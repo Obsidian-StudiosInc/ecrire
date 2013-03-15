@@ -7,3 +7,8 @@ $ mkdir build
 $ cd build
 $ cmake ..
 $ make && sudo make install
+
+If you're trying to build in a machine where you have efl 1.7.5 libraries installed, 
+you must first run:
+
+$ mv cmake/Modules/legacy/* cmake/Modules/

@@ -75,7 +75,11 @@ _find_in_entry(Evas_Object *entry, const char *text, Eina_Bool jump_next)
         while ((utf8 + idx) < found)
           {
              pos++;
+#if (EINA_VERSION_MAJOR > 1) || (EINA_VERSION_MINOR >= 8)
              eina_unicode_utf8_next_get(utf8, &idx);
+#else
+             eina_unicode_utf8_get_next(utf8, &idx);
+#endif
           }
 
         elm_entry_select_none(entry);
