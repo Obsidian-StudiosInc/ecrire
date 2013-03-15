@@ -9,6 +9,8 @@ $ cmake ..
 $ make && sudo make install
 
 If you're trying to build in a machine where you have efl 1.7.5 libraries installed, 
-you must first run:
+you must run cmake like this:
+$ CMAKE_PREFIX_PATH=/path/to/ecrire/cmake/Modules/legacy cmake /path/to/ecrire
 
-$ mv cmake/Modules/legacy/* cmake/Modules/
+If you are trying to build with efl 1.8 and having issues, you should try:
+$ CMAKE_PREFIX_PATH=/usr/local/share/cmake/Modules/ cmake /path/to/ecrire
