@@ -8,10 +8,10 @@
 
 static Evas_Object *goto_win, *sent;
 
-static Eina_Bool
+static void
 _goto_do(Evas_Object *entry, const char *text)
 {
-   int line,prev;
+   int line;
    Evas_Object *tb = elm_entry_textblock_get(entry);
    Evas_Textblock_Cursor *mcur = evas_object_textblock_cursor_get(tb);
 
@@ -19,17 +19,16 @@ _goto_do(Evas_Object *entry, const char *text)
 
    if (line > 0)
      {
-        evas_object_hide(goto_win); 
+        evas_object_hide(goto_win);
 	evas_textblock_cursor_line_set(mcur, line-1);
 	elm_entry_calc_force(entry);
-	
+
 	elm_object_focus_set(entry, EINA_TRUE);
-        
-     } 
+     }
 }
 
 static void
-_goto_clicked(void *data, 
+_goto_clicked(void *data,
      Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    _goto_do(data, elm_object_text_get(sent));
@@ -55,7 +54,7 @@ ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
         evas_object_show(goto_win);
         return goto_win;
      }
-   
+
    goto_win = win = elm_win_add(parent, "Go to line", ELM_WIN_TOOLBAR);
    elm_win_autodel_set(win, EINA_TRUE);
    elm_win_title_set(win, _("Go to"));
