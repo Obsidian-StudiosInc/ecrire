@@ -119,7 +119,7 @@ _cur_changed(void *data, Evas_Object *obj, void *event_info __UNUSED__)
    col = evas_textblock_cursor_pos_get(mcur) -
       evas_textblock_cursor_pos_get(cur) + 1;
    evas_textblock_cursor_free(cur);
-
+   
    snprintf(buf, sizeof(buf), _("Ln %d, Col %d"), line, col);
    elm_object_text_set(data, buf);
 }
@@ -401,6 +401,13 @@ _open_do(void *data)
 {
    Ecrire_Entry *ent = data;
    ui_file_open_save_dialog_open(ent->win, _fs_open_done, EINA_FALSE);
+}
+
+static void
+_goto_line(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+{
+   Ecrire_Entry *ent = data;
+   ui_goto_dialog_open(ent->win, ent);
 }
 
 static void
@@ -704,6 +711,7 @@ main(int argc, char *argv[])
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    elm_toolbar_item_append(tbar, "edit-find-replace", _("Find & Replace"),
          _find, main_ec_ent);
+   elm_toolbar_item_append(tbar, "gotoline", _("Goto Line"), _goto_line, main_ec_ent);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),

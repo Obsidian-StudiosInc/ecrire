@@ -6,7 +6,6 @@
 * Support .swp files (autosave feature of elm?).
 * Search -> wrap around, search backwards, case insensitive.
 * Allow to manually override newline legacy mode?
-* Go to line.
 * Add save as.
 * Font selection: Add checkbox to say: "Use default font".
 * Font selection: Load the current values to the view.
