@@ -2,12 +2,11 @@
 # Copyright (C) YEAR Enlightenment development team
 # This file is distributed under the same license as the PACKAGE package.
 # Aníbal Garrido <khany@member.trisquel.info>, 2012.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-11-08 02:06+0100\n"
+"POT-Creation-Date: 2013-03-18 01:19+0900\n"
 "PO-Revision-Date: 2012-11-08 02:06+0100\n"
 "Last-Translator: Aníbal Garrido <khany@member.trisquel.info>\n"
 "Language-Team: Enlightenment Team\n"
@@ -17,11 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/bin/ui/alerts.c:56
-msgid "<align=center>Would you like to save changes to document?<br>Any unsaved changes will be lost."
-msgstr "<align=center>Quiere guardar los cambios del documento?<br>Los cambios sin guardar se perderán."
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Quiere guardar los cambios del documento?<br>Los cambios sin "
+"guardar se perderán."
 
-#: src/bin/ui/alerts.c:71
-#: src/bin/main.c:687
+#: src/bin/ui/alerts.c:71 src/bin/main.c:687
 msgid "Save"
 msgstr "Guardar"
 
@@ -33,24 +35,23 @@ msgstr "Descartar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/bin/ui/search_dialog.c:144
-#: src/bin/main.c:705
+#: src/bin/ui/search_dialog.c:148 src/bin/main.c:705
 msgid "Find & Replace"
 msgstr "Buscar y sustituir"
 
-#: src/bin/ui/search_dialog.c:166
+#: src/bin/ui/search_dialog.c:170
 msgid "Search for:"
 msgstr "Buscar por:"
 
-#: src/bin/ui/search_dialog.c:190
+#: src/bin/ui/search_dialog.c:194
 msgid "Replace with:"
 msgstr "Sustituir por:"
 
-#: src/bin/ui/search_dialog.c:214
+#: src/bin/ui/search_dialog.c:218
 msgid "Find"
 msgstr "Buscar"
 
-#: src/bin/ui/search_dialog.c:222
+#: src/bin/ui/search_dialog.c:226
 msgid "Replace"
 msgstr "Sustituir"
 
@@ -125,4 +126,3 @@ msgstr "Pegar"
 #: src/bin/main.c:709
 msgid "Settings"
 msgstr "Preferencias"
-

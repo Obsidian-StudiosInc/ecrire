@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire \n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-08-09 11:44+0900\n"
+"POT-Creation-Date: 2013-03-18 01:19+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,23 +35,23 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:144 src/bin/main.c:705
+#: src/bin/ui/search_dialog.c:148 src/bin/main.c:705
 msgid "Find & Replace"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:166
+#: src/bin/ui/search_dialog.c:170
 msgid "Search for:"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:190
+#: src/bin/ui/search_dialog.c:194
 msgid "Replace with:"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:214
+#: src/bin/ui/search_dialog.c:218
 msgid "Find"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:222
+#: src/bin/ui/search_dialog.c:226
 msgid "Replace"
 msgstr ""
 
