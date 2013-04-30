@@ -1,22 +1,20 @@
 # Portuguese translation for Ecrire.
 # This file is put in the public domain.
-# Sérgio Marques <smarquespt@gmail.com>, 2012
+# Sérgio Marques <smarquespt@gmail.com>, 2012-2013
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Ecrire\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-18 01:19+0900\n"
-"PO-Revision-Date: 2012-08-23 00:32+0100\n"
+"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
+"POT-Creation-Date: 2013-04-07 20:53+0200\n"
+"PO-Revision-Date: 2013-04-30 12:53-0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: \n"
-"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: PORTUGAL\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: pt\n"
 
 #: src/bin/ui/alerts.c:56
 msgid ""
@@ -26,7 +24,7 @@ msgstr ""
 "<align=center>Pretende gravar as alterações do documento?<br>As alterações "
 "não gravadas serão perdidas."
 
-#: src/bin/ui/alerts.c:71 src/bin/main.c:687
+#: src/bin/ui/alerts.c:71 src/bin/main.c:694
 msgid "Save"
 msgstr "Gravar"
 
@@ -38,7 +36,7 @@ msgstr "Rejeitar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/bin/ui/search_dialog.c:148 src/bin/main.c:705
+#: src/bin/ui/search_dialog.c:148 src/bin/main.c:712
 msgid "Find & Replace"
 msgstr "Localizar e substituir"
 
@@ -94,38 +92,42 @@ msgstr "%s Sem título %d - %s"
 msgid "Ln %d, Col %d"
 msgstr "Lin. %d, Col. %d"
 
-#: src/bin/main.c:684
+#: src/bin/main.c:691
 msgid "New"
 msgstr "Novo"
 
-#: src/bin/main.c:685
+#: src/bin/main.c:692
 msgid "Open"
 msgstr "Abrir"
 
-#: src/bin/main.c:688
+#: src/bin/main.c:695
 msgid "Save As"
 msgstr "Gravar como"
 
-#: src/bin/main.c:693
+#: src/bin/main.c:700
 msgid "Undo"
 msgstr "Anular"
 
-#: src/bin/main.c:695
+#: src/bin/main.c:702
 msgid "Redo"
 msgstr "Refazer"
 
-#: src/bin/main.c:698
+#: src/bin/main.c:705
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/bin/main.c:700
+#: src/bin/main.c:707
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/bin/main.c:702
+#: src/bin/main.c:709
 msgid "Paste"
 msgstr "Colar"
 
-#: src/bin/main.c:709
+#: src/bin/main.c:714
+msgid "Goto Line"
+msgstr "Ir para a linha"
+
+#: src/bin/main.c:717
 msgid "Settings"
 msgstr "Definições"
