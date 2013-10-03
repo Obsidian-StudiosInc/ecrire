@@ -86,7 +86,7 @@ ecrire_cfg_load(void)
    Eet_File *ef;
 
    if (!config_file)
-      return EINA_FALSE;
+      goto end;
 
    ef = eet_open(config_file, EET_FILE_MODE_READ);
    if (!ef)
