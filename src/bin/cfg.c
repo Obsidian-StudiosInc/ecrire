@@ -96,8 +96,6 @@ ecrire_cfg_load(void)
      }
 
    _ent_cfg = eet_data_read(ef, _ent_cfg_descriptor, _CONFIG_ENTRY);
-   if (!_ent_cfg)
-      goto end;
 
 end:
    if (!_ent_cfg)
