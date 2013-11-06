@@ -43,14 +43,22 @@ ecrire_cfg_shutdown(void)
       free(config_file);
 
    _ent_cfg_descriptor_shutdown();
+
+   eet_shutdown();
+   efreet_shutdown();
 }
 
 void
 ecrire_cfg_init(const char *file)
 {
    const char *ext = ".cfg";
-   const char *path = efreet_config_home_get();
+   const char *path;
    size_t len;
+
+   efreet_init();
+   eet_init();
+
+   path = efreet_config_home_get();
 
    if (!path || !file)
       return;
@@ -62,8 +70,6 @@ ecrire_cfg_init(const char *file)
 
    config_file = malloc(len + 1);
    snprintf(config_file, len + 1, "%s/%s%s", path, file, ext);
-
-   eet_init();
 
    _ent_cfg_descriptor_init();
 }
