@@ -1,0 +1,135 @@
+# Polish translation for Ecrire.
+# This file is put in the public domain.
+# Konrad Makowski <poczta@konradmakowski.pl>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Ecrire\n"
+"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
+"POT-Creation-Date: 2013-04-07 20:53+0200\n"
+"PO-Revision-Date: 2013-11-22 22:59+0100\n"
+"Last-Translator: Konrad Makowski\n"
+"Language-Team: polish <poczta@konradmakowski.pl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-05-30 05:53+0000\n"
+"X-Generator: Launchpad (build 16652)\n"
+"X-Poedit-Country: Polski\n"
+"Language: pl\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: src/bin/ui/alerts.c:56
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr "<align=center>Czy chcesz zapisać zmiany w dokumencie?<br>Wszelkie nie zapisane zmiany zostaną utracone."
+
+#: src/bin/ui/alerts.c:71 src/bin/main.c:694
+msgid "Save"
+msgstr "Zapisz"
+
+#: src/bin/ui/alerts.c:82
+msgid "Discard"
+msgstr "Zaniechaj"
+
+#: src/bin/ui/alerts.c:88
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/bin/ui/search_dialog.c:148 src/bin/main.c:712
+msgid "Find & Replace"
+msgstr "Znajdź i zamień"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Szukaj:"
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Zamień przez:"
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Znajdź"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Zamień"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Wybierz Font"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Wielkość Fontu:"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pkt"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Użyj Domyślnego Fontu:"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Ustaw"
+
+#: src/bin/main.c:96
+#, c-format
+msgid "%s%s - %s"
+msgstr "%s%s - %s"
+
+#: src/bin/main.c:99
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "%sBez tytułu %d - %s"
+
+#: src/bin/main.c:123
+#, c-format
+msgid "Ln %d, Col %d"
+msgstr "Wiersz %d, Kolumna %d"
+
+#: src/bin/main.c:691
+msgid "New"
+msgstr "Nowy"
+
+#: src/bin/main.c:692
+msgid "Open"
+msgstr "Otwórz"
+
+#: src/bin/main.c:695
+msgid "Save As"
+msgstr "Zapisz jako"
+
+#: src/bin/main.c:700
+msgid "Undo"
+msgstr "Cofnij"
+
+#: src/bin/main.c:702
+msgid "Redo"
+msgstr "Ponów"
+
+#: src/bin/main.c:705
+msgid "Cut"
+msgstr "Wytnij"
+
+#: src/bin/main.c:707
+msgid "Copy"
+msgstr "Kopiuj"
+
+#: src/bin/main.c:709
+msgid "Paste"
+msgstr "Wklej"
+
+#: src/bin/main.c:714
+msgid "Goto Line"
+msgstr "Idź do linii"
+
+#: src/bin/main.c:717
+msgid "Settings"
+msgstr "Ustawienia"
