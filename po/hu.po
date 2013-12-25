@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Enlightenment development team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ecrire\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2013-03-18 01:19+0900\n"
+"PO-Revision-Date: 2013-12-25 15:53+0100\n"
+"Last-Translator: rezso <rezso@rezso.net>\n"
+"Language-Team: hu <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"Language: hu\n"
+
+#: src/bin/ui/alerts.c:56
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Elmenti a dokumentum változásait?<br>Minden mentetlen változás "
+"elveszik."
+
+#: src/bin/ui/alerts.c:71 src/bin/main.c:687
+msgid "Save"
+msgstr "Mentés"
+
+#: src/bin/ui/alerts.c:82
+msgid "Discard"
+msgstr "Elvetés"
+
+#: src/bin/ui/alerts.c:88
+msgid "Cancel"
+msgstr "Mégsem"
+
+#: src/bin/ui/search_dialog.c:148 src/bin/main.c:705
+msgid "Find & Replace"
+msgstr "Keresés és csere"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Keresés erre: "
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Csere erre:"
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Keresés"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Csere"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Válasszon egy betűtípust"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Betűméret:"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pont"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Alapértelmezett betűkészlet használata:"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Beállítás"
+
+#: src/bin/main.c:96
+#, c-format
+msgid "%s%s - %s"
+msgstr "%s%s - %s"
+
+#: src/bin/main.c:99
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "%sNévtelen %d - %s"
+
+#: src/bin/main.c:123
+#, c-format
+msgid "Ln %d, Col %d"
+msgstr "%d. sor, %d. oszlop"
+
+#: src/bin/main.c:684
+msgid "New"
+msgstr "Új"
+
+#: src/bin/main.c:685
+msgid "Open"
+msgstr "Megnyitás"
+
+#: src/bin/main.c:688
+msgid "Save As"
+msgstr "Mentés másként"
+
+#: src/bin/main.c:693
+msgid "Undo"
+msgstr "Mégse"
+
+#: src/bin/main.c:695
+msgid "Redo"
+msgstr "Újra"
+
+#: src/bin/main.c:698
+msgid "Cut"
+msgstr "Kivágás"
+
+#: src/bin/main.c:700
+msgid "Copy"
+msgstr "Másolás"
+
+#: src/bin/main.c:702
+msgid "Paste"
+msgstr "Beillesztés"
+
+#: src/bin/main.c:709
+msgid "Settings"
+msgstr "Beállítások"
