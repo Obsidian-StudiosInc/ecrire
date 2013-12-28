@@ -6,75 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-05-01 19:36+0200\n"
-"PO-Revision-Date: 2013-05-01 19:38+0200\n"
+"POT-Creation-Date: 2013-12-28 19:07+0100\n"
+"PO-Revision-Date: 2013-12-28 19:15+0100\n"
 "Last-Translator: Massimo Maiurana <maiurana@gmail.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/bin/ui/alerts.c:56
-msgid ""
-"<align=center>Would you like to save changes to document?<br>Any unsaved "
-"changes will be lost."
-msgstr ""
-"<align=center>Volete salvare le modifiche al documento?<br>Ogni modifica non "
-"salvata verrà persa."
-
-#: src/bin/ui/alerts.c:71 src/bin/main.c:694
-msgid "Save"
-msgstr "Salva"
-
-#: src/bin/ui/alerts.c:82
-msgid "Discard"
-msgstr "Abbandona"
-
-#: src/bin/ui/alerts.c:88
-msgid "Cancel"
-msgstr "Annulla"
-
-#: src/bin/ui/search_dialog.c:148 src/bin/main.c:712
-msgid "Find & Replace"
-msgstr "Trova & Sostituisci"
-
-#: src/bin/ui/search_dialog.c:170
-msgid "Search for:"
-msgstr "Cerca:"
-
-#: src/bin/ui/search_dialog.c:194
-msgid "Replace with:"
-msgstr "Sostituisci con: "
-
-#: src/bin/ui/search_dialog.c:218
-msgid "Find"
-msgstr "Trova"
-
-#: src/bin/ui/search_dialog.c:226
-msgid "Replace"
-msgstr "Sostituisci"
-
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Seleziona carattere"
-
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
-msgstr "Dimensione carattere:"
-
-#: src/bin/ui/font_dialog.c:119
-#, c-format
-msgid "%.0f pts"
-msgstr "%.0f pt"
-
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Usa font predefinito:"
-
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Set"
 
 #: src/bin/main.c:96
 #, c-format
@@ -98,6 +37,10 @@ msgstr "Nuovo"
 #: src/bin/main.c:692
 msgid "Open"
 msgstr "Apri"
+
+#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+msgid "Save"
+msgstr "Salva"
 
 #: src/bin/main.c:695
 msgid "Save As"
@@ -123,6 +66,10 @@ msgstr "Copia"
 msgid "Paste"
 msgstr "Incolla"
 
+#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
+msgid "Find & Replace"
+msgstr "Trova & Sostituisci"
+
 #: src/bin/main.c:714
 msgid "Goto Line"
 msgstr "Vai alla riga"
@@ -130,3 +77,68 @@ msgstr "Vai alla riga"
 #: src/bin/main.c:717
 msgid "Settings"
 msgstr "Impostazioni"
+
+#: src/bin/ui/alerts.c:56
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Volete salvare le modifiche al documento?<br>Ogni modifica non "
+"salvata verrà persa."
+
+#: src/bin/ui/alerts.c:82
+msgid "Discard"
+msgstr "Abbandona"
+
+#: src/bin/ui/alerts.c:88
+msgid "Cancel"
+msgstr "Annulla"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Seleziona carattere"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Dimensione carattere:"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pt"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Usa font predefinito:"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Imposta"
+
+#: src/bin/ui/goto_dialog.c:60
+msgid "Go to"
+msgstr "Vai a"
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Go to line:"
+msgstr "Vai alla linea"
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr "Vai"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Cerca:"
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Sostituisci con: "
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Trova"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Sostituisci"
