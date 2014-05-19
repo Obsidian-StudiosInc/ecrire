@@ -7,77 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-04-07 20:53+0200\n"
-"PO-Revision-Date: 2013-04-08 10:00+0000\n"
+"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"PO-Revision-Date: 2014-01-02 15:10+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-09 05:26+0000\n"
-"X-Generator: Launchpad (build 16550)\n"
+"X-Launchpad-Export-Date: 2014-01-03 05:48+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "Language: eo\n"
-
-#: src/bin/ui/alerts.c:56
-msgid ""
-"<align=center>Would you like to save changes to document?<br>Any unsaved "
-"changes will be lost."
-msgstr ""
-"<align=center>Ĉu vi volas konservi la ŝanĝojn al la dokumento?<br>Ĉiuj "
-"nekonservataj ŝanĝoj perdiĝos."
-
-#: src/bin/ui/alerts.c:71 src/bin/main.c:694
-msgid "Save"
-msgstr "Konservi"
-
-#: src/bin/ui/alerts.c:82
-msgid "Discard"
-msgstr "Nekonservi"
-
-#: src/bin/ui/alerts.c:88
-msgid "Cancel"
-msgstr "Nuligi"
-
-#: src/bin/ui/search_dialog.c:148 src/bin/main.c:712
-msgid "Find & Replace"
-msgstr "Trovi kaj anstataŭigi"
-
-#: src/bin/ui/search_dialog.c:170
-msgid "Search for:"
-msgstr "Serĉi:"
-
-#: src/bin/ui/search_dialog.c:194
-msgid "Replace with:"
-msgstr "Anstataŭigi per:"
-
-#: src/bin/ui/search_dialog.c:218
-msgid "Find"
-msgstr "Trovi"
-
-#: src/bin/ui/search_dialog.c:226
-msgid "Replace"
-msgstr "Anstataŭigi"
-
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Elektu tiparon"
-
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
-msgstr "Grando de tiparo:"
-
-#: src/bin/ui/font_dialog.c:119
-#, c-format
-msgid "%.0f pts"
-msgstr "%.0f erojn"
-
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Uzi aprioran tiparon:"
-
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Agordi"
 
 #: src/bin/main.c:96
 #, c-format
@@ -101,6 +40,10 @@ msgstr "Nova"
 #: src/bin/main.c:692
 msgid "Open"
 msgstr "Malfermi"
+
+#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+msgid "Save"
+msgstr "Konservi"
 
 #: src/bin/main.c:695
 msgid "Save As"
@@ -126,6 +69,10 @@ msgstr "Kopii"
 msgid "Paste"
 msgstr "Alglui"
 
+#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
+msgid "Find & Replace"
+msgstr "Trovi kaj anstataŭigi"
+
 #: src/bin/main.c:714
 msgid "Goto Line"
 msgstr "Iru al linio"
@@ -133,3 +80,68 @@ msgstr "Iru al linio"
 #: src/bin/main.c:717
 msgid "Settings"
 msgstr "Agordoj"
+
+#: src/bin/ui/alerts.c:56
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Ĉu vi volas konservi la ŝanĝojn al la dokumento?<br>Ĉiuj "
+"nekonservataj ŝanĝoj perdiĝos."
+
+#: src/bin/ui/alerts.c:82
+msgid "Discard"
+msgstr "Nekonservi"
+
+#: src/bin/ui/alerts.c:88
+msgid "Cancel"
+msgstr "Nuligi"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Elektu tiparon"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Grando de tiparo:"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f erojn"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Uzi aprioran tiparon:"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Agordi"
+
+#: src/bin/ui/goto_dialog.c:60
+msgid "Go to"
+msgstr "Iri al"
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Go to line:"
+msgstr "Iru al linio:"
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr "Iri"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Serĉi:"
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Anstataŭigi per:"
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Trovi"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Anstataŭigi"

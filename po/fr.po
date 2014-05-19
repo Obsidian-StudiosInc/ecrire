@@ -6,80 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecrire\n"
 "Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-04-07 20:53+0200\n"
-"PO-Revision-Date: 2013-05-29 20:47+0000\n"
+"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"PO-Revision-Date: 2014-01-19 19:40+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: français <sansgourou@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-30 05:53+0000\n"
-"X-Generator: Launchpad (build 16652)\n"
+"X-Launchpad-Export-Date: 2014-01-20 05:30+0000\n"
+"X-Generator: Launchpad (build 16901)\n"
 "X-Poedit-Country: FRANCE\n"
 "Language: fr\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-#: src/bin/ui/alerts.c:56
-msgid ""
-"<align=center>Would you like to save changes to document?<br>Any unsaved "
-"changes will be lost."
-msgstr ""
-"<align=center>Voulez-vous enregistrer le document modifié ?<br>Toute "
-"modification non enregistrée sera perdue."
-
-#: src/bin/ui/alerts.c:71 src/bin/main.c:694
-msgid "Save"
-msgstr "Enregistrer"
-
-#: src/bin/ui/alerts.c:82
-msgid "Discard"
-msgstr "Abandonner"
-
-#: src/bin/ui/alerts.c:88
-msgid "Cancel"
-msgstr "Annuler"
-
-#: src/bin/ui/search_dialog.c:148 src/bin/main.c:712
-msgid "Find & Replace"
-msgstr "Substituer"
-
-#: src/bin/ui/search_dialog.c:170
-msgid "Search for:"
-msgstr "Rechercher :"
-
-#: src/bin/ui/search_dialog.c:194
-msgid "Replace with:"
-msgstr "Remplacer par :"
-
-#: src/bin/ui/search_dialog.c:218
-msgid "Find"
-msgstr "Chercher"
-
-#: src/bin/ui/search_dialog.c:226
-msgid "Replace"
-msgstr "Remplacer"
-
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Choisir une police"
-
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
-msgstr "Taille de la police :"
-
-#: src/bin/ui/font_dialog.c:119
-#, c-format
-msgid "%.0f pts"
-msgstr "%.0f pt"
-
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Police par défaut"
-
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Valider"
 
 #: src/bin/main.c:96
 #, c-format
@@ -103,6 +42,10 @@ msgstr "Nouveau"
 #: src/bin/main.c:692
 msgid "Open"
 msgstr "Ouvrir"
+
+#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+msgid "Save"
+msgstr "Enregistrer"
 
 #: src/bin/main.c:695
 msgid "Save As"
@@ -128,6 +71,10 @@ msgstr "Copier"
 msgid "Paste"
 msgstr "Coller"
 
+#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
+msgid "Find & Replace"
+msgstr "Substituer"
+
 #: src/bin/main.c:714
 msgid "Goto Line"
 msgstr "Aller à la ligne"
@@ -135,3 +82,68 @@ msgstr "Aller à la ligne"
 #: src/bin/main.c:717
 msgid "Settings"
 msgstr "Paramètres"
+
+#: src/bin/ui/alerts.c:56
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Voulez-vous enregistrer le document modifié ?<br>Toute "
+"modification non enregistrée sera perdue."
+
+#: src/bin/ui/alerts.c:82
+msgid "Discard"
+msgstr "Abandonner"
+
+#: src/bin/ui/alerts.c:88
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Choisir une police"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Taille de la police :"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pt"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Police par défaut"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Valider"
+
+#: src/bin/ui/goto_dialog.c:60
+msgid "Go to"
+msgstr "Aller à"
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Go to line:"
+msgstr "Aller à la ligne :"
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr "Aller"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Rechercher :"
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Remplacer par :"
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Chercher"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Remplacer"
