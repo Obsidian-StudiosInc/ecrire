@@ -1,125 +1,123 @@
-# Galician translation of ecrire
-# This file is put in the public domain.
-# Aníbal Garrido <khany@member.trisquel.info>, 2012.
+# Lithuanian translation for enlightenment
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the enlightenment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ecrire\n"
-"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
+"Project-Id-Version: enlightenment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-30 11:50+0100\n"
-"PO-Revision-Date: 2014-05-24 08:43+0000\n"
-"Last-Translator: Aníbal Garrido <Unknown>\n"
-"Language-Team: http://trasno.net/ <proxecto@trasno.net>\n"
+"PO-Revision-Date: 2014-05-10 22:53+0000\n"
+"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
+"Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-25 05:44+0000\n"
-"X-Generator: Launchpad (build 17017)\n"
-"Language: gl\n"
+"X-Launchpad-Export-Date: 2014-05-11 06:43+0000\n"
+"X-Generator: Launchpad (build 16996)\n"
 
 #: src/bin/main.c:96
 #, c-format
 msgid "%s%s - %s"
-msgstr "%s%s - %s"
+msgstr ""
 
 #: src/bin/main.c:99
 #, c-format
 msgid "%sUntitled %d - %s"
-msgstr "%sSen título %d - %s"
+msgstr ""
 
 #: src/bin/main.c:123
 #, c-format
 msgid "Ln %d, Col %d"
-msgstr "Lin %d, Col %d"
+msgstr ""
 
 #: src/bin/main.c:691
 msgid "New"
-msgstr "Novo"
+msgstr ""
 
 #: src/bin/main.c:692
 msgid "Open"
-msgstr "Abrir"
+msgstr "Atverti"
 
 #: src/bin/main.c:694 src/bin/ui/alerts.c:71
 msgid "Save"
-msgstr "Gardar"
+msgstr "Įrašyti"
 
 #: src/bin/main.c:695
 msgid "Save As"
-msgstr "Gardar Como"
+msgstr "Įrašyti kaip"
 
 #: src/bin/main.c:700
 msgid "Undo"
-msgstr "Desfacer"
+msgstr "Atšaukti"
 
 #: src/bin/main.c:702
 msgid "Redo"
-msgstr "Refacer"
+msgstr ""
 
 #: src/bin/main.c:705
 msgid "Cut"
-msgstr "Cortar"
+msgstr "Iškirpti"
 
 #: src/bin/main.c:707
 msgid "Copy"
-msgstr "Copiar"
+msgstr "Kopijuoti"
 
 #: src/bin/main.c:709
 msgid "Paste"
-msgstr "Pegar"
+msgstr "Įdėti"
 
 #: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
 msgid "Find & Replace"
-msgstr "Atopar e Substituír"
+msgstr "Rasti ir Pakeisti"
 
 #: src/bin/main.c:714
 msgid "Goto Line"
-msgstr "Ir á liña"
+msgstr ""
 
 #: src/bin/main.c:717
 msgid "Settings"
-msgstr "Preferencias"
+msgstr "Nustatymai"
 
 #: src/bin/ui/alerts.c:56
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
 msgstr ""
-"<align=center>Quere gardar os cambios do documento?<br>Os cambios sen gardar "
-"perderanse."
 
 #: src/bin/ui/alerts.c:82
 msgid "Discard"
-msgstr "Rexeitar"
+msgstr ""
 
 #: src/bin/ui/alerts.c:88
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Atsisakyti"
 
 #: src/bin/ui/font_dialog.c:89
 msgid "Select Font"
-msgstr "Escolla un tipo de letra"
+msgstr "Pasirinkti šriftą"
 
 #: src/bin/ui/font_dialog.c:114
 msgid "Font size:"
-msgstr "Tamaño do tipo de letra:"
+msgstr "Šrifto dydis:"
 
 #: src/bin/ui/font_dialog.c:119
 #, c-format
 msgid "%.0f pts"
-msgstr "%.0f pts"
+msgstr ""
 
 #: src/bin/ui/font_dialog.c:157
 msgid "Use Default Font:"
-msgstr "Empregar o tipo de letra predefinido:"
+msgstr "Naudoti numatytąjį šriftą:"
 
 #: src/bin/ui/font_dialog.c:168
 msgid "Set"
-msgstr "Establecer"
+msgstr "Nustatyti"
 
 #: src/bin/ui/goto_dialog.c:60
 msgid "Go to"
-msgstr ""
+msgstr "Eiti į"
 
 #: src/bin/ui/goto_dialog.c:82
 msgid "Go to line:"
@@ -131,16 +129,16 @@ msgstr ""
 
 #: src/bin/ui/search_dialog.c:170
 msgid "Search for:"
-msgstr "Buscar por:"
+msgstr "Ieškoti:"
 
 #: src/bin/ui/search_dialog.c:194
 msgid "Replace with:"
-msgstr "Substituír por:"
+msgstr "Pakeisti į:"
 
 #: src/bin/ui/search_dialog.c:218
 msgid "Find"
-msgstr "Atopar"
+msgstr "Rasti"
 
 #: src/bin/ui/search_dialog.c:226
 msgid "Replace"
-msgstr "Substituír"
+msgstr "Pakeisti"
