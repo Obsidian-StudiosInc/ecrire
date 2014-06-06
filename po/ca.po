@@ -1,0 +1,146 @@
+# Catalan translation for enlightenment
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the enlightenment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enlightenment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"PO-Revision-Date: 2014-05-26 22:31+0000\n"
+"Last-Translator: joancoll <Unknown>\n"
+"Language-Team: Catalan <ca@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-05-27 05:40+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
+
+#: src/bin/main.c:96
+#, c-format
+msgid "%s%s - %s"
+msgstr "%s%s - %s"
+
+#: src/bin/main.c:99
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "%sSense títol %d - %s"
+
+#: src/bin/main.c:123
+#, c-format
+msgid "Ln %d, Col %d"
+msgstr "Ln %d, Col %d"
+
+#: src/bin/main.c:691
+msgid "New"
+msgstr "Nou"
+
+#: src/bin/main.c:692
+msgid "Open"
+msgstr "Obre"
+
+#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+msgid "Save"
+msgstr "Desa"
+
+#: src/bin/main.c:695
+msgid "Save As"
+msgstr "Anomena i desa"
+
+#: src/bin/main.c:700
+msgid "Undo"
+msgstr "Desfés"
+
+#: src/bin/main.c:702
+msgid "Redo"
+msgstr "Refés"
+
+#: src/bin/main.c:705
+msgid "Cut"
+msgstr "Retalla"
+
+#: src/bin/main.c:707
+msgid "Copy"
+msgstr "Copia"
+
+#: src/bin/main.c:709
+msgid "Paste"
+msgstr "Enganxa"
+
+#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
+msgid "Find & Replace"
+msgstr "Cerca i substitueix"
+
+#: src/bin/main.c:714
+msgid "Goto Line"
+msgstr "Vés a la línia"
+
+#: src/bin/main.c:717
+msgid "Settings"
+msgstr "Paràmetres"
+
+#: src/bin/ui/alerts.c:56
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Vol desar els canvi en el document?<br>Qualsevol canvi no "
+"desat es perdrà."
+
+#: src/bin/ui/alerts.c:82
+msgid "Discard"
+msgstr "Descarta"
+
+#: src/bin/ui/alerts.c:88
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Seleccioni el tipus de lletra"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Mida de la font:"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pts"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Utilitza la font predeterminada"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Estableix"
+
+#: src/bin/ui/goto_dialog.c:60
+msgid "Go to"
+msgstr "Vés a"
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Go to line:"
+msgstr "Vés a la línia:"
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr "Fes"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Cerca per:"
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Substitueix per:"
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Cerca"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Reemplaça"
