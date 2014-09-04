@@ -71,7 +71,7 @@ _save_markup_utf8(const char *file, const char *text)
      }
    if (text)
      {
-        if(fputs(text, f)==EOF)
+        if (fputs(text, f) == EOF)
           {
              EINA_LOG_ERR("Error in writing to '%s'.", file);	
              return EINA_FALSE;
