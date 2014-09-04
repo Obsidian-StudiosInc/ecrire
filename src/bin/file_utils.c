@@ -66,13 +66,16 @@ _save_markup_utf8(const char *file, const char *text)
    f = fopen(file, "wb");
    if (!f)
      {
-        // FIXME: report a write error
+        EINA_LOG_ERR("could not open '%s' for writing.", file);
         return EINA_FALSE;
      }
-
    if (text)
      {
-        fputs(text, f); // FIXME: catch error
+        if(fputs(text, f)==EOF)
+          {
+             EINA_LOG_ERR("Error in writing to '%s'.", file);	
+             return EINA_FALSE;
+          } 
      }
    fclose(f);
    return EINA_TRUE;
