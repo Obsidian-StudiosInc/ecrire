@@ -3,6 +3,15 @@
 
 #include <Evas.h>
 
+extern int _ecrire_log_dom;
+#define ECRIRE_DEFAULT_LOG_COLOR EINA_COLOR_CYAN
+
+#define CRI(...)      EINA_LOG_DOM_CRIT(_ecrire_log_dom, __VA_ARGS__)
+#define ERR(...)      EINA_LOG_DOM_ERR(_ecrire_log_dom, __VA_ARGS__)
+#define WRN(...)      EINA_LOG_DOM_WARN(_ecrire_log_dom, __VA_ARGS__)
+#define INF(...)      EINA_LOG_DOM_INFO(_ecrire_log_dom, __VA_ARGS__)
+#define DBG(...)      EINA_LOG_DOM_DBG(_ecrire_log_dom, __VA_ARGS__)
+
 struct _Ecrire_Entry {
      Evas_Object *entry;
      Evas_Object *win;

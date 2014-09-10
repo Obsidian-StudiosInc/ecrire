@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "mess_header.h"
+
 static char *
 _buf_append(char *buf, const char *str, int *len, int *alloc)
 {
@@ -66,14 +68,14 @@ _save_markup_utf8(const char *file, const char *text)
    f = fopen(file, "wb");
    if (!f)
      {
-        EINA_LOG_ERR("could not open '%s' for writing.", file);
+        ERR("could not open '%s' for writing.", file);
         return EINA_FALSE;
      }
    if (text)
      {
         if (fputs(text, f) == EOF)
           {
-             EINA_LOG_ERR("Error in writing to '%s'.", file);	
+             ERR("Error in writing to '%s'.", file);
              return EINA_FALSE;
           } 
      }

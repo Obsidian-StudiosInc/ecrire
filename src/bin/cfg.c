@@ -97,7 +97,7 @@ ecrire_cfg_load(void)
    ef = eet_open(config_file, EET_FILE_MODE_READ);
    if (!ef)
      {
-        /* FIXME Info message? create new config? */
+        INF("Failed to read the config file. Creating a new one.");
         goto end;
      }
 
@@ -127,7 +127,7 @@ ecrire_cfg_save(void)
    ef = eet_open(config_file, EET_FILE_MODE_WRITE);
    if (!ef)
      {
-        EINA_LOG_ERR("could not open '%s' for writing.", config_file);
+        ERR("could not open '%s' for writing.", config_file);
         return EINA_FALSE;
      }
 

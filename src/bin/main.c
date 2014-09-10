@@ -22,6 +22,9 @@ static Ecrire_Entry *main_ec_ent;
 static void print_usage(const char *bin);
 static void editor_font_set(Ecrire_Entry *ent, const char *font, int font_size);
 
+/* specific log domain to help debug only ecrire */
+int _ecrire_log_dom = -1;
+
 static void
 _init_entry(Ecrire_Entry *ent)
 {
@@ -213,7 +216,7 @@ _undo_stack_add(Ecrire_Entry *ent, Elm_Entry_Change_Info *_info)
 static void
 _undo_redo_do(Ecrire_Entry *ent, Elm_Entry_Change_Info *inf, Eina_Bool undo)
 {
-   EINA_LOG_DBG("%s: %s", (undo) ? "Undo" : "Redo",
+   DBG("%s: %s", (undo) ? "Undo" : "Redo",
          inf->change.insert.content);
 
    if ((inf->insert && undo) || (!inf->insert && !undo))
@@ -594,6 +597,19 @@ main(int argc, char *argv[])
 
    opterr = 0;
 
+   if (!eina_init())
+     {
+        printf("Failed to initialize Eina_log module\n");
+        return EXIT_FAILURE;
+     }
+
+   _ecrire_log_dom = eina_log_domain_register("ecrire", ECRIRE_DEFAULT_LOG_COLOR);
+   if (_ecrire_log_dom < 0)
+     {
+        EINA_LOG_ERR("Unable to create a log domain.");
+        exit(-1);
+     }
+
    while ((c = getopt (argc, argv, "")) != -1)
      {
         switch (c)
@@ -602,12 +618,12 @@ main(int argc, char *argv[])
               print_usage(argv[0]);
               if (isprint (optopt))
                 {
-                   EINA_LOG_ERR("Unknown option or requires an argument `-%c'.",
+                   ERR("Unknown option or requires an argument `-%c'.",
                          optopt);
                 }
               else
                 {
-                   EINA_LOG_ERR("Unknown option character `\\x%x'.", optopt);
+                   ERR("Unknown option character `\\x%x'.", optopt);
                 }
               return 1;
               break;
@@ -636,7 +652,7 @@ main(int argc, char *argv[])
         main_ec_ent->filename = eina_stringshare_add(argv[optind]);
      }
 
-   EINA_LOG_DBG("Opening filename: '%s'", main_ec_ent->filename);
+   DBG("Opening filename: '%s'", main_ec_ent->filename);
 
    main_ec_ent->win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
    elm_win_autodel_set(main_ec_ent->win, EINA_FALSE);
@@ -746,6 +762,9 @@ main(int argc, char *argv[])
 
    ecrire_cfg_shutdown();
    elm_shutdown();
+   eina_log_domain_unregister(_ecrire_log_dom);
+   _ecrire_log_dom = -1;
+   eina_shutdown();
 
    return 0;
 }
