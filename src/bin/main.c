@@ -374,8 +374,8 @@ _fs_open_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
       _load_to_entry(main_ec_ent, selected);
 }
 
-static void
-_save_do(const char *file, Ecrire_Entry *ent)
+void
+save_do(const char *file, Ecrire_Entry *ent)
 {
    if (plain_utf8)
       _save_plain_utf8(file, elm_object_text_get(ent->entry));
@@ -395,7 +395,7 @@ _fs_save_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
 
    if (selected)
      {
-        _save_do(selected, main_ec_ent);
+        save_do(selected, main_ec_ent);
      }
 }
 
@@ -421,15 +421,15 @@ _open(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 }
 
 void
-editor_save(Ecrire_Entry *ent)
+editor_save(Ecrire_Entry *ent, void *callback_func)
 {
    if (ent->filename)
      {
-        _save_do(ent->filename, ent);
+        save_do(ent->filename, ent);
      }
    else
      {
-        ui_file_open_save_dialog_open(ent->win, _fs_save_done, EINA_TRUE);
+        ui_file_open_save_dialog_open(ent->win, callback_func, EINA_TRUE);
      }
 }
 
@@ -437,7 +437,7 @@ static void
 _save(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Ecrire_Entry *ent = data;
-   editor_save(ent);
+   editor_save(ent, _fs_save_done);
 }
 
 static void

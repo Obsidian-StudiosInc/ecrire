@@ -1,4 +1,3 @@
-* Have "you have unsaved changes, do you want to close this without saving?" dialog.
 * Undo/redo
   * Also add a stack limit? Replace should also affect undo/redo.
   * This is just an example policy, should possibly be implemented differently.
