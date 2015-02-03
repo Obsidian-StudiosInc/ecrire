@@ -1,20 +1,22 @@
 #
-# Саша Петровић <salepetronije@gmail.com>, 2012.
+# Саша Петровић <salepetronije@gmail.com>, 2012, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
 "POT-Creation-Date: 2013-12-30 11:50+0100\n"
-"PO-Revision-Date: 2013-04-11 16:30+0000\n"
+"PO-Revision-Date: 2015-01-31 13:59+0100\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
-"Language-Team: српски <xfce-i18n@xfce.org>\n"
+"Language-Team: српски <xfce4@xfce4.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-31 04:55+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-06-14 05:42+0000\n"
+"X-Generator: Gtranslator 2.91.6\n"
 "Language: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/bin/main.c:96
 #, c-format
@@ -29,7 +31,7 @@ msgstr "%sНеименовано %d - %s"
 #: src/bin/main.c:123
 #, c-format
 msgid "Ln %d, Col %d"
-msgstr "Лин %d, кол %d"
+msgstr "Линија %d, стубац %d"
 
 #: src/bin/main.c:691
 msgid "New"
@@ -85,7 +87,7 @@ msgid ""
 "changes will be lost."
 msgstr ""
 "<align=center>Да ли желите да сачувате измене у документу?<br>Несачуване "
-"измене ће бити изгубљине."
+"измене ће бити изгубљене."
 
 #: src/bin/ui/alerts.c:82
 msgid "Discard"
@@ -118,15 +120,15 @@ msgstr "Постави"
 
 #: src/bin/ui/goto_dialog.c:60
 msgid "Go to"
-msgstr ""
+msgstr "Иди на"
 
 #: src/bin/ui/goto_dialog.c:82
 msgid "Go to line:"
-msgstr ""
+msgstr "Иди на линију:"
 
 #: src/bin/ui/goto_dialog.c:106
 msgid "Go"
-msgstr ""
+msgstr "Иди"
 
 #: src/bin/ui/search_dialog.c:170
 msgid "Search for:"
