@@ -55,9 +55,9 @@ ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
         return goto_win;
      }
 
-   goto_win = win = elm_win_add(parent, "Go to line", ELM_WIN_TOOLBAR);
+   goto_win = win = elm_win_add(parent, "jump-to", ELM_WIN_TOOLBAR);
    elm_win_autodel_set(win, EINA_TRUE);
-   elm_win_title_set(win, _("Go to"));
+   elm_win_title_set(win, _("Jump to"));
    evas_object_smart_callback_add(win, "delete,request", _my_win_del, entry);
 
    bg = elm_bg_add(win);
@@ -79,7 +79,7 @@ ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
    elm_box_pack_end(bx, hbx);
 
    lbl = elm_label_add(win);
-   elm_object_text_set(lbl, _("Go to line:"));
+   elm_object_text_set(lbl, _("Jump to line:"));
    evas_object_size_hint_align_set(lbl, EVAS_HINT_FILL, 0.5);
    evas_object_size_hint_weight_set(lbl, 0.0, 0.0);
    elm_box_pack_end(hbx, lbl);

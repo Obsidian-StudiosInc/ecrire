@@ -143,9 +143,9 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
         return search_win;
      }
 
-   search_win = win = elm_win_add(parent, "find-replace", ELM_WIN_TOOLBAR);
+   search_win = win = elm_win_add(parent, "search", ELM_WIN_TOOLBAR);
    elm_win_autodel_set(win, EINA_TRUE);
-   elm_win_title_set(win, _("Find & Replace"));
+   elm_win_title_set(win, _("Search"));
    evas_object_smart_callback_add(win, "delete,request", my_win_del, entry);
 
    bg = elm_bg_add(win);

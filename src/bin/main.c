@@ -725,9 +725,9 @@ main(int argc, char *argv[])
       elm_toolbar_item_append(tbar, "edit-paste", _("Paste"), _paste, main_ec_ent);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   elm_toolbar_item_append(tbar, "edit-find-replace", _("Find & Replace"),
+   elm_toolbar_item_append(tbar, "edit-find-replace", _("Search"),
          _find, main_ec_ent);
-   elm_toolbar_item_append(tbar, "gotoline", _("Goto Line"), _goto_line, main_ec_ent);
+   elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line, main_ec_ent);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
