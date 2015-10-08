@@ -32,6 +32,6 @@ Comment[tr]=Basit metin düzenleyici
 Icon=ecrire
 Exec=ecrire %f
 Terminal=false
-MimeType=text/plain
+MimeType=text/plain;
 Categories=Utility;TextEditor;
 StartupNotify=true
