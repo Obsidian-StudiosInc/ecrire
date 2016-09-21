@@ -1,0 +1,143 @@
+# Slovenian translation for enlightenment
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# This file is distributed under the same license as the enlightenment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enlightenment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-06-02 20:00+0200\n"
+"PO-Revision-Date: 2016-09-21 16:51+0200\n"
+"Last-Translator: Renato Rener <renato.rener@gmail.com>\n"
+"Language-Team: Slovenian <sl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2016-09-16 20:28+0000\n"
+"X-Generator: Poedit 1.8.9\n"
+"Language: sl\n"
+
+#: src/bin/main.c:99
+#, c-format
+msgid "%s%s - %s"
+msgstr "%s%s - %s"
+
+#: src/bin/main.c:102
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "%sNeimenovano %d - %s"
+
+#: src/bin/main.c:126
+#, c-format
+msgid "Ln %d, Col %d"
+msgstr "Vr %d, Stlp %d"
+
+#: src/bin/main.c:707
+msgid "New"
+msgstr "Nov"
+
+#: src/bin/main.c:708
+msgid "Open"
+msgstr "Odpri"
+
+#: src/bin/main.c:710 src/bin/ui/alerts.c:82
+msgid "Save"
+msgstr "Shrani"
+
+#: src/bin/main.c:711
+msgid "Save As"
+msgstr "Shrani kot"
+
+#: src/bin/main.c:716
+msgid "Undo"
+msgstr "Razveljavi"
+
+#: src/bin/main.c:718
+msgid "Redo"
+msgstr "Ponovno uveljavi"
+
+#: src/bin/main.c:721
+msgid "Cut"
+msgstr "Izreži"
+
+#: src/bin/main.c:723
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: src/bin/main.c:725
+msgid "Paste"
+msgstr "Prilepi"
+
+#: src/bin/main.c:728 src/bin/ui/search_dialog.c:148
+msgid "Search"
+msgstr "Iskanje"
+
+#: src/bin/main.c:730 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr "Skoči na"
+
+#: src/bin/main.c:733
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: src/bin/ui/alerts.c:67
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr ""
+"<align=center>Ali si želilte shraniti spremembe v dokumentu?<br>Vse "
+"neshranjene spremembe bodo izgubljene."
+
+#: src/bin/ui/alerts.c:88
+msgid "Discard"
+msgstr "Zavrzi"
+
+#: src/bin/ui/alerts.c:94
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: src/bin/ui/font_dialog.c:89
+msgid "Select Font"
+msgstr "Izberi pisavo"
+
+#: src/bin/ui/font_dialog.c:114
+msgid "Font size:"
+msgstr "Velikost pisave:"
+
+#: src/bin/ui/font_dialog.c:119
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pts"
+
+#: src/bin/ui/font_dialog.c:157
+msgid "Use Default Font:"
+msgstr "Uporabi privzeto pisavo:"
+
+#: src/bin/ui/font_dialog.c:168
+msgid "Set"
+msgstr "Nastavi"
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Jump to line:"
+msgstr "Skoči na vrstico:"
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr "Pojdi"
+
+#: src/bin/ui/search_dialog.c:170
+msgid "Search for:"
+msgstr "Iskanje:"
+
+#: src/bin/ui/search_dialog.c:194
+msgid "Replace with:"
+msgstr "Zamenjaj z:"
+
+#: src/bin/ui/search_dialog.c:218
+msgid "Find"
+msgstr "Najdi"
+
+#: src/bin/ui/search_dialog.c:226
+msgid "Replace"
+msgstr "Zamenjaj"
