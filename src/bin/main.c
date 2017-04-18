@@ -493,10 +493,10 @@ _find(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 }
 
 static void
-_font_settings(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_settings(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Ecrire_Entry *ent = data;
-   ui_font_dialog_open(elm_object_top_widget_get(ent->win), ent, _ent_cfg->font.name, _ent_cfg->font.size);
+   ui_settings_dialog_open(elm_object_top_widget_get(ent->win), ent, _ent_cfg);
 }
 
 
@@ -731,7 +731,7 @@ main(int argc, char *argv[])
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
-         _font_settings, main_ec_ent);
+         _settings, main_ec_ent);
 
 #ifdef HAVE_ECORE_X
    if (!ecore_x_selection_owner_get(ECORE_X_ATOM_SELECTION_CLIPBOARD))
