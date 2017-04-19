@@ -568,6 +568,9 @@ editor_font_choose(Ecrire_Entry *ent, const char *font, int size)
 }
 
 #ifdef HAVE_ECORE_X
+
+Eina_Bool ctrl_pressed = EINA_FALSE;
+
 static Eina_Bool
 _selection_notify(void *data, int type __UNUSED__, void *_event)
 {
@@ -585,6 +588,29 @@ _selection_notify(void *data, int type __UNUSED__, void *_event)
      }
 
    return ECORE_CALLBACK_PASS_ON;
+}
+
+static Eina_Bool
+_key_down_cb(void *data,
+             Evas_Object *obj,
+             void *ev)
+{
+    Ecore_Event_Key *event = ev;
+    if(ctrl_pressed)
+      {
+        ctrl_pressed = EINA_FALSE;
+        if(!strcmp("S", event->key) ||
+           !strcmp("s", event->key))
+          {
+            _save(data,NULL,NULL);
+          }
+      }
+    else if (!strcmp("Control_L", event->key) ||
+             !strcmp("Control_R", event->key))
+      {
+        ctrl_pressed = EINA_TRUE;
+      }
+    return ECORE_CALLBACK_PASS_ON;
 }
 #endif
 
@@ -742,6 +768,8 @@ main(int argc, char *argv[])
    ecore_x_fixes_selection_notification_request(ECORE_X_ATOM_SELECTION_CLIPBOARD);
    ecore_event_handler_add(ECORE_X_EVENT_FIXES_SELECTION_NOTIFY,
          _selection_notify, main_ec_ent);
+   
+   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
 #endif
 
    /* We don't have a selection when we start, make the items disabled */
