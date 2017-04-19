@@ -2,6 +2,6 @@ src/bin/file_utils.c
 src/bin/main.c
 src/bin/ui/alerts.c
 src/bin/ui/file_related.c
-src/bin/ui/font_dialog.c
+src/bin/ui/settings_dialog.c
 src/bin/ui/goto_dialog.c
 src/bin/ui/search_dialog.c

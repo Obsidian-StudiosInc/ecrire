@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-18 01:19+0900\n"
+"POT-Creation-Date: 2017-04-19 02:04-0400\n"
 "PO-Revision-Date: 2012-11-08 02:06+0100\n"
 "Last-Translator: Aníbal Garrido <khany@member.trisquel.info>\n"
 "Language-Team: Enlightenment Team\n"
@@ -15,7 +15,71 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/bin/ui/alerts.c:56
+#: src/bin/main.c:99
+#, c-format
+msgid "%s%s - %s"
+msgstr "%s%s - %s"
+
+#: src/bin/main.c:102
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "%sSin título %d - %s"
+
+#: src/bin/main.c:126
+#, c-format
+msgid "Ln %d, Col %d"
+msgstr "Lín %d, Col %d"
+
+#: src/bin/main.c:748
+msgid "New"
+msgstr "Nuevo"
+
+#: src/bin/main.c:749
+msgid "Open"
+msgstr "Abrir"
+
+#: src/bin/main.c:751 src/bin/ui/alerts.c:64
+msgid "Save"
+msgstr "Guardar"
+
+#: src/bin/main.c:752
+msgid "Save As"
+msgstr "Guardar como"
+
+#: src/bin/main.c:757
+msgid "Undo"
+msgstr "Deshacer"
+
+#: src/bin/main.c:759
+msgid "Redo"
+msgstr "Rehacer"
+
+#: src/bin/main.c:762
+msgid "Cut"
+msgstr "Cortar"
+
+#: src/bin/main.c:764
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/bin/main.c:766
+msgid "Paste"
+msgstr "Pegar"
+
+#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#, fuzzy
+msgid "Search"
+msgstr "Buscar por:"
+
+#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr ""
+
+#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
+msgid "Settings"
+msgstr "Preferencias"
+
+#: src/bin/ui/alerts.c:60
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
@@ -23,21 +87,65 @@ msgstr ""
 "<align=center>Quiere guardar los cambios del documento?<br>Los cambios sin "
 "guardar se perderán."
 
-#: src/bin/ui/alerts.c:71 src/bin/main.c:687
-msgid "Save"
-msgstr "Guardar"
-
-#: src/bin/ui/alerts.c:82
+#: src/bin/ui/alerts.c:69
 msgid "Discard"
 msgstr "Descartar"
 
-#: src/bin/ui/alerts.c:88
+#: src/bin/ui/alerts.c:74
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/bin/ui/search_dialog.c:148 src/bin/main.c:705
-msgid "Find & Replace"
-msgstr "Buscar y sustituir"
+#: src/bin/ui/settings_dialog.c:117
+msgid "ecrire"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:117
+#, fuzzy
+msgid "settings"
+msgstr "Preferencias"
+
+#: src/bin/ui/settings_dialog.c:130
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:150
+msgid "Word Wrap"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:168
+#, fuzzy
+msgid "Use default font"
+msgstr "Usar el tipo de letra predefinido:"
+
+#: src/bin/ui/settings_dialog.c:186
+#, fuzzy
+msgid "Font size"
+msgstr "Tamaño del tipo de letra:"
+
+#: src/bin/ui/settings_dialog.c:196
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pts"
+
+#: src/bin/ui/settings_dialog.c:252
+msgid "OK"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:267
+msgid "Apply"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:282
+msgid "Close"
+msgstr ""
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Jump to line:"
+msgstr ""
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr ""
 
 #: src/bin/ui/search_dialog.c:170
 msgid "Search for:"
@@ -55,74 +163,11 @@ msgstr "Buscar"
 msgid "Replace"
 msgstr "Sustituir"
 
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Seleccione un tipo de letra"
+#~ msgid "Find & Replace"
+#~ msgstr "Buscar y sustituir"
 
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
-msgstr "Tamaño del tipo de letra:"
+#~ msgid "Select Font"
+#~ msgstr "Seleccione un tipo de letra"
 
-#: src/bin/ui/font_dialog.c:119
-#, c-format
-msgid "%.0f pts"
-msgstr "%.0f pts"
-
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Usar el tipo de letra predefinido:"
-
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Definir"
-
-#: src/bin/main.c:96
-#, c-format
-msgid "%s%s - %s"
-msgstr "%s%s - %s"
-
-#: src/bin/main.c:99
-#, c-format
-msgid "%sUntitled %d - %s"
-msgstr "%sSin título %d - %s"
-
-#: src/bin/main.c:123
-#, c-format
-msgid "Ln %d, Col %d"
-msgstr "Lín %d, Col %d"
-
-#: src/bin/main.c:684
-msgid "New"
-msgstr "Nuevo"
-
-#: src/bin/main.c:685
-msgid "Open"
-msgstr "Abrir"
-
-#: src/bin/main.c:688
-msgid "Save As"
-msgstr "Guardar como"
-
-#: src/bin/main.c:693
-msgid "Undo"
-msgstr "Deshacer"
-
-#: src/bin/main.c:695
-msgid "Redo"
-msgstr "Rehacer"
-
-#: src/bin/main.c:698
-msgid "Cut"
-msgstr "Cortar"
-
-#: src/bin/main.c:700
-msgid "Copy"
-msgstr "Copiar"
-
-#: src/bin/main.c:702
-msgid "Paste"
-msgstr "Pegar"
-
-#: src/bin/main.c:709
-msgid "Settings"
-msgstr "Preferencias"
+#~ msgid "Set"
+#~ msgstr "Definir"

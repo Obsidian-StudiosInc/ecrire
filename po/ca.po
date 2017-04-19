@@ -6,81 +6,83 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2017-04-19 02:04-0400\n"
 "PO-Revision-Date: 2014-05-26 22:31+0000\n"
 "Last-Translator: joancoll <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-05-27 05:40+0000\n"
 "X-Generator: Launchpad (build 17017)\n"
 
-#: src/bin/main.c:96
+#: src/bin/main.c:99
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:99
+#: src/bin/main.c:102
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sSense títol %d - %s"
 
-#: src/bin/main.c:123
+#: src/bin/main.c:126
 #, c-format
 msgid "Ln %d, Col %d"
 msgstr "Ln %d, Col %d"
 
-#: src/bin/main.c:691
+#: src/bin/main.c:748
 msgid "New"
 msgstr "Nou"
 
-#: src/bin/main.c:692
+#: src/bin/main.c:749
 msgid "Open"
 msgstr "Obre"
 
-#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+#: src/bin/main.c:751 src/bin/ui/alerts.c:64
 msgid "Save"
 msgstr "Desa"
 
-#: src/bin/main.c:695
+#: src/bin/main.c:752
 msgid "Save As"
 msgstr "Anomena i desa"
 
-#: src/bin/main.c:700
+#: src/bin/main.c:757
 msgid "Undo"
 msgstr "Desfés"
 
-#: src/bin/main.c:702
+#: src/bin/main.c:759
 msgid "Redo"
 msgstr "Refés"
 
-#: src/bin/main.c:705
+#: src/bin/main.c:762
 msgid "Cut"
 msgstr "Retalla"
 
-#: src/bin/main.c:707
+#: src/bin/main.c:764
 msgid "Copy"
 msgstr "Copia"
 
-#: src/bin/main.c:709
+#: src/bin/main.c:766
 msgid "Paste"
 msgstr "Enganxa"
 
-#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
-msgid "Find & Replace"
-msgstr "Cerca i substitueix"
+#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#, fuzzy
+msgid "Search"
+msgstr "Cerca per:"
 
-#: src/bin/main.c:714
-msgid "Goto Line"
-msgstr "Vés a la línia"
+#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr ""
 
-#: src/bin/main.c:717
+#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
 msgid "Settings"
 msgstr "Paràmetres"
 
-#: src/bin/ui/alerts.c:56
+#: src/bin/ui/alerts.c:60
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
@@ -88,41 +90,61 @@ msgstr ""
 "<align=center>Vol desar els canvi en el document?<br>Qualsevol canvi no "
 "desat es perdrà."
 
-#: src/bin/ui/alerts.c:82
+#: src/bin/ui/alerts.c:69
 msgid "Discard"
 msgstr "Descarta"
 
-#: src/bin/ui/alerts.c:88
+#: src/bin/ui/alerts.c:74
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Seleccioni el tipus de lletra"
+#: src/bin/ui/settings_dialog.c:117
+msgid "ecrire"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
+#: src/bin/ui/settings_dialog.c:117
+#, fuzzy
+msgid "settings"
+msgstr "Paràmetres"
+
+#: src/bin/ui/settings_dialog.c:130
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:150
+msgid "Word Wrap"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:168
+#, fuzzy
+msgid "Use default font"
+msgstr "Utilitza la font predeterminada"
+
+#: src/bin/ui/settings_dialog.c:186
+#, fuzzy
+msgid "Font size"
 msgstr "Mida de la font:"
 
-#: src/bin/ui/font_dialog.c:119
+#: src/bin/ui/settings_dialog.c:196
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Utilitza la font predeterminada"
+#: src/bin/ui/settings_dialog.c:252
+msgid "OK"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Estableix"
+#: src/bin/ui/settings_dialog.c:267
+msgid "Apply"
+msgstr ""
 
-#: src/bin/ui/goto_dialog.c:60
-msgid "Go to"
-msgstr "Vés a"
+#: src/bin/ui/settings_dialog.c:282
+msgid "Close"
+msgstr ""
 
 #: src/bin/ui/goto_dialog.c:82
-msgid "Go to line:"
+#, fuzzy
+msgid "Jump to line:"
 msgstr "Vés a la línia:"
 
 #: src/bin/ui/goto_dialog.c:106
@@ -144,3 +166,18 @@ msgstr "Cerca"
 #: src/bin/ui/search_dialog.c:226
 msgid "Replace"
 msgstr "Reemplaça"
+
+#~ msgid "Find & Replace"
+#~ msgstr "Cerca i substitueix"
+
+#~ msgid "Goto Line"
+#~ msgstr "Vés a la línia"
+
+#~ msgid "Select Font"
+#~ msgstr "Seleccioni el tipus de lletra"
+
+#~ msgid "Set"
+#~ msgstr "Estableix"
+
+#~ msgid "Go to"
+#~ msgstr "Vés a"

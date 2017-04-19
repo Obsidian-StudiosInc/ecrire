@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire \n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-18 01:19+0900\n"
+"POT-Creation-Date: 2017-04-19 02:04-0400\n"
 "PO-Revision-Date: 2012-12-22 03:32+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -17,27 +17,135 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/bin/ui/alerts.c:56
+#: src/bin/main.c:99
+#, c-format
+msgid "%s%s - %s"
+msgstr "%s%s - %s"
+
+#: src/bin/main.c:102
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "%s未命名 %d - %s"
+
+#: src/bin/main.c:126
+#, c-format
+msgid "Ln %d, Col %d"
+msgstr "%d 行，%d 列"
+
+#: src/bin/main.c:748
+msgid "New"
+msgstr "新建"
+
+#: src/bin/main.c:749
+msgid "Open"
+msgstr "打开"
+
+#: src/bin/main.c:751 src/bin/ui/alerts.c:64
+msgid "Save"
+msgstr "保存"
+
+#: src/bin/main.c:752
+msgid "Save As"
+msgstr "另存为"
+
+#: src/bin/main.c:757
+msgid "Undo"
+msgstr "撤销"
+
+#: src/bin/main.c:759
+msgid "Redo"
+msgstr "重做"
+
+#: src/bin/main.c:762
+msgid "Cut"
+msgstr "剪切"
+
+#: src/bin/main.c:764
+msgid "Copy"
+msgstr "复制"
+
+#: src/bin/main.c:766
+msgid "Paste"
+msgstr "粘贴"
+
+#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#, fuzzy
+msgid "Search"
+msgstr "搜索："
+
+#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr ""
+
+#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
+msgid "Settings"
+msgstr "设置"
+
+#: src/bin/ui/alerts.c:60
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
 msgstr "<align=center>是否保存对文档的修改？<br>任何未保存的变更将会丢失。"
 
-#: src/bin/ui/alerts.c:71 src/bin/main.c:687
-msgid "Save"
-msgstr "保存"
-
-#: src/bin/ui/alerts.c:82
+#: src/bin/ui/alerts.c:69
 msgid "Discard"
 msgstr "丢弃"
 
-#: src/bin/ui/alerts.c:88
+#: src/bin/ui/alerts.c:74
 msgid "Cancel"
 msgstr "取消"
 
-#: src/bin/ui/search_dialog.c:148 src/bin/main.c:705
-msgid "Find & Replace"
-msgstr "查找和替换"
+#: src/bin/ui/settings_dialog.c:117
+msgid "ecrire"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:117
+#, fuzzy
+msgid "settings"
+msgstr "设置"
+
+#: src/bin/ui/settings_dialog.c:130
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:150
+msgid "Word Wrap"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:168
+#, fuzzy
+msgid "Use default font"
+msgstr "使用默认字体："
+
+#: src/bin/ui/settings_dialog.c:186
+#, fuzzy
+msgid "Font size"
+msgstr "字体大小："
+
+#: src/bin/ui/settings_dialog.c:196
+#, c-format
+msgid "%.0f pts"
+msgstr "%.0f pts"
+
+#: src/bin/ui/settings_dialog.c:252
+msgid "OK"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:267
+msgid "Apply"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:282
+msgid "Close"
+msgstr ""
+
+#: src/bin/ui/goto_dialog.c:82
+msgid "Jump to line:"
+msgstr ""
+
+#: src/bin/ui/goto_dialog.c:106
+msgid "Go"
+msgstr ""
 
 #: src/bin/ui/search_dialog.c:170
 msgid "Search for:"
@@ -55,74 +163,11 @@ msgstr "查找"
 msgid "Replace"
 msgstr "替换"
 
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "选择字体"
+#~ msgid "Find & Replace"
+#~ msgstr "查找和替换"
 
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
-msgstr "字体大小："
+#~ msgid "Select Font"
+#~ msgstr "选择字体"
 
-#: src/bin/ui/font_dialog.c:119
-#, c-format
-msgid "%.0f pts"
-msgstr "%.0f pts"
-
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "使用默认字体："
-
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "设置"
-
-#: src/bin/main.c:96
-#, c-format
-msgid "%s%s - %s"
-msgstr "%s%s - %s"
-
-#: src/bin/main.c:99
-#, c-format
-msgid "%sUntitled %d - %s"
-msgstr "%s未命名 %d - %s"
-
-#: src/bin/main.c:123
-#, c-format
-msgid "Ln %d, Col %d"
-msgstr "%d 行，%d 列"
-
-#: src/bin/main.c:684
-msgid "New"
-msgstr "新建"
-
-#: src/bin/main.c:685
-msgid "Open"
-msgstr "打开"
-
-#: src/bin/main.c:688
-msgid "Save As"
-msgstr "另存为"
-
-#: src/bin/main.c:693
-msgid "Undo"
-msgstr "撤销"
-
-#: src/bin/main.c:695
-msgid "Redo"
-msgstr "重做"
-
-#: src/bin/main.c:698
-msgid "Cut"
-msgstr "剪切"
-
-#: src/bin/main.c:700
-msgid "Copy"
-msgstr "复制"
-
-#: src/bin/main.c:702
-msgid "Paste"
-msgstr "粘贴"
-
-#: src/bin/main.c:709
-msgid "Settings"
-msgstr "设置"
+#~ msgid "Set"
+#~ msgstr "设置"

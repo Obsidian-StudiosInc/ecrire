@@ -5,82 +5,83 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
-"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2017-04-19 02:04-0400\n"
 "PO-Revision-Date: 2014-05-24 08:43+0000\n"
 "Last-Translator: Aníbal Garrido <Unknown>\n"
 "Language-Team: http://trasno.net/ <proxecto@trasno.net>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-05-25 05:44+0000\n"
 "X-Generator: Launchpad (build 17017)\n"
-"Language: gl\n"
 
-#: src/bin/main.c:96
+#: src/bin/main.c:99
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:99
+#: src/bin/main.c:102
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sSen título %d - %s"
 
-#: src/bin/main.c:123
+#: src/bin/main.c:126
 #, c-format
 msgid "Ln %d, Col %d"
 msgstr "Lin %d, Col %d"
 
-#: src/bin/main.c:691
+#: src/bin/main.c:748
 msgid "New"
 msgstr "Novo"
 
-#: src/bin/main.c:692
+#: src/bin/main.c:749
 msgid "Open"
 msgstr "Abrir"
 
-#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+#: src/bin/main.c:751 src/bin/ui/alerts.c:64
 msgid "Save"
 msgstr "Gardar"
 
-#: src/bin/main.c:695
+#: src/bin/main.c:752
 msgid "Save As"
 msgstr "Gardar Como"
 
-#: src/bin/main.c:700
+#: src/bin/main.c:757
 msgid "Undo"
 msgstr "Desfacer"
 
-#: src/bin/main.c:702
+#: src/bin/main.c:759
 msgid "Redo"
 msgstr "Refacer"
 
-#: src/bin/main.c:705
+#: src/bin/main.c:762
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/bin/main.c:707
+#: src/bin/main.c:764
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/bin/main.c:709
+#: src/bin/main.c:766
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
-msgid "Find & Replace"
-msgstr "Atopar e Substituír"
+#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#, fuzzy
+msgid "Search"
+msgstr "Buscar por:"
 
-#: src/bin/main.c:714
-msgid "Goto Line"
-msgstr "Ir á liña"
+#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr ""
 
-#: src/bin/main.c:717
+#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
 msgid "Settings"
 msgstr "Preferencias"
 
-#: src/bin/ui/alerts.c:56
+#: src/bin/ui/alerts.c:60
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
@@ -88,41 +89,60 @@ msgstr ""
 "<align=center>Quere gardar os cambios do documento?<br>Os cambios sen gardar "
 "perderanse."
 
-#: src/bin/ui/alerts.c:82
+#: src/bin/ui/alerts.c:69
 msgid "Discard"
 msgstr "Rexeitar"
 
-#: src/bin/ui/alerts.c:88
+#: src/bin/ui/alerts.c:74
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Escolla un tipo de letra"
+#: src/bin/ui/settings_dialog.c:117
+msgid "ecrire"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
+#: src/bin/ui/settings_dialog.c:117
+#, fuzzy
+msgid "settings"
+msgstr "Preferencias"
+
+#: src/bin/ui/settings_dialog.c:130
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:150
+msgid "Word Wrap"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:168
+#, fuzzy
+msgid "Use default font"
+msgstr "Empregar o tipo de letra predefinido:"
+
+#: src/bin/ui/settings_dialog.c:186
+#, fuzzy
+msgid "Font size"
 msgstr "Tamaño do tipo de letra:"
 
-#: src/bin/ui/font_dialog.c:119
+#: src/bin/ui/settings_dialog.c:196
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Empregar o tipo de letra predefinido:"
+#: src/bin/ui/settings_dialog.c:252
+msgid "OK"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Establecer"
+#: src/bin/ui/settings_dialog.c:267
+msgid "Apply"
+msgstr ""
 
-#: src/bin/ui/goto_dialog.c:60
-msgid "Go to"
+#: src/bin/ui/settings_dialog.c:282
+msgid "Close"
 msgstr ""
 
 #: src/bin/ui/goto_dialog.c:82
-msgid "Go to line:"
+msgid "Jump to line:"
 msgstr ""
 
 #: src/bin/ui/goto_dialog.c:106
@@ -144,3 +164,15 @@ msgstr "Atopar"
 #: src/bin/ui/search_dialog.c:226
 msgid "Replace"
 msgstr "Substituír"
+
+#~ msgid "Find & Replace"
+#~ msgstr "Atopar e Substituír"
+
+#~ msgid "Goto Line"
+#~ msgstr "Ir á liña"
+
+#~ msgid "Select Font"
+#~ msgstr "Escolla un tipo de letra"
+
+#~ msgid "Set"
+#~ msgstr "Establecer"

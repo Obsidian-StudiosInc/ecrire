@@ -5,85 +5,86 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ecrire\n"
-"Report-Msgid-Bugs-To: $MSGID_BUGS_ADDRESS\n"
-"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2017-04-19 02:04-0400\n"
 "PO-Revision-Date: 2014-01-19 19:40+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: français <sansgourou@gmail.com>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-01-20 05:30+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 "X-Poedit-Country: FRANCE\n"
-"Language: fr\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/bin/main.c:96
+#: src/bin/main.c:99
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:99
+#: src/bin/main.c:102
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sSans titre %d - %s"
 
-#: src/bin/main.c:123
+#: src/bin/main.c:126
 #, c-format
 msgid "Ln %d, Col %d"
 msgstr "Ligne %d, Col %d"
 
-#: src/bin/main.c:691
+#: src/bin/main.c:748
 msgid "New"
 msgstr "Nouveau"
 
-#: src/bin/main.c:692
+#: src/bin/main.c:749
 msgid "Open"
 msgstr "Ouvrir"
 
-#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+#: src/bin/main.c:751 src/bin/ui/alerts.c:64
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/bin/main.c:695
+#: src/bin/main.c:752
 msgid "Save As"
 msgstr "Enreg. sous"
 
-#: src/bin/main.c:700
+#: src/bin/main.c:757
 msgid "Undo"
 msgstr "Défaire"
 
-#: src/bin/main.c:702
+#: src/bin/main.c:759
 msgid "Redo"
 msgstr "Refaire"
 
-#: src/bin/main.c:705
+#: src/bin/main.c:762
 msgid "Cut"
 msgstr "Couper"
 
-#: src/bin/main.c:707
+#: src/bin/main.c:764
 msgid "Copy"
 msgstr "Copier"
 
-#: src/bin/main.c:709
+#: src/bin/main.c:766
 msgid "Paste"
 msgstr "Coller"
 
-#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
-msgid "Find & Replace"
-msgstr "Substituer"
+#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#, fuzzy
+msgid "Search"
+msgstr "Rechercher :"
 
-#: src/bin/main.c:714
-msgid "Goto Line"
-msgstr "Aller à la ligne"
+#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr ""
 
-#: src/bin/main.c:717
+#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/bin/ui/alerts.c:56
+#: src/bin/ui/alerts.c:60
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
@@ -91,41 +92,61 @@ msgstr ""
 "<align=center>Voulez-vous enregistrer le document modifié ?<br>Toute "
 "modification non enregistrée sera perdue."
 
-#: src/bin/ui/alerts.c:82
+#: src/bin/ui/alerts.c:69
 msgid "Discard"
 msgstr "Abandonner"
 
-#: src/bin/ui/alerts.c:88
+#: src/bin/ui/alerts.c:74
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Choisir une police"
+#: src/bin/ui/settings_dialog.c:117
+msgid "ecrire"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
+#: src/bin/ui/settings_dialog.c:117
+#, fuzzy
+msgid "settings"
+msgstr "Paramètres"
+
+#: src/bin/ui/settings_dialog.c:130
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:150
+msgid "Word Wrap"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:168
+#, fuzzy
+msgid "Use default font"
+msgstr "Police par défaut"
+
+#: src/bin/ui/settings_dialog.c:186
+#, fuzzy
+msgid "Font size"
 msgstr "Taille de la police :"
 
-#: src/bin/ui/font_dialog.c:119
+#: src/bin/ui/settings_dialog.c:196
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pt"
 
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Police par défaut"
+#: src/bin/ui/settings_dialog.c:252
+msgid "OK"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Valider"
+#: src/bin/ui/settings_dialog.c:267
+msgid "Apply"
+msgstr ""
 
-#: src/bin/ui/goto_dialog.c:60
-msgid "Go to"
-msgstr "Aller à"
+#: src/bin/ui/settings_dialog.c:282
+msgid "Close"
+msgstr ""
 
 #: src/bin/ui/goto_dialog.c:82
-msgid "Go to line:"
+#, fuzzy
+msgid "Jump to line:"
 msgstr "Aller à la ligne :"
 
 #: src/bin/ui/goto_dialog.c:106
@@ -147,3 +168,18 @@ msgstr "Chercher"
 #: src/bin/ui/search_dialog.c:226
 msgid "Replace"
 msgstr "Remplacer"
+
+#~ msgid "Find & Replace"
+#~ msgstr "Substituer"
+
+#~ msgid "Goto Line"
+#~ msgstr "Aller à la ligne"
+
+#~ msgid "Select Font"
+#~ msgstr "Choisir une police"
+
+#~ msgid "Set"
+#~ msgstr "Valider"
+
+#~ msgid "Go to"
+#~ msgstr "Aller à"

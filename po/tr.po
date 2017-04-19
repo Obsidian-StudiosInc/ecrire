@@ -6,123 +6,145 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-12-30 11:50+0100\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2017-04-19 02:04-0400\n"
 "PO-Revision-Date: 2014-04-16 13:26+0000\n"
 "Last-Translator: Ali E.İMREK <alierkanimrek@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-04-17 05:56+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 
-#: src/bin/main.c:96
+#: src/bin/main.c:99
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:99
+#: src/bin/main.c:102
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sBaşlıksız %d - %s"
 
-#: src/bin/main.c:123
+#: src/bin/main.c:126
 #, c-format
 msgid "Ln %d, Col %d"
 msgstr "Ln %d, Col %d"
 
-#: src/bin/main.c:691
+#: src/bin/main.c:748
 msgid "New"
 msgstr "Yeni"
 
-#: src/bin/main.c:692
+#: src/bin/main.c:749
 msgid "Open"
 msgstr "Aç"
 
-#: src/bin/main.c:694 src/bin/ui/alerts.c:71
+#: src/bin/main.c:751 src/bin/ui/alerts.c:64
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/bin/main.c:695
+#: src/bin/main.c:752
 msgid "Save As"
 msgstr "Farklı kaydet"
 
-#: src/bin/main.c:700
+#: src/bin/main.c:757
 msgid "Undo"
 msgstr "Geri Al"
 
-#: src/bin/main.c:702
+#: src/bin/main.c:759
 msgid "Redo"
 msgstr "Yinele"
 
-#: src/bin/main.c:705
+#: src/bin/main.c:762
 msgid "Cut"
 msgstr "Kes"
 
-#: src/bin/main.c:707
+#: src/bin/main.c:764
 msgid "Copy"
 msgstr "Kopyala"
 
-#: src/bin/main.c:709
+#: src/bin/main.c:766
 msgid "Paste"
 msgstr "Yapıştır"
 
-#: src/bin/main.c:712 src/bin/ui/search_dialog.c:148
-msgid "Find & Replace"
-msgstr "Bul & Değiştir"
+#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#, fuzzy
+msgid "Search"
+msgstr "Ara:"
 
-#: src/bin/main.c:714
-msgid "Goto Line"
-msgstr "Satıra Git"
+#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+msgid "Jump to"
+msgstr ""
 
-#: src/bin/main.c:717
+#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/bin/ui/alerts.c:56
+#: src/bin/ui/alerts.c:60
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
 msgstr ""
-"<align=center>Belgedeki değişiklikleri kaydetmek istiyor "
-"musunuz?<br>Kaydedilmemiş değişiklikler kaybolacaktır."
+"<align=center>Belgedeki değişiklikleri kaydetmek istiyor musunuz?"
+"<br>Kaydedilmemiş değişiklikler kaybolacaktır."
 
-#: src/bin/ui/alerts.c:82
+#: src/bin/ui/alerts.c:69
 msgid "Discard"
 msgstr "Vazgeç"
 
-#: src/bin/ui/alerts.c:88
+#: src/bin/ui/alerts.c:74
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/bin/ui/font_dialog.c:89
-msgid "Select Font"
-msgstr "Yazı Tipi Seç"
+#: src/bin/ui/settings_dialog.c:117
+msgid "ecrire"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:114
-msgid "Font size:"
+#: src/bin/ui/settings_dialog.c:117
+#, fuzzy
+msgid "settings"
+msgstr "Ayarlar"
+
+#: src/bin/ui/settings_dialog.c:130
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:150
+msgid "Word Wrap"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:168
+#, fuzzy
+msgid "Use default font"
+msgstr "Varsayılan Yazı Tipini Kullan:"
+
+#: src/bin/ui/settings_dialog.c:186
+#, fuzzy
+msgid "Font size"
 msgstr "Yazıtipi boyutu:"
 
-#: src/bin/ui/font_dialog.c:119
+#: src/bin/ui/settings_dialog.c:196
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/font_dialog.c:157
-msgid "Use Default Font:"
-msgstr "Varsayılan Yazı Tipini Kullan:"
+#: src/bin/ui/settings_dialog.c:252
+msgid "OK"
+msgstr ""
 
-#: src/bin/ui/font_dialog.c:168
-msgid "Set"
-msgstr "Ayarla"
+#: src/bin/ui/settings_dialog.c:267
+msgid "Apply"
+msgstr ""
 
-#: src/bin/ui/goto_dialog.c:60
-msgid "Go to"
-msgstr "Git"
+#: src/bin/ui/settings_dialog.c:282
+msgid "Close"
+msgstr ""
 
 #: src/bin/ui/goto_dialog.c:82
-msgid "Go to line:"
+#, fuzzy
+msgid "Jump to line:"
 msgstr "Satıra git:"
 
 #: src/bin/ui/goto_dialog.c:106
@@ -144,3 +166,18 @@ msgstr "Bul"
 #: src/bin/ui/search_dialog.c:226
 msgid "Replace"
 msgstr "Değiştir"
+
+#~ msgid "Find & Replace"
+#~ msgstr "Bul & Değiştir"
+
+#~ msgid "Goto Line"
+#~ msgstr "Satıra Git"
+
+#~ msgid "Select Font"
+#~ msgstr "Yazı Tipi Seç"
+
+#~ msgid "Set"
+#~ msgstr "Ayarla"
+
+#~ msgid "Go to"
+#~ msgstr "Git"
