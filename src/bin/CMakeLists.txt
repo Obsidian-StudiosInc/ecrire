@@ -5,7 +5,6 @@ LIST(APPEND ECRIRE_CC_SOURCES
    ui/file_related.c
    ui/search_dialog.c
    ui/goto_dialog.c
-   ui/font_dialog.c
    ui/settings_dialog.c
    ui/alerts.c
    )
