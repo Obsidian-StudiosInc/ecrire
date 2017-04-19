@@ -66,7 +66,10 @@ ui_settings_dialog_open(Evas_Object *parent,
   Evas_Object *ic, *obj, *table;
   int row = 0;
 
-  win = elm_win_add(parent, "settings", ELM_WIN_BASIC);
+   if (win)
+     return win;
+
+  win = elm_win_add(parent, "settings", ELM_WIN_TOOLBAR);
   elm_win_autodel_set(win, EINA_TRUE);
   elm_win_title_set(win, _("Settings"));
   evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
