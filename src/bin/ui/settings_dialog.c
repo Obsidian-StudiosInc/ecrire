@@ -28,6 +28,7 @@ settings_delete_cb (void *data EINA_UNUSED,
                     void *event_info EINA_UNUSED)
 {
    evas_object_del(win);
+   win = NULL;
 }
 
 static void
