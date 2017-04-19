@@ -599,8 +599,13 @@ _key_down_cb(void *data,
     if(ctrl_pressed)
       {
         ctrl_pressed = EINA_FALSE;
-        if(!strcmp("S", event->key) ||
-           !strcmp("s", event->key))
+        if(!strcmp("F", event->key) ||
+           !strcmp("f", event->key))
+          {
+            _find(data,NULL,NULL);
+          }
+        else if(!strcmp("S", event->key) ||
+                !strcmp("s", event->key))
           {
             _save(data,NULL,NULL);
           }
