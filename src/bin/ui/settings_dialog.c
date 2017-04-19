@@ -53,15 +53,6 @@ settings_default_font_cb(void *data EINA_UNUSED,
    elm_object_disabled_set(fsize, elm_check_state_get(obj));
 }
 
-static void
-settings_font_cb (void *data,
-                  Evas_Object *obj EINA_UNUSED,
-                  void *event_info EINA_UNUSED)
-{
-    Ecrire_Entry *ent = (Ecrire_Entry *) data;
-    ui_font_dialog_open (win, ent, ent_cfg->font.name, ent_cfg->font.size);
-}
-
 static Eina_List *
 settings_font_list_get(const Evas *e)
 {
@@ -123,7 +114,7 @@ ui_settings_dialog_open(Evas_Object *parent,
    if (win)
      return win;
 
-  win = elm_win_util_dialog_add (parent, "ecrire", "settings");
+  win = elm_win_util_dialog_add (parent, _("ecrire"),  _("settings"));
   elm_win_autodel_set(win, EINA_TRUE);
   elm_win_title_set(win, _("Settings"));
   evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
@@ -136,7 +127,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Alpha Label */
   obj = elm_label_add (table);
-  elm_object_text_set (obj, "Alpha");
+  elm_object_text_set (obj,  _("Alpha"));
   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
   evas_object_size_hint_align_set (obj, 1, 0);
   elm_table_pack (table, obj, 0, row, 1, 1);
@@ -156,7 +147,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Word Wrap Label */
   obj = elm_label_add(table);
-  elm_object_text_set(obj,"Word Wrap");
+  elm_object_text_set(obj, _("Word Wrap"));
   evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
   evas_object_size_hint_align_set(obj, 1, 0);
   elm_table_pack(table, obj, 0, row, 1, 1);
@@ -258,7 +249,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Ok Button */
   obj = elm_button_add(table);
-  elm_object_text_set(obj,"OK");
+  elm_object_text_set(obj,_("OK"));
   ic = elm_image_add (win);
   if (elm_icon_standard_set (ic,"dialog-ok")) {
     elm_object_content_set (obj, ic);
@@ -273,7 +264,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   
   /* Apply Button */
   obj = elm_button_add(table);
-  elm_object_text_set(obj,"Apply");
+  elm_object_text_set(obj,_("Apply"));
   ic = elm_image_add (win);
   if (elm_icon_standard_set (ic,"dialog-apply")) {
     elm_object_content_set (obj, ic);
@@ -288,7 +279,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Close Button */
   obj = elm_button_add(table);
-  elm_object_text_set(obj,"Close");
+  elm_object_text_set(obj,_("Close"));
   ic = elm_image_add (win);
   if (elm_icon_standard_set (ic,"dialog-close")) {
     elm_object_content_set (obj, ic);
