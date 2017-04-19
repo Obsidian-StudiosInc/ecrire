@@ -12,9 +12,13 @@ extern int _ecrire_log_dom;
 #define INF(...)      EINA_LOG_DOM_INFO(_ecrire_log_dom, __VA_ARGS__)
 #define DBG(...)      EINA_LOG_DOM_DBG(_ecrire_log_dom, __VA_ARGS__)
 
+#define ALPHA(O,A) evas_object_color_set (O, 255, 255, 255, A)
+
 struct _Ecrire_Entry {
      Evas_Object *entry;
      Evas_Object *win;
+     Evas_Object *bg;
+     Evas_Object *bx;
      const char *filename;
      int unsaved;
      Elm_Object_Item *copy_item, *cut_item, *save_item, *paste_item, *undo_item, *redo_item;

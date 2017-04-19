@@ -15,6 +15,19 @@ Ent_Cfg *ent_cfg;
 Evas_Object *win;
 
 static void
+settings_alpha_cb (void *data,
+                   Evas_Object *obj,
+                   void *event_info EINA_UNUSED)
+{
+  Ecrire_Entry *ent = (Ecrire_Entry *)data;
+  Evas_Object *bg;
+
+  ent_cfg->alpha = elm_slider_value_get (obj);
+  ALPHA (ent->bg, ent_cfg->alpha);
+  ALPHA (ent->bx, ent_cfg->alpha);
+}
+
+static void
 settings_apply_cb (void *data EINA_UNUSED,
                    Evas_Object *obj EINA_UNUSED,
                    void *event_info EINA_UNUSED)
@@ -80,7 +93,26 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_size_hint_padding_set (table, ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING),
                                      ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING));
   evas_object_show(table);
+
+  /* Alpha Label */
+  obj = elm_label_add (table);
+  elm_object_text_set (obj, "Alpha");
+  evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set (obj, 1, 0);
+  elm_table_pack (table, obj, 0, row, 1, 1);
+  evas_object_show (obj);
   
+  /* Alpha Slider */
+  obj = elm_slider_add (table);
+  elm_slider_horizontal_set (obj, EINA_TRUE);
+  elm_slider_min_max_set (obj, 127, 255);
+  elm_slider_value_set (obj, ent_cfg->alpha);
+  evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_table_pack (table, obj, 1, row, 2, 1);
+  evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, ent);
+  evas_object_show (obj);
+  row++;
 
   /* Font Settings Label */
   obj = elm_label_add(table);
