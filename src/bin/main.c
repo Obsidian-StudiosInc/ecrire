@@ -604,6 +604,11 @@ _key_down_cb(void *data,
           {
             _find(data,NULL,NULL);
           }
+        else if(!strcmp("O", event->key) ||
+                !strcmp("o", event->key))
+          {
+            _open(data,NULL,NULL);
+          }
         else if(!strcmp("S", event->key) ||
                 !strcmp("s", event->key))
           {
