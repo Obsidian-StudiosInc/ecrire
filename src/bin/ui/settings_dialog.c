@@ -114,9 +114,8 @@ ui_settings_dialog_open(Evas_Object *parent,
    if (win)
      return win;
 
-  win = elm_win_util_dialog_add (parent, _("ecrire"),  _("settings"));
+  win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
   elm_win_autodel_set(win, EINA_TRUE);
-  elm_win_title_set(win, _("Settings"));
   evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
 
   table = elm_table_add(win);
