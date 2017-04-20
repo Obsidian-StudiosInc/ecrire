@@ -6,7 +6,11 @@
 
 #include "../mess_header.h"
 
-static Evas_Object *search_win, *sent, *rent;
+const static int PADDING = 5;
+const static int BUTTON_HEIGHT = 27;
+const static int BUTTON_WIDTH = 60;
+
+static Evas_Object *win, *search, *replace;
 static Eina_Bool forward = EINA_TRUE;
 static Evas_Textblock_Cursor *cur_find;
 
@@ -99,16 +103,16 @@ static void
 _find_clicked(void *data,
       Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
-   _find_in_entry(data, elm_object_text_get(sent), EINA_TRUE);
+   _find_in_entry(data, elm_object_text_get(search), EINA_TRUE);
 }
 
 static void
 _replace_clicked(void *data,
       Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
-   if (_find_in_entry(data, elm_object_text_get(sent), EINA_FALSE))
+   if (_find_in_entry(data, elm_object_text_get(search), EINA_FALSE))
      {
-        elm_entry_entry_insert(data, elm_object_text_get(rent));
+        elm_entry_entry_insert(data, elm_object_text_get(replace));
         if (cur_find)
           {
              evas_textblock_cursor_free(cur_find);
@@ -128,112 +132,101 @@ my_win_del(void *data __UNUSED__, Evas_Object *obj, void *event_info)
         evas_textblock_cursor_free(cur_find);
         cur_find = NULL;
      }
-   search_win = NULL;
+   win = NULL;
 }
 
 Evas_Object *
-ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
+ui_find_dialog_open(Evas_Object *pareplace, Ecrire_Entry *ent)
 {
-   Evas_Object *entry = ent->entry;
-   Evas_Object *win, *bg, *bx, *lbl, *hbx, *btn;
+  Evas_Object *obj, *table;
+  int row = 0;
 
-   if (search_win)
-     {
-        evas_object_show(search_win);
-        return search_win;
-     }
+  if (win)
+    {
+      evas_object_show(win);
+      return win;
+    }
 
-   search_win = win = elm_win_add(parent, "search", ELM_WIN_TOOLBAR);
-   elm_win_autodel_set(win, EINA_TRUE);
-   elm_win_title_set(win, _("Search"));
-   evas_object_smart_callback_add(win, "delete,request", my_win_del, entry);
+  win = elm_win_util_dialog_add(pareplace, _("ecrire"),  _("Search"));
+  elm_win_autodel_set(win, EINA_TRUE);
+  evas_object_smart_callback_add(win, "delete,request", my_win_del, ent->entry);
 
-   bg = elm_bg_add(win);
-   elm_win_resize_object_add(win, bg);
-   evas_object_size_hint_weight_set(bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show(bg);
+  table = elm_table_add(win);
+  elm_obj_table_padding_set(table,
+                            ELM_SCALE_SIZE(PADDING),
+                            ELM_SCALE_SIZE(PADDING));
+  evas_object_size_hint_padding_set (table,
+                                     ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING));
+  evas_object_show(table);
 
-   bx = elm_box_add(win);
-   elm_win_resize_object_add(win, bx);
-   evas_object_size_hint_weight_set(bx, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show(bx);
+  /* Search for Label */
+  obj = elm_label_add (table);
+  elm_object_text_set (obj,  _("Search for"));
+  evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set (obj, 1, 0);
+  elm_table_pack (table, obj, 0, row, 1, 1);
+  evas_object_show (obj);
 
-   hbx = elm_box_add(win);
-   elm_box_padding_set(hbx, 15, 0);
-   elm_box_horizontal_set(hbx, EINA_TRUE);
-   evas_object_size_hint_align_set(hbx, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   evas_object_size_hint_weight_set(hbx, EVAS_HINT_EXPAND, 0.0);
-   evas_object_show(hbx);
-   elm_box_pack_end(bx, hbx);
+  search = elm_entry_add(table);
+  elm_entry_scrollable_set(search, EINA_TRUE);
+  elm_entry_single_line_set(search, EINA_TRUE);
+  evas_object_size_hint_weight_set(search, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(search, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_table_pack (table, search, 1, row, 3, 1);
+  evas_object_show(search);
+  row++;
 
-   lbl = elm_label_add(win);
-   elm_object_text_set(lbl, _("Search for:"));
-   evas_object_size_hint_align_set(lbl, EVAS_HINT_FILL, 0.5);
-   evas_object_size_hint_weight_set(lbl, 0.0, 0.0);
-   elm_box_pack_end(hbx, lbl);
-   evas_object_show(lbl);
+  /* Replace with Label */
+  obj = elm_label_add (table);
+  elm_object_text_set (obj,  _("Replace with"));
+  evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set (obj, 1, 0);
+  elm_table_pack (table, obj, 0, row, 1, 1);
+  evas_object_show (obj);
 
-   sent = elm_entry_add(win);
-   elm_entry_scrollable_set(sent, EINA_TRUE);
-   elm_entry_single_line_set(sent, EINA_TRUE);
-   evas_object_size_hint_align_set(sent, EVAS_HINT_FILL, 0.0);
-   evas_object_size_hint_weight_set(sent, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(hbx, sent);
-   evas_object_show(sent);
+  replace = elm_entry_add(table);
+  elm_entry_scrollable_set(replace, EINA_TRUE);
+  elm_entry_single_line_set(replace, EINA_TRUE);
+  evas_object_size_hint_weight_set(replace, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(replace, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_table_pack (table, replace, 1, row, 3, 1);
+  evas_object_show(replace);
+  row++;
 
-   hbx = elm_box_add(win);
-   elm_box_homogeneous_set(hbx, EINA_FALSE);
-   elm_box_padding_set(hbx, 15, 0);
-   elm_box_horizontal_set(hbx, EINA_TRUE);
-   evas_object_size_hint_align_set(hbx, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   evas_object_size_hint_weight_set(hbx, EVAS_HINT_EXPAND, 0.0);
-   evas_object_show(hbx);
-   elm_box_pack_end(bx, hbx);
+  obj = elm_button_add(table);
+  elm_object_text_set(obj, _("Find"));
+  evas_object_size_hint_align_set(obj, 0, 0);
+  evas_object_size_hint_min_set(obj,
+                                ELM_SCALE_SIZE(BUTTON_WIDTH),
+                                ELM_SCALE_SIZE(BUTTON_HEIGHT));
+  elm_table_pack (table, obj, 2, row, 1, 1);
+  evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent->entry);
+  evas_object_show(obj);
 
-   lbl = elm_label_add(win);
-   elm_object_text_set(lbl, _("Replace with:"));
-   evas_object_size_hint_align_set(lbl, EVAS_HINT_FILL, 0.5);
-   evas_object_size_hint_weight_set(lbl, 0.0, 0.0);
-   elm_box_pack_end(hbx, lbl);
-   evas_object_show(lbl);
+  obj = elm_button_add(table);
+  elm_object_text_set(obj, _("Replace"));
+  evas_object_size_hint_align_set(obj, 0, 0);
+  evas_object_size_hint_min_set(obj,
+                                ELM_SCALE_SIZE(BUTTON_WIDTH),
+                                ELM_SCALE_SIZE(BUTTON_HEIGHT));
+  elm_table_pack (table, obj, 3, row, 1, 1);
+  evas_object_smart_callback_add(obj, "clicked", _replace_clicked, ent->entry);
+  evas_object_show(obj);
 
-   rent = elm_entry_add(win);
-   elm_entry_scrollable_set(rent, EINA_TRUE);
-   elm_entry_single_line_set(rent, EINA_TRUE);
-   evas_object_size_hint_align_set(rent, EVAS_HINT_FILL, 0.0);
-   evas_object_size_hint_weight_set(rent, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(hbx, rent);
-   evas_object_show(rent);
+  /* Box for padding */
+  obj = elm_box_add (win);
+  elm_box_pack_end (obj, table);
+  evas_object_show (obj);
 
-   hbx = elm_box_add(win);
-   elm_box_homogeneous_set(hbx, EINA_FALSE);
-   elm_box_padding_set(hbx, 15, 0);
-   elm_box_horizontal_set(hbx, EINA_TRUE);
-   evas_object_size_hint_align_set(hbx, 1.0, EVAS_HINT_FILL);
-   evas_object_size_hint_weight_set(hbx, 0.0, 0.0);
-   evas_object_show(hbx);
-   elm_box_pack_end(bx, hbx);
+  elm_win_resize_object_add (win, obj);
+  elm_win_raise (win);
+  evas_object_show (win);
 
-   btn = elm_button_add(win);
-   elm_object_text_set(btn, _("Find"));
-   evas_object_size_hint_align_set(btn, 1.0, 0.0);
-   evas_object_size_hint_weight_set(btn, 0.0, 0.0);
-   evas_object_show(btn);
-   elm_box_pack_end(hbx, btn);
-   evas_object_smart_callback_add(btn, "clicked", _find_clicked, entry);
+  elm_object_focus_set(search, EINA_TRUE);
 
-   btn = elm_button_add(win);
-   elm_object_text_set(btn, _("Replace"));
-   evas_object_size_hint_align_set(btn, 1.0, 0.0);
-   evas_object_size_hint_weight_set(btn, 0.0, 0.0);
-   evas_object_show(btn);
-   elm_box_pack_end(hbx, btn);
-   evas_object_smart_callback_add(btn, "clicked", _replace_clicked, entry);
-
-   /* Forcing it to be the min height. */
-   evas_object_resize(win, 300, 1);
-   evas_object_show(win);
-
-   cur_find = NULL;
-   return win;
+  cur_find = NULL;
+  return win;
 }
