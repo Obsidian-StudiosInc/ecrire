@@ -33,6 +33,7 @@ install-sh
 ltmain.sh
 m4/
 missing
+nbproject/
 po/Makefile
 po/Makefile.in
 po/Makefile.in.in
