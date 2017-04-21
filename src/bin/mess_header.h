@@ -1,7 +1,7 @@
 #ifndef _MESS_HEADER_H
 #define _MESS_HEADER_H
 
-#include <Evas.h>
+#include <Elementary.h>
 
 extern int _ecrire_log_dom;
 #define ECRIRE_DEFAULT_LOG_COLOR EINA_COLOR_CYAN
@@ -15,25 +15,22 @@ extern int _ecrire_log_dom;
 #define ALPHA(O,A) evas_object_color_set (O, 255, 255, 255, A)
 
 struct _Ecrire_Entry {
-     Evas_Object *entry;
+     Elm_Code *code;
+     Elm_Code_Widget *entry;
      Evas_Object *win;
      Evas_Object *bg;
      Evas_Object *bx;
+     Evas_Object *cursor_label;
      const char *filename;
      int unsaved;
-     Elm_Object_Item *copy_item, *cut_item, *save_item, *paste_item, *undo_item, *redo_item;
-
-     /* Undo stack */
-     Eina_List *undo_stack;
-     Eina_List *undo_stack_ptr;
-     Eina_List *last_saved_stack_ptr;
-     Eina_Bool undo_stack_can_merge;
+     Elm_Object_Item *copy_item, *cut_item, *save_item, *save_as_item,
+                     *paste_item, *undo_item, *redo_item;
 };
 
 typedef struct _Ecrire_Entry Ecrire_Entry;
 
 char *_load_plain(const char *file);
-char *_load_file(const char *file);
+Eina_Bool _load_file(const char *file, const Elm_Code_File *code_file);
 Eina_Bool _save_markup_utf8(const char *file, const char *text);
 Eina_Bool _save_plain_utf8(const char *file, const char *text);
 

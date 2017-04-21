@@ -26,32 +26,20 @@ static void editor_font_set(Ecrire_Entry *ent, const char *font, int font_size);
 int _ecrire_log_dom = -1;
 
 static void
+_init_font(Ecrire_Entry *ent)
+{
+   if(_ent_cfg->font.name)
+     elm_obj_code_widget_font_set(ent->entry,
+                                  _ent_cfg->font.name,
+                                  _ent_cfg->font.size);
+   else
+     elm_obj_code_widget_font_set(ent->entry,  NULL, 10);
+}
+
+static void
 _init_entry(Ecrire_Entry *ent)
 {
-   Elm_Entry_Change_Info *inf;
-   editor_font_set(ent, _ent_cfg->font.name, _ent_cfg->font.size);
-
-   /* Init the undo stack */
-   EINA_LIST_FREE(ent->undo_stack, inf)
-     {
-        if (inf)
-          {
-             if (inf->insert)
-               {
-                  eina_stringshare_del(inf->change.insert.content);
-               }
-             else
-               {
-                  eina_stringshare_del(inf->change.del.content);
-               }
-             free(inf);
-          }
-     }
-   ent->undo_stack = ent->undo_stack_ptr =
-      eina_list_append(ent->undo_stack, NULL);
-   ent->last_saved_stack_ptr = ent->undo_stack_ptr;
-   ent->undo_stack_can_merge = EINA_FALSE;
-
+   _init_font(ent);
    elm_object_item_disabled_set(ent->undo_item, EINA_TRUE);
    elm_object_item_disabled_set(ent->redo_item, EINA_TRUE);
 }
@@ -70,8 +58,9 @@ _alert_if_need_saving(void (*done)(void *data), Ecrire_Entry *ent)
 }
 
 static void
-_sel_start(void *data, Evas_Object *obj __UNUSED__,
-      void *event_info __UNUSED__)
+_sel_start(void *data,
+           Evas_Object *obj EINA_UNUSED,
+           void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    elm_object_item_disabled_set(ent->copy_item, EINA_FALSE);
@@ -79,8 +68,9 @@ _sel_start(void *data, Evas_Object *obj __UNUSED__,
 }
 
 static void
-_sel_clear(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
-      void *event_info __UNUSED__)
+_sel_clear(void *data,
+           Evas_Object *obj EINA_UNUSED,
+           void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    elm_object_item_disabled_set(ent->copy_item, EINA_TRUE);
@@ -107,163 +97,23 @@ _update_cur_file(const char *file, Ecrire_Entry *ent)
 }
 
 static void
-_cur_changed(void *data, Evas_Object *obj, void *event_info __UNUSED__)
+_cur_changed(void *data,
+             Evas_Object *obj EINA_UNUSED,
+             void *event_info EINA_UNUSED)
 {
    char buf[50];
    int line;
    int col;
-   const Evas_Object *tb = elm_entry_textblock_get(obj);
-   const Evas_Textblock_Cursor *mcur = evas_object_textblock_cursor_get(tb);
-   Evas_Textblock_Cursor *cur = evas_object_textblock_cursor_new(tb);
-   line =
-      evas_textblock_cursor_line_geometry_get(mcur, NULL, NULL, NULL, NULL) + 1;
-   evas_textblock_cursor_copy(mcur, cur);
-   evas_textblock_cursor_line_char_first(cur);
-   col = evas_textblock_cursor_pos_get(mcur) -
-      evas_textblock_cursor_pos_get(cur) + 1;
-   evas_textblock_cursor_free(cur);
-   
-   snprintf(buf, sizeof(buf), _("Ln %d, Col %d"), line, col);
-   elm_object_text_set(data, buf);
-}
 
-static void
-_cur_changed_manual(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
-{
    Ecrire_Entry *ent = data;
-   ent->undo_stack_can_merge = EINA_FALSE;
-}
-
-static void
-_update_undo_redo_items(Ecrire_Entry *ent)
-{
-   elm_object_item_disabled_set(ent->undo_item,
-         !eina_list_next(ent->undo_stack_ptr));
-   elm_object_item_disabled_set(ent->redo_item,
-         !eina_list_prev(ent->undo_stack_ptr));
-
-   if (ent->undo_stack_ptr == ent->last_saved_stack_ptr)
+   elm_obj_code_widget_cursor_position_get(ent->entry,&line,&col);
+   snprintf(buf, sizeof(buf), _("Ln %d, Col %d"), line, col);
+   elm_object_text_set(ent->cursor_label, buf);
+   if(elm_object_item_disabled_get(ent->undo_item) &&
+      elm_obj_code_widget_can_undo_get(ent->entry)) 
      {
-        elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
-        _update_cur_file(ent->filename, ent);
+       elm_object_item_disabled_set(ent->undo_item, EINA_FALSE);
      }
-   else if (elm_object_item_disabled_get(ent->save_item))
-     {
-        elm_object_item_disabled_set(ent->save_item, EINA_FALSE);
-        _update_cur_file(ent->filename, ent);
-     }
-
-}
-
-static void
-_undo_stack_add(Ecrire_Entry *ent, Elm_Entry_Change_Info *_info)
-{
-   Elm_Entry_Change_Info *inf;
-
-   ent->undo_stack = eina_list_split_list(ent->undo_stack, eina_list_prev(ent->undo_stack_ptr),
-         &ent->undo_stack_ptr);
-
-   EINA_LIST_FREE(ent->undo_stack, inf)
-     {
-        if (inf->insert)
-          {
-             eina_stringshare_del(inf->change.insert.content);
-          }
-        else
-          {
-             eina_stringshare_del(inf->change.del.content);
-          }
-        free(inf);
-     }
-
-   /* FIXME: Do a smarter merge, actually merge the structures, not just
-    * mark them to be merged. */
-#if 0
-   inf = (Elm_Entry_Change_Info *) eina_list_data_get(undo_stack_ptr);
-   /* If true, we should merge with the current top */
-   if (undo_stack_can_merge && (_info->insert == inf->insert))
-     {
-     }
-   else
-#endif
-     {
-        Elm_Entry_Change_Info *head_inf = eina_list_data_get(ent->undo_stack_ptr);
-
-        inf = calloc(1, sizeof(*inf));
-        memcpy(inf, _info, sizeof(*inf));
-        if (inf->insert)
-          {
-             eina_stringshare_ref(inf->change.insert.content);
-          }
-        else
-          {
-             eina_stringshare_ref(inf->change.del.content);
-          }
-
-        if (ent->undo_stack_can_merge && (inf->insert == head_inf->insert))
-           inf->merge = EINA_TRUE;
-
-        ent->undo_stack_ptr = eina_list_prepend(ent->undo_stack_ptr, inf);
-     }
-
-   ent->undo_stack = ent->undo_stack_ptr;
-
-   ent->undo_stack_can_merge = EINA_TRUE;
-
-   _update_undo_redo_items(ent);
-}
-
-static void
-_undo_redo_do(Ecrire_Entry *ent, Elm_Entry_Change_Info *inf, Eina_Bool undo)
-{
-   DBG("%s: %s", (undo) ? "Undo" : "Redo",
-         inf->change.insert.content);
-
-   if ((inf->insert && undo) || (!inf->insert && !undo))
-     {
-        const Evas_Object *tb = elm_entry_textblock_get(ent->entry);
-        Evas_Textblock_Cursor *mcur, *end;
-        mcur = (Evas_Textblock_Cursor *) evas_object_textblock_cursor_get(tb);
-        end = evas_object_textblock_cursor_new(tb);
-
-        if (inf->insert)
-          {
-             elm_entry_cursor_pos_set(ent->entry, inf->change.insert.pos);
-             evas_textblock_cursor_pos_set(end, inf->change.insert.pos +
-                   inf->change.insert.plain_length);
-          }
-        else
-          {
-             elm_entry_cursor_pos_set(ent->entry, inf->change.del.start);
-             evas_textblock_cursor_pos_set(end, inf->change.del.end);
-          }
-
-        evas_textblock_cursor_range_delete(mcur, end);
-        evas_textblock_cursor_free(end);
-        elm_entry_calc_force(ent->entry);
-     }
-   else
-     {
-        if (inf->insert)
-          {
-             elm_entry_cursor_pos_set(ent->entry, inf->change.insert.pos);
-             elm_entry_entry_insert(ent->entry, inf->change.insert.content);
-          }
-        else
-          {
-             size_t start;
-             start = (inf->change.del.start < inf->change.del.end) ?
-                inf->change.del.start : inf->change.del.end;
-
-             elm_entry_cursor_pos_set(ent->entry, start);
-             elm_entry_entry_insert(ent->entry, inf->change.insert.content);
-             elm_entry_cursor_pos_set(ent->entry, inf->change.del.end);
-          }
-     }
-
-   /* No matter what, once we did an undo/redo we don't want to merge,
-    * even if we got backt to the top of the stack. */
-   ent->undo_stack_can_merge = EINA_FALSE;
 }
 
 static void
@@ -271,61 +121,29 @@ _undo(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    /* In undo we care about the current item */
    Ecrire_Entry *ent = data;
-   Elm_Entry_Change_Info *inf = NULL;
-   if (!eina_list_next(ent->undo_stack_ptr))
-      return;
-
-   do
+   elm_obj_code_widget_undo(ent->entry);
+   if(!elm_object_item_disabled_get(ent->undo_item) &&
+      !elm_obj_code_widget_can_undo_get(ent->entry)) 
      {
-        inf = eina_list_data_get(ent->undo_stack_ptr);
-
-        _undo_redo_do(ent, inf, EINA_TRUE);
-
-        if (eina_list_next(ent->undo_stack_ptr))
-          {
-             ent->undo_stack_ptr = eina_list_next(ent->undo_stack_ptr);
-          }
-        else
-          {
-             break;
-          }
+       elm_object_item_disabled_set(ent->undo_item, EINA_TRUE);
      }
-   while (inf && inf->merge);
-
-   _update_undo_redo_items(ent);
+   else if(elm_object_item_disabled_get(ent->redo_item) &&
+           elm_obj_code_widget_can_redo_get(ent->entry)) 
+     {
+       elm_object_item_disabled_set(ent->redo_item, EINA_FALSE);
+     }
 }
 
 static void
 _redo(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Ecrire_Entry *ent = data;
-   Elm_Entry_Change_Info *inf = NULL;
-   if (!eina_list_prev(ent->undo_stack_ptr))
-      return;
-
-   do
+   elm_obj_code_widget_redo(ent->entry);
+   if(!elm_object_item_disabled_get(ent->redo_item) &&
+      !elm_obj_code_widget_can_redo_get(ent->entry)) 
      {
-        if (eina_list_prev(ent->undo_stack_ptr))
-          {
-             ent->undo_stack_ptr = eina_list_prev(ent->undo_stack_ptr);
-             /* In redo we care about the NEW item */
-             inf = eina_list_data_get(ent->undo_stack_ptr);
-             _undo_redo_do(ent, inf, EINA_FALSE);
-          }
-        else
-          {
-             break;
-          }
-
-        /* Update inf to next for the condition. */
-        if (eina_list_prev(ent->undo_stack_ptr))
-          {
-             inf = eina_list_data_get(eina_list_prev(ent->undo_stack_ptr));
-          }
+       elm_object_item_disabled_set(ent->redo_item, EINA_TRUE);
      }
-   while (inf && inf->merge);
-
-   _update_undo_redo_items(ent);
 }
 
 static void
@@ -333,10 +151,15 @@ _ent_changed(void *data, Evas_Object *obj __UNUSED__, void *event_info)
 {
    Ecrire_Entry *ent = data;
    elm_object_item_disabled_set(ent->save_item, EINA_FALSE);
+   elm_object_item_disabled_set(ent->save_as_item, EINA_FALSE);
    _update_cur_file(ent->filename, ent);
+}
 
-   /* Undo/redo */
-   _undo_stack_add(ent, event_info);
+static void
+_clear ()
+{
+  elm_code_file_clear(main_ec_ent->code->file);
+  elm_code_file_line_append(main_ec_ent->code->file, "", 10, NULL);
 }
 
 static void
@@ -344,18 +167,9 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
 {
    if (file)
      {
-        char *buf;
-
-        if (plain_utf8)
-           buf = _load_plain(file);
-        else
-           buf = _load_file(file);
-
-        elm_object_text_set(ent->entry, "");
+        elm_code_file_open(ent->code,file);
         _init_entry(ent);
-        elm_entry_entry_append(ent->entry, buf);
         elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
-        free(buf);
      }
    else
      {
@@ -377,13 +191,8 @@ _fs_open_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
 void
 save_do(const char *file, Ecrire_Entry *ent)
 {
-   if (plain_utf8)
-      _save_plain_utf8(file, elm_object_text_get(ent->entry));
-   else
-      _save_markup_utf8(file, elm_object_text_get(ent->entry));
-
+   elm_code_file_save (ent->code->file);
    elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
-   ent->last_saved_stack_ptr = ent->undo_stack_ptr;
    _update_cur_file(file, ent);
 }
 
@@ -451,7 +260,7 @@ static void
 _new_do(void *data)
 {
    Ecrire_Entry *ent = data;
-   elm_object_text_set(ent->entry, "");
+   _clear();
    _init_entry(ent);
    elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
    _update_cur_file(NULL, ent);
@@ -468,21 +277,21 @@ static void
 _cut(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Ecrire_Entry *ent = data;
-   elm_entry_selection_cut(ent->entry);
+   elm_code_widget_selection_cut(ent->entry);
 }
 
 static void
 _copy(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Ecrire_Entry *ent = data;
-   elm_entry_selection_copy(ent->entry);
+   elm_code_widget_selection_copy(ent->entry);
 }
 
 static void
 _paste(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Ecrire_Entry *ent = data;
-   elm_entry_selection_paste(ent->entry);
+   elm_code_widget_selection_paste(ent->entry);
 }
 
 static void
@@ -627,7 +436,7 @@ _key_down_cb(void *data,
 int
 main(int argc, char *argv[])
 {
-   Evas_Object *tbar, *cur_info;
+   Evas_Object  *obj, *tbar;
    Evas_Coord w = 600, h = 600;
    int c;
 
@@ -680,8 +489,6 @@ main(int argc, char *argv[])
    main_ec_ent = calloc(1, sizeof(*main_ec_ent));
    main_ec_ent->unsaved = 1;
    main_ec_ent->filename = NULL;
-   main_ec_ent->last_saved_stack_ptr = NULL;
-   main_ec_ent->undo_stack_can_merge = EINA_FALSE;
 
    if (optind < argc)
      {
@@ -719,26 +526,31 @@ main(int argc, char *argv[])
    elm_box_pack_end(main_ec_ent->bx, tbar);
    evas_object_show(tbar);
 
-   main_ec_ent->entry = elm_entry_add(main_ec_ent->win);
-   elm_entry_scrollable_set(main_ec_ent->entry, EINA_TRUE);
-   elm_entry_line_wrap_set(main_ec_ent->entry, _ent_cfg->wrap_type);
-   elm_entry_cnp_mode_set(main_ec_ent->entry, ELM_CNP_MODE_PLAINTEXT);
+   main_ec_ent->code = elm_code_create();
+   main_ec_ent->entry = efl_add(elm_code_widget_class_get(),
+                                main_ec_ent->win,
+                                elm_obj_code_widget_code_set(efl_added,
+                                                             main_ec_ent->code));
+   _init_font(main_ec_ent);
+   elm_code_file_line_append(main_ec_ent->code->file, "", 2, NULL);
+   elm_obj_code_widget_editable_set(main_ec_ent->entry, EINA_TRUE);
+   elm_obj_code_widget_syntax_enabled_set(main_ec_ent->entry, EINA_TRUE);
+   elm_obj_code_widget_show_whitespace_set(main_ec_ent->entry, EINA_TRUE);
+   elm_obj_code_widget_line_numbers_set(main_ec_ent->entry, EINA_TRUE);
    evas_object_size_hint_align_set(main_ec_ent->entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(main_ec_ent->entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    elm_box_pack_end(main_ec_ent->bx, main_ec_ent->entry);
    evas_object_show(main_ec_ent->entry);
 
-   cur_info = elm_label_add(main_ec_ent->win);
-   _cur_changed(cur_info, main_ec_ent->entry, NULL);
-   evas_object_size_hint_align_set(cur_info, 1.0, 0.5);
-   evas_object_size_hint_weight_set(cur_info, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(main_ec_ent->bx, cur_info);
-   evas_object_show(cur_info);
+   main_ec_ent->cursor_label = obj = elm_label_add(main_ec_ent->win);
+   _cur_changed(main_ec_ent, NULL, NULL);
+   evas_object_size_hint_align_set(obj, 1.0, 0.5);
+   evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0.0);
+   elm_box_pack_end(main_ec_ent->bx, obj);
+   evas_object_show(obj);
 
    evas_object_smart_callback_add(main_ec_ent->entry, "cursor,changed",
-         _cur_changed, cur_info);
-   evas_object_smart_callback_add(main_ec_ent->entry, "cursor,changed,manual",
-         _cur_changed_manual, main_ec_ent);
+         _cur_changed, main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->entry, "changed,user", _ent_changed, main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->entry, "undo,request", _undo, main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->entry, "redo,request", _redo, main_ec_ent);
@@ -748,9 +560,9 @@ main(int argc, char *argv[])
    elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_ec_ent);
    elm_toolbar_item_append(tbar, "document-open", _("Open"), _open, main_ec_ent);
    main_ec_ent->save_item =
-      elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_ec_ent);
-   elm_toolbar_item_append(tbar, "document-save-as", _("Save As"), _save_as,
-            main_ec_ent);
+     elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_ec_ent);
+   main_ec_ent->save_as_item =
+     elm_toolbar_item_append(tbar, "document-save-as", _("Save As"), _save_as, main_ec_ent);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    main_ec_ent->undo_item =
@@ -791,6 +603,7 @@ main(int argc, char *argv[])
    elm_object_item_disabled_set(main_ec_ent->copy_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->cut_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->save_item, EINA_TRUE);
+   elm_object_item_disabled_set(main_ec_ent->save_as_item, EINA_TRUE);
 
    evas_object_resize(main_ec_ent->win, w, h);
 
