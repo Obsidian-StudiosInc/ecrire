@@ -117,7 +117,7 @@ _cur_changed(void *data,
 }
 
 static void
-_undo(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_undo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    /* In undo we care about the current item */
    Ecrire_Entry *ent = data;
@@ -135,7 +135,7 @@ _undo(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 }
 
 static void
-_redo(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_redo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    elm_obj_code_widget_redo(ent->entry);
@@ -147,7 +147,7 @@ _redo(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 }
 
 static void
-_ent_changed(void *data, Evas_Object *obj __UNUSED__, void *event_info)
+_ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
    Ecrire_Entry *ent = data;
    elm_object_item_disabled_set(ent->save_item, EINA_FALSE);
@@ -180,7 +180,7 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
 }
 
 static void
-_fs_open_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
+_fs_open_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
       void *event_info)
 {
    const char *selected = event_info;
@@ -197,7 +197,7 @@ save_do(const char *file, Ecrire_Entry *ent)
 }
 
 static void
-_fs_save_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
+_fs_save_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
       void *event_info)
 {
    const char *selected = event_info;
@@ -216,14 +216,16 @@ _open_do(void *data)
 }
 
 static void
-_goto_line(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_goto_line(void *data,
+           Evas_Object *obj EINA_UNUSED,
+           void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    ui_goto_dialog_open(ent->win, ent);
 }
 
 static void
-_open(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_open(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    _alert_if_need_saving(_open_do, ent);
@@ -243,14 +245,14 @@ editor_save(Ecrire_Entry *ent, void *callback_func)
 }
 
 static void
-_save(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_save(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    editor_save(ent, _fs_save_done);
 }
 
 static void
-_save_as(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_save_as(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    ui_file_open_save_dialog_open(ent->win, _fs_save_done, EINA_TRUE);
@@ -267,42 +269,44 @@ _new_do(void *data)
 }
 
 static void
-_new(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_new(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    _alert_if_need_saving(_new_do, ent);
 }
 
 static void
-_cut(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_cut(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    elm_code_widget_selection_cut(ent->entry);
 }
 
 static void
-_copy(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_copy(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    elm_code_widget_selection_copy(ent->entry);
 }
 
 static void
-_paste(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_paste(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    elm_code_widget_selection_paste(ent->entry);
 }
 
 static void
-_find(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_find(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    ui_find_dialog_open(ent->win, ent);
 }
 
 static void
-_settings(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_settings(void *data,
+          Evas_Object *obj EINA_UNUSED,
+          void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    ui_settings_dialog_open(elm_object_top_widget_get(ent->win), ent, _ent_cfg);
@@ -310,7 +314,7 @@ _settings(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 
 
 static void
-_win_del_do(void *data __UNUSED__)
+_win_del_do(void *data EINA_UNUSED)
 {
    elm_exit();
 }
@@ -381,7 +385,7 @@ editor_font_choose(Ecrire_Entry *ent, const char *font, int size)
 Eina_Bool ctrl_pressed = EINA_FALSE;
 
 static Eina_Bool
-_selection_notify(void *data, int type __UNUSED__, void *_event)
+_selection_notify(void *data, int type EINA_UNUSED, void *_event)
 {
    Ecrire_Entry *ent = data;
    Ecore_X_Event_Fixes_Selection_Notify *event =
