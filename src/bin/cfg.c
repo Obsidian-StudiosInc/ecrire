@@ -27,6 +27,7 @@ _ent_cfg_descriptor_init(void)
    CFG_ADD_BASIC(font.name, EET_T_STRING);
    CFG_ADD_BASIC(font.size, EET_T_INT);
    CFG_ADD_BASIC(wrap_type, EET_T_INT);
+   CFG_ADD_BASIC(line_numbers, EET_T_INT);
 
 #undef CFG_ADD_BASIC
 }

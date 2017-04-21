@@ -85,6 +85,18 @@ settings_font_list_get(const Evas *e)
 }
 
 static void
+settings_line_numbers_cb (void *data,
+                          Evas_Object *obj,
+                          void *event_info EINA_UNUSED)
+{
+  Eina_Bool state;
+  
+  state = elm_check_state_get (obj);
+  elm_obj_code_widget_line_numbers_set ((Elm_Code_Widget *)data, state);
+  ent_cfg->line_numbers = state;
+}
+
+static void
 settings_word_wrap_cb (void *data,
                        Evas_Object *obj,
                        void *event_info EINA_UNUSED)
@@ -142,6 +154,23 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_table_pack (table, obj, 1, row, 2, 1);
   evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, ent);
   evas_object_show (obj);
+  row++;
+
+  /* Line Numbers Label */
+  obj = elm_label_add(table);
+  elm_object_text_set(obj, _("Line Numbers"));
+  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set(obj, 1, 0);
+  elm_table_pack(table, obj, 0, row, 1, 1);
+  evas_object_show(obj);
+
+  /* Line Numbers Check box */
+  obj = elm_check_add(table);
+  elm_check_state_set(obj,  _ent_cfg->line_numbers);
+  evas_object_size_hint_align_set(obj, 0, 1);
+  elm_table_pack(table, obj, 1, row, 1, 1);
+  evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, ent->entry);
+  evas_object_show(obj);
   row++;
 
   /* Word Wrap Label */

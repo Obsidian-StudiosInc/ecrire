@@ -20,6 +20,7 @@ typedef struct
         int size; /* 0 means theme's size */
    } font;
    Elm_Wrap_Type wrap_type;
+   Eina_Bool line_numbers;
 } Ent_Cfg;
 
 extern Ent_Cfg *_ent_cfg;

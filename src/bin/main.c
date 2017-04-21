@@ -536,7 +536,7 @@ main(int argc, char *argv[])
    elm_obj_code_widget_editable_set(main_ec_ent->entry, EINA_TRUE);
    elm_obj_code_widget_syntax_enabled_set(main_ec_ent->entry, EINA_TRUE);
    elm_obj_code_widget_show_whitespace_set(main_ec_ent->entry, EINA_TRUE);
-   elm_obj_code_widget_line_numbers_set(main_ec_ent->entry, EINA_TRUE);
+   elm_obj_code_widget_line_numbers_set(main_ec_ent->entry, _ent_cfg->line_numbers);
    evas_object_size_hint_align_set(main_ec_ent->entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(main_ec_ent->entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    elm_box_pack_end(main_ec_ent->bx, main_ec_ent->entry);
