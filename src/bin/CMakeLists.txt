@@ -1,6 +1,5 @@
 LIST(APPEND ECRIRE_CC_SOURCES
    main.c
-   file_utils.c
    cfg.c
    ui/file_related.c
    ui/search_dialog.c
