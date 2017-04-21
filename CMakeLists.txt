@@ -11,6 +11,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 include_directories ("${PROJECT_BINARY_DIR}")
 
 # FIXME: add version checking!
+find_package(Eo REQUIRED)
 find_package(Eina REQUIRED)
 find_package(Eet REQUIRED)
 find_package(Evas REQUIRED)
@@ -51,6 +52,7 @@ ADD_DEFINITIONS(
    )
 
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
+ADD_DEFINITIONS(-DEFL_BETA_API_SUPPORT)
 
 find_package(Gettext)
 if (GETTEXT_FOUND)
