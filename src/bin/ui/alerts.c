@@ -10,7 +10,7 @@ static void *done_data;
 static void (*done_cb)(void *data);
 
 static void
-_discard(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_discard(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = done_data;
 
@@ -19,7 +19,7 @@ _discard(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 }
 
 static void
-_fs_save_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
+_fs_save_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
       void *event_info)
 {
    const char *selected = event_info;
@@ -32,7 +32,7 @@ _fs_save_done(void *data __UNUSED__, Evas_Object *obj __UNUSED__,
 }
 
 static void
-_save(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_save(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = done_data;
 
@@ -41,7 +41,7 @@ _save(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 }
 
 static void
-_cancel(void *data, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+_cancel(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    evas_object_del(data);
 }
