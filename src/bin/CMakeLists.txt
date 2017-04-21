@@ -10,6 +10,7 @@ LIST(APPEND ECRIRE_CC_SOURCES
    )
 
 include_directories(
+   ${EO_INCLUDE_DIRS}
    ${EINA_INCLUDE_DIRS}
    ${ELEMENTARY_INCLUDE_DIRS}
    ${EDJE_INCLUDE_DIRS}
@@ -23,6 +24,7 @@ include_directories(
 
 add_executable(ecrire ${ECRIRE_CC_SOURCES})
 target_link_libraries(ecrire
+   ${EO_LIBRARIES}
    ${EINA_LIBRARIES}
    ${ELEMENTARY_LIBRARIES}
    ${EDJE_LIBRARIES}
