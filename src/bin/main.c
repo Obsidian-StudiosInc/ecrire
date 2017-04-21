@@ -159,7 +159,7 @@ static void
 _clear ()
 {
   elm_code_file_clear(main_ec_ent->code->file);
-  elm_code_file_line_append(main_ec_ent->code->file, "", 10, NULL);
+  elm_code_file_line_append(main_ec_ent->code->file, "", 0, NULL);
 }
 
 static void
@@ -532,7 +532,7 @@ main(int argc, char *argv[])
                                 elm_obj_code_widget_code_set(efl_added,
                                                              main_ec_ent->code));
    _init_font(main_ec_ent);
-   elm_code_file_line_append(main_ec_ent->code->file, "", 2, NULL);
+   elm_code_file_line_append(main_ec_ent->code->file, "", 0, NULL);
    elm_obj_code_widget_editable_set(main_ec_ent->entry, EINA_TRUE);
    elm_obj_code_widget_syntax_enabled_set(main_ec_ent->entry, EINA_TRUE);
    elm_obj_code_widget_show_whitespace_set(main_ec_ent->entry, EINA_TRUE);
