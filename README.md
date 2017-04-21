@@ -1,3 +1,13 @@
+# ecrire - Text Editor for EFL/Enlightenment
+
+This is a mirror of the official
+[ecrire repo](https://git.enlightenment.org/apps/ecrire.git/)
+
+Work is being done in the wltjr branch. Intended to be merged back into 
+upstream, or forked worse case.
+
+## Original Readme
+
 This is intended to be a text editor.
 
 It's currently mostly just a PoC, but I hope it'll grow to be more than that.
