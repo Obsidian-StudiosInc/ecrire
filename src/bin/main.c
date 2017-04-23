@@ -26,6 +26,13 @@ static void editor_font_set(Ecrire_Entry *ent, const char *font, int font_size);
 int _ecrire_log_dom = -1;
 
 static void
+_set_save_disabled(Ecrire_Entry *ent, Eina_Bool disabled)
+{
+  elm_object_item_disabled_set(ent->save_item, disabled);
+  elm_object_item_disabled_set(ent->save_as_item, disabled);
+}
+
+static void
 _init_font(Ecrire_Entry *ent)
 {
    if(_ent_cfg->font.name)
@@ -150,8 +157,7 @@ static void
 _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
    Ecrire_Entry *ent = data;
-   elm_object_item_disabled_set(ent->save_item, EINA_FALSE);
-   elm_object_item_disabled_set(ent->save_as_item, EINA_FALSE);
+   _set_save_disabled(ent, EINA_FALSE);
    _update_cur_file(ent->filename, ent);
 }
 
@@ -169,7 +175,7 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
      {
         elm_code_file_open(ent->code,file);
         _init_entry(ent);
-        elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
+        _set_save_disabled(ent, EINA_TRUE);
      }
    else
      {
@@ -192,7 +198,7 @@ void
 save_do(const char *file, Ecrire_Entry *ent)
 {
    elm_code_file_save (ent->code->file);
-   elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
+   _set_save_disabled(ent, EINA_TRUE);
    _update_cur_file(file, ent);
 }
 
@@ -264,7 +270,7 @@ _new_do(void *data)
    Ecrire_Entry *ent = data;
    _clear();
    _init_entry(ent);
-   elm_object_item_disabled_set(ent->save_item, EINA_TRUE);
+   _set_save_disabled(ent, EINA_TRUE);
    _update_cur_file(NULL, ent);
 }
 
@@ -606,8 +612,7 @@ main(int argc, char *argv[])
    /* We don't have a selection when we start, make the items disabled */
    elm_object_item_disabled_set(main_ec_ent->copy_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->cut_item, EINA_TRUE);
-   elm_object_item_disabled_set(main_ec_ent->save_item, EINA_TRUE);
-   elm_object_item_disabled_set(main_ec_ent->save_as_item, EINA_TRUE);
+   _set_save_disabled(main_ec_ent, EINA_TRUE);
 
    evas_object_resize(main_ec_ent->win, w, h);
 
