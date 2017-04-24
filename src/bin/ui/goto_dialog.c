@@ -6,114 +6,101 @@
 
 #include "../mess_header.h"
 
-static Evas_Object *goto_win, *sent;
+const static int PADDING = 5;
+const static int BUTTON_HEIGHT = 27;
+const static int BUTTON_WIDTH = 60;
+
+static Evas_Object *goto_win, *goto_entry;
 
 static void
-_goto_do(Evas_Object *entry, const char *text)
+_goto_win_del(void *data EINA_UNUSED,
+              Evas_Object *obj EINA_UNUSED,
+              void *event_info EINA_UNUSED)
 {
-   int line;
-   Evas_Object *tb = elm_entry_textblock_get(entry);
-   Evas_Textblock_Cursor *mcur = evas_object_textblock_cursor_get(tb);
-
-   line = atoi(text);
-
-   if (line > 0)
-     {
-        evas_object_hide(goto_win);
-	evas_textblock_cursor_line_set(mcur, line-1);
-	elm_entry_calc_force(entry);
-
-	elm_object_focus_set(entry, EINA_TRUE);
-     }
+  evas_object_del(goto_win);
+  goto_win = NULL;
 }
 
 static void
 _goto_clicked(void *data,
-     Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
+              Evas_Object *obj EINA_UNUSED,
+              void *event_info EINA_UNUSED)
 {
-   _goto_do(data, elm_object_text_get(sent));
-}
+  Ecrire_Entry *ent;
+  int line, lines;
 
-static void
-_my_win_del(void *data __UNUSED__, Evas_Object *obj, void *event_info)
-{
-   (void) obj;
-   (void) event_info;
-   /* Reset the stuff that need reseting */
-   goto_win = NULL;
+  ent = data;
+  line = atoi(elm_entry_entry_get(goto_entry));
+  lines = elm_code_file_lines_get(ent->code->file);
+  if (line>0 && lines > 0 && line <= lines)
+    {
+      elm_obj_code_widget_cursor_position_set(ent->entry,line,1);
+      elm_object_focus_set(ent->entry, EINA_TRUE);
+      _goto_win_del(NULL,NULL,NULL);
+    }
 }
 
 Evas_Object *
 ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
 {
-   Evas_Object *entry = ent->entry;
-   Evas_Object *win, *bg, *bx, *lbl, *hbx, *btn;
+  Evas_Object *obj, *table;
 
-   if (goto_win)
-     {
-        evas_object_show(goto_win);
-        return goto_win;
-     }
+  if (goto_win)
+    {
+      evas_object_show(goto_win);
+      return goto_win;
+    }
 
-   goto_win = win = elm_win_add(parent, "jump-to", ELM_WIN_TOOLBAR);
-   elm_win_autodel_set(win, EINA_TRUE);
-   elm_win_title_set(win, _("Jump to"));
-   evas_object_smart_callback_add(win, "delete,request", _my_win_del, entry);
+  goto_win = elm_win_util_dialog_add(parent, "jump-to",  _("Jump to"));
+  elm_win_autodel_set(goto_win, EINA_TRUE);
+  evas_object_smart_callback_add(goto_win, "delete,request", _goto_win_del, NULL);
 
-   bg = elm_bg_add(win);
-   elm_win_resize_object_add(win, bg);
-   evas_object_size_hint_weight_set(bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show(bg);
+  table = elm_table_add(goto_win);
+  elm_obj_table_padding_set(table,
+                            ELM_SCALE_SIZE(PADDING),
+                            ELM_SCALE_SIZE(PADDING));
+  evas_object_size_hint_padding_set (table,
+                                     ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING));
+  evas_object_show(table);
 
-   bx = elm_box_add(win);
-   elm_win_resize_object_add(win, bx);
-   evas_object_size_hint_weight_set(bx, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show(bx);
+  obj = elm_label_add (table);
+  elm_object_text_set (obj,  _("Jump to line"));
+  evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set (obj, 1, 0);
+  elm_table_pack (table, obj, 0, 0, 1, 1);
+  evas_object_show (obj);
 
-   hbx = elm_box_add(win);
-   elm_box_padding_set(hbx, 15, 0);
-   elm_box_horizontal_set(hbx, EINA_TRUE);
-   evas_object_size_hint_align_set(hbx, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   evas_object_size_hint_weight_set(hbx, EVAS_HINT_EXPAND, 0.0);
-   evas_object_show(hbx);
-   elm_box_pack_end(bx, hbx);
+  goto_entry = elm_entry_add(table);
+  elm_entry_scrollable_set(goto_entry, EINA_TRUE);
+  elm_entry_single_line_set(goto_entry, EINA_TRUE);
+  evas_object_size_hint_weight_set(goto_entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(goto_entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_table_pack (table, goto_entry, 1, 0, 2, 1);
+  evas_object_show(goto_entry);
 
-   lbl = elm_label_add(win);
-   elm_object_text_set(lbl, _("Jump to line:"));
-   evas_object_size_hint_align_set(lbl, EVAS_HINT_FILL, 0.5);
-   evas_object_size_hint_weight_set(lbl, 0.0, 0.0);
-   elm_box_pack_end(hbx, lbl);
-   evas_object_show(lbl);
+  obj = elm_button_add(table);
+  elm_object_text_set(obj, _("Go"));
+  evas_object_size_hint_align_set(obj, 0, 0);
+  evas_object_size_hint_min_set(obj,
+                                ELM_SCALE_SIZE(BUTTON_WIDTH),
+                                ELM_SCALE_SIZE(BUTTON_HEIGHT));
+  elm_table_pack (table, obj, 2, 1, 1, 1);
+  evas_object_smart_callback_add(obj, "clicked", _goto_clicked, ent);
+  evas_object_show(obj);
 
-   sent = elm_entry_add(win);
-   elm_entry_scrollable_set(sent, EINA_TRUE);
-   elm_entry_single_line_set(sent, EINA_TRUE);
-   evas_object_size_hint_align_set(sent, EVAS_HINT_FILL, 0.0);
-   evas_object_size_hint_weight_set(sent, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(hbx, sent);
-   evas_object_show(sent);
+  /* Box for padding */
+  obj = elm_box_add (goto_win);
+  elm_box_pack_end (obj, table);
+  evas_object_show (obj);
 
-   hbx = elm_box_add(win);
-   elm_box_homogeneous_set(hbx, EINA_FALSE);
-   elm_box_padding_set(hbx, 15, 0);
-   elm_box_horizontal_set(hbx, EINA_TRUE);
-   evas_object_size_hint_align_set(hbx, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   evas_object_size_hint_weight_set(hbx, EVAS_HINT_EXPAND, 0.0);
-   evas_object_show(hbx);
-   elm_box_pack_end(bx, hbx);
+  elm_win_resize_object_add (goto_win, obj);
+  elm_win_raise (goto_win);
+  evas_object_show (goto_win);
 
-   btn = elm_button_add(win);
-   elm_object_text_set(btn, _("Go"));
-   evas_object_size_hint_align_set(btn, 1.0, 0.0);
-   evas_object_size_hint_weight_set(btn, 0.0, 0.0);
-   evas_object_show(btn);
-   elm_box_pack_end(hbx, btn);
-   evas_object_smart_callback_add(btn, "clicked", _goto_clicked, entry);
+  elm_object_focus_set(goto_entry, EINA_TRUE);
 
-   /* Forcing it to be the min height. */
-   evas_object_resize(win, 300, 1);
-   evas_object_show(win);
-
-   return win;
+  return goto_win;
 }
-
