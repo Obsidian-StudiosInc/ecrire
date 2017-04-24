@@ -30,6 +30,7 @@ data/Makefile
 data/Makefile.in
 depcomp
 install-sh
+install_manifest.txt
 ltmain.sh
 m4/
 missing
@@ -56,3 +57,4 @@ src/bin/Makefile
 src/bin/Makefile.in
 src/bin/ecrire
 stamp-h1
+/dist/
