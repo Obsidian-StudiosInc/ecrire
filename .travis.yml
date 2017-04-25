@@ -13,7 +13,7 @@ before_install:
 install:
   - sudo apt-get -qq update
   - sudo apt-get install -y cmake rpm libc6-dbg
-  - wget https://launchpad.net/ubuntu/+source/valgrind/1:3.12.0-1ubuntu1/+build/11192226/+files/valgrind_3.12.0-1ubuntu1_amd64.deb
+  - wget https://launchpad.net/~niko2040/+archive/ubuntu/e19/+files/libefl_1.19.0-0precise5_amd64.deb
   - wget https://launchpad.net/~niko2040/+archive/ubuntu/e19/+files/libefl-dbg_1.19.0-0precise5_amd64.deb
   - sudo dpkg -i *.deb
 
