@@ -13,7 +13,7 @@ before_install:
 install:
   - sudo apt-get -qq update
   - sudo apt-get -qq -y upgrade
-  - sudo apt-get install -y cmake libc6-dbg rpm
+  - sudo apt-get install -y cmake libbullet libgstreamer-plugins-base libgstreamer libluajit libtiff4 libudev0 libxss1 libc6-dbg rpm
   - wget https://launchpad.net/~niko2040/+archive/ubuntu/e19/+files/libefl-bin_1.19.0-0precise5_amd64.deb
   - wget https://launchpad.net/~niko2040/+archive/ubuntu/e19/+files/libefl-data_1.19.0-0precise5_all.deb
   - wget https://launchpad.net/~niko2040/+archive/ubuntu/e19/+files/libefl_1.19.0-0precise5_amd64.deb
