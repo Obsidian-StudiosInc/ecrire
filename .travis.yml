@@ -1,0 +1,48 @@
+language: c
+compiler: gcc
+sudo: required
+env:
+  global:
+    - secure: Av0RnthKHIYGQ3CUxxn81OqVAmtLVDQPmfD8ucLgps7T5XULavrX6c6OFbybLw5M1NfJyROTNYLUM11MtPWcGNbxV2ki0RaCpgMOrkz4UKw+usO7p+W3UlKZE4l0R5sbIe37hiVYyx6dhKlbC0QA0AO8KHBCFB1r19YfmbiB0K7fJoLRt3bsAyQB1cyJFJBrhPsr0pxtQu3HlX7xf+avbWEsbpY9UNmUxi+VopDAHw9Wk6WSBRvHtRhy6g4paNyz7QrygEuz6jea01K8Io4uB4DOmWbngl+mucM7nRb7Uxw5iY4Pygzz6qVfV+zRPyegy8NvLUPKTQq7FTlamAq7CdEgkFMN1nI3ZUW9X0lXOay7C3Nma0/Giso0/enmm4fM+2IjqHZ5lI2bFDLgGeES8dO/bGMGTdiV31am+W81WE+ZYw0qYT8JfnICSEkhcZsvyopvVufThUNySP0gfcWnhWsQ+SXfSa79GxSgTuwHjQN/u/ZvQJPE54mxIUt/tNRNHnP9iiGNRI0f+ZqqDeHytAT9u8Hlz9LL4tW7FhUt6+eL9kI356ZIqAG00VQ/RGtlIqapeaXpOjVw5jX6QlwyNReK7W0qqaoBgvwVddtmAkuO2FWX8FBB+mSiTHWWdloerv4xRY9HFqc32DirZOhX4RMUIS1AjkyD7ZBnlSkn0o0=
+  matrix:
+    - MY_PV=0.2.1
+
+before_install:
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y cmake rpm libc6-dbg
+  - wget https://launchpad.net/ubuntu/+source/valgrind/1:3.12.0-1ubuntu1/+build/11192226/+files/valgrind_3.12.0-1ubuntu1_amd64.deb
+  - wget https://launchpad.net/~niko2040/+archive/ubuntu/e19/+files/libefl-dbg_1.19.0-0precise5_amd64.deb
+  - sudo dpkg -i *.deb
+
+script:
+  - cmake -D CMAKE_BUILD_TYPE=Debug ./
+  - make package
+  - sudo dpkg -i --force-all dist/ecrire-${MY_PV}.x86_64.deb
+
+notifications:
+  email: false
+
+deploy:
+  provider: releases
+  api_key:
+    secure: sb8ol1akBX3T1R6kjN2qnlv4W0ZSq0SgrcYAQj3KS/c0WC8szqQFNdze8Ace0RnHrgbRWgUU1yEivsxQX97YhTfkWHLCsecfALfP7IPB3ghrS1Nr+e4epwqotJbW2YSdwkX2Cgf0SwxcrzO8Py2IfVhWU+dNwOONNW+S+7ad9u29TH4r3++Rtmy/8wATQahatcnu7Jefd31p+e17ZLZRSqZS9lY0xhX10hBKrZaHG3QlyEZewPq3M0RKEvSQe58m8obgTFWjpsw5btLiMFJkLZx19SbgNKe09bQSli7M5aJhj1wT+flYRAPsWIzzvBbeEL2oC6k3H1BfOU2wY8ZM9ZBlYfctba6rmCw0eG9yAFq5bcIP3wOJvCx9DYW6pcc1kOny4VYChE3C+rcbaKSCZ/AAQ81AUMgsnGIkPc8tvwRvTUA3EUAQSyRXgOkKbWh7aAlk1AklSqcgFiTYa3+WWMlW1qTTDjFMwSuJd8M+Fu5cR5FGH3yLUxOe10iyWH5E7qj3S4Xbbn+ZYVSoWAEHIb7PVwcDJHWKAyRF1b1vT8pGr17TMQGKDWZmL4mWHTB5f4SsKOqCwUayL0f0+rRUy965cxRiPPHtQhOyF2GL/tMK3ODqGgQFENxY9V6mRgQrNhpfKXaErV+n39JacWPg7poy7pESFx2IptesisM854s=
+  file:
+    - dist/ecrire-${MY_PV}.x86_64.deb
+    - dist/ecrire-${MY_PV}.x86_64.rpm
+  on:
+    repo: Obsidian-StudiosInc/ecrire
+    branch: wltjr
+    tags: true
+
+addons:
+  coverity_scan:
+    project:
+      name: Obsidian-StudiosInc/ecrire
+      description: Build submitted via Travis CI
+    notification_email: wlt@o-sinc.com
+    build_command_prepend: cmake -D CMAKE_BUILD_TYPE=Debug ./ ; make clean
+    build_command: make -j 4
+    branch_pattern: master
