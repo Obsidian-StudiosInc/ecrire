@@ -22,7 +22,7 @@ install:
 script:
   - cmake -D CMAKE_BUILD_TYPE=Debug ./
   - make package
-  - sudo dpkg -i --force-all dist/ecrire-${MY_PV}.x86_64.deb
+  - sudo dpkg -i --force-all --force-confask dist/ecrire-${MY_PV}.x86_64.deb
 
 notifications:
   email: false
