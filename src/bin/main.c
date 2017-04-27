@@ -20,7 +20,6 @@ static Eina_Unicode plain_utf8 = EINA_TRUE;
 static Ecrire_Entry *main_ec_ent;
 
 static void print_usage(const char *bin);
-static void editor_font_set(Ecrire_Entry *ent, const char *font, int font_size);
 
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
@@ -32,15 +31,21 @@ _set_save_disabled(Ecrire_Entry *ent, Eina_Bool disabled)
   elm_object_item_disabled_set(ent->save_as_item, disabled);
 }
 
+void
+editor_font_set(Ecrire_Entry *ent, const char *name, unsigned int size)
+{
+  if(size==0)
+    size = 10;
+  if(name)
+    elm_obj_code_widget_font_set(ent->entry, name, size);
+  else
+    elm_obj_code_widget_font_set(ent->entry, NULL, size);
+}
+
 static void
 _init_font(Ecrire_Entry *ent)
 {
-   if(_ent_cfg->font.name)
-     elm_obj_code_widget_font_set(ent->entry,
-                                  _ent_cfg->font.name,
-                                  _ent_cfg->font.size);
-   else
-     elm_obj_code_widget_font_set(ent->entry,  NULL, 10);
+  editor_font_set(ent, _ent_cfg->font.name, _ent_cfg->font.size);
 }
 
 static void
@@ -333,57 +338,6 @@ my_win_del(void *data, Evas_Object *obj, void *event_info)
    (void) obj;
    (void) event_info;
    _alert_if_need_saving(_win_del_do, ent);
-}
-
-static void
-editor_font_set(Ecrire_Entry *ent, const char *font, int font_size)
-{
-   const Evas_Object *tb = elm_entry_textblock_get(ent->entry);
-   Eina_Strbuf *sbuf;
-
-   eina_stringshare_replace(&_ent_cfg->font.name, font);
-   _ent_cfg->font.size = font_size;
-
-   sbuf = eina_strbuf_new();
-
-   if (_ent_cfg->font.name)
-     {
-        eina_strbuf_append_printf(sbuf, "font=\\'%s\\'", _ent_cfg->font.name);
-     }
-
-   if (_ent_cfg->font.size > 0)
-     {
-        eina_strbuf_append_printf(sbuf, " font_size=\\'%d\\'",
-              _ent_cfg->font.size);
-     }
-
-   if (eina_strbuf_length_get(sbuf) > 0)
-     {
-        Evas_Textblock_Style *ts = evas_textblock_style_new();
-
-        eina_strbuf_prepend(sbuf, "DEFAULT='");
-        eina_strbuf_append(sbuf, "'");
-        evas_textblock_style_set(ts, eina_strbuf_string_get(sbuf));
-
-        evas_object_textblock_style_user_push((Evas_Object *) tb, ts);
-     }
-   else
-     {
-        evas_object_textblock_style_user_pop((Evas_Object *) tb);
-     }
-
-   elm_entry_calc_force(ent->entry);
-
-   eina_strbuf_free(sbuf);
-}
-
-void
-editor_font_choose(Ecrire_Entry *ent, const char *font, int size)
-{
-   editor_font_set(ent, font, size);
-
-   /* Save the font for future runs */
-   ecrire_cfg_save();
 }
 
 #ifdef HAVE_ECORE_X

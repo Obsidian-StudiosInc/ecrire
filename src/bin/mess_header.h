@@ -34,7 +34,7 @@ Eina_Bool _load_file(const char *file, const Elm_Code_File *code_file);
 Eina_Bool _save_markup_utf8(const char *file, const char *text);
 Eina_Bool _save_plain_utf8(const char *file, const char *text);
 
-void editor_font_choose(Ecrire_Entry *ent, const char *font, int size);
+void editor_font_set(Ecrire_Entry *ent, const char *name, unsigned int size);
 void editor_save(Ecrire_Entry *ent, void *callback_func);
 void save_do(const char *file, Ecrire_Entry *ent);
 

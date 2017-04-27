@@ -15,6 +15,13 @@ Ent_Cfg *ent_cfg;
 Evas_Object *fsize, *list, *win;
 
 static void
+disable_font_widgets(Eina_Bool state)
+{
+   elm_object_disabled_set(list, state);
+   elm_object_disabled_set(fsize, state);
+}
+
+static void
 settings_alpha_cb (void *data,
                    Evas_Object *obj,
                    void *event_info EINA_UNUSED)
@@ -36,6 +43,19 @@ settings_apply_cb (void *data EINA_UNUSED,
 }
 
 static void
+settings_apply_font_cb (void *data,
+                        Evas_Object *obj EINA_UNUSED,
+                        void *event_info EINA_UNUSED)
+{
+  Ecrire_Entry *ent = data;
+  Elm_Object_Item *list_it = elm_list_selected_item_get(list);
+  if(list_it)
+      editor_font_set(ent,
+                      elm_object_item_text_get(list_it),
+                      elm_spinner_value_get(fsize));
+}
+
+static void
 settings_delete_cb (void *data EINA_UNUSED,
                     Evas_Object *obj EINA_UNUSED,
                     void *event_info EINA_UNUSED)
@@ -49,8 +69,7 @@ settings_default_font_cb(void *data EINA_UNUSED,
                          Evas_Object *obj,
                          void *event_info EINA_UNUSED)
 {
-   elm_object_disabled_set(list, elm_check_state_get(obj));
-   elm_object_disabled_set(fsize, elm_check_state_get(obj));
+   disable_font_widgets(elm_check_state_get(obj));
 }
 
 static Eina_List *
@@ -219,16 +238,17 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Font Size Spinner */
   fsize = elm_spinner_add(table);
-  if(!ent_cfg->font.name || !ent_cfg->font.size)
-    elm_object_disabled_set(fsize, EINA_TRUE);
+  if(!ent_cfg->font.name)
+    disable_font_widgets(EINA_TRUE);
   elm_spinner_label_format_set(fsize, _("%.0f pts"));
   elm_spinner_step_set(fsize, 1);
   elm_spinner_wrap_set(fsize, EINA_FALSE);
   elm_object_style_set (fsize, "vertical");
-  elm_spinner_min_max_set(fsize, 0, 72);
+  elm_spinner_min_max_set(fsize, 1, 72);
   elm_spinner_value_set(fsize, ent_cfg->font.size);
   evas_object_size_hint_align_set(fsize, 0.0, 0.5);
   elm_table_pack (table, fsize, 1, row, 2, 1);
+  evas_object_smart_callback_add(fsize, "changed", settings_apply_font_cb, ent);
   evas_object_show(fsize);
   row++;
 
@@ -239,13 +259,14 @@ ui_settings_dialog_open(Evas_Object *parent,
    evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
    elm_table_pack (table, obj, 0, row, 3, 1);
+
    evas_object_show(obj);
    row++;
    
   /* Fonts List */
   list = elm_list_add(table);
-  if(!ent_cfg->font.name || !ent_cfg->font.size)
-    elm_object_disabled_set(list, EINA_TRUE);
+  if(!ent_cfg->font.name)
+    disable_font_widgets(EINA_TRUE);
   evas_object_size_hint_weight_set(list, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set(list, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_box_pack_end (obj, list);
@@ -274,6 +295,7 @@ ui_settings_dialog_open(Evas_Object *parent,
             elm_list_item_selected_set(cur_font, EINA_TRUE);
          }
     }
+  evas_object_smart_callback_add(list, "selected", settings_apply_font_cb, ent);
 
   /* Ok Button */
   obj = elm_button_add(table);
