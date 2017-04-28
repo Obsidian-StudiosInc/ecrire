@@ -17,7 +17,7 @@ gedit (GTK/Gnome), kwrite (KDE/Plasma), and similar basic text editors.
 Ecrire has been modified to use elementary code widget instead of entry. 
 There are various issues as a result of this change, and some 
 pre-existing issues. Some pre-existing issues have been fixed with the 
-switch and others new issues has been created.
+switch and others new issues have been created.
 
 Work is ongoing to get Ecrire into shape for basic daily use. 
 Contributions are welcome!
