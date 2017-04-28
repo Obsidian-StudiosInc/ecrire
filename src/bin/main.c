@@ -236,7 +236,7 @@ _goto_line(void *data,
 }
 
 static void
-_open(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
+_open_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
    _alert_if_need_saving(_open_do, ent);
@@ -380,7 +380,7 @@ _key_down_cb(void *data,
         else if(!strcmp("O", event->key) ||
                 !strcmp("o", event->key))
           {
-            _open(data,NULL,NULL);
+            _open_cb(data,NULL,NULL);
           }
         else if(!strcmp("S", event->key) ||
                 !strcmp("s", event->key))
@@ -522,7 +522,7 @@ main(int argc, char *argv[])
    evas_object_smart_callback_add(main_ec_ent->entry, "selection,cleared", _sel_clear, main_ec_ent);
 
    elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_ec_ent);
-   elm_toolbar_item_append(tbar, "document-open", _("Open"), _open, main_ec_ent);
+   elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, main_ec_ent);
    main_ec_ent->save_item =
      elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_ec_ent);
    main_ec_ent->save_as_item =
