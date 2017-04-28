@@ -14,11 +14,17 @@ Ecrire is a basic text editor written in EFL for the Enlightenment
 desktop environment. It is intended to be a native EFL alternative to 
 gedit (GTK/Gnome), kwrite (KDE/Plasma), and similar basic text editors.
 
+Ecrire has been modified to use elementary code widget instead of entry. 
+There are various issues as a result of this change, and some 
+pre-existing issues. Some pre-existing issues have been fixed with the 
+switch and others new issues has been created.
+
+Work is ongoing to get Ecrire into shape for basic daily use. 
 Contributions are welcome!
 
 ## Build
 To build for usage run cmake, and then make. The build system will 
-generate dep and rpm's for installation, using either dist or package 
+generate deb and rpm's for installation, using either dist or package 
 targets. Dist target will package sources in addition to binaries. 
 Package will only generate deb and rpm's.
 
