@@ -104,6 +104,7 @@ ecrire_cfg_load(void)
      }
 
    _ent_cfg = eet_data_read(ef, _ent_cfg_descriptor, _CONFIG_ENTRY);
+   eet_close(ef);
 
 end:
    if (!_ent_cfg)
@@ -111,7 +112,6 @@ end:
         _ent_cfg = _ecrire_cfg_new();
      }
 
-   eet_close(ef);
    return EINA_TRUE;
 }
 
