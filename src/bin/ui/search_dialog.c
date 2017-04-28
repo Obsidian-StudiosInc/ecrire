@@ -10,9 +10,7 @@ const static int PADDING = 5;
 const static int BUTTON_HEIGHT = 27;
 const static int BUTTON_WIDTH = 60;
 
-static Eina_Bool forward = EINA_TRUE;
 static Evas_Object *find_entry, *replace_entry, *search_win;
-static int find_line, find_pos;
 
 static void
 _search_win_del(void *data EINA_UNUSED,
@@ -27,14 +25,14 @@ static int
 _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
 {
   Elm_Code_Line *code_line;
-  int found, len, col, row, lines;
+  int i, found, len, col, row, lines;
 
   if (!text || !*text)
     return EINA_FALSE;
 
   lines = elm_code_file_lines_get(ent->code->file);
   elm_obj_code_widget_cursor_position_get(ent->entry,&row,&col);
-  for(int i=row; i<=lines; i++)
+  for(i=row; i<=lines; i++)
     {
       code_line = elm_code_file_line_get(ent->code->file,i);
       found = elm_code_line_text_strpos(code_line,text,col);
@@ -73,7 +71,7 @@ _replace_clicked(void *data,
                  Evas_Object *obj EINA_UNUSED,
                  void *event_info EINA_UNUSED)
 {
-  char *replace;
+  const char *replace;
   int  len, col, row;
   unsigned int pos;
 
