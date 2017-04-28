@@ -47,12 +47,13 @@ settings_apply_font_cb (void *data,
                         Evas_Object *obj EINA_UNUSED,
                         void *event_info EINA_UNUSED)
 {
-  Ecrire_Entry *ent = data;
   Elm_Object_Item *list_it = elm_list_selected_item_get(list);
-  if(list_it)
-      editor_font_set(ent,
-                      elm_object_item_text_get(list_it),
-                      elm_spinner_value_get(fsize));
+  const char *name = elm_object_item_text_get(list_it);
+  unsigned int size = elm_spinner_value_get(fsize);
+  editor_font_set((Ecrire_Entry *)data, name, size);
+  if(name)
+    ent_cfg->font.name = name;
+  ent_cfg->font.size = size;
 }
 
 static void
