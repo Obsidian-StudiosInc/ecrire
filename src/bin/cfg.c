@@ -133,8 +133,13 @@ ecrire_cfg_save(void)
         return EINA_FALSE;
      }
 
+   if(ret && !_ent_cfg->font.name)
+     ret = eet_delete(ef, "config/font.name");
+
    ret = eet_data_write
          (ef, _ent_cfg_descriptor, _CONFIG_ENTRY, _ent_cfg, EINA_TRUE);
+   
+   
    eet_close(ef);
 
    return ret;
