@@ -66,11 +66,19 @@ settings_delete_cb (void *data EINA_UNUSED,
 }
 
 static void
-settings_default_font_cb(void *data EINA_UNUSED,
+settings_default_font_cb(void *data,
                          Evas_Object *obj,
                          void *event_info EINA_UNUSED)
 {
-   disable_font_widgets(elm_check_state_get(obj));
+  Ecrire_Entry *ent = data;
+  Eina_Bool state = elm_check_state_get(obj);
+  disable_font_widgets(elm_check_state_get(obj));
+  if(state && ent_cfg->font.name)
+    {
+      //elm_obj_code_widget_font_set(ent->entry, name, size);
+      ent_cfg->font.name = NULL;
+      ent_cfg->font.size = 10;
+    }
 }
 
 static Eina_List *
@@ -225,7 +233,7 @@ ui_settings_dialog_open(Evas_Object *parent,
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_default_font_cb, NULL);
+  evas_object_smart_callback_add(obj, "changed", settings_default_font_cb, ent);
   evas_object_show(obj);
   row++;
 
