@@ -19,7 +19,18 @@ There are various issues as a result of this change, and some
 pre-existing issues. Some pre-existing issues have been fixed with the 
 switch and others new issues have been created.
 
-Work is ongoing to get Ecrire into shape for basic daily use. 
+Issues relating to syntax highlighting are being tracked in the 
+[Elm Code Syntax Support chart](https://phab.enlightenment.org/w/elm_code/syntax_support/). 
+Please do not open tasks on syntax highlighting related issues here on github. 
+Please open tasks on 
+[Enlightenment's Phabricator](https://phab.enlightenment.org/) 
+for elm code. That is the best place, since those issues will have to be 
+addressed upstream in EFL itself.
+
+Work is ongoing to get Ecrire into shape for basic daily use. Lots of 
+features will be coming after the most common are implemented, including 
+effects/eye candy.
+
 Contributions are welcome!
 
 ## Build
