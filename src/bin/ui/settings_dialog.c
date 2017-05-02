@@ -73,12 +73,14 @@ settings_default_font_cb(void *data,
   Ecrire_Entry *ent = data;
   Eina_Bool state = elm_check_state_get(obj);
   disable_font_widgets(elm_check_state_get(obj));
-  if(state && ent_cfg->font.name)
+  if(state)
     {
-      //elm_obj_code_widget_font_set(ent->entry, name, size);
+      elm_obj_code_widget_font_set(ent->entry, NULL, 10);
       ent_cfg->font.name = NULL;
       ent_cfg->font.size = 10;
     }
+  else
+    settings_apply_font_cb(ent, (Evas_Object *)NULL, (void *)NULL);
 }
 
 static Eina_List *
