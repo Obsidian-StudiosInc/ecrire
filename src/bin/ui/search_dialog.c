@@ -117,6 +117,9 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_show (obj);
 
   find_entry = elm_entry_add(table);
+  if(!elm_code_widget_selection_is_empty(ent->entry))
+    elm_object_text_set(find_entry,
+                        elm_code_widget_selection_text_get(ent->entry));
   elm_entry_scrollable_set(find_entry, EINA_TRUE);
   elm_entry_single_line_set(find_entry, EINA_TRUE);
   evas_object_size_hint_weight_set(find_entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
