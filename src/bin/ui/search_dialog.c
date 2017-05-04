@@ -10,15 +10,15 @@ const static int PADDING = 4;
 const static int BUTTON_HEIGHT = 29;
 const static int BUTTON_WIDTH = 70;
 
-static Evas_Object *find_entry, *replace_entry, *search_win;
+static Evas_Object *find_entry, *replace_entry, *search_box;
 
 static void
-_search_win_del(void *data EINA_UNUSED,
+_search_box_del(void *data EINA_UNUSED,
                 Evas_Object *obj EINA_UNUSED,
                 void *event_info EINA_UNUSED)
 {
-  evas_object_del(search_win);
-  search_win = NULL;
+  evas_object_del(search_box);
+  search_box = NULL;
 }
 
 static int
@@ -96,13 +96,13 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   Evas_Object *obj, *table;
   int row = 0;
 
-  if (search_win)
+  if (search_box)
     {
-      evas_object_show(search_win);
-      return search_win;
+      evas_object_show(search_box);
+      return search_box;
     }
 
-  search_win = table = elm_table_add(parent);
+  search_box = table = elm_table_add(parent);
   elm_obj_table_padding_set(table, ELM_SCALE_SIZE(PADDING), 0);
   evas_object_size_hint_padding_set(table, ELM_SCALE_SIZE(PADDING), 0, 0, 0);
   evas_object_size_hint_weight_set(table, EVAS_HINT_EXPAND, 0);
@@ -176,13 +176,13 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
                                 ELM_SCALE_SIZE(BUTTON_WIDTH),
                                 ELM_SCALE_SIZE(BUTTON_HEIGHT));
   elm_table_pack (table, obj, 3, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _search_win_del, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_box_del, ent);
   evas_object_show(obj);
 
   elm_box_pack_end(ent->bx, table);
-  evas_object_show (search_win);
+  evas_object_show (search_box);
 
   elm_object_focus_set(find_entry, EINA_TRUE);
 
-  return search_win;
+  return search_box;
 }
