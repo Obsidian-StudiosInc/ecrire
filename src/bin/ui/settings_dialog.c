@@ -26,8 +26,7 @@ settings_alpha_cb (void *data,
                    Evas_Object *obj,
                    void *event_info EINA_UNUSED)
 {
-  Ecrire_Entry *ent = (Ecrire_Entry *)data;
-  Evas_Object *bg;
+  Ecrire_Entry *ent = data;
 
   ent_cfg->alpha = elm_slider_value_get (obj);
   ALPHA (ent->bg, ent_cfg->alpha);
