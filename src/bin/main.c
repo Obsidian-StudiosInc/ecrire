@@ -119,7 +119,7 @@ _cur_changed(void *data,
 
    Ecrire_Entry *ent = data;
    elm_obj_code_widget_cursor_position_get(ent->entry,&line,&col);
-   snprintf(buf, sizeof(buf), _("Ln %d, Col %d"), line, col);
+   snprintf(buf, sizeof(buf), _(" Line %d, Column %d"), line, col);
    elm_object_text_set(ent->cursor_label, buf);
    if(elm_object_item_disabled_get(ent->undo_item) &&
       elm_obj_code_widget_can_undo_get(ent->entry)) 
@@ -513,7 +513,7 @@ main(int argc, char *argv[])
 
    main_ec_ent->cursor_label = obj = elm_label_add(main_ec_ent->win);
    _cur_changed(main_ec_ent, NULL, NULL);
-   evas_object_size_hint_align_set(obj, 1.0, 0.5);
+   evas_object_size_hint_align_set(obj, 0, 0.5);
    evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0.0);
    elm_box_pack_end(box, obj);
    evas_object_show(obj);
