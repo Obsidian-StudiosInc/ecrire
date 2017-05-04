@@ -400,7 +400,7 @@ _key_down_cb(void *data,
 int
 main(int argc, char *argv[])
 {
-   Evas_Object  *obj, *tbar;
+   Evas_Object  *box, *obj, *tbar;
    Evas_Coord w = 600, h = 600;
    int c;
 
@@ -472,12 +472,10 @@ main(int argc, char *argv[])
    evas_object_size_hint_weight_set (main_ec_ent->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    evas_object_show (main_ec_ent->bg);
 
-   main_ec_ent->bx = elm_box_add (main_ec_ent->win);
-   if(_ent_cfg->alpha)
-     ALPHA (main_ec_ent->bx, _ent_cfg->alpha);
-   elm_win_resize_object_add (main_ec_ent->win, main_ec_ent->bx);
-   evas_object_size_hint_weight_set (main_ec_ent->bx, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show (main_ec_ent->bx);
+   box = obj = elm_box_add (main_ec_ent->win);
+   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+   elm_win_resize_object_add (main_ec_ent->win, box);
+   evas_object_show (obj);
 
    tbar = elm_toolbar_add(main_ec_ent->win);
    elm_toolbar_homogeneous_set(tbar, 0);
@@ -486,9 +484,15 @@ main(int argc, char *argv[])
    elm_toolbar_align_set(tbar, 0.0);
    evas_object_size_hint_weight_set(tbar, 0.0, 0.0);
    evas_object_size_hint_align_set(tbar, EVAS_HINT_FILL, 0.0);
-
-   elm_box_pack_end(main_ec_ent->bx, tbar);
+   elm_box_pack_end(box, tbar);
    evas_object_show(tbar);
+
+   main_ec_ent->bx = obj = elm_box_add (main_ec_ent->win);
+   if(_ent_cfg->alpha)
+     ALPHA (obj, _ent_cfg->alpha);
+   evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+   evas_object_show(obj);
 
    main_ec_ent->code = elm_code_create();
    main_ec_ent->entry = efl_add(elm_code_widget_class_get(),
@@ -504,13 +508,14 @@ main(int argc, char *argv[])
    evas_object_size_hint_align_set(main_ec_ent->entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(main_ec_ent->entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    elm_box_pack_end(main_ec_ent->bx, main_ec_ent->entry);
+   elm_box_pack_end(box, main_ec_ent->bx);
    evas_object_show(main_ec_ent->entry);
 
    main_ec_ent->cursor_label = obj = elm_label_add(main_ec_ent->win);
    _cur_changed(main_ec_ent, NULL, NULL);
    evas_object_size_hint_align_set(obj, 1.0, 0.5);
    evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(main_ec_ent->bx, obj);
+   elm_box_pack_end(box, obj);
    evas_object_show(obj);
 
    evas_object_smart_callback_add(main_ec_ent->entry, "cursor,changed",
