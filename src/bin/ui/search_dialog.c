@@ -104,8 +104,8 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
 
   search_win = elm_frame_add(ent->bx);
   elm_object_text_set(search_win, _("Search"));
-  evas_object_size_hint_align_set(obj, EVAS_HINT_EXPAND, 0.5);
-  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0.0);
+  evas_object_size_hint_align_set(search_win, EVAS_HINT_FILL, 1);
+  evas_object_size_hint_weight_set(search_win, EVAS_HINT_EXPAND, 0);
 
   table = elm_table_add(search_win);
   elm_obj_table_padding_set(table,
@@ -116,8 +116,6 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
                                      ELM_SCALE_SIZE(PADDING),
                                      ELM_SCALE_SIZE(PADDING),
                                      ELM_SCALE_SIZE(PADDING));
-  evas_object_size_hint_align_set(table, EVAS_HINT_EXPAND, 0.5);
-  evas_object_size_hint_weight_set(table, EVAS_HINT_EXPAND, 0.0);
   evas_object_show(table);
 
   /* Search for Label */
