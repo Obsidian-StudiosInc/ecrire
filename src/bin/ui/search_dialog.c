@@ -179,7 +179,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_smart_callback_add(obj, "clicked", _search_box_del, ent);
   evas_object_show(obj);
 
-  elm_box_pack_end(ent->bx, table);
+  elm_box_pack_end(ent->box_editor, table);
   evas_object_show (search_box);
 
   elm_object_focus_set(find_entry, EINA_TRUE);

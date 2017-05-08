@@ -489,7 +489,7 @@ main(int argc, char *argv[])
    elm_box_pack_end(main_ec_ent->box_main, tbar);
    evas_object_show(tbar);
 
-   main_ec_ent->bx = obj = elm_box_add (main_ec_ent->win);
+   main_ec_ent->box_editor = obj = elm_box_add (main_ec_ent->win);
    if(_ent_cfg->alpha)
      ALPHA (obj, _ent_cfg->alpha);
    evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
@@ -509,8 +509,8 @@ main(int argc, char *argv[])
    elm_obj_code_widget_line_numbers_set(main_ec_ent->entry, _ent_cfg->line_numbers);
    evas_object_size_hint_align_set(main_ec_ent->entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(main_ec_ent->entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   elm_box_pack_end(main_ec_ent->bx, main_ec_ent->entry);
-   elm_box_pack_end(main_ec_ent->box_main, main_ec_ent->bx);
+   elm_box_pack_end(main_ec_ent->box_editor, main_ec_ent->entry);
+   elm_box_pack_end(main_ec_ent->box_main, main_ec_ent->box_editor);
    evas_object_show(main_ec_ent->entry);
 
    main_ec_ent->cursor_label = obj = elm_label_add(main_ec_ent->win);

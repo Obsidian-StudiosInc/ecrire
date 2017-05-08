@@ -18,9 +18,9 @@ struct _Ecrire_Entry {
      Elm_Code *code;
      Elm_Code_Widget *entry;
      Evas_Object *win;
-     Evas_Object *box_main;
      Evas_Object *bg;
-     Evas_Object *bx;
+     Evas_Object *box_editor;
+     Evas_Object *box_main;
      Evas_Object *cursor_label;
      const char *filename;
      int unsaved;

@@ -31,7 +31,7 @@ settings_alpha_cb (void *data,
   ent_cfg->alpha = elm_slider_value_get (obj);
   ALPHA (ent->bg, ent_cfg->alpha);
   ALPHA (ent->box_main, ent_cfg->alpha);
-  ALPHA (ent->bx, ent_cfg->alpha);
+  ALPHA (ent->box_editor, ent_cfg->alpha);
 }
 
 static void
