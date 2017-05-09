@@ -10,6 +10,11 @@ This is a mirror of the official
 Work is being done in the wltjr branch. Intended to be merged back into 
 upstream, or forked worse case.
 
+## Known Issues
+- Search Previous button goes same direction as next, one way vs two way search
+- Crash opening files containing code, other than c source and header files
+- Wordwrap setting does not function till next release of EFL > 1.19.0
+
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
 desktop environment. It is intended to be a native EFL alternative to 
