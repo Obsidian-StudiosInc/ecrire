@@ -21,6 +21,7 @@ static Ecrire_Entry *main_ec_ent;
 
 static void print_usage(const char *bin);
 
+Eina_Bool ctrl_pressed = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
 
@@ -341,9 +342,6 @@ my_win_del(void *data, Evas_Object *obj, void *event_info)
 }
 
 #ifdef HAVE_ECORE_X
-
-Eina_Bool ctrl_pressed = EINA_FALSE;
-
 static Eina_Bool
 _selection_notify(void *data, int type EINA_UNUSED, void *_event)
 {
@@ -362,6 +360,7 @@ _selection_notify(void *data, int type EINA_UNUSED, void *_event)
 
    return ECORE_CALLBACK_PASS_ON;
 }
+#endif
 
 static Eina_Bool
 _key_down_cb(void *data,
@@ -392,7 +391,6 @@ _key_down_cb(void *data,
       }
     return ECORE_CALLBACK_PASS_ON;
 }
-#endif
 
 int
 main(int argc, char *argv[])
@@ -556,16 +554,15 @@ main(int argc, char *argv[])
 
 #ifdef HAVE_ECORE_X
    if (!ecore_x_selection_owner_get(ECORE_X_ATOM_SELECTION_CLIPBOARD))
-     {
         elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
-     }
 
    ecore_x_fixes_selection_notification_request(ECORE_X_ATOM_SELECTION_CLIPBOARD);
    ecore_event_handler_add(ECORE_X_EVENT_FIXES_SELECTION_NOTIFY,
          _selection_notify, main_ec_ent);
-   
-   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
+#else
+   elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
 #endif
+   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
 
    /* We don't have a selection when we start, make the items disabled */
    elm_object_item_disabled_set(main_ec_ent->copy_item, EINA_TRUE);
