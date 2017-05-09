@@ -14,6 +14,7 @@ upstream, or forked worse case.
 - Search Previous button goes same direction as next, one way vs two way search
 - Crash opening files containing code, other than c source and header files
 - Wordwrap setting does not function till next release of EFL > 1.19.0
+- Issues running under Wayland #2
 
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
