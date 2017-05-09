@@ -176,15 +176,15 @@ _clear ()
 static void
 _load_to_entry(Ecrire_Entry *ent, const char *file)
 {
-   if (file)
+  if (file)
+    {
+      elm_code_file_open(ent->code,file);
+      _init_entry(ent);
+      _set_save_disabled(ent, EINA_TRUE);
+    }
+  else
      {
-        elm_code_file_open(ent->code,file);
-        _init_entry(ent);
-        _set_save_disabled(ent, EINA_TRUE);
-     }
-   else
-     {
-        _init_entry(ent);
+      _init_entry(ent);
      }
 
    _update_cur_file(file, ent);
@@ -374,19 +374,16 @@ _key_down_cb(void *data,
         ctrl_pressed = EINA_FALSE;
         if(!strcmp("F", event->key) ||
            !strcmp("f", event->key))
-          {
             _find(data,NULL,NULL);
-          }
+        else if(!strcmp("H", event->key) ||
+                !strcmp("h", event->key))
+            _find(data,NULL,NULL);
         else if(!strcmp("O", event->key) ||
                 !strcmp("o", event->key))
-          {
             _open_cb(data,NULL,NULL);
-          }
         else if(!strcmp("S", event->key) ||
                 !strcmp("s", event->key))
-          {
             _save(data,NULL,NULL);
-          }
       }
     else if (!strcmp("Control_L", event->key) ||
              !strcmp("Control_R", event->key))
