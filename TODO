@@ -1,3 +1,4 @@
+* History of files opened, recent files
 * Search -> find all, change direction, case insensitive, regex, history
 * Font settings: Mark currently selected font in font settings
 * Open file dialog starts in same folder as previous
@@ -7,3 +8,4 @@ Stage 2
 * Tabs/Multiple documents open
 * Effects
 * Support .swp files (autosave feature of elm?).
+* History of find/replace, switch to combobox
