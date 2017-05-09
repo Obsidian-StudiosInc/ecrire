@@ -24,6 +24,7 @@ _search_box_del(void *data EINA_UNUSED,
 static int
 _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
 {
+  Eina_Bool reset = EINA_TRUE;
   Elm_Code_Line *code_line;
   int i, found, len, col, row, lines;
 
@@ -36,21 +37,27 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
     {
       code_line = elm_code_file_line_get(ent->code->file,i);
       found = elm_code_line_text_strpos(code_line,text,col);
-      if(found>0)
+      if(found>=0)
         {
           len = strlen(text);
-          col = found+len+1;
-          elm_code_widget_selection_start(ent->entry,i,found+1);
-          elm_code_widget_selection_end(ent->entry,i,col-1);
+          col = elm_code_widget_line_text_column_width_to_position(ent->entry,
+                                                                   code_line,
+                                                                   found);
+          elm_code_widget_selection_start(ent->entry,i,col);
+          col += len-1;
+          elm_code_widget_selection_end(ent->entry,i,col);
           elm_obj_code_widget_cursor_position_set(ent->entry,i,col);
           break;
         }
       else if(i==row || i==lines) // reset and repeat
         {
-          if(col>1)
-              col = 1;
-          if(i==lines)
+          if(col>0)
+            col = 0;
+          if(i==lines && reset)
+            {
               i = 0;
+              reset = EINA_FALSE;
+            }
         }
     }
   return found;
@@ -71,11 +78,13 @@ _replace_clicked(void *data,
                  Evas_Object *obj EINA_UNUSED,
                  void *event_info EINA_UNUSED)
 {
-  const char *replace;
+  const char *find, *replace;
   int  len, col, row;
-  unsigned int pos;
+  int pos;
 
-  if (pos = _find_in_entry(data, elm_entry_entry_get(find_entry), EINA_FALSE))
+  find = elm_entry_entry_get(find_entry);
+  pos = _find_in_entry(data, find, EINA_FALSE);
+  if(pos>=0)
     {
       Ecrire_Entry *ent = data;
       Elm_Code_Line *code_line;
@@ -83,10 +92,12 @@ _replace_clicked(void *data,
       replace = elm_entry_entry_get(replace_entry);
       elm_obj_code_widget_cursor_position_get(ent->entry,&row,&col);
       code_line = elm_code_file_line_get(ent->code->file,row);
-      len = col-pos-1;
+      len = strlen(find);
       elm_code_line_text_remove(code_line, pos, len);
       len = strlen(replace);
       elm_code_line_text_insert(code_line, pos, replace, len);
+      /* Fix me this clears all not just the current selection */
+      elm_code_widget_selection_clear(ent->entry);
     }
 }
 
