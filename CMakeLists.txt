@@ -19,6 +19,7 @@ find_package(Ecore REQUIRED)
 find_package(Ecore COMPONENTS INPUT)
 find_package(Edje REQUIRED)
 find_package(Efreet REQUIRED)
+find_package(Efreet COMPONENTS mime)
 find_package(Elementary REQUIRED)
 
 option(wayland "Use wayland instead of x")
