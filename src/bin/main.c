@@ -164,6 +164,7 @@ _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
    Ecrire_Entry *ent = data;
    _set_save_disabled(ent, EINA_FALSE);
+   elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
    _update_cur_file(ent->filename, ent);
 }
 
@@ -180,15 +181,13 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
   if (file)
     {
       elm_code_file_open(ent->code,file);
-      _init_entry(ent);
       _set_save_disabled(ent, EINA_TRUE);
+      elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
+      elm_object_item_disabled_set(ent->copy_item, EINA_FALSE);
     }
-  else
-     {
-      _init_entry(ent);
-     }
 
-   _update_cur_file(file, ent);
+  _init_entry(ent);
+  _update_cur_file(file, ent);
 }
 
 static void
@@ -234,6 +233,17 @@ _goto_line(void *data,
 {
    Ecrire_Entry *ent = data;
    ui_goto_dialog_open(ent->win, ent);
+}
+
+static void
+_close_cb(void *data,
+          Evas_Object *obj EINA_UNUSED,
+          void *event_info EINA_UNUSED)
+{
+   Ecrire_Entry *ent = data;
+   _alert_if_need_saving(_clear, ent);
+   elm_object_item_disabled_set(ent->close_item, EINA_TRUE);
+   _set_save_disabled(ent, EINA_TRUE);
 }
 
 static void
@@ -383,6 +393,9 @@ _key_down_cb(void *data,
         else if(!strcmp("S", event->key) ||
                 !strcmp("s", event->key))
             _save(data,NULL,NULL);
+        else if(!strcmp("W", event->key) ||
+                !strcmp("w", event->key))
+            _close_cb(data,NULL,NULL);
       }
     else if (!strcmp("Control_L", event->key) ||
              !strcmp("Control_R", event->key))
@@ -525,6 +538,8 @@ main(int argc, char *argv[])
 
    elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_ec_ent);
    elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, main_ec_ent);
+   main_ec_ent->close_item =
+     elm_toolbar_item_append(tbar, "document-close", _("Close"), _close_cb, main_ec_ent);
    main_ec_ent->save_item =
      elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_ec_ent);
    main_ec_ent->save_as_item =
@@ -565,6 +580,7 @@ main(int argc, char *argv[])
    ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
 
    /* We don't have a selection when we start, make the items disabled */
+   elm_object_item_disabled_set(main_ec_ent->close_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->copy_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->cut_item, EINA_TRUE);
    _set_save_disabled(main_ec_ent, EINA_TRUE);
