@@ -178,8 +178,23 @@ _clear ()
 static void
 _load_to_entry(Ecrire_Entry *ent, const char *file)
 {
+  Elm_Code_Syntax *syntax;
+  const char *mime;
+
   if (file)
     {
+      mime = efreet_mime_type_get(file);
+      if(mime)
+        {
+          if(!strcasecmp(mime, "text/x-chdr") ||
+             !strcasecmp(mime, "text/x-csrc") ||
+             !strcasecmp(mime, "text/x-python"))
+            syntax = elm_code_syntax_for_mime_get(mime);
+          else
+            syntax = elm_code_syntax_for_mime_get("text/plain");
+          if(syntax)
+            elm_code_syntax_parse_file(syntax,ent->code);
+        }
       elm_code_file_open(ent->code,file);
       _set_save_disabled(ent, EINA_TRUE);
       elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
