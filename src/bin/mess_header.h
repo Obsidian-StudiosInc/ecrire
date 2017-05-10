@@ -24,8 +24,8 @@ struct _Ecrire_Entry {
      Evas_Object *cursor_label;
      const char *filename;
      int unsaved;
-     Elm_Object_Item *copy_item, *cut_item, *save_item, *save_as_item,
-                     *paste_item, *undo_item, *redo_item;
+     Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
+                     *save_as_item, *paste_item, *undo_item, *redo_item;
 };
 
 typedef struct _Ecrire_Entry Ecrire_Entry;
