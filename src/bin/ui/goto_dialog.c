@@ -4,7 +4,7 @@
 
 #include <Elementary.h>
 
-#include "../mess_header.h"
+#include "../ecrire.h"
 
 const static int PADDING = 5;
 const static int BUTTON_HEIGHT = 27;

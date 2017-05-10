@@ -1,7 +1,7 @@
 #ifndef _UI_H
 #define _UI_H
 
-#include "../mess_header.h"
+#include "../ecrire.h"
 
 void ui_file_open_save_dialog_open(Evas_Object *parent, Evas_Smart_Cb func, Eina_Bool save);
 

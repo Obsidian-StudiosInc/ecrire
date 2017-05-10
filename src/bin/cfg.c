@@ -2,7 +2,7 @@
 #include <Efreet.h>
 
 #include "cfg.h"
-#include "mess_header.h"
+#include "ecrire.h"
 
 Ent_Cfg *_ent_cfg;
 static Eet_Data_Descriptor * _ent_cfg_descriptor;
