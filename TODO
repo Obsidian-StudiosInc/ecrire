@@ -2,6 +2,8 @@
 * Search -> find all, change direction, case insensitive, regex, history
 * Font settings: Mark currently selected font in font settings
 * Open file dialog starts in same folder as previous
+* Ability to drag and drop files to be opened
+* Add ability/fix issues with paste via left + right mouse button click
 
 Stage 2
 ~~~~~~~
