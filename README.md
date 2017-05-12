@@ -14,12 +14,14 @@ upstream, or forked worse case.
 - Search Previous button goes same direction as next, one way vs two way search
 - Crash opening files containing code, other than c source and header files
 - Wordwrap setting does not function till next release of EFL > 1.19.0
-- Issues running under Wayland #2
+- Issues running under Wayland [Issue #2](https://github.com/Obsidian-StudiosInc/ecrire/issues/2)
 
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
-desktop environment. It is intended to be a native EFL alternative to 
-gedit (GTK/Gnome), kwrite (KDE/Plasma), and similar basic text editors.
+desktop environment and long term also Tizen. It is intended to be a 
+native EFL alternative to gedit (GTK/Gnome), kwrite (KDE/Plasma), and 
+similar basic text editors. With the exception that ecrire should be 
+usable on desktop as well as mobile devices.
 
 Ecrire has been modified to use elementary code widget instead of entry. 
 There are various issues as a result of this change, and some 
