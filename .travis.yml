@@ -32,7 +32,7 @@ deploy:
     - dist/ecrire-${MY_PV}.x86_64.rpm
   on:
     repo: Obsidian-StudiosInc/ecrire
-    branch: wltjr
+    branch: master
     tags: true
 
 addons:
@@ -43,4 +43,4 @@ addons:
     notification_email: wlt@o-sinc.com
     build_command_prepend: cmake -D CMAKE_BUILD_TYPE=Debug ./ ; make clean
     build_command: make -j 4
-    branch_pattern: wltjr
+    branch_pattern: master
