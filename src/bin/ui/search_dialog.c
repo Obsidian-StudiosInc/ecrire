@@ -9,6 +9,7 @@
 const static int PADDING = 4;
 const static int BUTTON_HEIGHT = 29;
 const static int BUTTON_WIDTH = 70;
+const static int BUTTON_ICON_SIZE = 14;
 
 static Evas_Object *find_entry, *replace_entry, *search_box;
 
@@ -104,7 +105,7 @@ _replace_clicked(void *data,
 Evas_Object *
 ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
 {
-  Evas_Object *obj, *table;
+  Evas_Object *icon, *obj, *table;
   int row = 0;
 
   if (search_box)
@@ -139,20 +140,62 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_show(find_entry);
 
   obj = elm_button_add(table);
-  elm_object_text_set(obj, _("Next"));
-  evas_object_size_hint_min_set(obj,
-                                ELM_SCALE_SIZE(BUTTON_WIDTH),
-                                ELM_SCALE_SIZE(BUTTON_HEIGHT));
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "edit-find"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(obj, "icon", icon);
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(obj, _("Find All"));
+    }
   elm_table_pack (table, obj, 2, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent);
   evas_object_show(obj);
-  
+
   obj = elm_button_add(table);
-  elm_object_text_set(obj, _("Previous"));
-  evas_object_size_hint_min_set(obj,
-                                ELM_SCALE_SIZE(BUTTON_WIDTH),
-                                ELM_SCALE_SIZE(BUTTON_HEIGHT));
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "go-previous"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(obj, "icon", icon);
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(obj, _("Previous"));
+    }
   elm_table_pack (table, obj, 3, row, 1, 1);
+  evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent);
+  evas_object_show(obj);
+
+  obj = elm_button_add(table);
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "go-next"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(obj, "icon", icon);
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(obj, _("Next"));
+    }
+  elm_table_pack (table, obj, 4, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent);
   evas_object_show(obj);
   row++;
@@ -173,20 +216,53 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_show(replace_entry);
 
   obj = elm_button_add(table);
-  elm_object_text_set(obj, _("Replace"));
-  evas_object_size_hint_min_set(obj,
-                                ELM_SCALE_SIZE(BUTTON_WIDTH),
-                                ELM_SCALE_SIZE(BUTTON_HEIGHT));
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "edit-find-replace"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(obj, "icon", icon);
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(obj, _("Replace"));
+    }
   elm_table_pack (table, obj, 2, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _replace_clicked, ent);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
-  elm_object_text_set(obj, _("Close"));
+  elm_object_text_set(obj, _("Replace All"));
   evas_object_size_hint_min_set(obj,
                                 ELM_SCALE_SIZE(BUTTON_WIDTH),
                                 ELM_SCALE_SIZE(BUTTON_HEIGHT));
   elm_table_pack (table, obj, 3, row, 1, 1);
+  evas_object_smart_callback_add(obj, "clicked", _replace_clicked, ent);
+  evas_object_show(obj);
+
+  obj = elm_button_add(table);
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "window-close"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      evas_object_size_hint_weight_set(icon, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+      evas_object_size_hint_align_set(icon, EVAS_HINT_FILL, 0.5);
+      elm_object_part_content_set(obj, "icon", icon);
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(obj, _("Close"));
+    }
+  elm_table_pack (table, obj, 4, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _search_box_del, ent);
   evas_object_show(obj);
 
