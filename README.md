@@ -7,8 +7,9 @@
 This is a mirror of the official
 [ecrire repo](https://git.enlightenment.org/apps/ecrire.git/)
 
-Work is being done in the wltjr branch. Intended to be merged back into 
-upstream, or forked worse case.
+Work was being done in the wltjr branch. It has been merged into master 
+branch and further work will be done there. This repository should be 
+sync'd with the official Enlightenment one within the next month.
 
 ## Known Issues
 - Search Previous button goes same direction as next, one way vs two way search
