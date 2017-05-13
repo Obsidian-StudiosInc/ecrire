@@ -64,30 +64,18 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
   return found;
 }
 
-static void
-_find_clicked(void *data,
-              Evas_Object *obj EINA_UNUSED,
-              void *event_info EINA_UNUSED)
+static Eina_Bool
+_replace_in_entry(Ecrire_Entry *ent)
 {
-  _find_in_entry((Ecrire_Entry *)data,
-                 elm_entry_entry_get(find_entry),
-                 EINA_TRUE);
-}
-
-static void
-_replace_clicked(void *data,
-                 Evas_Object *obj EINA_UNUSED,
-                 void *event_info EINA_UNUSED)
-{
+  Eina_Bool replaced = EINA_FALSE;
   const char *find, *replace;
   int  len, col, row;
   int pos;
 
   find = elm_entry_entry_get(find_entry);
-  pos = _find_in_entry(data, find, EINA_FALSE);
+  pos = _find_in_entry(ent, find, EINA_FALSE);
   if(pos>=0)
     {
-      Ecrire_Entry *ent = data;
       Elm_Code_Line *code_line;
 
       replace = elm_entry_entry_get(replace_entry);
@@ -99,7 +87,35 @@ _replace_clicked(void *data,
       elm_code_line_text_insert(code_line, pos, replace, len);
       /* Fix me this clears all not just the current selection */
       elm_code_widget_selection_clear(ent->entry);
+      replaced = EINA_TRUE;
     }
+  return(replaced);
+}
+
+static void
+_find_clicked(void *data,
+              Evas_Object *obj EINA_UNUSED,
+              void *event_info EINA_UNUSED)
+{
+  _find_in_entry((Ecrire_Entry *)data,
+                 elm_entry_entry_get(find_entry),
+                 EINA_TRUE);
+}
+
+static void
+_replace_all_clicked(void *data,
+                     Evas_Object *obj EINA_UNUSED,
+                     void *event_info EINA_UNUSED)
+{
+    while(_replace_in_entry((Ecrire_Entry *)data)==EINA_TRUE) ;
+}
+
+static void
+_replace_clicked(void *data,
+                 Evas_Object *obj EINA_UNUSED,
+                 void *event_info EINA_UNUSED)
+{
+  _replace_in_entry((Ecrire_Entry *)data);
 }
 
 Evas_Object *
@@ -241,7 +257,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
                                 ELM_SCALE_SIZE(BUTTON_WIDTH),
                                 ELM_SCALE_SIZE(BUTTON_HEIGHT));
   elm_table_pack (table, obj, 3, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _replace_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _replace_all_clicked, ent);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
