@@ -15,6 +15,7 @@ sync'd with the official Enlightenment one within the next month.
 - Search Previous button goes same direction as next, one way vs two way search
 - Wordwrap setting does not function till next release of EFL > 1.19.0
 - Crash saving files
+- Parallel compiling fails, requires make -j1 or no jobs [Issue #3](https://github.com/Obsidian-StudiosInc/ecrire/issues/3)
 
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
