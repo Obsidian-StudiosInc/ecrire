@@ -4,12 +4,9 @@
 [![Build Status](https://img.shields.io/shippable/58fa9a131fb3ec0700df16e5/wltjr.svg?colorA=9977bb&style=plastic)](https://app.shippable.com/projects/58fa9a131fb3ec0700df16e5/)
 [![Code Quality](https://img.shields.io/coverity/scan/12512.svg?colorA=9977bb&style=plastic)](https://scan.coverity.com/projects/obsidian-studiosinc-ecrire)
 
-This is a mirror of the official
-[ecrire repo](https://git.enlightenment.org/apps/ecrire.git/)
-
-Work was being done in the wltjr branch. It has been merged into master 
-branch and further work will be done there. This repository should be 
-sync'd with the official Enlightenment one within the next month.
+This is a fork and current development version Ecrire, a EFL based text 
+editor for Enlightenment and eventually Tizen as well. Or any device 
+that has EFL.
 
 ## Known Issues
 - Search Previous button goes same direction as next, one way vs two way search
