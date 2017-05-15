@@ -189,7 +189,7 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
           else
             syntax = elm_code_syntax_for_mime_get("text/plain");
           if(syntax)
-            elm_code_syntax_parse_file(syntax,ent->code);
+            elm_code_syntax_parse_file(syntax,ent->code->file);
         }
       elm_code_file_open(ent->code,file);
       _set_save_disabled(ent, EINA_TRUE);
@@ -368,14 +368,15 @@ _activate_paste_cb(void *data EINA_UNUSED,
                    Elm_Selection_Data *event)
 {
   if (!event)
-    return ECORE_CALLBACK_PASS_ON;
+    return EINA_FALSE;
 
   /* FIXME: needs to get Ecrire_Entry via obj */
   elm_object_item_disabled_set(main_ec_ent->paste_item,
                                (event->data ? EINA_FALSE : EINA_TRUE));
 
-  return ECORE_CALLBACK_PASS_ON;
+  return EINA_TRUE;
 }
+
 static Eina_Bool
 _get_clipboard_cb(void *data,
                   Evas_Object *obj EINA_UNUSED,
@@ -389,7 +390,7 @@ _get_clipboard_cb(void *data,
                         _activate_paste_cb,
                         NULL);
 
-  return ECORE_CALLBACK_PASS_ON;
+  return EINA_TRUE;
 }
 
 static Eina_Bool
@@ -422,7 +423,7 @@ _key_down_cb(void *data,
       {
         ctrl_pressed = EINA_TRUE;
       }
-    return ECORE_CALLBACK_PASS_ON;
+  return EINA_TRUE;
 }
 
 int
@@ -594,14 +595,16 @@ main(int argc, char *argv[])
    elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
    _set_save_disabled(main_ec_ent, EINA_TRUE);
 
-   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
+   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
+                           (Ecore_Event_Handler_Cb)_key_down_cb,
+                           main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->win,
                                   "delete,request",
                                   my_win_del,
                                   main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->win,
                                   "focused",
-                                  _get_clipboard_cb,
+                                  (Evas_Smart_Cb)_get_clipboard_cb,
                                   main_ec_ent);
 
    evas_object_resize(main_ec_ent->win, w, h);
