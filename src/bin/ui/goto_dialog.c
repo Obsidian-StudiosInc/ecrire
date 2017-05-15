@@ -56,9 +56,7 @@ ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_smart_callback_add(goto_win, "delete,request", _goto_win_del, NULL);
 
   table = elm_table_add(goto_win);
-  elm_obj_table_padding_set(table,
-                            ELM_SCALE_SIZE(PADDING),
-                            ELM_SCALE_SIZE(PADDING));
+  elm_table_padding_set(table,ELM_SCALE_SIZE(PADDING),ELM_SCALE_SIZE(PADDING));
   evas_object_size_hint_padding_set (table,
                                      ELM_SCALE_SIZE(PADDING),
                                      ELM_SCALE_SIZE(PADDING),
