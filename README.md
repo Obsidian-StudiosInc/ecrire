@@ -14,7 +14,6 @@ sync'd with the official Enlightenment one within the next month.
 ## Known Issues
 - Search Previous button goes same direction as next, one way vs two way search
 - Wordwrap setting does not function till next release of EFL > 1.19.0
-- Issues running under Wayland [Issue #2](https://github.com/Obsidian-StudiosInc/ecrire/issues/2)
 - Crash saving files
 
 ## About
