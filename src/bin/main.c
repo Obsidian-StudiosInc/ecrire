@@ -6,10 +6,6 @@
 # include <unistd.h>
 #endif
 
-#ifdef HAVE_ECORE_X
-# include <Ecore_X.h>
-#endif
-
 #include <Elementary.h>
 
 #include "ecrire.h"
@@ -366,26 +362,35 @@ my_win_del(void *data, Evas_Object *obj, void *event_info)
    _alert_if_need_saving(_win_del_do, ent);
 }
 
-#ifdef HAVE_ECORE_X
 static Eina_Bool
-_selection_notify(void *data, int type EINA_UNUSED, void *_event)
+_activate_paste_cb(void *data EINA_UNUSED,
+                   Evas_Object *obj EINA_UNUSED,
+                   Elm_Selection_Data *event)
 {
-   Ecrire_Entry *ent = data;
-   Ecore_X_Event_Fixes_Selection_Notify *event =
-      (Ecore_X_Event_Fixes_Selection_Notify *) _event;
+  if (!event)
+    return ECORE_CALLBACK_PASS_ON;
 
-   if (!event)
-      return ECORE_CALLBACK_PASS_ON;
+  /* FIXME: needs to get Ecrire_Entry via obj */
+  elm_object_item_disabled_set(main_ec_ent->paste_item,
+                               (event->data ? EINA_FALSE : EINA_TRUE));
 
-   if (event->selection == ECORE_X_SELECTION_CLIPBOARD)
-     {
-        elm_object_item_disabled_set(ent->paste_item,
-              (event->reason != ECORE_X_OWNER_CHANGE_REASON_NEW_OWNER));
-     }
-
-   return ECORE_CALLBACK_PASS_ON;
+  return ECORE_CALLBACK_PASS_ON;
 }
-#endif
+static Eina_Bool
+_get_clipboard_cb(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *ev EINA_UNUSED)
+{
+  Ecrire_Entry *ent = data;
+
+  elm_cnp_selection_get(ent->win,
+                        ELM_SEL_TYPE_CLIPBOARD,
+                        ELM_SEL_FORMAT_TARGETS,
+                        _activate_paste_cb,
+                        NULL);
+
+  return ECORE_CALLBACK_PASS_ON;
+}
 
 static Eina_Bool
 _key_down_cb(void *data,
@@ -582,27 +587,24 @@ main(int argc, char *argv[])
    elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
          _settings, main_ec_ent);
 
-#ifdef HAVE_ECORE_X
-   if (!ecore_x_selection_owner_get(ECORE_X_ATOM_SELECTION_CLIPBOARD))
-        elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
-
-   ecore_x_fixes_selection_notification_request(ECORE_X_ATOM_SELECTION_CLIPBOARD);
-   ecore_event_handler_add(ECORE_X_EVENT_FIXES_SELECTION_NOTIFY,
-         _selection_notify, main_ec_ent);
-#else
-   elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
-#endif
-   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
-
    /* We don't have a selection when we start, make the items disabled */
    elm_object_item_disabled_set(main_ec_ent->close_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->copy_item, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->cut_item, EINA_TRUE);
+   elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
    _set_save_disabled(main_ec_ent, EINA_TRUE);
 
-   evas_object_resize(main_ec_ent->win, w, h);
+   ecore_event_handler_add(ECORE_EVENT_KEY_DOWN, _key_down_cb, main_ec_ent);
+   evas_object_smart_callback_add(main_ec_ent->win,
+                                  "delete,request",
+                                  my_win_del,
+                                  main_ec_ent);
+   evas_object_smart_callback_add(main_ec_ent->win,
+                                  "focused",
+                                  _get_clipboard_cb,
+                                  main_ec_ent);
 
-   evas_object_smart_callback_add(main_ec_ent->win, "delete,request", my_win_del, main_ec_ent);
+   evas_object_resize(main_ec_ent->win, w, h);
    evas_object_show(main_ec_ent->win);
 
    _load_to_entry(main_ec_ent, main_ec_ent->filename);
