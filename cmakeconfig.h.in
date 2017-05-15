@@ -17,6 +17,4 @@
 #define PATH_MAX 4096
 #endif
 
-#cmakedefine HAVE_ECORE_X
-
 #cmakedefine ENABLE_NLS
