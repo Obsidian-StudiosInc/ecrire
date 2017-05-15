@@ -22,17 +22,6 @@ find_package(Efreet REQUIRED)
 find_package(Efreet COMPONENTS mime)
 find_package(Elementary REQUIRED)
 
-option(wayland "Use wayland instead of x")
-if(wayland)
-    find_package(Ecore COMPONENTS wl2)
-else()
-    find_package(Ecore COMPONENTS X)
-endif()
-
-if(DEFINED ECORE_X_FOUND)
-   set(HAVE_ECORE_X 1)
-endif()
-
 IF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     find_package(intl REQUIRED)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
