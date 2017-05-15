@@ -131,7 +131,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
     }
 
   search_box = table = elm_table_add(parent);
-  elm_obj_table_padding_set(table, ELM_SCALE_SIZE(PADDING), 0);
+  elm_table_padding_set(table, ELM_SCALE_SIZE(PADDING), 0);
   evas_object_size_hint_padding_set(table, ELM_SCALE_SIZE(PADDING), 0, 0, 0);
   evas_object_size_hint_weight_set(table, EVAS_HINT_EXPAND, 0);
   evas_object_size_hint_align_set(table, EVAS_HINT_FILL, EVAS_HINT_FILL);
