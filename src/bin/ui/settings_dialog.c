@@ -161,7 +161,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
 
   table = elm_table_add(win);
-  elm_obj_table_padding_set(table, ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING));
+  elm_table_padding_set(table,ELM_SCALE_SIZE(PADDING),ELM_SCALE_SIZE(PADDING));
   evas_object_size_hint_padding_set (table, ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING),
                                      ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING));
   evas_object_show(table);
