@@ -11,7 +11,8 @@ that has EFL.
 ## Known Issues
 - Search Previous button goes same direction as next, one way vs two way search
 - Wordwrap setting does not function till next release of EFL > 1.19.0
-- Crash saving files
+- Crash saving file as will be fixed in the next release of EFL > 1.19.0 
+- Wayland crash remains [Issue #2](https://github.com/Obsidian-StudiosInc/ecrire/issues/2)
 - Parallel compiling fails, requires make -j1 or no jobs [Issue #3](https://github.com/Obsidian-StudiosInc/ecrire/issues/3)
 
 ## About
