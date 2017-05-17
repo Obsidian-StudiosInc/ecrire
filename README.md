@@ -13,6 +13,9 @@ that has EFL.
 - Wordwrap setting does not function till next release of EFL > 1.19.0
 - Crash saving file as will be fixed in the next release of EFL > 1.19.0 
 - Only supports English language [elm code task #T5496](https://phab.enlightenment.org/T5496)
+- Crash when opening large files
+[issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
+[elm code task #T5497](https://phab.enlightenment.org/T5497)
 
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
