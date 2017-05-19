@@ -22,6 +22,13 @@ Eina_Bool ctrl_pressed = EINA_FALSE;
 int _ecrire_log_dom = -1;
 
 static void
+_set_cut_copy_disabled(Ecrire_Entry *ent, Eina_Bool disabled)
+{
+  elm_object_item_disabled_set(ent->cut_item, disabled);
+  elm_object_item_disabled_set(ent->copy_item, disabled);
+}
+
+static void
 _set_save_disabled(Ecrire_Entry *ent, Eina_Bool disabled)
 {
   elm_object_item_disabled_set(ent->save_item, disabled);
@@ -71,9 +78,7 @@ _sel_start(void *data,
            Evas_Object *obj EINA_UNUSED,
            void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   elm_object_item_disabled_set(ent->copy_item, EINA_FALSE);
-   elm_object_item_disabled_set(ent->cut_item, EINA_FALSE);
+  _set_cut_copy_disabled((Ecrire_Entry *)data, EINA_FALSE);
 }
 
 static void
@@ -81,9 +86,7 @@ _sel_clear(void *data,
            Evas_Object *obj EINA_UNUSED,
            void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   elm_object_item_disabled_set(ent->copy_item, EINA_TRUE);
-   elm_object_item_disabled_set(ent->cut_item, EINA_TRUE);
+  _set_cut_copy_disabled((Ecrire_Entry *)data, EINA_TRUE);
 }
 
 static void
@@ -193,8 +196,7 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
         }
       elm_code_file_open(ent->code,file);
       _set_save_disabled(ent, EINA_TRUE);
-      elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
-      elm_object_item_disabled_set(ent->copy_item, EINA_FALSE);
+      _set_cut_copy_disabled(ent, EINA_TRUE);
     }
 
   _init_entry(ent);
@@ -590,8 +592,7 @@ main(int argc, char *argv[])
 
    /* We don't have a selection when we start, make the items disabled */
    elm_object_item_disabled_set(main_ec_ent->close_item, EINA_TRUE);
-   elm_object_item_disabled_set(main_ec_ent->copy_item, EINA_TRUE);
-   elm_object_item_disabled_set(main_ec_ent->cut_item, EINA_TRUE);
+   _set_cut_copy_disabled(main_ec_ent, EINA_TRUE);
    elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
    _set_save_disabled(main_ec_ent, EINA_TRUE);
 
