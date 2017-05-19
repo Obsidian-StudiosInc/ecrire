@@ -90,6 +90,15 @@ _sel_clear(void *data,
 }
 
 static void
+_sel_cut_copy(void *data,
+              Evas_Object *obj EINA_UNUSED,
+              void *event_info EINA_UNUSED)
+{
+  Ecrire_Entry *ent = data;
+  elm_object_item_disabled_set(ent->paste_item, EINA_FALSE);
+}
+
+static void
 _update_cur_file(const char *file, Ecrire_Entry *ent)
 {
    const char *saving = (!elm_object_item_disabled_get(ent->save_item)) ?
@@ -558,6 +567,8 @@ main(int argc, char *argv[])
    evas_object_smart_callback_add(main_ec_ent->entry, "redo,request", _redo, main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->entry, "selection,start", _sel_start, main_ec_ent);
    evas_object_smart_callback_add(main_ec_ent->entry, "selection,cleared", _sel_clear, main_ec_ent);
+   evas_object_smart_callback_add(main_ec_ent->entry, "selection,copy", _sel_cut_copy, main_ec_ent);
+   evas_object_smart_callback_add(main_ec_ent->entry, "selection,cut", _sel_cut_copy, main_ec_ent);
 
    elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_ec_ent);
    elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, main_ec_ent);
