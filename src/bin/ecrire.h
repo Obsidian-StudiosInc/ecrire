@@ -1,5 +1,5 @@
-#ifndef _MESS_HEADER_H
-#define _MESS_HEADER_H
+#ifndef _ECRIRE_H
+#define _ECRIRE_H
 
 #include <Elementary.h>
 
