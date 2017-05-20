@@ -53,7 +53,7 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool forward)
   lines = elm_code_file_lines_get(ent->code->file);
   elm_obj_code_widget_cursor_position_get(ent->entry,&row,&col);
   i=row;
-  while(i<=lines)
+  while(i>=0 && i<=lines)
     {
       code_line = elm_code_file_line_get(ent->code->file,i);
       found = elm_code_line_text_strpos(code_line,text,col);
@@ -103,6 +103,8 @@ _replace_in_entry(Ecrire_Entry *ent)
   int pos;
 
   find = elm_entry_entry_get(find_entry);
+  if(strlen(find)<=0)
+    return(replaced);
   pos = _find_in_entry(ent, find, EINA_FALSE);
   if(pos>=0)
     {
