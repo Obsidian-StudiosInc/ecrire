@@ -1,5 +1,5 @@
 * History of files opened, recent files
-* Search -> find all, change direction, case insensitive, regex, history
+* Search -> find/highlight all, case insensitive, regex, history
 * Font settings: Mark currently selected font in font settings
 * Open file dialog starts in same folder as previous
 * Ability to drag and drop files to be opened
