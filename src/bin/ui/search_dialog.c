@@ -41,18 +41,19 @@ _search_select_text(Elm_Code_Widget *entry,
 }
 
 static int
-_find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
+_find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool forward)
 {
   Eina_Bool reset = EINA_TRUE;
   Elm_Code_Line *code_line;
-  int i, found, len, col, row, lines;
+  int i, found, col, row, lines;
 
   if (!text || !*text)
     return EINA_FALSE;
 
   lines = elm_code_file_lines_get(ent->code->file);
   elm_obj_code_widget_cursor_position_get(ent->entry,&row,&col);
-  for(i=row; i<=lines; i++)
+  i=row;
+  while(i<=lines)
     {
       code_line = elm_code_file_line_get(ent->code->file,i);
       found = elm_code_line_text_strpos(code_line,text,col);
@@ -61,15 +62,33 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
           _search_select_text(ent->entry, code_line, text, found, i, col);
           break;
         }
-      else if(i==row || i==lines) // reset and repeat
+      else if(forward)
         {
-          if(col>0)
-            col = 0;
-          if(i==lines && reset)
+          if(i==row || i==lines) // reset and repeat
             {
-              i = 0;
-              reset = EINA_FALSE;
+              if(col>0)
+                col = 0;
+              if(i==lines && reset)
+                {
+                  i = 0;
+                  reset = EINA_FALSE;
+                }
             }
+          i++;
+        }
+      else
+        {
+         if(i==row || i==0) // reset and repeat
+            {
+              if(col>0)
+                col = 0;
+              if(i==0 && reset)
+                {
+                  i = lines;
+                  reset = EINA_FALSE;
+                }
+            }
+          i--;
         }
     }
   return found;
@@ -111,6 +130,16 @@ _find_clicked(void *data,
   _find_in_entry((Ecrire_Entry *)data,
                  elm_entry_entry_get(find_entry),
                  EINA_TRUE);
+}
+
+static void
+_search_prev_cb(void *data,
+                Evas_Object *obj EINA_UNUSED,
+                void *event_info EINA_UNUSED)
+{
+  _find_in_entry((Ecrire_Entry *)data,
+                 elm_entry_entry_get(find_entry),
+                 EINA_FALSE);
 }
 
 static void
@@ -205,7 +234,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Previous"));
     }
   elm_table_pack (table, obj, 3, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_prev_cb, ent);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
