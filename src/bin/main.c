@@ -184,6 +184,14 @@ _clear ()
 }
 
 static void
+_close ()
+{
+  elm_code_file_close(main_ec_ent->code->file);
+  elm_code_file_new(main_ec_ent->code);
+  elm_code_file_line_append(main_ec_ent->code->file, "", 0, NULL);
+}
+
+static void
 _load_to_entry(Ecrire_Entry *ent, const char *file)
 {
   Elm_Code_Syntax *syntax;
@@ -270,7 +278,7 @@ _close_cb(void *data,
           void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
-   _alert_if_need_saving(_clear, ent);
+   _alert_if_need_saving(_close, ent);
    elm_object_item_disabled_set(ent->close_item, EINA_TRUE);
    _set_save_disabled(ent, EINA_TRUE);
 }
