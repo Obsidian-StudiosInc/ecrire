@@ -22,6 +22,24 @@ _search_box_del(void *data EINA_UNUSED,
   search_box = NULL;
 }
 
+static void
+_search_select_text(Elm_Code_Widget *entry,
+                    Elm_Code_Line *code_line,
+                    const char *text,
+                    const int found,
+                    const int row,
+                    int col)
+{
+  int len = strlen(text);
+  col = elm_code_widget_line_text_column_width_to_position(entry,
+                                                           code_line,
+                                                           found);
+  elm_code_widget_selection_start(entry,row,col);
+  col += len-1;
+  elm_code_widget_selection_end(entry,row,col);
+  elm_obj_code_widget_cursor_position_set(entry,row,col);
+}
+
 static int
 _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
 {
@@ -40,14 +58,7 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool again)
       found = elm_code_line_text_strpos(code_line,text,col);
       if(found>=0)
         {
-          len = strlen(text);
-          col = elm_code_widget_line_text_column_width_to_position(ent->entry,
-                                                                   code_line,
-                                                                   found);
-          elm_code_widget_selection_start(ent->entry,i,col);
-          col += len-1;
-          elm_code_widget_selection_end(ent->entry,i,col);
-          elm_obj_code_widget_cursor_position_set(ent->entry,i,col);
+          _search_select_text(ent->entry, code_line, text, found, i, col);
           break;
         }
       else if(i==row || i==lines) // reset and repeat
