@@ -9,7 +9,6 @@ editor for Enlightenment and eventually Tizen as well. Or any device
 that has EFL.
 
 ## Known Issues
-- Search Previous button goes same direction as next, one way vs two way search
 - Wordwrap setting does not function till next release of EFL > 1.19.0
 - Crash saving file as will be fixed in the next release of EFL > 1.19.0 
 - Only supports English language [elm code task #T5496](https://phab.enlightenment.org/T5496)
