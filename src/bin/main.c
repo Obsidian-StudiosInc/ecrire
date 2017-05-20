@@ -207,6 +207,12 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
       _set_save_disabled(ent, EINA_TRUE);
       _set_cut_copy_disabled(ent, EINA_TRUE);
       elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
+
+      Elm_Transit *transit = elm_transit_add();
+      elm_transit_object_add(transit, ent->box_editor);
+      elm_transit_effect_translation_add(transit, 0, 600, 0, 0);
+      elm_transit_duration_set(transit, 0.75);
+      elm_transit_go(transit);
     }
 
   _init_entry(ent);
