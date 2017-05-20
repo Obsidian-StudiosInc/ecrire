@@ -206,6 +206,7 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
       elm_code_file_open(ent->code,file);
       _set_save_disabled(ent, EINA_TRUE);
       _set_cut_copy_disabled(ent, EINA_TRUE);
+      elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
     }
 
   _init_entry(ent);
