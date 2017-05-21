@@ -375,6 +375,7 @@ _settings(void *data,
 static void
 _win_del_do(void *data EINA_UNUSED)
 {
+   _close();
    elm_exit();
 }
 
