@@ -380,12 +380,11 @@ _win_del_do(void *data EINA_UNUSED)
 }
 
 static void
-my_win_del(void *data, Evas_Object *obj, void *event_info)
+my_win_del(void *data,
+           Evas_Object *obj EINA_UNUSED,
+           void *event_info EINA_UNUSED)
 {
    Ecrire_Entry *ent = data;
-   (void) data;
-   (void) obj;
-   (void) event_info;
    _alert_if_need_saving(_win_del_do, ent);
 }
 
