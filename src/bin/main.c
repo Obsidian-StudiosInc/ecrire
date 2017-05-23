@@ -376,6 +376,8 @@ static void
 _win_del_do(void *data EINA_UNUSED)
 {
    _close();
+   evas_object_del(main_ec_ent->win);
+   free(main_ec_ent);
    elm_exit();
 }
 
