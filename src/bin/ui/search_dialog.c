@@ -125,9 +125,9 @@ _replace_in_entry(Ecrire_Entry *ent)
 }
 
 static void
-_find_clicked(void *data,
-              Evas_Object *obj EINA_UNUSED,
-              void *event_info EINA_UNUSED)
+_search_next_cb(void *data,
+                Evas_Object *obj EINA_UNUSED,
+                void *event_info EINA_UNUSED)
 {
   _find_in_entry((Ecrire_Entry *)data,
                  elm_entry_entry_get(find_entry),
@@ -195,6 +195,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_size_hint_weight_set(find_entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set(find_entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_table_pack (table, find_entry, 1, row, 1, 1);
+  evas_object_smart_callback_add(find_entry, "activated", _search_next_cb, ent);
   evas_object_show(find_entry);
 
   obj = elm_button_add(table);
@@ -215,7 +216,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Find All"));
     }
   elm_table_pack (table, obj, 2, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_next_cb, ent);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
@@ -257,7 +258,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Next"));
     }
   elm_table_pack (table, obj, 4, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _find_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_next_cb, ent);
   evas_object_show(obj);
   row++;
 
