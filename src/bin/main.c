@@ -13,7 +13,7 @@
 #include "ui/ui.h"
 
 static Eina_Unicode plain_utf8 = EINA_TRUE;
-static Ecrire_Entry *main_ec_ent;
+static Ecrire_Doc *main_doc;
 
 static void print_usage(const char *bin);
 
@@ -22,54 +22,54 @@ Eina_Bool ctrl_pressed = EINA_FALSE;
 int _ecrire_log_dom = -1;
 
 static void
-_set_cut_copy_disabled(Ecrire_Entry *ent, Eina_Bool disabled)
+_set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  elm_object_item_disabled_set(ent->cut_item, disabled);
-  elm_object_item_disabled_set(ent->copy_item, disabled);
+  elm_object_item_disabled_set(doc->cut_item, disabled);
+  elm_object_item_disabled_set(doc->copy_item, disabled);
 }
 
 static void
-_set_save_disabled(Ecrire_Entry *ent, Eina_Bool disabled)
+_set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  elm_object_item_disabled_set(ent->save_item, disabled);
-  elm_object_item_disabled_set(ent->save_as_item, disabled);
+  elm_object_item_disabled_set(doc->save_item, disabled);
+  elm_object_item_disabled_set(doc->save_as_item, disabled);
 }
 
 void
-editor_font_set(Ecrire_Entry *ent, const char *name, unsigned int size)
+editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size)
 {
   if(size==0)
     size = 10;
   if(name)
-    elm_obj_code_widget_font_set(ent->entry, name, size);
+    elm_obj_code_widget_font_set(doc->entry, name, size);
   else
-    elm_obj_code_widget_font_set(ent->entry, NULL, size);
+    elm_obj_code_widget_font_set(doc->entry, NULL, size);
 }
 
 static void
-_init_font(Ecrire_Entry *ent)
+_init_font(Ecrire_Doc *doc)
 {
-  editor_font_set(ent, _ent_cfg->font.name, _ent_cfg->font.size);
+  editor_font_set(doc, _ent_cfg->font.name, _ent_cfg->font.size);
 }
 
 static void
-_init_entry(Ecrire_Entry *ent)
+_init_entry(Ecrire_Doc *doc)
 {
-   _init_font(ent);
-   elm_object_item_disabled_set(ent->undo_item, EINA_TRUE);
-   elm_object_item_disabled_set(ent->redo_item, EINA_TRUE);
+   _init_font(doc);
+   elm_object_item_disabled_set(doc->undo_item, EINA_TRUE);
+   elm_object_item_disabled_set(doc->redo_item, EINA_TRUE);
 }
 
 static void
-_alert_if_need_saving(void (*done)(void *data), Ecrire_Entry *ent)
+_alert_if_need_saving(void (*done)(void *data), Ecrire_Doc *doc)
 {
-   if (!elm_object_item_disabled_get(ent->save_item))
+   if (!elm_object_item_disabled_get(doc->save_item))
      {
-        ui_alert_need_saving(ent->entry, done, ent);
+        ui_alert_need_saving(doc->entry, done, doc);
      }
    else
      {
-        done(ent);
+        done(doc);
      }
 }
 
@@ -78,7 +78,7 @@ _sel_start(void *data,
            Evas_Object *obj EINA_UNUSED,
            void *event_info EINA_UNUSED)
 {
-  _set_cut_copy_disabled((Ecrire_Entry *)data, EINA_FALSE);
+  _set_cut_copy_disabled((Ecrire_Doc *)data, EINA_FALSE);
 }
 
 static void
@@ -86,7 +86,7 @@ _sel_clear(void *data,
            Evas_Object *obj EINA_UNUSED,
            void *event_info EINA_UNUSED)
 {
-  _set_cut_copy_disabled((Ecrire_Entry *)data, EINA_TRUE);
+  _set_cut_copy_disabled((Ecrire_Doc *)data, EINA_TRUE);
 }
 
 static void
@@ -94,26 +94,26 @@ _sel_cut_copy(void *data,
               Evas_Object *obj EINA_UNUSED,
               void *event_info EINA_UNUSED)
 {
-  Ecrire_Entry *ent = data;
-  elm_object_item_disabled_set(ent->paste_item, EINA_FALSE);
+  Ecrire_Doc *doc = data;
+  elm_object_item_disabled_set(doc->paste_item, EINA_FALSE);
 }
 
 static void
-_update_cur_file(const char *file, Ecrire_Entry *ent)
+_update_cur_file(const char *file, Ecrire_Doc *doc)
 {
-   const char *saving = (!elm_object_item_disabled_get(ent->save_item)) ?
+   const char *saving = (!elm_object_item_disabled_get(doc->save_item)) ?
       "*" : "";
-   eina_stringshare_replace(&ent->filename, file);
+   eina_stringshare_replace(&doc->filename, file);
      {
         char buf[1024];
-        if (ent->filename)
-           snprintf(buf, sizeof(buf), _("%s%s - %s"), saving, ent->filename,
+        if (doc->filename)
+           snprintf(buf, sizeof(buf), _("%s%s - %s"), saving, doc->filename,
                  PACKAGE_NAME);
         else
            snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
-                 ent->unsaved, PACKAGE_NAME);
+                 doc->unsaved, PACKAGE_NAME);
 
-        elm_win_title_set(ent->win, buf);
+        elm_win_title_set(doc->win, buf);
      }
 }
 
@@ -126,14 +126,14 @@ _cur_changed(void *data,
    int line;
    int col;
 
-   Ecrire_Entry *ent = data;
-   elm_obj_code_widget_cursor_position_get(ent->entry,&line,&col);
+   Ecrire_Doc *doc = data;
+   elm_obj_code_widget_cursor_position_get(doc->entry,&line,&col);
    snprintf(buf, sizeof(buf), _(" Line %d, Column %d"), line, col);
-   elm_object_text_set(ent->cursor_label, buf);
-   if(elm_object_item_disabled_get(ent->undo_item) &&
-      elm_obj_code_widget_can_undo_get(ent->entry)) 
+   elm_object_text_set(doc->cursor_label, buf);
+   if(elm_object_item_disabled_get(doc->undo_item) &&
+      elm_obj_code_widget_can_undo_get(doc->entry)) 
      {
-       elm_object_item_disabled_set(ent->undo_item, EINA_FALSE);
+       elm_object_item_disabled_set(doc->undo_item, EINA_FALSE);
      }
 }
 
@@ -141,58 +141,58 @@ static void
 _undo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    /* In undo we care about the current item */
-   Ecrire_Entry *ent = data;
-   elm_obj_code_widget_undo(ent->entry);
-   if(!elm_object_item_disabled_get(ent->undo_item) &&
-      !elm_obj_code_widget_can_undo_get(ent->entry)) 
+   Ecrire_Doc *doc = data;
+   elm_obj_code_widget_undo(doc->entry);
+   if(!elm_object_item_disabled_get(doc->undo_item) &&
+      !elm_obj_code_widget_can_undo_get(doc->entry)) 
      {
-       elm_object_item_disabled_set(ent->undo_item, EINA_TRUE);
+       elm_object_item_disabled_set(doc->undo_item, EINA_TRUE);
      }
-   else if(elm_object_item_disabled_get(ent->redo_item) &&
-           elm_obj_code_widget_can_redo_get(ent->entry)) 
+   else if(elm_object_item_disabled_get(doc->redo_item) &&
+           elm_obj_code_widget_can_redo_get(doc->entry)) 
      {
-       elm_object_item_disabled_set(ent->redo_item, EINA_FALSE);
+       elm_object_item_disabled_set(doc->redo_item, EINA_FALSE);
      }
 }
 
 static void
 _redo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   elm_obj_code_widget_redo(ent->entry);
-   if(!elm_object_item_disabled_get(ent->redo_item) &&
-      !elm_obj_code_widget_can_redo_get(ent->entry)) 
+   Ecrire_Doc *doc = data;
+   elm_obj_code_widget_redo(doc->entry);
+   if(!elm_object_item_disabled_get(doc->redo_item) &&
+      !elm_obj_code_widget_can_redo_get(doc->entry)) 
      {
-       elm_object_item_disabled_set(ent->redo_item, EINA_TRUE);
+       elm_object_item_disabled_set(doc->redo_item, EINA_TRUE);
      }
 }
 
 static void
 _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
-   Ecrire_Entry *ent = data;
-   _set_save_disabled(ent, EINA_FALSE);
-   elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
-   _update_cur_file(ent->filename, ent);
+   Ecrire_Doc *doc = data;
+   _set_save_disabled(doc, EINA_FALSE);
+   elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
+   _update_cur_file(doc->filename, doc);
 }
 
 static void
 _clear ()
 {
-  elm_code_file_clear(main_ec_ent->code->file);
-  elm_code_file_line_append(main_ec_ent->code->file, "", 0, NULL);
+  elm_code_file_clear(main_doc->code->file);
+  elm_code_file_line_append(main_doc->code->file, "", 0, NULL);
 }
 
 static void
 _close ()
 {
-  elm_code_file_close(main_ec_ent->code->file);
-  elm_code_file_new(main_ec_ent->code);
-  elm_code_file_line_append(main_ec_ent->code->file, "", 0, NULL);
+  elm_code_file_close(main_doc->code->file);
+  elm_code_file_new(main_doc->code);
+  elm_code_file_line_append(main_doc->code->file, "", 0, NULL);
 }
 
 static void
-_load_to_entry(Ecrire_Entry *ent, const char *file)
+_load_to_entry(Ecrire_Doc *doc, const char *file)
 {
   Elm_Code_Syntax *syntax;
   const char *mime;
@@ -209,22 +209,22 @@ _load_to_entry(Ecrire_Entry *ent, const char *file)
           else
             syntax = elm_code_syntax_for_mime_get("text/plain");
           if(syntax)
-            elm_code_syntax_parse_file(syntax,ent->code->file);
+            elm_code_syntax_parse_file(syntax,doc->code->file);
         }
-      elm_code_file_open(ent->code,file);
-      _set_save_disabled(ent, EINA_TRUE);
-      _set_cut_copy_disabled(ent, EINA_TRUE);
-      elm_object_item_disabled_set(ent->close_item, EINA_FALSE);
+      elm_code_file_open(doc->code,file);
+      _set_save_disabled(doc, EINA_TRUE);
+      _set_cut_copy_disabled(doc, EINA_TRUE);
+      elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
 
       Elm_Transit *transit = elm_transit_add();
-      elm_transit_object_add(transit, ent->box_editor);
+      elm_transit_object_add(transit, doc->box_editor);
       elm_transit_effect_translation_add(transit, 0, 600, 0, 0);
       elm_transit_duration_set(transit, 0.75);
       elm_transit_go(transit);
     }
 
-  _init_entry(ent);
-  _update_cur_file(file, ent);
+  _init_entry(doc);
+  _update_cur_file(file, doc);
 }
 
 static void
@@ -233,15 +233,15 @@ _fs_open_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
 {
    const char *selected = event_info;
    if (selected)
-      _load_to_entry(main_ec_ent, selected);
+      _load_to_entry(main_doc, selected);
 }
 
 void
-save_do(const char *file, Ecrire_Entry *ent)
+save_do(const char *file, Ecrire_Doc *doc)
 {
-   elm_code_file_save (ent->code->file);
-   _set_save_disabled(ent, EINA_TRUE);
-   _update_cur_file(file, ent);
+   elm_code_file_save (doc->code->file);
+   _set_save_disabled(doc, EINA_TRUE);
+   _update_cur_file(file, doc);
 }
 
 static void
@@ -252,15 +252,15 @@ _fs_save_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
 
    if (selected)
      {
-        save_do(selected, main_ec_ent);
+        save_do(selected, main_doc);
      }
 }
 
 static void
 _open_do(void *data)
 {
-   Ecrire_Entry *ent = data;
-   ui_file_open_save_dialog_open(ent->win, _fs_open_done, EINA_FALSE);
+   Ecrire_Doc *doc = data;
+   ui_file_open_save_dialog_open(doc->win, _fs_open_done, EINA_FALSE);
 }
 
 static void
@@ -268,8 +268,8 @@ _goto_line(void *data,
            Evas_Object *obj EINA_UNUSED,
            void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   ui_goto_dialog_open(ent->win, ent);
+   Ecrire_Doc *doc = data;
+   ui_goto_dialog_open(doc->win, doc);
 }
 
 static void
@@ -277,89 +277,89 @@ _close_cb(void *data,
           Evas_Object *obj EINA_UNUSED,
           void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   _alert_if_need_saving(_close, ent);
-   elm_object_item_disabled_set(ent->close_item, EINA_TRUE);
-   _set_save_disabled(ent, EINA_TRUE);
+   Ecrire_Doc *doc = data;
+   _alert_if_need_saving(_close, doc);
+   elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
+   _set_save_disabled(doc, EINA_TRUE);
 }
 
 static void
 _open_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   _alert_if_need_saving(_open_do, ent);
+   Ecrire_Doc *doc = data;
+   _alert_if_need_saving(_open_do, doc);
 }
 
 void
-editor_save(Ecrire_Entry *ent, void *callback_func)
+editor_save(Ecrire_Doc *doc, void *callback_func)
 {
-   if (ent->filename)
+   if (doc->filename)
      {
-        save_do(ent->filename, ent);
+        save_do(doc->filename, doc);
      }
    else
      {
-        ui_file_open_save_dialog_open(ent->win, callback_func, EINA_TRUE);
+        ui_file_open_save_dialog_open(doc->win, callback_func, EINA_TRUE);
      }
 }
 
 static void
 _save(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   editor_save(ent, _fs_save_done);
+   Ecrire_Doc *doc = data;
+   editor_save(doc, _fs_save_done);
 }
 
 static void
 _save_as(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   ui_file_open_save_dialog_open(ent->win, _fs_save_done, EINA_TRUE);
+   Ecrire_Doc *doc = data;
+   ui_file_open_save_dialog_open(doc->win, _fs_save_done, EINA_TRUE);
 }
 
 static void
 _new_do(void *data)
 {
-   Ecrire_Entry *ent = data;
+   Ecrire_Doc *doc = data;
    _clear();
-   _init_entry(ent);
-   _set_save_disabled(ent, EINA_TRUE);
-   _update_cur_file(NULL, ent);
+   _init_entry(doc);
+   _set_save_disabled(doc, EINA_TRUE);
+   _update_cur_file(NULL, doc);
 }
 
 static void
 _new(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   _alert_if_need_saving(_new_do, ent);
+   Ecrire_Doc *doc = data;
+   _alert_if_need_saving(_new_do, doc);
 }
 
 static void
 _cut(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   elm_code_widget_selection_cut(ent->entry);
+   Ecrire_Doc *doc = data;
+   elm_code_widget_selection_cut(doc->entry);
 }
 
 static void
 _copy(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   elm_code_widget_selection_copy(ent->entry);
+   Ecrire_Doc *doc = data;
+   elm_code_widget_selection_copy(doc->entry);
 }
 
 static void
 _paste(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   elm_code_widget_selection_paste(ent->entry);
+   Ecrire_Doc *doc = data;
+   elm_code_widget_selection_paste(doc->entry);
 }
 
 static void
 _find(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   ui_find_dialog_open(ent->win, ent);
+   Ecrire_Doc *doc = data;
+   ui_find_dialog_open(doc->win, doc);
 }
 
 static void
@@ -367,8 +367,8 @@ _settings(void *data,
           Evas_Object *obj EINA_UNUSED,
           void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   ui_settings_dialog_open(elm_object_top_widget_get(ent->win), ent, _ent_cfg);
+   Ecrire_Doc *doc = data;
+   ui_settings_dialog_open(elm_object_top_widget_get(doc->win), doc, _ent_cfg);
 }
 
 
@@ -376,8 +376,8 @@ static void
 _win_del_do(void *data EINA_UNUSED)
 {
    _close();
-   evas_object_del(main_ec_ent->win);
-   free(main_ec_ent);
+   evas_object_del(main_doc->win);
+   free(main_doc);
    elm_exit();
 }
 
@@ -386,8 +386,8 @@ my_win_del(void *data,
            Evas_Object *obj EINA_UNUSED,
            void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = data;
-   _alert_if_need_saving(_win_del_do, ent);
+   Ecrire_Doc *doc = data;
+   _alert_if_need_saving(_win_del_do, doc);
 }
 
 static Eina_Bool
@@ -398,8 +398,8 @@ _activate_paste_cb(void *data EINA_UNUSED,
   if (!event)
     return EINA_FALSE;
 
-  /* FIXME: needs to get Ecrire_Entry via obj */
-  elm_object_item_disabled_set(main_ec_ent->paste_item,
+  /* FIXME: needs to get Ecrire_Doc via obj */
+  elm_object_item_disabled_set(main_doc->paste_item,
                                (event->data ? EINA_FALSE : EINA_TRUE));
 
   return EINA_TRUE;
@@ -410,9 +410,9 @@ _get_clipboard_cb(void *data,
                   Evas_Object *obj EINA_UNUSED,
                   void *ev EINA_UNUSED)
 {
-  Ecrire_Entry *ent = data;
+  Ecrire_Doc *doc = data;
 
-  elm_cnp_selection_get(ent->win,
+  elm_cnp_selection_get(doc->win,
                         ELM_SEL_TYPE_CLIPBOARD,
                         ELM_SEL_FORMAT_TARGETS,
                         _activate_paste_cb,
@@ -508,141 +508,141 @@ main(int argc, char *argv[])
    ecrire_cfg_init(PACKAGE_NAME);
    ecrire_cfg_load();
 
-   main_ec_ent = calloc(1, sizeof(*main_ec_ent));
-   main_ec_ent->unsaved = 1;
-   main_ec_ent->filename = NULL;
+   main_doc = calloc(1, sizeof(*main_doc));
+   main_doc->unsaved = 1;
+   main_doc->filename = NULL;
 
    if (optind < argc)
      {
-        main_ec_ent->filename = eina_stringshare_add(argv[optind]);
+        main_doc->filename = eina_stringshare_add(argv[optind]);
      }
 
-   DBG("Opening filename: '%s'", main_ec_ent->filename);
+   DBG("Opening filename: '%s'", main_doc->filename);
 
-   main_ec_ent->win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
-   elm_win_alpha_set (main_ec_ent->win, EINA_TRUE);
-   elm_win_autodel_set(main_ec_ent->win, EINA_FALSE);
+   main_doc->win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
+   elm_win_alpha_set (main_doc->win, EINA_TRUE);
+   elm_win_autodel_set(main_doc->win, EINA_FALSE);
 
-   main_ec_ent->bg = elm_bg_add (main_ec_ent->win);
+   main_doc->bg = elm_bg_add (main_doc->win);
    if(_ent_cfg->alpha)
-     ALPHA (main_ec_ent->bg, _ent_cfg->alpha);
-   elm_win_resize_object_add (main_ec_ent->win, main_ec_ent->bg);
-   evas_object_size_hint_weight_set (main_ec_ent->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show (main_ec_ent->bg);
+     ALPHA (main_doc->bg, _ent_cfg->alpha);
+   elm_win_resize_object_add (main_doc->win, main_doc->bg);
+   evas_object_size_hint_weight_set (main_doc->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+   evas_object_show (main_doc->bg);
 
-   main_ec_ent->box_main = obj = elm_box_add (main_ec_ent->win);
+   main_doc->box_main = obj = elm_box_add (main_doc->win);
    if(_ent_cfg->alpha)
-     ALPHA (main_ec_ent->box_main, _ent_cfg->alpha);
+     ALPHA (main_doc->box_main, _ent_cfg->alpha);
    evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   elm_win_resize_object_add (main_ec_ent->win, obj);
+   elm_win_resize_object_add (main_doc->win, obj);
    evas_object_show (obj);
 
-   tbar = elm_toolbar_add(main_ec_ent->win);
+   tbar = elm_toolbar_add(main_doc->win);
    elm_toolbar_homogeneous_set(tbar, 0);
    elm_toolbar_shrink_mode_set(tbar, ELM_TOOLBAR_SHRINK_SCROLL);
    elm_toolbar_select_mode_set(tbar, ELM_OBJECT_SELECT_MODE_NONE);
    elm_toolbar_align_set(tbar, 0.0);
    evas_object_size_hint_weight_set(tbar, 0.0, 0.0);
    evas_object_size_hint_align_set(tbar, EVAS_HINT_FILL, 0.0);
-   elm_box_pack_end(main_ec_ent->box_main, tbar);
+   elm_box_pack_end(main_doc->box_main, tbar);
    evas_object_show(tbar);
 
-   main_ec_ent->box_editor = obj = elm_box_add (main_ec_ent->win);
+   main_doc->box_editor = obj = elm_box_add (main_doc->win);
    if(_ent_cfg->alpha)
      ALPHA (obj, _ent_cfg->alpha);
    evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    evas_object_show(obj);
 
-   main_ec_ent->code = elm_code_create();
-   main_ec_ent->entry = efl_add(elm_code_widget_class_get(),
-                                main_ec_ent->win,
+   main_doc->code = elm_code_create();
+   main_doc->entry = efl_add(elm_code_widget_class_get(),
+                                main_doc->win,
                                 elm_obj_code_widget_code_set(efl_added,
-                                                             main_ec_ent->code));
-   _init_font(main_ec_ent);
-   elm_code_file_line_append(main_ec_ent->code->file, "", 0, NULL);
-   elm_obj_code_widget_editable_set(main_ec_ent->entry, EINA_TRUE);
-   elm_obj_code_widget_syntax_enabled_set(main_ec_ent->entry, EINA_TRUE);
-   elm_obj_code_widget_show_whitespace_set(main_ec_ent->entry, EINA_TRUE);
-   elm_obj_code_widget_line_numbers_set(main_ec_ent->entry, _ent_cfg->line_numbers);
-   evas_object_size_hint_align_set(main_ec_ent->entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   evas_object_size_hint_weight_set(main_ec_ent->entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   elm_box_pack_end(main_ec_ent->box_editor, main_ec_ent->entry);
-   elm_box_pack_end(main_ec_ent->box_main, main_ec_ent->box_editor);
-   evas_object_show(main_ec_ent->entry);
+                                                             main_doc->code));
+   _init_font(main_doc);
+   elm_code_file_line_append(main_doc->code->file, "", 0, NULL);
+   elm_obj_code_widget_editable_set(main_doc->entry, EINA_TRUE);
+   elm_obj_code_widget_syntax_enabled_set(main_doc->entry, EINA_TRUE);
+   elm_obj_code_widget_show_whitespace_set(main_doc->entry, EINA_TRUE);
+   elm_obj_code_widget_line_numbers_set(main_doc->entry, _ent_cfg->line_numbers);
+   evas_object_size_hint_align_set(main_doc->entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   evas_object_size_hint_weight_set(main_doc->entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+   elm_box_pack_end(main_doc->box_editor, main_doc->entry);
+   elm_box_pack_end(main_doc->box_main, main_doc->box_editor);
+   evas_object_show(main_doc->entry);
 
-   main_ec_ent->cursor_label = obj = elm_label_add(main_ec_ent->win);
-   _cur_changed(main_ec_ent, NULL, NULL);
+   main_doc->cursor_label = obj = elm_label_add(main_doc->win);
+   _cur_changed(main_doc, NULL, NULL);
    evas_object_size_hint_align_set(obj, 0, 0.5);
    evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(main_ec_ent->box_main, obj);
+   elm_box_pack_end(main_doc->box_main, obj);
    evas_object_show(obj);
 
-   evas_object_smart_callback_add(main_ec_ent->entry, "cursor,changed",
-         _cur_changed, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "changed,user", _ent_changed, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "undo,request", _undo, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "redo,request", _redo, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "selection,start", _sel_start, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "selection,cleared", _sel_clear, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "selection,copy", _sel_cut_copy, main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->entry, "selection,cut", _sel_cut_copy, main_ec_ent);
+   evas_object_smart_callback_add(main_doc->entry, "cursor,changed",
+         _cur_changed, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "changed,user", _ent_changed, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "undo,request", _undo, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "redo,request", _redo, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "selection,start", _sel_start, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "selection,cleared", _sel_clear, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "selection,copy", _sel_cut_copy, main_doc);
+   evas_object_smart_callback_add(main_doc->entry, "selection,cut", _sel_cut_copy, main_doc);
 
-   elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_ec_ent);
-   elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, main_ec_ent);
-   main_ec_ent->close_item =
-     elm_toolbar_item_append(tbar, "document-close", _("Close"), _close_cb, main_ec_ent);
-   main_ec_ent->save_item =
-     elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_ec_ent);
-   main_ec_ent->save_as_item =
-     elm_toolbar_item_append(tbar, "document-save-as", _("Save As"), _save_as, main_ec_ent);
+   elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_doc);
+   elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, main_doc);
+   main_doc->close_item =
+     elm_toolbar_item_append(tbar, "document-close", _("Close"), _close_cb, main_doc);
+   main_doc->save_item =
+     elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_doc);
+   main_doc->save_as_item =
+     elm_toolbar_item_append(tbar, "document-save-as", _("Save As"), _save_as, main_doc);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   main_ec_ent->undo_item =
-      elm_toolbar_item_append(tbar, "edit-undo", _("Undo"), _undo, main_ec_ent);
-   main_ec_ent->redo_item =
-      elm_toolbar_item_append(tbar, "edit-redo", _("Redo"), _redo, main_ec_ent);
+   main_doc->undo_item =
+      elm_toolbar_item_append(tbar, "edit-undo", _("Undo"), _undo, main_doc);
+   main_doc->redo_item =
+      elm_toolbar_item_append(tbar, "edit-redo", _("Redo"), _redo, main_doc);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   main_ec_ent->cut_item = elm_toolbar_item_append(tbar, "edit-cut", _("Cut"), _cut, main_ec_ent);
-   main_ec_ent->copy_item =
-      elm_toolbar_item_append(tbar, "edit-copy", _("Copy"), _copy, main_ec_ent);
-   main_ec_ent->paste_item =
-      elm_toolbar_item_append(tbar, "edit-paste", _("Paste"), _paste, main_ec_ent);
+   main_doc->cut_item = elm_toolbar_item_append(tbar, "edit-cut", _("Cut"), _cut, main_doc);
+   main_doc->copy_item =
+      elm_toolbar_item_append(tbar, "edit-copy", _("Copy"), _copy, main_doc);
+   main_doc->paste_item =
+      elm_toolbar_item_append(tbar, "edit-paste", _("Paste"), _paste, main_doc);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    elm_toolbar_item_append(tbar, "edit-find-replace", _("Search"),
-         _find, main_ec_ent);
-   elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line, main_ec_ent);
+         _find, main_doc);
+   elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line, main_doc);
    elm_toolbar_item_separator_set(
          elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
    elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
-         _settings, main_ec_ent);
+         _settings, main_doc);
 
    /* We don't have a selection when we start, make the items disabled */
-   elm_object_item_disabled_set(main_ec_ent->close_item, EINA_TRUE);
-   _set_cut_copy_disabled(main_ec_ent, EINA_TRUE);
-   elm_object_item_disabled_set(main_ec_ent->paste_item, EINA_TRUE);
-   _set_save_disabled(main_ec_ent, EINA_TRUE);
+   elm_object_item_disabled_set(main_doc->close_item, EINA_TRUE);
+   _set_cut_copy_disabled(main_doc, EINA_TRUE);
+   elm_object_item_disabled_set(main_doc->paste_item, EINA_TRUE);
+   _set_save_disabled(main_doc, EINA_TRUE);
 
    ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
                            (Ecore_Event_Handler_Cb)_key_down_cb,
-                           main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->win,
+                           main_doc);
+   evas_object_smart_callback_add(main_doc->win,
                                   "delete,request",
                                   my_win_del,
-                                  main_ec_ent);
-   evas_object_smart_callback_add(main_ec_ent->win,
+                                  main_doc);
+   evas_object_smart_callback_add(main_doc->win,
                                   "focused",
                                   (Evas_Smart_Cb)_get_clipboard_cb,
-                                  main_ec_ent);
+                                  main_doc);
 
-   evas_object_resize(main_ec_ent->win, w, h);
-   evas_object_show(main_ec_ent->win);
+   evas_object_resize(main_doc->win, w, h);
+   evas_object_show(main_doc->win);
 
-   _load_to_entry(main_ec_ent, main_ec_ent->filename);
+   _load_to_entry(main_doc, main_doc->filename);
 
-   elm_object_focus_set(main_ec_ent->entry, EINA_TRUE);
+   elm_object_focus_set(main_doc->entry, EINA_TRUE);
 
    elm_run();
 
