@@ -26,12 +26,12 @@ settings_alpha_cb (void *data,
                    Evas_Object *obj,
                    void *event_info EINA_UNUSED)
 {
-  Ecrire_Entry *ent = data;
+  Ecrire_Doc *doc = data;
 
   ent_cfg->alpha = elm_slider_value_get (obj);
-  ALPHA (ent->bg, ent_cfg->alpha);
-  ALPHA (ent->box_main, ent_cfg->alpha);
-  ALPHA (ent->box_editor, ent_cfg->alpha);
+  ALPHA (doc->bg, ent_cfg->alpha);
+  ALPHA (doc->box_main, ent_cfg->alpha);
+  ALPHA (doc->box_editor, ent_cfg->alpha);
 }
 
 static void
@@ -50,7 +50,7 @@ settings_apply_font_cb (void *data,
   Elm_Object_Item *list_it = elm_list_selected_item_get(list);
   const char *name = elm_object_item_text_get(list_it);
   unsigned int size = elm_spinner_value_get(fsize);
-  editor_font_set((Ecrire_Entry *)data, name, size);
+  editor_font_set((Ecrire_Doc *)data, name, size);
   if(name)
     ent_cfg->font.name = name;
   ent_cfg->font.size = size;
@@ -70,17 +70,17 @@ settings_default_font_cb(void *data,
                          Evas_Object *obj,
                          void *event_info EINA_UNUSED)
 {
-  Ecrire_Entry *ent = data;
+  Ecrire_Doc *doc = data;
   Eina_Bool state = elm_check_state_get(obj);
   disable_font_widgets(elm_check_state_get(obj));
   if(state)
     {
-      elm_obj_code_widget_font_set(ent->entry, NULL, 10);
+      elm_obj_code_widget_font_set(doc->entry, NULL, 10);
       ent_cfg->font.name = NULL;
       ent_cfg->font.size = 10;
     }
   else
-    settings_apply_font_cb(ent, (Evas_Object *)NULL, (void *)NULL);
+    settings_apply_font_cb(doc, (Evas_Object *)NULL, (void *)NULL);
 }
 
 static Eina_List *
@@ -145,11 +145,11 @@ settings_word_wrap_cb (void *data,
 
 Evas_Object *
 ui_settings_dialog_open(Evas_Object *parent,
-                        Ecrire_Entry *ent,
+                        Ecrire_Doc *doc,
                         Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *entry = ent->entry;
+  Evas_Object *entry = doc->entry;
   Evas_Object *ic, *obj, *table;
   int row = 0;
 
@@ -182,7 +182,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_table_pack (table, obj, 1, row, 2, 1);
-  evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, ent);
+  evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, doc);
   evas_object_show (obj);
   row++;
 
@@ -199,7 +199,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_check_state_set(obj,  _ent_cfg->line_numbers);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, ent->entry);
+  evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->entry);
   evas_object_show(obj);
   row++;
 
@@ -217,7 +217,7 @@ ui_settings_dialog_open(Evas_Object *parent,
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_word_wrap_cb, ent->entry);
+  evas_object_smart_callback_add(obj, "changed", settings_word_wrap_cb, doc->entry);
   evas_object_show(obj);
   row++;
 
@@ -235,7 +235,7 @@ ui_settings_dialog_open(Evas_Object *parent,
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_default_font_cb, ent);
+  evas_object_smart_callback_add(obj, "changed", settings_default_font_cb, doc);
   evas_object_show(obj);
   row++;
 
@@ -259,7 +259,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_spinner_value_set(fsize, ent_cfg->font.size);
   evas_object_size_hint_align_set(fsize, 0.0, 0.5);
   elm_table_pack (table, fsize, 1, row, 2, 1);
-  evas_object_smart_callback_add(fsize, "changed", settings_apply_font_cb, ent);
+  evas_object_smart_callback_add(fsize, "changed", settings_apply_font_cb, doc);
   evas_object_show(fsize);
   row++;
 
@@ -306,7 +306,7 @@ ui_settings_dialog_open(Evas_Object *parent,
             elm_list_item_selected_set(cur_font, EINA_TRUE);
          }
     }
-  evas_object_smart_callback_add(list, "selected", settings_apply_font_cb, ent);
+  evas_object_smart_callback_add(list, "selected", settings_apply_font_cb, doc);
 
   /* Ok Button */
   obj = elm_button_add(table);
