@@ -19,8 +19,9 @@ _discard(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 static void
-_fs_save_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
-      void *event_info)
+_fs_save_done(void *data EINA_UNUSED,
+              Evas_Object *obj EINA_UNUSED,
+              void *event_info)
 {
    const char *selected = event_info;
 
@@ -47,10 +48,10 @@ _cancel(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 void
-ui_alert_need_saving(Evas_Object *entry, void (*done)(void *data), void *data)
+ui_alert_need_saving(Evas_Object *parent, void (*done)(void *data), void *data)
 {
-   Evas_Object *popup, *btn1, *btn2, *btn3;
-   popup = elm_popup_add(elm_object_top_widget_get(entry));
+   Evas_Object *obj, *popup;
+   popup = elm_popup_add(elm_object_top_widget_get(parent));
 
    done_cb = done;
    done_data = data;
@@ -60,20 +61,20 @@ ui_alert_need_saving(Evas_Object *entry, void (*done)(void *data), void *data)
          _("<align=center>Would you like to save changes to document?<br>"
          "Any unsaved changes will be lost."));
 
-   btn1 = elm_button_add(popup);
-   elm_object_text_set(btn1, _("Save"));
-   elm_object_part_content_set(popup, "button1",  btn1);
-   evas_object_smart_callback_add(btn1, "clicked", _save, popup);
+   obj = elm_button_add(popup);
+   elm_object_text_set(obj, _("Save"));
+   elm_object_part_content_set(popup, "button1",  obj);
+   evas_object_smart_callback_add(obj, "clicked", _save, popup);
 
-   btn2 = elm_button_add(popup);
-   elm_object_text_set(btn2, _("Discard"));
-   elm_object_part_content_set(popup, "button2", btn2);
-   evas_object_smart_callback_add(btn2, "clicked", _discard, popup);
+   obj = elm_button_add(popup);
+   elm_object_text_set(obj, _("Discard"));
+   elm_object_part_content_set(popup, "button2", obj);
+   evas_object_smart_callback_add(obj, "clicked", _discard, popup);
 
-   btn3 = elm_button_add(popup);
-   elm_object_text_set(btn3, _("Cancel"));
-   elm_object_part_content_set(popup, "button3", btn3);
-   evas_object_smart_callback_add(btn3, "clicked", _cancel, popup);
+   obj = elm_button_add(popup);
+   elm_object_text_set(obj, _("Cancel"));
+   elm_object_part_content_set(popup, "button3", obj);
+   evas_object_smart_callback_add(obj, "clicked", _cancel, popup);
 
    elm_popup_orient_set(popup, ELM_POPUP_ORIENT_CENTER);
    evas_object_show(popup);
