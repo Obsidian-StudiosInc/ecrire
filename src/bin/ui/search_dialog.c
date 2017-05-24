@@ -119,6 +119,9 @@ _replace_in_entry(Ecrire_Entry *ent)
       elm_code_line_text_insert(code_line, pos, replace, len);
       /* Fix me this clears all not just the current selection */
       elm_code_widget_selection_clear(ent->entry);
+      efl_event_callback_legacy_call(ent->entry,
+                                     ELM_OBJ_CODE_WIDGET_EVENT_CHANGED_USER,
+                                     NULL);
       replaced = EINA_TRUE;
     }
   return(replaced);
