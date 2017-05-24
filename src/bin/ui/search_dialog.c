@@ -35,9 +35,9 @@ _search_select_text(Elm_Code_Widget *entry,
                                                            code_line,
                                                            found);
   elm_code_widget_selection_start(entry,row,col);
+  elm_obj_code_widget_cursor_position_set(entry,row,col);
   col += len-1;
   elm_code_widget_selection_end(entry,row,col);
-  elm_obj_code_widget_cursor_position_set(entry,row,col);
 }
 
 static int
@@ -105,7 +105,7 @@ _replace_in_entry(Ecrire_Entry *ent)
   find = elm_entry_entry_get(find_entry);
   if(strlen(find)<=0)
     return(replaced);
-  pos = _find_in_entry(ent, find, EINA_FALSE);
+  pos = _find_in_entry(ent, find, EINA_TRUE);
   if(pos>=0)
     {
       Elm_Code_Line *code_line;
