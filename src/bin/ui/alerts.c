@@ -12,10 +12,10 @@ static void (*done_cb)(void *data);
 static void
 _discard(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = done_data;
+   Ecrire_Doc *doc = done_data;
 
    evas_object_del(data);
-   done_cb(ent);
+   done_cb(doc);
 }
 
 static void
@@ -34,10 +34,10 @@ _fs_save_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
 static void
 _save(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
-   Ecrire_Entry *ent = done_data;
+   Ecrire_Doc *doc = done_data;
 
    evas_object_del(data);
-   editor_save(ent, _fs_save_done);
+   editor_save(doc, _fs_save_done);
 }
 
 static void
