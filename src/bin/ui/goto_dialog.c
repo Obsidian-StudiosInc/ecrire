@@ -26,22 +26,22 @@ _goto_clicked(void *data,
               Evas_Object *obj EINA_UNUSED,
               void *event_info EINA_UNUSED)
 {
-  Ecrire_Entry *ent;
+  Ecrire_Doc *doc;
   int line, lines;
 
-  ent = data;
+  doc = data;
   line = atoi(elm_entry_entry_get(goto_entry));
-  lines = elm_code_file_lines_get(ent->code->file);
+  lines = elm_code_file_lines_get(doc->code->file);
   if (line>0 && lines > 0 && line <= lines)
     {
-      elm_obj_code_widget_cursor_position_set(ent->entry,line,1);
-      elm_object_focus_set(ent->entry, EINA_TRUE);
+      elm_obj_code_widget_cursor_position_set(doc->entry,line,1);
+      elm_object_focus_set(doc->entry, EINA_TRUE);
       _goto_win_del(NULL,NULL,NULL);
     }
 }
 
 Evas_Object *
-ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
+ui_goto_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
 {
   Evas_Object *obj, *table;
 
@@ -86,7 +86,7 @@ ui_goto_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
                                 ELM_SCALE_SIZE(BUTTON_WIDTH),
                                 ELM_SCALE_SIZE(BUTTON_HEIGHT));
   elm_table_pack (table, obj, 2, 1, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _goto_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _goto_clicked, doc);
   evas_object_show(obj);
 
   /* Box for padding */
