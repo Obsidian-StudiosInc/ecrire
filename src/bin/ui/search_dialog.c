@@ -41,7 +41,7 @@ _search_select_text(Elm_Code_Widget *entry,
 }
 
 static int
-_find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool forward)
+_find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
 {
   Eina_Bool reset = EINA_TRUE;
   Elm_Code_Line *code_line;
@@ -50,16 +50,16 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool forward)
   if (!text || !*text)
     return EINA_FALSE;
 
-  lines = elm_code_file_lines_get(ent->code->file);
-  elm_obj_code_widget_cursor_position_get(ent->entry,&row,&col);
+  lines = elm_code_file_lines_get(doc->code->file);
+  elm_obj_code_widget_cursor_position_get(doc->entry,&row,&col);
   i=row;
   while(i>=0 && i<=lines)
     {
-      code_line = elm_code_file_line_get(ent->code->file,i);
+      code_line = elm_code_file_line_get(doc->code->file,i);
       found = elm_code_line_text_strpos(code_line,text,col);
       if(found>=0)
         {
-          _search_select_text(ent->entry, code_line, text, found, i, col);
+          _search_select_text(doc->entry, code_line, text, found, i, col);
           break;
         }
       else if(forward)
@@ -95,7 +95,7 @@ _find_in_entry(Ecrire_Entry *ent, const char *text, Eina_Bool forward)
 }
 
 static Eina_Bool
-_replace_in_entry(Ecrire_Entry *ent)
+_replace_in_entry(Ecrire_Doc *doc)
 {
   Eina_Bool replaced = EINA_FALSE;
   const char *find, *replace;
@@ -105,21 +105,21 @@ _replace_in_entry(Ecrire_Entry *ent)
   find = elm_entry_entry_get(find_entry);
   if(strlen(find)<=0)
     return(replaced);
-  pos = _find_in_entry(ent, find, EINA_TRUE);
+  pos = _find_in_entry(doc, find, EINA_TRUE);
   if(pos>=0)
     {
       Elm_Code_Line *code_line;
 
       replace = elm_entry_entry_get(replace_entry);
-      elm_obj_code_widget_cursor_position_get(ent->entry,&row,&col);
-      code_line = elm_code_file_line_get(ent->code->file,row);
+      elm_obj_code_widget_cursor_position_get(doc->entry,&row,&col);
+      code_line = elm_code_file_line_get(doc->code->file,row);
       len = strlen(find);
       elm_code_line_text_remove(code_line, pos, len);
       len = strlen(replace);
       elm_code_line_text_insert(code_line, pos, replace, len);
       /* Fix me this clears all not just the current selection */
-      elm_code_widget_selection_clear(ent->entry);
-      efl_event_callback_legacy_call(ent->entry,
+      elm_code_widget_selection_clear(doc->entry);
+      efl_event_callback_legacy_call(doc->entry,
                                      ELM_OBJ_CODE_WIDGET_EVENT_CHANGED_USER,
                                      NULL);
       replaced = EINA_TRUE;
@@ -132,7 +132,7 @@ _search_next_cb(void *data,
                 Evas_Object *obj EINA_UNUSED,
                 void *event_info EINA_UNUSED)
 {
-  _find_in_entry((Ecrire_Entry *)data,
+  _find_in_entry((Ecrire_Doc *)data,
                  elm_entry_entry_get(find_entry),
                  EINA_TRUE);
 }
@@ -142,7 +142,7 @@ _search_prev_cb(void *data,
                 Evas_Object *obj EINA_UNUSED,
                 void *event_info EINA_UNUSED)
 {
-  _find_in_entry((Ecrire_Entry *)data,
+  _find_in_entry((Ecrire_Doc *)data,
                  elm_entry_entry_get(find_entry),
                  EINA_FALSE);
 }
@@ -153,7 +153,7 @@ _replace_all_clicked(void *data,
                      void *event_info EINA_UNUSED)
 {
   /* FIXME: Added temp hack to slow down loop, to fast causes crash? */
-  while(_replace_in_entry((Ecrire_Entry *)data)==EINA_TRUE) sleep(0.1);
+  while(_replace_in_entry((Ecrire_Doc *)data)==EINA_TRUE) sleep(0.1);
 }
 
 static void
@@ -161,11 +161,11 @@ _replace_clicked(void *data,
                  Evas_Object *obj EINA_UNUSED,
                  void *event_info EINA_UNUSED)
 {
-  _replace_in_entry((Ecrire_Entry *)data);
+  _replace_in_entry((Ecrire_Doc *)data);
 }
 
 Evas_Object *
-ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
+ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
 {
   Evas_Object *icon, *obj, *table;
   int row = 0;
@@ -191,15 +191,15 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
   evas_object_show (obj);
 
   find_entry = elm_entry_add(table);
-  if(!elm_code_widget_selection_is_empty(ent->entry))
+  if(!elm_code_widget_selection_is_empty(doc->entry))
     elm_object_text_set(find_entry,
-                        elm_code_widget_selection_text_get(ent->entry));
+                        elm_code_widget_selection_text_get(doc->entry));
   elm_entry_scrollable_set(find_entry, EINA_TRUE);
   elm_entry_single_line_set(find_entry, EINA_TRUE);
   evas_object_size_hint_weight_set(find_entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set(find_entry, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_table_pack (table, find_entry, 1, row, 1, 1);
-  evas_object_smart_callback_add(find_entry, "activated", _search_next_cb, ent);
+  evas_object_smart_callback_add(find_entry, "activated", _search_next_cb, doc);
   evas_object_show(find_entry);
 
   obj = elm_button_add(table);
@@ -220,7 +220,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Find All"));
     }
   elm_table_pack (table, obj, 2, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _search_next_cb, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_next_cb, doc);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
@@ -241,7 +241,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Previous"));
     }
   elm_table_pack (table, obj, 3, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _search_prev_cb, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_prev_cb, doc);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
@@ -262,7 +262,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Next"));
     }
   elm_table_pack (table, obj, 4, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _search_next_cb, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_next_cb, doc);
   evas_object_show(obj);
   row++;
 
@@ -299,7 +299,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Replace"));
     }
   elm_table_pack (table, obj, 2, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _replace_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _replace_clicked, doc);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
@@ -320,7 +320,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Replace All"));
     }
   elm_table_pack (table, obj, 3, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _replace_all_clicked, ent);
+  evas_object_smart_callback_add(obj, "clicked", _replace_all_clicked, doc);
   evas_object_show(obj);
 
   obj = elm_button_add(table);
@@ -343,10 +343,10 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Entry *ent)
       elm_object_text_set(obj, _("Close"));
     }
   elm_table_pack (table, obj, 4, row, 1, 1);
-  evas_object_smart_callback_add(obj, "clicked", _search_box_del, ent);
+  evas_object_smart_callback_add(obj, "clicked", _search_box_del, doc);
   evas_object_show(obj);
 
-  elm_box_pack_end(ent->box_editor, table);
+  elm_box_pack_end(doc->box_editor, table);
   evas_object_show (search_box);
 
   elm_object_focus_set(find_entry, EINA_TRUE);
