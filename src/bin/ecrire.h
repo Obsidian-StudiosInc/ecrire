@@ -30,8 +30,6 @@ struct _Ecrire_Doc {
 };
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
-/* Deprecated */
-typedef struct _Ecrire_Doc Ecrire_Entry;
 
 char *_load_plain(const char *file);
 Eina_Bool _load_file(const char *file, const Elm_Code_File *code_file);
