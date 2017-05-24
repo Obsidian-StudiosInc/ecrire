@@ -431,10 +431,11 @@ _key_down_cb(void *data,
       {
         ctrl_pressed = EINA_FALSE;
         if(!strcmp("F", event->key) ||
-           !strcmp("f", event->key))
-            _find(data,NULL,NULL);
-        else if(!strcmp("H", event->key) ||
-                !strcmp("h", event->key))
+           !strcmp("f", event->key) ||
+           !strcmp("H", event->key) ||
+           !strcmp("h", event->key) ||
+           !strcmp("R", event->key) ||
+           !strcmp("r", event->key))
             _find(data,NULL,NULL);
         else if(!strcmp("O", event->key) ||
                 !strcmp("o", event->key))
