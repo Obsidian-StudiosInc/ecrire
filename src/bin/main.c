@@ -177,10 +177,10 @@ _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 }
 
 static void
-_clear ()
+_clear (Ecrire_Doc *doc)
 {
-  elm_code_file_clear(main_doc->code->file);
-  elm_code_file_line_append(main_doc->code->file, "", 0, NULL);
+  elm_code_file_clear(doc->code->file);
+  elm_code_file_line_append(doc->code->file, "", 0, NULL);
 }
 
 static void
@@ -326,7 +326,7 @@ static void
 _new_do(void *data)
 {
    Ecrire_Doc *doc = data;
-   _clear();
+   _clear(doc);
    _init_entry(doc);
    _set_save_disabled(doc, EINA_TRUE);
    _update_cur_file(NULL, doc);
