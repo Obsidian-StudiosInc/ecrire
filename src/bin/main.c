@@ -194,7 +194,7 @@ _close ()
 static void
 _load_to_entry(Ecrire_Doc *doc, const char *file)
 {
-  Elm_Code_Syntax *syntax;
+  Elm_Code_Syntax *syntax = NULL;
   const char *mime;
 
   if (file)
