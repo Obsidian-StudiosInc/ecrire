@@ -206,10 +206,15 @@ _load_to_entry(Ecrire_Doc *doc, const char *file)
              !strcasecmp(mime, "text/x-csrc") ||
              !strcasecmp(mime, "text/x-python"))
             syntax = elm_code_syntax_for_mime_get(mime);
-          else
+          else if(strstr(mime, "text/"))
             syntax = elm_code_syntax_for_mime_get("text/plain");
           if(syntax)
-            elm_code_syntax_parse_file(syntax,doc->code->file);
+            {
+              elm_obj_code_widget_syntax_enabled_set(doc->entry, EINA_TRUE);
+              elm_code_syntax_parse_file(syntax,doc->code->file);
+            }
+          else
+            elm_obj_code_widget_syntax_enabled_set(doc->entry, EINA_FALSE);
         }
       elm_code_file_open(doc->code,file);
       _set_save_disabled(doc, EINA_TRUE);
