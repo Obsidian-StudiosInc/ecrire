@@ -99,22 +99,23 @@ _sel_cut_copy(void *data,
 }
 
 static void
-_update_cur_file(const char *file, Ecrire_Doc *doc)
+_update_cur_file(Ecrire_Doc *doc)
 {
-   const char *saving = (!elm_object_item_disabled_get(doc->save_item)) ?
-      "*" : "";
-   eina_stringshare_replace(&doc->filename, file);
-     {
-        char buf[1024];
-        if (doc->filename)
-           snprintf(buf, sizeof(buf), _("%s%s - %s"), saving, doc->filename,
-                 PACKAGE_NAME);
-        else
-           snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
-                 doc->unsaved, PACKAGE_NAME);
+  const char *filename = NULL, *saving;
+  saving = (!elm_object_item_disabled_get(doc->save_item)) ? "*" : "";
+    {
+      char buf[1024];
+      if(doc->code->file->file)
+        filename = eina_file_filename_get(doc->code->file->file);
+      if (filename)
+         snprintf(buf, sizeof(buf), _("%s%s - %s"), saving,
+                  filename, PACKAGE_NAME);
+      else
+         snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
+                  doc->unsaved, PACKAGE_NAME);
 
-        elm_win_title_set(doc->win, buf);
-     }
+      elm_win_title_set(doc->win, buf);
+    }
 }
 
 static void
@@ -173,7 +174,7 @@ _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
    Ecrire_Doc *doc = data;
    _set_save_disabled(doc, EINA_FALSE);
    elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
-   _update_cur_file(doc->filename, doc);
+   _update_cur_file(doc);
 }
 
 static void
@@ -229,7 +230,7 @@ _load_to_entry(Ecrire_Doc *doc, const char *file)
     }
 
   _init_entry(doc);
-  _update_cur_file(file, doc);
+  _update_cur_file(doc);
 }
 
 static void
@@ -246,7 +247,7 @@ save_do(const char *file, Ecrire_Doc *doc)
 {
    elm_code_file_save (doc->code->file);
    _set_save_disabled(doc, EINA_TRUE);
-   _update_cur_file(file, doc);
+   _update_cur_file(doc);
 }
 
 static void
@@ -298,14 +299,14 @@ _open_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 void
 editor_save(Ecrire_Doc *doc, void *callback_func)
 {
-   if (doc->filename)
-     {
-        save_do(doc->filename, doc);
-     }
-   else
-     {
-        ui_file_open_save_dialog_open(doc->win, callback_func, EINA_TRUE);
-     }
+  const char *filename = NULL;
+
+  if(doc->code->file->file)
+    filename = eina_file_filename_get(doc->code->file->file);
+  if (filename)
+    save_do(filename, doc);
+  else
+    ui_file_open_save_dialog_open(doc->win, callback_func, EINA_TRUE);
 }
 
 static void
@@ -329,7 +330,7 @@ _new_do(void *data)
    _clear(doc);
    _init_entry(doc);
    _set_save_disabled(doc, EINA_TRUE);
-   _update_cur_file(NULL, doc);
+   _update_cur_file(doc);
 }
 
 static void
