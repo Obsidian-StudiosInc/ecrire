@@ -190,6 +190,7 @@ _close ()
   elm_code_file_close(main_doc->code->file);
   elm_code_file_new(main_doc->code);
   elm_code_file_line_append(main_doc->code->file, "", 0, NULL);
+  _update_cur_file(main_doc);
 }
 
 static void
