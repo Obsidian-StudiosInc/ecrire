@@ -395,7 +395,7 @@ _settings(void *data,
 }
 
 static void
-_win_del_do(void *data EINA_UNUSED)
+_win_del_do(void *data)
 {
    Ecrire_Doc *doc = data;
    _close(doc);
