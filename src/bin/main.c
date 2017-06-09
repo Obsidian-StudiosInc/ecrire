@@ -393,13 +393,13 @@ _settings(void *data,
    ui_settings_dialog_open(elm_object_top_widget_get(doc->win), doc, _ent_cfg);
 }
 
-
 static void
 _win_del_do(void *data EINA_UNUSED)
 {
+   Ecrire_Doc *doc = data;
    _close();
-   evas_object_del(main_doc->win);
-   free(main_doc);
+   evas_object_del(doc->win);
+   free(doc);
    elm_exit();
 }
 
