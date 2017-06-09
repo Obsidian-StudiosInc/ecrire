@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 project(ecrire)
 set(VMAJ 0)
 set(VMIN 2)
-set(VMIC 6)
+set(VMIC 7)
 set(PACKAGE_VERSION ${VMAJ}.${VMIN}.${VMIC})
 
 set(PACKAGE ${CMAKE_PROJECT_NAME})
