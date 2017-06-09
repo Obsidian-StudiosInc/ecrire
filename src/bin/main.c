@@ -255,12 +255,15 @@ save_do(const char *file, Ecrire_Doc *doc)
     }
 
   /* File closed, open one, create if does not exist */
-  if(!doc->code->file->file)
+  if(file && !doc->code->file->file)
     {
-      FILE *fp;
+      FILE *fp = NULL;
       fp = fopen(file,"w");
-      fclose(fp);
-      doc->code->file->file = eina_file_open(file,EINA_FALSE);
+      if(fp)
+        {
+          fclose(fp);
+          doc->code->file->file = eina_file_open(file,EINA_FALSE);
+        }
     }
 
   /* File open, save */
