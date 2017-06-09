@@ -534,7 +534,6 @@ main(int argc, char *argv[])
 
    main_doc = calloc(1, sizeof(*main_doc));
    main_doc->unsaved = 1;
-   main_doc->filename = NULL;
 
    main_doc->win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
    elm_win_alpha_set (main_doc->win, EINA_TRUE);
