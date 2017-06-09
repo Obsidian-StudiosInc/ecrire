@@ -178,7 +178,7 @@ _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 }
 
 static void
-_close (void *data)
+_close_doc (void *data)
 {
   Ecrire_Doc *doc = data;
   elm_code_file_close(doc->code->file);
@@ -308,7 +308,7 @@ _close_cb(void *data,
           Evas_Object *obj EINA_UNUSED,
           void *event_info EINA_UNUSED)
 {
-  _alert_if_need_saving(_close, (Ecrire_Doc *)data);
+  _alert_if_need_saving(_close_doc, (Ecrire_Doc *)data);
 }
 
 static void
@@ -349,7 +349,7 @@ static void
 _new_do(void *data)
 {
    Ecrire_Doc *doc = data;
-   _close(doc);
+   _close_doc(doc);
    _init_entry(doc);
 }
 
@@ -401,7 +401,7 @@ static void
 _win_del_do(void *data)
 {
    Ecrire_Doc *doc = data;
-   _close(doc);
+   _close_doc(doc);
    evas_object_del(doc->win);
    free(doc);
    elm_exit();
