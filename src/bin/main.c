@@ -479,58 +479,11 @@ _key_down_cb(void *data,
   return EINA_TRUE;
 }
 
-int
-main(int argc, char *argv[])
+static void
+create_window(int argc, char *argv[])
 {
    Evas_Object  *obj, *tbar;
    Evas_Coord w = 600, h = 600;
-   int c;
-
-   opterr = 0;
-
-   if (!eina_init())
-     {
-        printf("Failed to initialize Eina_log module\n");
-        return EXIT_FAILURE;
-     }
-
-   _ecrire_log_dom = eina_log_domain_register("ecrire", ECRIRE_DEFAULT_LOG_COLOR);
-   if (_ecrire_log_dom < 0)
-     {
-        EINA_LOG_ERR("Unable to create a log domain.");
-        exit(-1);
-     }
-
-   while ((c = getopt (argc, argv, "")) != -1)
-     {
-        switch (c)
-          {
-           case '?':
-              print_usage(argv[0]);
-              if (isprint (optopt))
-                {
-                   ERR("Unknown option or requires an argument `-%c'.",
-                         optopt);
-                }
-              else
-                {
-                   ERR("Unknown option character `\\x%x'.", optopt);
-                }
-              return 1;
-              break;
-           default:
-              abort();
-          }
-     }
-
-   setlocale(LC_ALL, "");
-   bindtextdomain(PACKAGE, LOCALE_DIR);
-   textdomain(PACKAGE);
-
-   elm_init(argc, argv);
-
-   ecrire_cfg_init(PACKAGE_NAME);
-   ecrire_cfg_load();
 
    main_doc = calloc(1, sizeof(*main_doc));
    main_doc->unsaved = 1;
@@ -663,6 +616,60 @@ main(int argc, char *argv[])
      }
 
    elm_object_focus_set(main_doc->entry, EINA_TRUE);
+}
+
+int
+main(int argc, char *argv[])
+{
+   int c;
+
+   opterr = 0;
+
+   if (!eina_init())
+     {
+        printf("Failed to initialize Eina_log module\n");
+        return EXIT_FAILURE;
+     }
+
+   _ecrire_log_dom = eina_log_domain_register("ecrire", ECRIRE_DEFAULT_LOG_COLOR);
+   if (_ecrire_log_dom < 0)
+     {
+        EINA_LOG_ERR("Unable to create a log domain.");
+        exit(-1);
+     }
+
+   while ((c = getopt (argc, argv, "")) != -1)
+     {
+        switch (c)
+          {
+           case '?':
+              print_usage(argv[0]);
+              if (isprint (optopt))
+                {
+                   ERR("Unknown option or requires an argument `-%c'.",
+                         optopt);
+                }
+              else
+                {
+                   ERR("Unknown option character `\\x%x'.", optopt);
+                }
+              return 1;
+              break;
+           default:
+              abort();
+          }
+     }
+
+   setlocale(LC_ALL, "");
+   bindtextdomain(PACKAGE, LOCALE_DIR);
+   textdomain(PACKAGE);
+
+   elm_init(argc, argv);
+
+   ecrire_cfg_init(PACKAGE_NAME);
+   ecrire_cfg_load();
+
+   create_window(argc, argv);
 
    elm_run();
 
