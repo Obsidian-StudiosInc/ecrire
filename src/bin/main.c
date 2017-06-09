@@ -178,14 +178,15 @@ _ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 }
 
 static void
-_close ()
+_close (void *data)
 {
-  elm_code_file_close(main_doc->code->file);
-  elm_code_file_new(main_doc->code);
-  elm_code_file_line_append(main_doc->code->file, "", 0, NULL);
-  _update_cur_file(main_doc);
-  elm_object_item_disabled_set(main_doc->close_item, EINA_TRUE);
-  _set_save_disabled(main_doc, EINA_TRUE);
+  Ecrire_Doc *doc = data;
+  elm_code_file_close(doc->code->file);
+  elm_code_file_new(doc->code);
+  elm_code_file_line_append(doc->code->file, "", 0, NULL);
+  _update_cur_file(doc);
+  elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
+  _set_save_disabled(doc, EINA_TRUE);
 }
 
 static void
@@ -345,7 +346,7 @@ static void
 _new_do(void *data)
 {
    Ecrire_Doc *doc = data;
-   _close();
+   _close(doc);
    _init_entry(doc);
 }
 
@@ -397,7 +398,7 @@ static void
 _win_del_do(void *data EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
-   _close();
+   _close(doc);
    evas_object_del(doc->win);
    free(doc);
    elm_exit();
