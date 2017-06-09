@@ -414,15 +414,16 @@ my_win_del(void *data,
 }
 
 static Eina_Bool
-_activate_paste_cb(void *data EINA_UNUSED,
+_activate_paste_cb(void *data,
                    Evas_Object *obj EINA_UNUSED,
                    Elm_Selection_Data *event)
 {
   if (!event)
     return EINA_FALSE;
 
-  /* FIXME: needs to get Ecrire_Doc via obj */
-  elm_object_item_disabled_set(main_doc->paste_item,
+  Ecrire_Doc *doc = data;
+
+  elm_object_item_disabled_set(doc->paste_item,
                                (event->data ? EINA_FALSE : EINA_TRUE));
 
   return EINA_TRUE;
@@ -439,7 +440,7 @@ _get_clipboard_cb(void *data,
                         ELM_SEL_TYPE_CLIPBOARD,
                         ELM_SEL_FORMAT_TARGETS,
                         _activate_paste_cb,
-                        NULL);
+                        doc);
 
   return EINA_TRUE;
 }
