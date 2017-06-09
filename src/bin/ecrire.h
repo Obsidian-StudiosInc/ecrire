@@ -30,11 +30,6 @@ struct _Ecrire_Doc {
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
 
-char *_load_plain(const char *file);
-Eina_Bool _load_file(const char *file, const Elm_Code_File *code_file);
-Eina_Bool _save_markup_utf8(const char *file, const char *text);
-Eina_Bool _save_plain_utf8(const char *file, const char *text);
-
 void editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size);
 void editor_save(Ecrire_Doc *doc, void *callback_func);
 void save_do(const char *file, Ecrire_Doc *doc);
