@@ -241,9 +241,34 @@ _fs_open_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
 void
 save_do(const char *file, Ecrire_Doc *doc)
 {
-   elm_code_file_save (doc->code->file);
-   _set_save_disabled(doc, EINA_TRUE);
-   _update_cur_file(doc);
+  const char *filename = NULL;
+
+  if(doc->code->file->file)
+    filename = eina_file_filename_get(doc->code->file->file);
+
+  /* New file name, another file opened, close first */
+  if(file && filename && strcmp(file, filename))
+    {
+      eina_file_close(doc->code->file->file);
+      doc->code->file->file = NULL;
+    }
+
+  /* File closed, open one, create if does not exist */
+  if(!doc->code->file->file)
+    {
+      FILE *fp;
+      fp = fopen(file,"w");
+      fclose(fp);
+      doc->code->file->file = eina_file_open(file,EINA_FALSE);
+    }
+
+  /* File open, save */
+  if(doc->code->file->file)
+    {
+      elm_code_file_save (doc->code->file);
+      _set_save_disabled(doc, EINA_TRUE);
+      _update_cur_file(doc);
+    }
 }
 
 static void
