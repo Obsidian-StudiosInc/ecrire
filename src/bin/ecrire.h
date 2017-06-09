@@ -25,7 +25,6 @@ struct _Ecrire_Doc {
      /* Main Menu Items */
      Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
                      *save_as_item, *paste_item, *undo_item, *redo_item;
-     const char *filename;
      int unsaved;
 };
 
