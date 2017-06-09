@@ -536,13 +536,6 @@ main(int argc, char *argv[])
    main_doc->unsaved = 1;
    main_doc->filename = NULL;
 
-   if (optind < argc)
-     {
-        main_doc->filename = eina_stringshare_add(argv[optind]);
-     }
-
-   DBG("Opening filename: '%s'", main_doc->filename);
-
    main_doc->win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
    elm_win_alpha_set (main_doc->win, EINA_TRUE);
    elm_win_autodel_set(main_doc->win, EINA_FALSE);
@@ -664,7 +657,11 @@ main(int argc, char *argv[])
    evas_object_resize(main_doc->win, w, h);
    evas_object_show(main_doc->win);
 
-   _load_to_entry(main_doc, main_doc->filename);
+   if (optind < argc)
+     {
+       _load_to_entry(main_doc, argv[optind]);
+       DBG("Opening filename: '%s'", argv[optind]);
+     }
 
    elm_object_focus_set(main_doc->entry, EINA_TRUE);
 
