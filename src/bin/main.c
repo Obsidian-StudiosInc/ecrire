@@ -22,6 +22,29 @@ Eina_Bool ctrl_pressed = EINA_FALSE;
 int _ecrire_log_dom = -1;
 
 static void
+_set_path(Ecrire_Doc *doc, const char *file)
+{
+  char *f = NULL;
+  char *fp = NULL;
+  char *path = NULL;
+  int len;
+  if(doc->path)
+    free(doc->path);
+  len = strlen(file)+1;
+  fp = f = (char *)malloc(len);
+  if(f)
+    {
+      strncpy(f,file,len); 
+      path = dirname(f);
+      len = strlen(path)+1;
+      doc->path = (char *)malloc(len);
+      if(doc->path)
+        strncpy(doc->path,path,len);
+      free(fp);
+    }
+}
+
+static void
 _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
   elm_object_item_disabled_set(doc->cut_item, disabled);
@@ -216,6 +239,7 @@ _load_to_entry(Ecrire_Doc *doc, const char *file)
             elm_obj_code_widget_syntax_enabled_set(doc->entry, EINA_FALSE);
         }
       elm_code_file_open(doc->code,file);
+      _set_path(doc,file);
       _set_save_disabled(doc, EINA_TRUE);
       _set_cut_copy_disabled(doc, EINA_TRUE);
       elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
@@ -405,6 +429,8 @@ _win_del_do(void *data)
    Ecrire_Doc *doc = data;
    _close_doc(doc);
    evas_object_del(doc->win);
+  if(doc->path)
+    free(doc->path);
    free(doc);
    elm_exit();
 }
