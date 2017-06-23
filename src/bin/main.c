@@ -317,7 +317,7 @@ static void
 _open_do(void *data)
 {
    Ecrire_Doc *doc = data;
-   ui_file_open_save_dialog_open(doc->win, _fs_open_done, EINA_TRUE);
+   ui_file_open_save_dialog_open(doc, _fs_open_done, EINA_TRUE);
 }
 
 static void
@@ -354,7 +354,7 @@ editor_save(Ecrire_Doc *doc, void *callback_func)
   if (filename)
     save_do(filename, doc);
   else
-    ui_file_open_save_dialog_open(doc->win, callback_func, EINA_TRUE);
+    ui_file_open_save_dialog_open(doc, callback_func, EINA_TRUE);
 }
 
 static void
@@ -368,7 +368,7 @@ static void
 _save_as(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
-   ui_file_open_save_dialog_open(doc->win, _fs_save_done, EINA_TRUE);
+   ui_file_open_save_dialog_open(doc, _fs_save_done, EINA_TRUE);
 }
 
 static void

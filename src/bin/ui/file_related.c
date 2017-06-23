@@ -3,6 +3,7 @@
 #endif
 
 #include <Elementary.h>
+#include "../ecrire.h"
 
 Evas_Object *inwin;
 
@@ -15,17 +16,21 @@ _cleaning_cb(void *data, Evas_Object *obj, void *event_info)
 }
 
 void
-ui_file_open_save_dialog_open(Evas_Object *parent, Evas_Smart_Cb func,
-      Eina_Bool save)
+ui_file_open_save_dialog_open(Ecrire_Doc *doc,
+                              Evas_Smart_Cb func,
+                              Eina_Bool save)
 {
    Evas_Object *fs;
-   inwin = elm_win_inwin_add(parent);
+   inwin = elm_win_inwin_add(doc->win);
    evas_object_show(inwin);
 
    fs = elm_fileselector_add(inwin);
    elm_fileselector_is_save_set(fs, save);
    elm_fileselector_expandable_set(fs, EINA_FALSE);
-   elm_fileselector_path_set(fs, getenv("HOME"));
+   if(doc->path)
+     elm_fileselector_path_set(fs, doc->path);
+   else
+     elm_fileselector_path_set(fs, getenv("HOME"));
    elm_win_inwin_content_set(inwin, fs);
    evas_object_show(fs);
 
