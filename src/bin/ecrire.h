@@ -26,6 +26,7 @@ struct _Ecrire_Doc {
      Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
                      *save_as_item, *paste_item, *undo_item, *redo_item;
      int unsaved;
+     char *path;
 };
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
