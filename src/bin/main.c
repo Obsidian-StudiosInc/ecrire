@@ -194,6 +194,7 @@ _load_to_entry(Ecrire_Doc *doc, const char *file)
 {
   Elm_Code_Syntax *syntax = NULL;
   const char *mime;
+  int h;
 
   if (file)
     {
@@ -221,7 +222,8 @@ _load_to_entry(Ecrire_Doc *doc, const char *file)
 
       Elm_Transit *transit = elm_transit_add();
       elm_transit_object_add(transit, doc->box_editor);
-      elm_transit_effect_translation_add(transit, 0, 600, 0, 0);
+      evas_object_geometry_get(doc->win, NULL, NULL, NULL, &h);
+      elm_transit_effect_translation_add(transit, 0, h, 0, 0);
       elm_transit_duration_set(transit, 0.75);
       elm_transit_go(transit);
     }
