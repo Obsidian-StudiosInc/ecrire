@@ -14,6 +14,8 @@ Eina_Bool ecrire_cfg_load(void);
 typedef struct
 {
    unsigned int alpha;
+   unsigned int height;
+   unsigned int width;
    unsigned int version;
    struct {
         const char *name; /* NULL means theme's font */
