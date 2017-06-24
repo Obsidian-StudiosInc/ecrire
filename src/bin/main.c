@@ -427,6 +427,7 @@ static void
 _win_del_do(void *data)
 {
    Ecrire_Doc *doc = data;
+  ecrire_cfg_save();
    _close_doc(doc);
    evas_object_del(doc->win);
   if(doc->path)
@@ -473,6 +474,17 @@ _get_clipboard_cb(void *data,
                         _activate_paste_cb,
                         doc);
 
+  return EINA_TRUE;
+}
+
+static Eina_Bool
+_win_move_cb(void *data EINA_UNUSED, Evas_Object *obj, void *ev EINA_UNUSED)
+{
+  evas_object_geometry_get(obj,
+                           NULL,
+                           NULL,
+                           &(_ent_cfg->width),
+                           &(_ent_cfg->height));
   return EINA_TRUE;
 }
 
@@ -636,8 +648,15 @@ create_window(int argc, char *argv[])
                                   "focused",
                                   (Evas_Smart_Cb)_get_clipboard_cb,
                                   main_doc);
+   evas_object_smart_callback_add(main_doc->win,
+                                  "move",
+                                  (Evas_Smart_Cb)_win_move_cb,
+                                  main_doc->win);
 
-   evas_object_resize(main_doc->win, w, h);
+   if(_ent_cfg->height && _ent_cfg->width)
+     evas_object_resize(main_doc->win, _ent_cfg->width, _ent_cfg->height);
+   else
+     evas_object_resize(main_doc->win, w, h);
    evas_object_show(main_doc->win);
 
    if (optind < argc)
