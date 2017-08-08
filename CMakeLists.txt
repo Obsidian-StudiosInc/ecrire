@@ -10,17 +10,19 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 include_directories ("${PROJECT_BINARY_DIR}")
 
-# FIXME: add version checking!
-find_package(Eo REQUIRED)
-find_package(Eina REQUIRED)
-find_package(Eet REQUIRED)
-find_package(Evas REQUIRED)
-find_package(Ecore REQUIRED)
+set(EFL_VERSION 1.20.1)
+
+# Version only needed in first
+find_package(Eo ${EFL_VERSION} REQUIRED)
+find_package(Eina ${EFL_VERSION} REQUIRED)
+find_package(Eet ${EFL_VERSION} REQUIRED)
+find_package(Evas ${EFL_VERSION} REQUIRED)
+find_package(Ecore ${EFL_VERSION} REQUIRED)
 find_package(Ecore COMPONENTS INPUT)
-find_package(Edje REQUIRED)
-find_package(Efreet REQUIRED)
+find_package(Edje ${EFL_VERSION} REQUIRED)
+find_package(Efreet ${EFL_VERSION} REQUIRED)
 find_package(Efreet COMPONENTS mime)
-find_package(Elementary REQUIRED)
+find_package(Elementary ${EFL_VERSION} REQUIRED)
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
     find_package(intl REQUIRED)
