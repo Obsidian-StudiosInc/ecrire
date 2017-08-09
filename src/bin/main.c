@@ -664,6 +664,8 @@ create_window(int argc, char *argv[])
        _load_to_entry(main_doc, argv[optind]);
        DBG("Opening filename: '%s'", argv[optind]);
      }
+   else
+     _update_cur_file(main_doc);
 
    elm_object_focus_set(main_doc->entry, EINA_TRUE);
 }
