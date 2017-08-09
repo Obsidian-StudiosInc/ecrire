@@ -207,9 +207,9 @@ _close_doc (void *data)
   elm_code_file_close(doc->code->file);
   elm_code_file_new(doc->code);
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
-  _update_cur_file(doc);
   elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
   _set_save_disabled(doc, EINA_TRUE);
+  _update_cur_file(doc);
 }
 
 static void
