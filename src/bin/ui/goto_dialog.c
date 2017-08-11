@@ -34,8 +34,8 @@ _goto_clicked(void *data,
   lines = elm_code_file_lines_get(doc->code->file);
   if (line>0 && lines > 0 && line <= lines)
     {
-      elm_obj_code_widget_cursor_position_set(doc->entry,line,1);
-      elm_object_focus_set(doc->entry, EINA_TRUE);
+      elm_obj_code_widget_cursor_position_set(doc->widget,line,1);
+      elm_object_focus_set(doc->widget, EINA_TRUE);
       _goto_win_del(NULL,NULL,NULL);
     }
 }

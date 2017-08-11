@@ -75,7 +75,7 @@ settings_default_font_cb(void *data,
   disable_font_widgets(elm_check_state_get(obj));
   if(state)
     {
-      elm_obj_code_widget_font_set(doc->entry, NULL, 10);
+      elm_obj_code_widget_font_set(doc->widget, NULL, 10);
       ent_cfg->font.name = NULL;
       ent_cfg->font.size = 10;
     }
@@ -149,7 +149,7 @@ ui_settings_dialog_open(Evas_Object *parent,
                         Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *entry = doc->entry;
+  Evas_Object *entry = doc->widget;
   Evas_Object *ic, *obj, *table;
   int row = 0;
 
@@ -199,7 +199,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_check_state_set(obj,  _ent_cfg->line_numbers);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->entry);
+  evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->widget);
   evas_object_show(obj);
   row++;
 
@@ -217,7 +217,7 @@ ui_settings_dialog_open(Evas_Object *parent,
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_word_wrap_cb, doc->entry);
+  evas_object_smart_callback_add(obj, "changed", settings_word_wrap_cb, doc->widget);
   evas_object_show(obj);
   row++;
 

@@ -16,7 +16,7 @@ extern int _ecrire_log_dom;
 
 struct _Ecrire_Doc {
      Elm_Code *code;
-     Elm_Code_Widget *entry;
+     Elm_Code_Widget *widget;
      Evas_Object *win;
      Evas_Object *bg;
      Evas_Object *box_editor;

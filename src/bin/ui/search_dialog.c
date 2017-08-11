@@ -51,7 +51,7 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
     return EINA_FALSE;
 
   lines = elm_code_file_lines_get(doc->code->file);
-  elm_obj_code_widget_cursor_position_get(doc->entry,&row,&col);
+  elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
   i=row;
   while(i>=0 && i<=lines)
     {
@@ -59,7 +59,7 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
       found = elm_code_line_text_strpos(code_line,text,col);
       if(found>=0)
         {
-          _search_select_text(doc->entry, code_line, text, found, i, col);
+          _search_select_text(doc->widget, code_line, text, found, i, col);
           break;
         }
       else if(forward)
@@ -111,15 +111,15 @@ _replace_in_entry(Ecrire_Doc *doc)
       Elm_Code_Line *code_line;
 
       replace = elm_entry_entry_get(replace_entry);
-      elm_obj_code_widget_cursor_position_get(doc->entry,&row,&col);
+      elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
       code_line = elm_code_file_line_get(doc->code->file,row);
       len = strlen(find);
       elm_code_line_text_remove(code_line, pos, len);
       len = strlen(replace);
       elm_code_line_text_insert(code_line, pos, replace, len);
       /* Fix me this clears all not just the current selection */
-      elm_code_widget_selection_clear(doc->entry);
-      efl_event_callback_legacy_call(doc->entry,
+      elm_code_widget_selection_clear(doc->widget);
+      efl_event_callback_legacy_call(doc->widget,
                                      ELM_OBJ_CODE_WIDGET_EVENT_CHANGED_USER,
                                      NULL);
       replaced = EINA_TRUE;
@@ -191,9 +191,9 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
   evas_object_show (obj);
 
   find_entry = elm_entry_add(table);
-  if(!elm_code_widget_selection_is_empty(doc->entry))
+  if(!elm_code_widget_selection_is_empty(doc->widget))
     elm_object_text_set(find_entry,
-                        elm_code_widget_selection_text_get(doc->entry));
+                        elm_code_widget_selection_text_get(doc->widget));
   elm_entry_scrollable_set(find_entry, EINA_TRUE);
   elm_entry_single_line_set(find_entry, EINA_TRUE);
   evas_object_size_hint_weight_set(find_entry, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
