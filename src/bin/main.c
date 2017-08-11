@@ -247,6 +247,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
             elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
         }
       elm_code_file_open(doc->code,file);
+      _init_font(doc);
       _set_path(doc,file);
       _set_save_disabled(doc, EINA_TRUE);
       _set_cut_copy_disabled(doc, EINA_TRUE);
@@ -261,7 +262,6 @@ _open_file(Ecrire_Doc *doc, const char *file)
       elm_transit_go(transit);
     }
 
-  _init_entry(doc);
   _update_cur_file(doc);
 }
 
