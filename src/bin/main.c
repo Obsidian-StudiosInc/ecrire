@@ -58,6 +58,13 @@ _set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
   elm_object_item_disabled_set(doc->save_as_item, disabled);
 }
 
+static void
+_set_undo_redo_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
+{
+   elm_object_item_disabled_set(doc->undo_item, disabled);
+   elm_object_item_disabled_set(doc->redo_item, disabled);
+}
+
 void
 editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size)
 {
@@ -636,6 +643,7 @@ create_window(int argc, char *argv[])
    _set_cut_copy_disabled(main_doc, EINA_TRUE);
    elm_object_item_disabled_set(main_doc->paste_item, EINA_TRUE);
    _set_save_disabled(main_doc, EINA_TRUE);
+   _set_undo_redo_disabled(main_doc, EINA_TRUE);
 
    ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
                            (Ecore_Event_Handler_Cb)_key_down_cb,
