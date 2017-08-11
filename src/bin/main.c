@@ -83,14 +83,6 @@ _init_font(Ecrire_Doc *doc)
 }
 
 static void
-_init_entry(Ecrire_Doc *doc)
-{
-   _init_font(doc);
-   elm_object_item_disabled_set(doc->undo_item, EINA_TRUE);
-   elm_object_item_disabled_set(doc->redo_item, EINA_TRUE);
-}
-
-static void
 _alert_if_need_saving(void (*done)(void *data), Ecrire_Doc *doc)
 {
    if (!elm_object_item_disabled_get(doc->save_item))
