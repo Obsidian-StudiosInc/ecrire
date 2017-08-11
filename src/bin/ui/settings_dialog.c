@@ -204,14 +204,17 @@ ui_settings_dialog_open(Evas_Object *parent,
   row++;
 
   /* Word Wrap Label */
+/* FIXME: Hide till elm_code supports line wrapping
   obj = elm_label_add(table);
   elm_object_text_set(obj, _("Word Wrap"));
   evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
   evas_object_size_hint_align_set(obj, 1, 0);
   elm_table_pack(table, obj, 0, row, 1, 1);
   evas_object_show(obj);
+*/
 
   /* Word Wrap Check box */
+/* FIXME: Hide till elm_code supports line wrapping
   obj = elm_check_add(table);
   if(ent_cfg->wrap_type != ELM_WRAP_NONE)
     elm_check_state_set(obj, EINA_TRUE);
@@ -220,6 +223,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_smart_callback_add(obj, "changed", settings_word_wrap_cb, doc->widget);
   evas_object_show(obj);
   row++;
+*/
 
   /* Use default font Label */
   obj = elm_label_add(table);
