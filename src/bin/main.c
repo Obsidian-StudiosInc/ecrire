@@ -216,6 +216,7 @@ _close_doc (void *data)
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
   elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
   _set_save_disabled(doc, EINA_TRUE);
+  _set_undo_redo_disabled(doc, EINA_TRUE);
   _update_cur_file(doc);
 }
 
@@ -249,6 +250,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
       _set_path(doc,file);
       _set_save_disabled(doc, EINA_TRUE);
       _set_cut_copy_disabled(doc, EINA_TRUE);
+      _set_undo_redo_disabled(doc, EINA_TRUE);
       elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
 
       Elm_Transit *transit = elm_transit_add();
