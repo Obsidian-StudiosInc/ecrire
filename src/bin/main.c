@@ -213,7 +213,7 @@ _close_doc (void *data)
 }
 
 static void
-_load_to_entry(Ecrire_Doc *doc, const char *file)
+_open_file(Ecrire_Doc *doc, const char *file)
 {
   Elm_Code_Syntax *syntax = NULL;
   const char *mime;
@@ -262,7 +262,7 @@ _fs_open_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
 {
    const char *selected = event_info;
    if (selected)
-      _load_to_entry(main_doc, selected);
+      _open_file(main_doc, selected);
 }
 
 void
@@ -661,7 +661,7 @@ create_window(int argc, char *argv[])
 
    if (optind < argc)
      {
-       _load_to_entry(main_doc, argv[optind]);
+       _open_file(main_doc, argv[optind]);
        DBG("Opening filename: '%s'", argv[optind]);
      }
    else
