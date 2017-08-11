@@ -212,9 +212,14 @@ _close_doc (void *data)
 {
   Ecrire_Doc *doc = data;
   elm_code_file_close(doc->code->file);
+}
+
+static void
+_new_doc(Ecrire_Doc *doc) {
   elm_code_file_new(doc->code);
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
   elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
+  _init_font(doc);
   _set_save_disabled(doc, EINA_TRUE);
   _set_undo_redo_disabled(doc, EINA_TRUE);
   _update_cur_file(doc);
@@ -385,7 +390,7 @@ _new_do(void *data)
 {
    Ecrire_Doc *doc = data;
    _close_doc(doc);
-   _init_entry(doc);
+   _new_doc(doc);
 }
 
 static void
