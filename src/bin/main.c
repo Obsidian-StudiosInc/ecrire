@@ -20,6 +20,7 @@ static void print_usage(const char *bin);
 Eina_Bool ctrl_pressed = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
+char *drop_file = NULL;
 
 static void
 _set_path(Ecrire_Doc *doc, const char *file)
@@ -483,6 +484,40 @@ _get_clipboard_cb(void *data,
   return EINA_TRUE;
 }
 
+static void
+_drop_do(void *data)
+{
+  if(drop_file)
+    {
+       Ecrire_Doc *doc = data;
+       // FIXME: Need to set/pass document vs using global
+       _open_file(doc, drop_file);
+       free(drop_file);
+       drop_file = NULL;
+    }
+}
+
+static Eina_Bool
+_drop_cb(void *data, Evas_Object *obj EINA_UNUSED, Elm_Selection_Data *event)
+{
+  Ecrire_Doc *doc = data;
+  if(event && event->data)
+    {
+      // FIXME: Need to set/pass filename vs using global
+      const char *file = event->data;
+      int len = strlen(file);
+      if(drop_file)
+        free(drop_file); // just in case
+      drop_file = (char *)malloc(len+1);
+      if(drop_file)
+        {
+          strncpy(drop_file,file,len);
+          _alert_if_need_saving(_drop_do, doc);
+        }
+    }
+  return EINA_TRUE;
+}
+
 static Eina_Bool
 _win_move_cb(void *data EINA_UNUSED, Evas_Object *obj, void *ev EINA_UNUSED)
 {
@@ -644,6 +679,16 @@ create_window(int argc, char *argv[])
    _set_save_disabled(main_doc, EINA_TRUE);
    _set_undo_redo_disabled(main_doc, EINA_TRUE);
 
+   elm_drop_target_add(main_doc->widget,
+                       ELM_SEL_FORMAT_IMAGE,
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                       NULL,
+                       _drop_cb,
+                       main_doc);
    ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
                            (Ecore_Event_Handler_Cb)_key_down_cb,
                            main_doc);
