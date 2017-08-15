@@ -9,9 +9,8 @@ editor for Enlightenment and eventually Tizen as well. Or any device
 that has EFL.
 
 ## Known Issues
-- 3rd button copy/paste does not function
-- Drag and drop files into ecrire to open does not function
-- Wordwrap setting does not function till next release of EFL > 1.19.1
+- External 3rd button copy/paste does not function [elm code task #T5520](https://phab.enlightenment.org/T5520)
+- Line/Word wrap not possible till next release of EFL > 1.20.2
 - Only supports English language [elm code task #T5496](https://phab.enlightenment.org/T5496)
 - Crash when opening large files
 [issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
