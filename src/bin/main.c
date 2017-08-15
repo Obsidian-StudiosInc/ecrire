@@ -336,14 +336,6 @@ _goto_line(void *data,
 }
 
 static void
-_close_cb(void *data,
-          Evas_Object *obj EINA_UNUSED,
-          void *event_info EINA_UNUSED)
-{
-  _alert_if_need_saving(_close_doc, (Ecrire_Doc *)data);
-}
-
-static void
 _open_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
@@ -440,6 +432,14 @@ _win_del_do(void *data)
     free(doc->path);
    free(doc);
    elm_exit();
+}
+
+static void
+_close_cb(void *data,
+          Evas_Object *obj EINA_UNUSED,
+          void *event_info EINA_UNUSED)
+{
+  _alert_if_need_saving(_win_del_do, (Ecrire_Doc *)data);
 }
 
 static void
