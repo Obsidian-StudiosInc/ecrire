@@ -238,6 +238,10 @@ _open_file(Ecrire_Doc *doc, const char *file)
              !strcasecmp(mime, "text/x-csrc") ||
              !strcasecmp(mime, "text/x-python"))
             syntax = elm_code_syntax_for_mime_get(mime);
+          else if(!strcasecmp(mime, "text/x-diff") ||
+                  !strcasecmp(mime, "text/x-patch"))
+           elm_code_parser_standard_add(doc->code,
+                                        ELM_CODE_PARSER_STANDARD_DIFF);
           else if(strstr(mime, "text/"))
             syntax = elm_code_syntax_for_mime_get("text/plain");
           if(syntax)
