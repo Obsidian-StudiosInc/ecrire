@@ -9,12 +9,12 @@ editor for Enlightenment and eventually Tizen as well. Or any device
 that has EFL.
 
 ## Known Issues
-- External 3rd button copy/paste does not function [elm code task #T5520](https://phab.enlightenment.org/T5520)
-- Line/Word wrap not possible till next release of EFL > 1.20.2
 - Only supports English language [elm code task #T5496](https://phab.enlightenment.org/T5496)
 - Crash when opening large files
 [issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
 [elm code task #T5497](https://phab.enlightenment.org/T5497)
+- External 3rd button copy/paste does not function [elm code task #T5520](https://phab.enlightenment.org/T5520)
+- Line/Word wrap not possible till available in elm_code [elm code task #5908](https://phab.enlightenment.org/T5908)
 
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
