@@ -235,12 +235,17 @@ _open_file(Ecrire_Doc *doc, const char *file)
         {
           if(!strcasecmp(mime, "text/x-diff") ||
              !strcasecmp(mime, "text/x-patch"))
-           elm_code_parser_standard_add(doc->code,
-                                        ELM_CODE_PARSER_STANDARD_DIFF);
-          else if(strstr(mime, "text/"))
-            elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
+            elm_code_parser_standard_add(doc->code,
+                                         ELM_CODE_PARSER_STANDARD_DIFF);
           else
-            elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
+            {
+              doc->code->parsers = eina_list_remove(doc->code->parsers,
+                                                    ELM_CODE_PARSER_STANDARD_DIFF);
+              if(strstr(mime, "text/"))
+                elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
+              else
+                elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
+            }
         }
       elm_code_file_open(doc->code,file);
       _init_font(doc);
