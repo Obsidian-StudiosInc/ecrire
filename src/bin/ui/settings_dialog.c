@@ -17,8 +17,13 @@ Evas_Object *fsize, *list, *win;
 static void
 disable_font_widgets(Eina_Bool state)
 {
-   elm_object_disabled_set(list, state);
-   elm_object_disabled_set(fsize, state);
+  const Eina_List *items, *itr;
+  void *item;
+
+  elm_object_disabled_set(fsize, state);
+  items = elm_list_items_get(list);
+  EINA_LIST_FOREACH(items, itr, item)
+    elm_object_item_disabled_set((Elm_Object_Item *)item, state);
 }
 
 static void
@@ -235,7 +240,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Use default font Check box */
   obj = elm_check_add(table);
-  if(!ent_cfg->font.name || !ent_cfg->font.size)
+  if(!ent_cfg->font.name)
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
@@ -297,10 +302,13 @@ ui_settings_dialog_open(Evas_Object *parent,
          {
             Elm_Object_Item *tmp;
             tmp = elm_list_item_append(list, font, NULL, NULL, NULL, NULL);
-            if (ent_cfg->font.name && !strcmp(ent_cfg->font.name, font))
+            if (ent_cfg->font.name)
               {
+                if(!strcmp(ent_cfg->font.name, font))
                   cur_font = tmp;
               }
+            else
+              elm_object_item_disabled_set(tmp, EINA_TRUE);
          }
         EINA_LIST_FREE(flist, font)
           eina_stringshare_del(font);
