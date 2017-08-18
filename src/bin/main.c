@@ -162,21 +162,28 @@ _cur_changed(void *data,
 }
 
 static void
+_check_set_redo(Ecrire_Doc *doc)
+{
+  elm_object_item_disabled_set(doc->redo_item,
+                               !elm_obj_code_widget_can_redo_get(doc->widget));
+}
+
+static void
+_check_set_undo(Ecrire_Doc *doc)
+{
+  elm_object_item_disabled_set(doc->undo_item,
+                               !elm_obj_code_widget_can_undo_get(doc->widget));
+
+}
+
+static void
 _undo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    /* In undo we care about the current item */
    Ecrire_Doc *doc = data;
    elm_obj_code_widget_undo(doc->widget);
-   if(!elm_object_item_disabled_get(doc->undo_item) &&
-      !elm_obj_code_widget_can_undo_get(doc->widget))
-     {
-       elm_object_item_disabled_set(doc->undo_item, EINA_TRUE);
-     }
-   else if(elm_object_item_disabled_get(doc->redo_item) &&
-           elm_obj_code_widget_can_redo_get(doc->widget))
-     {
-       elm_object_item_disabled_set(doc->redo_item, EINA_FALSE);
-     }
+   _check_set_redo(doc);
+   _check_set_undo(doc);
 }
 
 static void
@@ -184,19 +191,16 @@ _redo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
    elm_obj_code_widget_redo(doc->widget);
-   if(!elm_object_item_disabled_get(doc->redo_item) &&
-      !elm_obj_code_widget_can_redo_get(doc->widget))
-     {
-       elm_object_item_disabled_set(doc->redo_item, EINA_TRUE);
-     }
+   _check_set_redo(doc);
 }
 
 static void
-_ent_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
+_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
    Ecrire_Doc *doc = data;
    _set_save_disabled(doc, EINA_FALSE);
    elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
+   _check_set_redo(doc);
    _update_cur_file(doc);
 }
 
@@ -633,7 +637,7 @@ create_window(int argc, char *argv[])
 
    evas_object_smart_callback_add(main_doc->widget, "cursor,changed",
          _cur_changed, main_doc);
-   evas_object_smart_callback_add(main_doc->widget, "changed,user", _ent_changed, main_doc);
+   evas_object_smart_callback_add(main_doc->widget, "changed,user", _changed, main_doc);
    evas_object_smart_callback_add(main_doc->widget, "undo,request", _undo, main_doc);
    evas_object_smart_callback_add(main_doc->widget, "redo,request", _redo, main_doc);
    evas_object_smart_callback_add(main_doc->widget, "selection,start", _sel_start, main_doc);
