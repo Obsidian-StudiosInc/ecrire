@@ -9,7 +9,6 @@ editor for Enlightenment and eventually Tizen as well. Or any device
 that has EFL.
 
 ## Known Issues
-- Only supports English language [elm code task #T5496](https://phab.enlightenment.org/T5496)
 - Crash when opening large files
 [issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
 [elm code task #T5497](https://phab.enlightenment.org/T5497)
