@@ -225,7 +225,6 @@ _new_doc(Ecrire_Doc *doc) {
 static void
 _open_file(Ecrire_Doc *doc, const char *file)
 {
-  Elm_Code_Syntax *syntax = NULL;
   const char *mime;
   int h;
 
@@ -234,21 +233,12 @@ _open_file(Ecrire_Doc *doc, const char *file)
       mime = efreet_mime_type_get(file);
       if(mime)
         {
-          if(!strcasecmp(mime, "text/x-chdr") ||
-             !strcasecmp(mime, "text/x-csrc") ||
-             !strcasecmp(mime, "text/x-python"))
-            syntax = elm_code_syntax_for_mime_get(mime);
-          else if(!strcasecmp(mime, "text/x-diff") ||
-                  !strcasecmp(mime, "text/x-patch"))
+          if(!strcasecmp(mime, "text/x-diff") ||
+             !strcasecmp(mime, "text/x-patch"))
            elm_code_parser_standard_add(doc->code,
                                         ELM_CODE_PARSER_STANDARD_DIFF);
           else if(strstr(mime, "text/"))
-            syntax = elm_code_syntax_for_mime_get("text/plain");
-          if(syntax)
-            {
-              elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
-              elm_code_syntax_parse_file(syntax,doc->code->file);
-            }
+            elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
           else
             elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
         }
