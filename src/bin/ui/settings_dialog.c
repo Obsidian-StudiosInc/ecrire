@@ -72,7 +72,7 @@ settings_default_font_cb(void *data,
 {
   Ecrire_Doc *doc = data;
   Eina_Bool state = elm_check_state_get(obj);
-  disable_font_widgets(elm_check_state_get(obj));
+  disable_font_widgets(state);
   if(state)
     {
       elm_obj_code_widget_font_set(doc->widget, NULL, 10);
@@ -299,7 +299,7 @@ ui_settings_dialog_open(Evas_Object *parent,
             tmp = elm_list_item_append(list, font, NULL, NULL, NULL, NULL);
             if (ent_cfg->font.name && !strcmp(ent_cfg->font.name, font))
               {
-                 cur_font = tmp;
+                  cur_font = tmp;
               }
          }
         EINA_LIST_FREE(flist, font)
