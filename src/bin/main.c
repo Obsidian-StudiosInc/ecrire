@@ -508,10 +508,10 @@ _drop_cb(void *data, Evas_Object *obj EINA_UNUSED, Elm_Selection_Data *event)
     {
       // FIXME: Need to set/pass filename vs using global
       const char *file = event->data;
-      int len = strlen(file);
+      int len = strlen(file)+1;
       if(drop_file)
         free(drop_file); // just in case
-      drop_file = (char *)malloc(len+1);
+      drop_file = (char *)malloc(len);
       if(drop_file)
         {
           strncpy(drop_file,file,len);
