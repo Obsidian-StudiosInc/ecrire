@@ -25,7 +25,7 @@ find_package(Efreet COMPONENTS mime)
 find_package(Elementary ${EFL_VERSION} REQUIRED)
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-    find_package(intl REQUIRED)
+    find_package(Intl REQUIRED)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 
 INCLUDE(CheckIncludeFiles)
