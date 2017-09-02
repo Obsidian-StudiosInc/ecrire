@@ -21,18 +21,39 @@ include_directories(
    ${EET_INCLUDE_DIRS}
    )
 
+IF (Intl_FOUND)
+   include_directories(${Intl_INCLUDE_DIRS})
+ENDIF (Intl_FOUND)
+
 add_executable(ecrire ${ECRIRE_CC_SOURCES})
-target_link_libraries(ecrire
-   ${EO_LIBRARIES}
-   ${EINA_LIBRARIES}
-   ${ELEMENTARY_LIBRARIES}
-   ${EDJE_LIBRARIES}
-   ${ECORE_LIBRARIES}
-   ${ECORE_INPUT_LIBRARIES}
-   ${EFREET_LIBRARIES}
-   ${EFREET_MIME_LIBRARIES}
-   ${EVAS_LIBRARIES}
-   ${EET_LIBRARIES}
-   )
+
+IF (Intl_FOUND)
+   target_link_libraries(ecrire
+      ${EO_LIBRARIES}
+      ${EINA_LIBRARIES}
+      ${ELEMENTARY_LIBRARIES}
+      ${EDJE_LIBRARIES}
+      ${ECORE_LIBRARIES}
+      ${ECORE_INPUT_LIBRARIES}
+      ${EFREET_LIBRARIES}
+      ${EFREET_MIME_LIBRARIES}
+      ${EVAS_LIBRARIES}
+      ${EET_LIBRARIES}
+      ${Intl_LIBRARIES}
+      )
+ELSE (Intl_FOUND)
+   target_link_libraries(ecrire
+      ${EO_LIBRARIES}
+      ${EINA_LIBRARIES}
+      ${ELEMENTARY_LIBRARIES}
+      ${EDJE_LIBRARIES}
+      ${ECORE_LIBRARIES}
+      ${ECORE_INPUT_LIBRARIES}
+      ${EFREET_LIBRARIES}
+      ${EFREET_MIME_LIBRARIES}
+      ${EVAS_LIBRARIES}
+      ${EET_LIBRARIES}
+      )
+ENDIF (Intl_FOUND)
 
 install(TARGETS ecrire DESTINATION bin)
