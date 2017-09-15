@@ -42,15 +42,25 @@ effects/eye candy.
 Contributions are welcome!
 
 ## Build
-To build for usage run cmake, and then make. The build system will 
-generate deb and rpm's for installation, using either dist or package 
-targets. Dist target will package sources in addition to binaries. 
-Package will only generate deb and rpm's.
+ecrire uses the cmake build system, little chance of switching to meson. 
+The build system will generate deb and rpm's for installation, using 
+either dist or package targets. Dist target will package sources in 
+addition to binaries. Package will only generate deb and rpm's.
+
+## Autotools
+The default build of cmake uses autotools
 
 ```
 cmake .
 make package
 ```
 
-Then you can install via the resulting dep or rpm generated in the dist 
-directory.
+## Ninja
+To use ninja for faster build instead of autotools
+```
+cmake -G Ninja
+ninja package
+```
+
+Then for either autotools or ninja, you can install via the resulting 
+.deb or .rpm generated in the dist directory.
