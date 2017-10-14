@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire \n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-13 21:03-0400\n"
+"POT-Creation-Date: 2017-10-14 00:31-0400\n"
 "PO-Revision-Date: 2012-12-22 03:32+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -32,57 +32,57 @@ msgstr "%s未命名 %d - %s"
 msgid " Line %d, Column %d"
 msgstr "%d 行，%d 列"
 
-#: src/bin/main.c:647
+#: src/bin/main.c:666
 msgid "New"
 msgstr "新建"
 
-#: src/bin/main.c:648
+#: src/bin/main.c:667
 msgid "Open"
 msgstr "打开"
 
-#: src/bin/main.c:650 src/bin/ui/settings_dialog.c:355
+#: src/bin/main.c:669 src/bin/ui/settings_dialog.c:355
 #: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:652 src/bin/ui/alerts.c:65
+#: src/bin/main.c:671 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "保存"
 
-#: src/bin/main.c:654
+#: src/bin/main.c:673
 msgid "Save As"
 msgstr "另存为"
 
-#: src/bin/main.c:658
+#: src/bin/main.c:677
 msgid "Undo"
 msgstr "撤销"
 
-#: src/bin/main.c:660
+#: src/bin/main.c:679
 msgid "Redo"
 msgstr "重做"
 
-#: src/bin/main.c:663
+#: src/bin/main.c:682
 msgid "Cut"
 msgstr "剪切"
 
-#: src/bin/main.c:665
+#: src/bin/main.c:684
 msgid "Copy"
 msgstr "复制"
 
-#: src/bin/main.c:667
+#: src/bin/main.c:686
 msgid "Paste"
 msgstr "粘贴"
 
-#: src/bin/main.c:670
+#: src/bin/main.c:689
 #, fuzzy
 msgid "Search"
 msgstr "搜索："
 
-#: src/bin/main.c:672 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:691 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:675 src/bin/ui/settings_dialog.c:164
+#: src/bin/main.c:694 src/bin/ui/settings_dialog.c:164
 msgid "Settings"
 msgstr "设置"
 
@@ -99,6 +99,10 @@ msgstr "丢弃"
 #: src/bin/ui/alerts.c:75
 msgid "Cancel"
 msgstr "取消"
+
+#: src/bin/ui/file_related.c:53
+msgid "Recent files"
+msgstr ""
 
 #: src/bin/ui/settings_dialog.c:164
 msgid "ecrire"

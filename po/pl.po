@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-13 21:03-0400\n"
+"POT-Creation-Date: 2017-10-14 00:31-0400\n"
 "PO-Revision-Date: 2013-11-22 22:59+0100\n"
 "Last-Translator: Konrad Makowski\n"
 "Language-Team: polish <poczta@konradmakowski.pl>\n"
@@ -35,57 +35,57 @@ msgstr "%sBez tytułu %d - %s"
 msgid " Line %d, Column %d"
 msgstr "Wiersz %d, Kolumna %d"
 
-#: src/bin/main.c:647
+#: src/bin/main.c:666
 msgid "New"
 msgstr "Nowy"
 
-#: src/bin/main.c:648
+#: src/bin/main.c:667
 msgid "Open"
 msgstr "Otwórz"
 
-#: src/bin/main.c:650 src/bin/ui/settings_dialog.c:355
+#: src/bin/main.c:669 src/bin/ui/settings_dialog.c:355
 #: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:652 src/bin/ui/alerts.c:65
+#: src/bin/main.c:671 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Zapisz"
 
-#: src/bin/main.c:654
+#: src/bin/main.c:673
 msgid "Save As"
 msgstr "Zapisz jako"
 
-#: src/bin/main.c:658
+#: src/bin/main.c:677
 msgid "Undo"
 msgstr "Cofnij"
 
-#: src/bin/main.c:660
+#: src/bin/main.c:679
 msgid "Redo"
 msgstr "Ponów"
 
-#: src/bin/main.c:663
+#: src/bin/main.c:682
 msgid "Cut"
 msgstr "Wytnij"
 
-#: src/bin/main.c:665
+#: src/bin/main.c:684
 msgid "Copy"
 msgstr "Kopiuj"
 
-#: src/bin/main.c:667
+#: src/bin/main.c:686
 msgid "Paste"
 msgstr "Wklej"
 
-#: src/bin/main.c:670
+#: src/bin/main.c:689
 #, fuzzy
 msgid "Search"
 msgstr "Szukaj:"
 
-#: src/bin/main.c:672 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:691 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:675 src/bin/ui/settings_dialog.c:164
+#: src/bin/main.c:694 src/bin/ui/settings_dialog.c:164
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -104,6 +104,10 @@ msgstr "Zaniechaj"
 #: src/bin/ui/alerts.c:75
 msgid "Cancel"
 msgstr "Anuluj"
+
+#: src/bin/ui/file_related.c:53
+msgid "Recent files"
+msgstr ""
 
 #: src/bin/ui/settings_dialog.c:164
 msgid "ecrire"

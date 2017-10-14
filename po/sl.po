@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-13 21:03-0400\n"
+"POT-Creation-Date: 2017-10-14 00:31-0400\n"
 "PO-Revision-Date: 2016-09-21 16:51+0200\n"
 "Last-Translator: Renato Rener <renato.rener@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -33,56 +33,56 @@ msgstr "%sNeimenovano %d - %s"
 msgid " Line %d, Column %d"
 msgstr "Vr %d, Stlp %d"
 
-#: src/bin/main.c:647
+#: src/bin/main.c:666
 msgid "New"
 msgstr "Nov"
 
-#: src/bin/main.c:648
+#: src/bin/main.c:667
 msgid "Open"
 msgstr "Odpri"
 
-#: src/bin/main.c:650 src/bin/ui/settings_dialog.c:355
+#: src/bin/main.c:669 src/bin/ui/settings_dialog.c:355
 #: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:652 src/bin/ui/alerts.c:65
+#: src/bin/main.c:671 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Shrani"
 
-#: src/bin/main.c:654
+#: src/bin/main.c:673
 msgid "Save As"
 msgstr "Shrani kot"
 
-#: src/bin/main.c:658
+#: src/bin/main.c:677
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: src/bin/main.c:660
+#: src/bin/main.c:679
 msgid "Redo"
 msgstr "Ponovno uveljavi"
 
-#: src/bin/main.c:663
+#: src/bin/main.c:682
 msgid "Cut"
 msgstr "Izreži"
 
-#: src/bin/main.c:665
+#: src/bin/main.c:684
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: src/bin/main.c:667
+#: src/bin/main.c:686
 msgid "Paste"
 msgstr "Prilepi"
 
-#: src/bin/main.c:670
+#: src/bin/main.c:689
 msgid "Search"
 msgstr "Iskanje"
 
-#: src/bin/main.c:672 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:691 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr "Skoči na"
 
-#: src/bin/main.c:675 src/bin/ui/settings_dialog.c:164
+#: src/bin/main.c:694 src/bin/ui/settings_dialog.c:164
 msgid "Settings"
 msgstr "Nastavitve"
 
@@ -101,6 +101,10 @@ msgstr "Zavrzi"
 #: src/bin/ui/alerts.c:75
 msgid "Cancel"
 msgstr "Prekliči"
+
+#: src/bin/ui/file_related.c:53
+msgid "Recent files"
+msgstr ""
 
 #: src/bin/ui/settings_dialog.c:164
 msgid "ecrire"

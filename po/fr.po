@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-13 21:03-0400\n"
+"POT-Creation-Date: 2017-10-14 00:31-0400\n"
 "PO-Revision-Date: 2014-01-19 19:40+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: français <sansgourou@gmail.com>\n"
@@ -35,57 +35,57 @@ msgstr "%sSans titre %d - %s"
 msgid " Line %d, Column %d"
 msgstr "Ligne %d, Col %d"
 
-#: src/bin/main.c:647
+#: src/bin/main.c:666
 msgid "New"
 msgstr "Nouveau"
 
-#: src/bin/main.c:648
+#: src/bin/main.c:667
 msgid "Open"
 msgstr "Ouvrir"
 
-#: src/bin/main.c:650 src/bin/ui/settings_dialog.c:355
+#: src/bin/main.c:669 src/bin/ui/settings_dialog.c:355
 #: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:652 src/bin/ui/alerts.c:65
+#: src/bin/main.c:671 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/bin/main.c:654
+#: src/bin/main.c:673
 msgid "Save As"
 msgstr "Enreg. sous"
 
-#: src/bin/main.c:658
+#: src/bin/main.c:677
 msgid "Undo"
 msgstr "Défaire"
 
-#: src/bin/main.c:660
+#: src/bin/main.c:679
 msgid "Redo"
 msgstr "Refaire"
 
-#: src/bin/main.c:663
+#: src/bin/main.c:682
 msgid "Cut"
 msgstr "Couper"
 
-#: src/bin/main.c:665
+#: src/bin/main.c:684
 msgid "Copy"
 msgstr "Copier"
 
-#: src/bin/main.c:667
+#: src/bin/main.c:686
 msgid "Paste"
 msgstr "Coller"
 
-#: src/bin/main.c:670
+#: src/bin/main.c:689
 #, fuzzy
 msgid "Search"
 msgstr "Rechercher :"
 
-#: src/bin/main.c:672 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:691 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:675 src/bin/ui/settings_dialog.c:164
+#: src/bin/main.c:694 src/bin/ui/settings_dialog.c:164
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -104,6 +104,10 @@ msgstr "Abandonner"
 #: src/bin/ui/alerts.c:75
 msgid "Cancel"
 msgstr "Annuler"
+
+#: src/bin/ui/file_related.c:53
+msgid "Recent files"
+msgstr ""
 
 #: src/bin/ui/settings_dialog.c:164
 msgid "ecrire"

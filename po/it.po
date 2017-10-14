@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-13 21:03-0400\n"
+"POT-Creation-Date: 2017-10-14 00:31-0400\n"
 "PO-Revision-Date: 2013-12-28 19:15+0100\n"
 "Last-Translator: Massimo Maiurana <maiurana@gmail.com>\n"
 "Language-Team: none\n"
@@ -30,57 +30,57 @@ msgstr "%sSenza titolo %d - %s"
 msgid " Line %d, Column %d"
 msgstr "Riga %d, Col %d"
 
-#: src/bin/main.c:647
+#: src/bin/main.c:666
 msgid "New"
 msgstr "Nuovo"
 
-#: src/bin/main.c:648
+#: src/bin/main.c:667
 msgid "Open"
 msgstr "Apri"
 
-#: src/bin/main.c:650 src/bin/ui/settings_dialog.c:355
+#: src/bin/main.c:669 src/bin/ui/settings_dialog.c:355
 #: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:652 src/bin/ui/alerts.c:65
+#: src/bin/main.c:671 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Salva"
 
-#: src/bin/main.c:654
+#: src/bin/main.c:673
 msgid "Save As"
 msgstr "Salva come"
 
-#: src/bin/main.c:658
+#: src/bin/main.c:677
 msgid "Undo"
 msgstr "Annulla"
 
-#: src/bin/main.c:660
+#: src/bin/main.c:679
 msgid "Redo"
 msgstr "Ripeti"
 
-#: src/bin/main.c:663
+#: src/bin/main.c:682
 msgid "Cut"
 msgstr "Taglia"
 
-#: src/bin/main.c:665
+#: src/bin/main.c:684
 msgid "Copy"
 msgstr "Copia"
 
-#: src/bin/main.c:667
+#: src/bin/main.c:686
 msgid "Paste"
 msgstr "Incolla"
 
-#: src/bin/main.c:670
+#: src/bin/main.c:689
 #, fuzzy
 msgid "Search"
 msgstr "Cerca:"
 
-#: src/bin/main.c:672 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:691 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:675 src/bin/ui/settings_dialog.c:164
+#: src/bin/main.c:694 src/bin/ui/settings_dialog.c:164
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -99,6 +99,10 @@ msgstr "Abbandona"
 #: src/bin/ui/alerts.c:75
 msgid "Cancel"
 msgstr "Annulla"
+
+#: src/bin/ui/file_related.c:53
+msgid "Recent files"
+msgstr ""
 
 #: src/bin/ui/settings_dialog.c:164
 msgid "ecrire"
