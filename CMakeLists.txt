@@ -31,17 +31,6 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 INCLUDE(CheckIncludeFiles)
 CHECK_INCLUDE_FILES(unistd.h HAVE_UNISTD_H)
 
-# likely put this into an FindCompilerAttribute.cmake:
-INCLUDE(CheckCSourceCompiles)
-SET(HAVE___ATTRIBUTE__)
-CHECK_C_SOURCE_COMPILES(
-   "void  foo (int bar __attribute__((unused)) ) { }
-   static void baz (void) __attribute__((unused));
-   static void baz (void) { }
-   int main(){}
-   " HAVE___ATTRIBUTE__
-)
-
 ADD_DEFINITIONS(-DPACKAGE_BIN_DIR="${CMAKE_INSTALL_PREFIX}/bin"
    -DPACKAGE_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${CMAKE_PROJECT_NAME}"
    -DPACKAGE_LIB_DIR="${CMAKE_INSTALL_PREFIX}/lib")
