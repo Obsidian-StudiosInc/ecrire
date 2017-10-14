@@ -225,8 +225,9 @@ _new_doc(Ecrire_Doc *doc) {
 static void
 _open_file(Ecrire_Doc *doc, const char *file)
 {
-  const char *mime;
+  const char *item, *mime;
   int h;
+  Eina_List *list;
 
   if (file)
     {
@@ -249,6 +250,24 @@ _open_file(Ecrire_Doc *doc, const char *file)
         }
       elm_code_file_open(doc->code,file);
       _init_font(doc);
+
+      if(strlen(file)>2)
+        {
+          if(eina_list_count(_ent_cfg->recent) >= ECRIRE_RECENT_COUNT)
+            {
+              item = eina_list_last_data_get(_ent_cfg->recent);
+              list = eina_list_remove(_ent_cfg->recent, item);
+              if(list)
+                  _ent_cfg->recent = list;
+            }
+          if(!eina_list_data_find(_ent_cfg->recent,file))
+            {
+              list = eina_list_prepend(_ent_cfg->recent,strdup(file));
+              if(list)
+                _ent_cfg->recent = list;
+            }
+        }
+
       _set_path(doc,file);
       _set_save_disabled(doc, EINA_TRUE);
       _set_cut_copy_disabled(doc, EINA_TRUE);
