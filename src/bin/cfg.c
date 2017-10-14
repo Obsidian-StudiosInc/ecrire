@@ -32,6 +32,9 @@ _ent_cfg_descriptor_init(void)
    CFG_ADD_BASIC(width, EET_T_INT);
 
 #undef CFG_ADD_BASIC
+
+   EET_DATA_DESCRIPTOR_ADD_LIST_STRING(
+       _ent_cfg_descriptor, Ent_Cfg, "recent", recent );
 }
 
 static void
@@ -127,7 +130,6 @@ ecrire_cfg_save(void)
    if (!config_file)
       return EINA_FALSE;
 
-
    ef = eet_open(config_file, EET_FILE_MODE_WRITE);
    if (!ef)
      {
@@ -140,8 +142,7 @@ ecrire_cfg_save(void)
 
    ret = eet_data_write
          (ef, _ent_cfg_descriptor, _CONFIG_ENTRY, _ent_cfg, EINA_TRUE);
-   
-   
+
    eet_close(ef);
 
    return ret;
