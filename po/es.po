@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-04-19 02:04-0400\n"
+"POT-Creation-Date: 2017-10-13 21:03-0400\n"
 "PO-Revision-Date: 2012-11-08 02:06+0100\n"
 "Last-Translator: Aníbal Garrido <khany@member.trisquel.info>\n"
 "Language-Team: Enlightenment Team\n"
@@ -15,71 +15,76 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/bin/main.c:99
+#: src/bin/main.c:134
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:102
+#: src/bin/main.c:137
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sSin título %d - %s"
 
-#: src/bin/main.c:126
-#, c-format
-msgid "Ln %d, Col %d"
+#: src/bin/main.c:155
+#, fuzzy, c-format
+msgid " Line %d, Column %d"
 msgstr "Lín %d, Col %d"
 
-#: src/bin/main.c:748
+#: src/bin/main.c:647
 msgid "New"
 msgstr "Nuevo"
 
-#: src/bin/main.c:749
+#: src/bin/main.c:648
 msgid "Open"
 msgstr "Abrir"
 
-#: src/bin/main.c:751 src/bin/ui/alerts.c:64
+#: src/bin/main.c:650 src/bin/ui/settings_dialog.c:355
+#: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
+msgid "Close"
+msgstr ""
+
+#: src/bin/main.c:652 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Guardar"
 
-#: src/bin/main.c:752
+#: src/bin/main.c:654
 msgid "Save As"
 msgstr "Guardar como"
 
-#: src/bin/main.c:757
+#: src/bin/main.c:658
 msgid "Undo"
 msgstr "Deshacer"
 
-#: src/bin/main.c:759
+#: src/bin/main.c:660
 msgid "Redo"
 msgstr "Rehacer"
 
-#: src/bin/main.c:762
+#: src/bin/main.c:663
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/bin/main.c:764
+#: src/bin/main.c:665
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/bin/main.c:766
+#: src/bin/main.c:667
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/bin/main.c:769 src/bin/ui/search_dialog.c:148
+#: src/bin/main.c:670
 #, fuzzy
 msgid "Search"
 msgstr "Buscar por:"
 
-#: src/bin/main.c:771 src/bin/ui/goto_dialog.c:60
+#: src/bin/main.c:672 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:774 src/bin/ui/settings_dialog.c:119
+#: src/bin/main.c:675 src/bin/ui/settings_dialog.c:164
 msgid "Settings"
 msgstr "Preferencias"
 
-#: src/bin/ui/alerts.c:60
+#: src/bin/ui/alerts.c:61
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
@@ -87,81 +92,101 @@ msgstr ""
 "<align=center>Quiere guardar los cambios del documento?<br>Los cambios sin "
 "guardar se perderán."
 
-#: src/bin/ui/alerts.c:69
+#: src/bin/ui/alerts.c:70
 msgid "Discard"
 msgstr "Descartar"
 
-#: src/bin/ui/alerts.c:74
+#: src/bin/ui/alerts.c:75
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/bin/ui/settings_dialog.c:117
+#: src/bin/ui/settings_dialog.c:164
 msgid "ecrire"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:117
-#, fuzzy
-msgid "settings"
-msgstr "Preferencias"
-
-#: src/bin/ui/settings_dialog.c:130
+#: src/bin/ui/settings_dialog.c:176
 msgid "Alpha"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:150
-msgid "Word Wrap"
+#: src/bin/ui/settings_dialog.c:196
+msgid "Line Numbers"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:168
+#: src/bin/ui/settings_dialog.c:235
 #, fuzzy
 msgid "Use default font"
 msgstr "Usar el tipo de letra predefinido:"
 
-#: src/bin/ui/settings_dialog.c:186
+#: src/bin/ui/settings_dialog.c:253
 #, fuzzy
 msgid "Font size"
 msgstr "Tamaño del tipo de letra:"
 
-#: src/bin/ui/settings_dialog.c:196
+#: src/bin/ui/settings_dialog.c:263
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/settings_dialog.c:252
+#: src/bin/ui/settings_dialog.c:325
 msgid "OK"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:267
+#: src/bin/ui/settings_dialog.c:340
 msgid "Apply"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:282
-msgid "Close"
+#: src/bin/ui/goto_dialog.c:68
+msgid "Jump to line"
 msgstr ""
 
-#: src/bin/ui/goto_dialog.c:82
-msgid "Jump to line:"
-msgstr ""
-
-#: src/bin/ui/goto_dialog.c:106
+#: src/bin/ui/goto_dialog.c:83
 msgid "Go"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:170
-msgid "Search for:"
+#: src/bin/ui/search_dialog.c:188
+#, fuzzy
+msgid "Search for"
 msgstr "Buscar por:"
 
-#: src/bin/ui/search_dialog.c:194
-msgid "Replace with:"
-msgstr "Sustituir por:"
-
-#: src/bin/ui/search_dialog.c:218
-msgid "Find"
+#: src/bin/ui/search_dialog.c:214 src/bin/ui/search_dialog.c:220
+#, fuzzy
+msgid "Find All"
 msgstr "Buscar"
 
-#: src/bin/ui/search_dialog.c:226
+#: src/bin/ui/search_dialog.c:235
+msgid "Find Previous"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:241
+msgid "Previous"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:256
+#, fuzzy
+msgid "Find Next"
+msgstr "Buscar"
+
+#: src/bin/ui/search_dialog.c:262
+msgid "Next"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:271 src/bin/ui/search_dialog.c:293
+#, fuzzy
+msgid "Replace with"
+msgstr "Sustituir por:"
+
+#: src/bin/ui/search_dialog.c:299
 msgid "Replace"
 msgstr "Sustituir"
+
+#: src/bin/ui/search_dialog.c:314 src/bin/ui/search_dialog.c:320
+#, fuzzy
+msgid "Replace All"
+msgstr "Sustituir"
+
+#, fuzzy
+#~ msgid "settings"
+#~ msgstr "Preferencias"
 
 #~ msgid "Find & Replace"
 #~ msgstr "Buscar y sustituir"

@@ -3,6 +3,7 @@
 #endif
 
 #include <Elementary.h>
+#include "../cfg.h"
 #include "../ecrire.h"
 
 Evas_Object *inwin;
@@ -15,14 +16,50 @@ _cleaning_cb(void *data, Evas_Object *obj, void *event_info)
    evas_object_del(inwin);  /* delete the test window */
 }
 
+static void
+_set_file_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
+{
+  const char *file = elm_object_item_text_get(event_info);
+  elm_fileselector_selected_set((Evas_Object *)data,file);
+
+}
+
 void
 ui_file_open_save_dialog_open(Ecrire_Doc *doc,
                               Evas_Smart_Cb func,
                               Eina_Bool save)
 {
-   Evas_Object *fs;
+   const char *file;
+   Eina_List *itr;
+   Evas_Object *fs, *icon, *sel, *box;
    inwin = elm_win_inwin_add(doc->win);
    evas_object_show(inwin);
+
+   box = elm_box_add(inwin);
+   elm_win_inwin_content_set(inwin, box);
+   evas_object_show(box);
+
+   sel = elm_hoversel_add(inwin);
+   elm_hoversel_auto_update_set(sel,EINA_TRUE);
+   icon = elm_icon_add (inwin);
+   if (elm_icon_standard_set (icon, "document-open-recent") ||
+       elm_icon_standard_set (icon, "document-multiple"))
+     {
+       elm_object_part_content_set(sel, "icon", icon);
+       evas_object_show (icon);
+     }
+   else
+     evas_object_del(icon);
+   elm_object_text_set(sel, _("Recent files"));
+   EINA_LIST_FOREACH(_ent_cfg->recent, itr, file)
+     {
+        elm_hoversel_item_add(sel, (char *)file, NULL, ELM_ICON_NONE, NULL, NULL);
+     }
+               
+   evas_object_size_hint_weight_set(sel, EVAS_HINT_EXPAND, 0);
+   evas_object_size_hint_align_set(sel, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   elm_box_pack_start(box,sel);
+   evas_object_show(sel);
 
    fs = elm_fileselector_add(inwin);
    elm_fileselector_is_save_set(fs, save);
@@ -31,8 +68,11 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
      elm_fileselector_path_set(fs, doc->path);
    else
      elm_fileselector_path_set(fs, getenv("HOME"));
-   elm_win_inwin_content_set(inwin, fs);
+   evas_object_size_hint_weight_set(fs, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+   evas_object_size_hint_align_set(fs, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   elm_box_pack_end(box,fs);
    evas_object_show(fs);
 
+   evas_object_smart_callback_add(sel, "selected", _set_file_cb, fs);
    evas_object_smart_callback_add(fs, "done", _cleaning_cb, func);
 }
