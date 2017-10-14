@@ -4,6 +4,7 @@
 #include <Elementary.h>
 
 #define _ENTITLED_CFG_VERSION 1
+#define ECRIRE_RECENT_COUNT 15
 
 void ecrire_cfg_init(const char *file);
 void ecrire_cfg_shutdown(void);
@@ -23,6 +24,7 @@ typedef struct
    } font;
    Elm_Wrap_Type wrap_type;
    Eina_Bool line_numbers;
+   Eina_List *recent;
 } Ent_Cfg;
 
 extern Ent_Cfg *_ent_cfg;
