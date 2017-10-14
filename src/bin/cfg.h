@@ -24,6 +24,8 @@ typedef struct
    } font;
    Elm_Wrap_Type wrap_type;
    Eina_Bool line_numbers;
+   Eina_Bool menu;
+   Eina_Bool toolbar;
    Eina_List *recent;
 } Ent_Cfg;
 
