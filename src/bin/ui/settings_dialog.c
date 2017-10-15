@@ -132,6 +132,28 @@ settings_line_numbers_cb (void *data,
 }
 
 static void
+settings_menu_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
+{
+  Eina_Bool state;
+  Evas_Object *win;
+
+  state = elm_check_state_get (obj);
+  win = (Evas_Object *)data;
+  if(!state)
+    evas_object_del(elm_win_main_menu_get(win));
+  ent_cfg->menu = state;
+}
+
+static void
+settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
+{
+  Eina_Bool state;
+  
+  state = elm_check_state_get (obj);
+  ent_cfg->toolbar = state;
+}
+
+static void
 settings_word_wrap_cb (void *data,
                        Evas_Object *obj,
                        void *event_info EINA_UNUSED)
@@ -205,6 +227,40 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
   evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->widget);
+  evas_object_show(obj);
+  row++;
+
+  /* Show Menu Label */
+  obj = elm_label_add(table);
+  elm_object_text_set(obj, _("Show Menu"));
+  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set(obj, 1, 0);
+  elm_table_pack(table, obj, 0, row, 1, 1);
+  evas_object_show(obj);
+
+  /* Menu Check box */
+  obj = elm_check_add(table);
+  elm_check_state_set(obj,  _ent_cfg->menu);
+  evas_object_size_hint_align_set(obj, 0, 1);
+  elm_table_pack(table, obj, 1, row, 1, 1);
+  evas_object_smart_callback_add(obj, "changed", settings_menu_cb, doc->win);
+  evas_object_show(obj);
+  row++;
+
+  /* Show Toolbar Label */
+  obj = elm_label_add(table);
+  elm_object_text_set(obj, _("Show Toolbar"));
+  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set(obj, 1, 0);
+  elm_table_pack(table, obj, 0, row, 1, 1);
+  evas_object_show(obj);
+
+  /* Menu Toolbar box */
+  obj = elm_check_add(table);
+  elm_check_state_set(obj,  _ent_cfg->toolbar);
+  evas_object_size_hint_align_set(obj, 0, 1);
+  elm_table_pack(table, obj, 1, row, 1, 1);
+  evas_object_smart_callback_add(obj, "changed", settings_toolbar_cb, doc->win);
   evas_object_show(obj);
   row++;
 
