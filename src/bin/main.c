@@ -48,22 +48,31 @@ _set_path(Ecrire_Doc *doc, const char *file)
 static void
 _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  elm_object_item_disabled_set(doc->cut_item, disabled);
-  elm_object_item_disabled_set(doc->copy_item, disabled);
+  if(_ent_cfg->toolbar)
+    {
+      elm_object_item_disabled_set(doc->cut_item, disabled);
+      elm_object_item_disabled_set(doc->copy_item, disabled);
+    }
 }
 
 static void
 _set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  elm_object_item_disabled_set(doc->save_item, disabled);
-  elm_object_item_disabled_set(doc->save_as_item, disabled);
+  if(_ent_cfg->toolbar)
+    {
+      elm_object_item_disabled_set(doc->save_item, disabled);
+      elm_object_item_disabled_set(doc->save_as_item, disabled);
+    }
 }
 
 static void
 _set_undo_redo_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-   elm_object_item_disabled_set(doc->undo_item, disabled);
-   elm_object_item_disabled_set(doc->redo_item, disabled);
+  if(_ent_cfg->toolbar)
+    {
+       elm_object_item_disabled_set(doc->undo_item, disabled);
+       elm_object_item_disabled_set(doc->redo_item, disabled);
+    }
 }
 
 void
@@ -117,8 +126,11 @@ _sel_cut_copy(void *data,
               Evas_Object *obj EINA_UNUSED,
               void *event_info EINA_UNUSED)
 {
-  Ecrire_Doc *doc = data;
-  elm_object_item_disabled_set(doc->paste_item, EINA_FALSE);
+  if(_ent_cfg->toolbar)
+    {
+      Ecrire_Doc *doc = data;
+      elm_object_item_disabled_set(doc->paste_item, EINA_FALSE);
+    }
 }
 
 static void
@@ -154,7 +166,8 @@ _cur_changed(void *data,
    elm_obj_code_widget_cursor_position_get(doc->widget,&line,&col);
    snprintf(buf, sizeof(buf), _(" Line %d, Column %d"), line, col);
    elm_object_text_set(doc->cursor_label, buf);
-   if(elm_object_item_disabled_get(doc->undo_item) &&
+   if(_ent_cfg->toolbar &&
+      elm_object_item_disabled_get(doc->undo_item) &&
       elm_obj_code_widget_can_undo_get(doc->widget))
      {
        elm_object_item_disabled_set(doc->undo_item, EINA_FALSE);
@@ -164,15 +177,17 @@ _cur_changed(void *data,
 static void
 _check_set_redo(Ecrire_Doc *doc)
 {
-  elm_object_item_disabled_set(doc->redo_item,
-                               !elm_obj_code_widget_can_redo_get(doc->widget));
+  if(_ent_cfg->toolbar)
+    elm_object_item_disabled_set(doc->redo_item,
+                                 !elm_obj_code_widget_can_redo_get(doc->widget));
 }
 
 static void
 _check_set_undo(Ecrire_Doc *doc)
 {
-  elm_object_item_disabled_set(doc->undo_item,
-                               !elm_obj_code_widget_can_undo_get(doc->widget));
+  if(_ent_cfg->toolbar)
+    elm_object_item_disabled_set(doc->undo_item,
+                                 !elm_obj_code_widget_can_undo_get(doc->widget));
 
 }
 
@@ -197,11 +212,14 @@ _redo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 static void
 _changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
-   Ecrire_Doc *doc = data;
-   _set_save_disabled(doc, EINA_FALSE);
-   elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
-   _check_set_redo(doc);
-   _update_cur_file(doc);
+  Ecrire_Doc *doc = data;
+  if(_ent_cfg->toolbar)
+    {
+      _set_save_disabled(doc, EINA_FALSE);
+      elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
+      _check_set_redo(doc);
+    }
+  _update_cur_file(doc);
 }
 
 static void
@@ -215,10 +233,13 @@ static void
 _new_doc(Ecrire_Doc *doc) {
   elm_code_file_new(doc->code);
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
-  elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
   _init_font(doc);
-  _set_save_disabled(doc, EINA_TRUE);
-  _set_undo_redo_disabled(doc, EINA_TRUE);
+  if(_ent_cfg->toolbar)
+    {
+      elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
+      _set_save_disabled(doc, EINA_TRUE);
+      _set_undo_redo_disabled(doc, EINA_TRUE);
+    }
   _update_cur_file(doc);
 }
 
@@ -269,10 +290,13 @@ _open_file(Ecrire_Doc *doc, const char *file)
         }
 
       _set_path(doc,file);
-      _set_save_disabled(doc, EINA_TRUE);
-      _set_cut_copy_disabled(doc, EINA_TRUE);
-      _set_undo_redo_disabled(doc, EINA_TRUE);
-      elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
+      if(_ent_cfg->toolbar)
+        {
+          _set_save_disabled(doc, EINA_TRUE);
+          _set_cut_copy_disabled(doc, EINA_TRUE);
+          _set_undo_redo_disabled(doc, EINA_TRUE);
+          elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
+        }
 
       Elm_Transit *transit = elm_transit_add();
       elm_transit_object_add(transit, doc->box_editor);
@@ -481,11 +505,12 @@ _activate_paste_cb(void *data,
 {
   if (!event)
     return EINA_FALSE;
-
-  Ecrire_Doc *doc = data;
-
-  elm_object_item_disabled_set(doc->paste_item,
-                               (event->data ? EINA_FALSE : EINA_TRUE));
+  if(_ent_cfg->toolbar)
+    {
+      Ecrire_Doc *doc = data;
+      elm_object_item_disabled_set(doc->paste_item,
+                                   (event->data ? EINA_FALSE : EINA_TRUE));
+    }
 
   return EINA_TRUE;
 }
@@ -585,10 +610,55 @@ _key_down_cb(void *data,
   return EINA_TRUE;
 }
 
+void
+add_toolbar(Ecrire_Doc *doc)
+{
+  Evas_Object  *tbar;
+   
+  doc->toolbar = tbar = elm_toolbar_add(doc->win);
+  elm_toolbar_homogeneous_set(tbar, 0);
+  elm_toolbar_shrink_mode_set(tbar, ELM_TOOLBAR_SHRINK_SCROLL);
+  elm_toolbar_select_mode_set(tbar, ELM_OBJECT_SELECT_MODE_NONE);
+  elm_toolbar_align_set(tbar, 0);
+  evas_object_size_hint_align_set(tbar, EVAS_HINT_FILL, 0);
+  elm_box_pack_start(doc->box_main, tbar);
+  evas_object_show(tbar);
+
+  elm_toolbar_item_append(tbar, "document-new", _("New"), _new, doc);
+  elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, doc);
+  doc->close_item =
+    elm_toolbar_item_append(tbar, "document-close", _("Close"), _close_cb, doc);
+  doc->save_item =
+    elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, doc);
+  doc->save_as_item =
+    elm_toolbar_item_append(tbar, "document-save-as", _("Save As"), _save_as, doc);
+  elm_toolbar_item_separator_set(
+        elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
+  doc->undo_item =
+     elm_toolbar_item_append(tbar, "edit-undo", _("Undo"), _undo, doc);
+  doc->redo_item =
+     elm_toolbar_item_append(tbar, "edit-redo", _("Redo"), _redo, doc);
+  elm_toolbar_item_separator_set(
+        elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
+  doc->cut_item = elm_toolbar_item_append(tbar, "edit-cut", _("Cut"), _cut, doc);
+  doc->copy_item =
+     elm_toolbar_item_append(tbar, "edit-copy", _("Copy"), _copy, doc);
+  doc->paste_item =
+     elm_toolbar_item_append(tbar, "edit-paste", _("Paste"), _paste, doc);
+  elm_toolbar_item_separator_set(
+        elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
+  elm_toolbar_item_append(tbar, "edit-find-replace", _("Search"), _find, doc);
+  elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line, doc);
+  elm_toolbar_item_separator_set(
+        elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
+  elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
+        _settings, doc);
+}
+
 static void
 create_window(int argc, char *argv[])
 {
-   Evas_Object  *edit_menu, *file_menu, *menu, *obj, *tbar;
+   Evas_Object  *edit_menu, *file_menu, *menu, *obj;
    Evas_Coord w = 600, h = 600;
 
    main_doc = calloc(1, sizeof(*main_doc));
@@ -634,15 +704,16 @@ create_window(int argc, char *argv[])
        elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line, main_doc);
      }
 
-   tbar = elm_toolbar_add(main_doc->win);
-   elm_toolbar_homogeneous_set(tbar, 0);
-   elm_toolbar_shrink_mode_set(tbar, ELM_TOOLBAR_SHRINK_SCROLL);
-   elm_toolbar_select_mode_set(tbar, ELM_OBJECT_SELECT_MODE_NONE);
-   elm_toolbar_align_set(tbar, 0.0);
-   evas_object_size_hint_weight_set(tbar, 0.0, 0.0);
-   evas_object_size_hint_align_set(tbar, EVAS_HINT_FILL, 0.0);
-   elm_box_pack_end(main_doc->box_main, tbar);
-   evas_object_show(tbar);
+   if(_ent_cfg->toolbar)
+     {
+       add_toolbar(main_doc);
+       /* We don't have a selection when we start, make the items disabled */
+       elm_object_item_disabled_set(main_doc->close_item, EINA_TRUE);
+       _set_cut_copy_disabled(main_doc, EINA_TRUE);
+       elm_object_item_disabled_set(main_doc->paste_item, EINA_TRUE);
+       _set_save_disabled(main_doc, EINA_TRUE);
+       _set_undo_redo_disabled(main_doc, EINA_TRUE);
+     }
 
    main_doc->box_editor = obj = elm_box_add (main_doc->win);
    if(_ent_cfg->alpha)
@@ -684,44 +755,6 @@ create_window(int argc, char *argv[])
    evas_object_smart_callback_add(main_doc->widget, "selection,cleared", _sel_clear, main_doc);
    evas_object_smart_callback_add(main_doc->widget, "selection,copy", _sel_cut_copy, main_doc);
    evas_object_smart_callback_add(main_doc->widget, "selection,cut", _sel_cut_copy, main_doc);
-
-   elm_toolbar_item_append(tbar, "document-new", _("New"), _new, main_doc);
-   elm_toolbar_item_append(tbar, "document-open", _("Open"), _open_cb, main_doc);
-   main_doc->close_item =
-     elm_toolbar_item_append(tbar, "document-close", _("Close"), _close_cb, main_doc);
-   main_doc->save_item =
-     elm_toolbar_item_append(tbar, "document-save", _("Save"), _save, main_doc);
-   main_doc->save_as_item =
-     elm_toolbar_item_append(tbar, "document-save-as", _("Save As"), _save_as, main_doc);
-   elm_toolbar_item_separator_set(
-         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   main_doc->undo_item =
-      elm_toolbar_item_append(tbar, "edit-undo", _("Undo"), _undo, main_doc);
-   main_doc->redo_item =
-      elm_toolbar_item_append(tbar, "edit-redo", _("Redo"), _redo, main_doc);
-   elm_toolbar_item_separator_set(
-         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   main_doc->cut_item = elm_toolbar_item_append(tbar, "edit-cut", _("Cut"), _cut, main_doc);
-   main_doc->copy_item =
-      elm_toolbar_item_append(tbar, "edit-copy", _("Copy"), _copy, main_doc);
-   main_doc->paste_item =
-      elm_toolbar_item_append(tbar, "edit-paste", _("Paste"), _paste, main_doc);
-   elm_toolbar_item_separator_set(
-         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   elm_toolbar_item_append(tbar, "edit-find-replace", _("Search"),
-         _find, main_doc);
-   elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line, main_doc);
-   elm_toolbar_item_separator_set(
-         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
-   elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
-         _settings, main_doc);
-
-   /* We don't have a selection when we start, make the items disabled */
-   elm_object_item_disabled_set(main_doc->close_item, EINA_TRUE);
-   _set_cut_copy_disabled(main_doc, EINA_TRUE);
-   elm_object_item_disabled_set(main_doc->paste_item, EINA_TRUE);
-   _set_save_disabled(main_doc, EINA_TRUE);
-   _set_undo_redo_disabled(main_doc, EINA_TRUE);
 
    elm_drop_target_add(main_doc->widget,
                        ELM_SEL_FORMAT_IMAGE,
