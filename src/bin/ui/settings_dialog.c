@@ -150,6 +150,10 @@ settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
   Eina_Bool state;
   
   state = elm_check_state_get (obj);
+  if(state)
+    add_toolbar((Ecrire_Doc *)data);
+  else
+    evas_object_del(((Ecrire_Doc *)data)->toolbar);
   ent_cfg->toolbar = state;
 }
 
@@ -260,7 +264,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_check_state_set(obj,  _ent_cfg->toolbar);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_toolbar_cb, doc->win);
+  evas_object_smart_callback_add(obj, "changed", settings_toolbar_cb, doc);
   evas_object_show(obj);
   row++;
 
