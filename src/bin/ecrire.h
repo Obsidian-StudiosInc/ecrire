@@ -22,6 +22,7 @@ struct _Ecrire_Doc {
      Evas_Object *box_editor;
      Evas_Object *box_main;
      Evas_Object *cursor_label;
+     Evas_Object *toolbar;
      /* Main Menu Items */
      Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
                      *save_as_item, *paste_item, *undo_item, *redo_item;
@@ -31,6 +32,7 @@ struct _Ecrire_Doc {
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
 
+void add_toolbar(Ecrire_Doc *doc);
 void editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size);
 void editor_save(Ecrire_Doc *doc, void *callback_func);
 void save_do(const char *file, Ecrire_Doc *doc);
