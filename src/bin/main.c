@@ -612,24 +612,27 @@ create_window(int argc, char *argv[])
    elm_win_resize_object_add (main_doc->win, obj);
    evas_object_show (obj);
 
-   menu = elm_win_main_menu_get(main_doc->win);
+   if(_ent_cfg->menu)
+     {
+       menu = elm_win_main_menu_get(main_doc->win);
 
-   file_menu = elm_menu_item_add(menu, NULL, NULL, _("File"), NULL, NULL);
-   elm_menu_item_add(menu, file_menu, "document-new", _("New"), _new, main_doc);
-   elm_menu_item_add(menu, file_menu, "document-open", _("Open"), _open_cb, main_doc);
-   elm_menu_item_add(menu, file_menu, "document-save", _("Save"), _save, main_doc);
-   elm_menu_item_add(menu, file_menu, "document-save-as", _("Save As"), _save_as, main_doc);
-   elm_menu_item_add(menu, file_menu, "preferences-system", _("Settings"), _settings, main_doc);
-   elm_menu_item_add(menu, file_menu, "application-exit", _("Exit"), _close_cb, main_doc);
+       file_menu = elm_menu_item_add(menu, NULL, NULL, _("File"), NULL, NULL);
+       elm_menu_item_add(menu, file_menu, "document-new", _("New"), _new, main_doc);
+       elm_menu_item_add(menu, file_menu, "document-open", _("Open"), _open_cb, main_doc);
+       elm_menu_item_add(menu, file_menu, "document-save", _("Save"), _save, main_doc);
+       elm_menu_item_add(menu, file_menu, "document-save-as", _("Save As"), _save_as, main_doc);
+       elm_menu_item_add(menu, file_menu, "preferences-system", _("Settings"), _settings, main_doc);
+       elm_menu_item_add(menu, file_menu, "application-exit", _("Exit"), _close_cb, main_doc);
 
-   edit_menu = elm_menu_item_add(menu, NULL, NULL, _("Edit"), NULL, NULL);
-   elm_menu_item_add(menu, edit_menu, "edit-undo", _("Undo"), _undo, main_doc);
-   elm_menu_item_add(menu, edit_menu, "edit-redo", _("Redo"), _redo, main_doc);
-   elm_menu_item_add(menu, edit_menu, "edit-cut", _("Cut"), _cut, main_doc);
-   elm_menu_item_add(menu, edit_menu, "edit-copy", _("Copy"), _copy, main_doc);
-   elm_menu_item_add(menu, edit_menu, "edit-paste", _("Paste"), _paste, main_doc);
-   elm_menu_item_add(menu, edit_menu, "edit-find-replace", _("Search"), _find, main_doc);
-   elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line, main_doc);
+       edit_menu = elm_menu_item_add(menu, NULL, NULL, _("Edit"), NULL, NULL);
+       elm_menu_item_add(menu, edit_menu, "edit-undo", _("Undo"), _undo, main_doc);
+       elm_menu_item_add(menu, edit_menu, "edit-redo", _("Redo"), _redo, main_doc);
+       elm_menu_item_add(menu, edit_menu, "edit-cut", _("Cut"), _cut, main_doc);
+       elm_menu_item_add(menu, edit_menu, "edit-copy", _("Copy"), _copy, main_doc);
+       elm_menu_item_add(menu, edit_menu, "edit-paste", _("Paste"), _paste, main_doc);
+       elm_menu_item_add(menu, edit_menu, "edit-find-replace", _("Search"), _find, main_doc);
+       elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line, main_doc);
+     }
 
    tbar = elm_toolbar_add(main_doc->win);
    elm_toolbar_homogeneous_set(tbar, 0);
