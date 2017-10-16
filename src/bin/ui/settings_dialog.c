@@ -128,7 +128,7 @@ settings_line_numbers_cb (void *data,
   
   state = elm_check_state_get (obj);
   elm_obj_code_widget_line_numbers_set ((Elm_Code_Widget *)data, state);
-  ent_cfg->line_numbers = state;
+  ent_cfg->line_numbers = !state;
 }
 
 static void
@@ -141,7 +141,7 @@ settings_menu_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
   win = (Evas_Object *)data;
   if(!state)
     evas_object_del(elm_win_main_menu_get(win));
-  ent_cfg->menu = state;
+  ent_cfg->menu = !state;
 }
 
 static void
@@ -154,7 +154,7 @@ settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
     add_toolbar((Ecrire_Doc *)data);
   else
     evas_object_del(((Ecrire_Doc *)data)->toolbar);
-  ent_cfg->toolbar = state;
+  ent_cfg->toolbar = !state;
 }
 
 static void
@@ -227,7 +227,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Line Numbers Check box */
   obj = elm_check_add(table);
-  elm_check_state_set(obj,  _ent_cfg->line_numbers);
+  elm_check_state_set(obj, !_ent_cfg->line_numbers);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
   evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->widget);
@@ -244,7 +244,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Menu Check box */
   obj = elm_check_add(table);
-  elm_check_state_set(obj,  _ent_cfg->menu);
+  elm_check_state_set(obj, !_ent_cfg->menu);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
   evas_object_smart_callback_add(obj, "changed", settings_menu_cb, doc->win);
@@ -261,7 +261,7 @@ ui_settings_dialog_open(Evas_Object *parent,
 
   /* Menu Toolbar box */
   obj = elm_check_add(table);
-  elm_check_state_set(obj,  _ent_cfg->toolbar);
+  elm_check_state_set(obj, !_ent_cfg->toolbar);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
   evas_object_smart_callback_add(obj, "changed", settings_toolbar_cb, doc);
