@@ -48,7 +48,7 @@ _set_path(Ecrire_Doc *doc, const char *file)
 static void
 _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
       elm_object_item_disabled_set(doc->cut_item, disabled);
       elm_object_item_disabled_set(doc->copy_item, disabled);
@@ -58,7 +58,7 @@ _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 static void
 _set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
       elm_object_item_disabled_set(doc->save_item, disabled);
       elm_object_item_disabled_set(doc->save_as_item, disabled);
@@ -68,7 +68,7 @@ _set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 static void
 _set_undo_redo_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
 {
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
        elm_object_item_disabled_set(doc->undo_item, disabled);
        elm_object_item_disabled_set(doc->redo_item, disabled);
@@ -95,7 +95,8 @@ _init_font(Ecrire_Doc *doc)
 static void
 _alert_if_need_saving(void (*done)(void *data), Ecrire_Doc *doc)
 {
-   if (!elm_object_item_disabled_get(doc->save_item))
+   if (!_ent_cfg->toolbar &&
+       !elm_object_item_disabled_get(doc->save_item))
      {
         ui_alert_need_saving(doc->widget, done, doc);
      }
@@ -126,7 +127,7 @@ _sel_cut_copy(void *data,
               Evas_Object *obj EINA_UNUSED,
               void *event_info EINA_UNUSED)
 {
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
       Ecrire_Doc *doc = data;
       elm_object_item_disabled_set(doc->paste_item, EINA_FALSE);
@@ -137,7 +138,8 @@ static void
 _update_cur_file(Ecrire_Doc *doc)
 {
   const char *filename = NULL, *saving;
-  saving = (!elm_object_item_disabled_get(doc->save_item)) ? "*" : "";
+  saving = (!_ent_cfg->toolbar &&
+            !elm_object_item_disabled_get(doc->save_item)) ? "*" : "";
     {
       char buf[1024];
       if(doc->code->file->file)
@@ -166,7 +168,7 @@ _cur_changed(void *data,
    elm_obj_code_widget_cursor_position_get(doc->widget,&line,&col);
    snprintf(buf, sizeof(buf), _(" Line %d, Column %d"), line, col);
    elm_object_text_set(doc->cursor_label, buf);
-   if(_ent_cfg->toolbar &&
+   if(!_ent_cfg->toolbar &&
       elm_object_item_disabled_get(doc->undo_item) &&
       elm_obj_code_widget_can_undo_get(doc->widget))
      {
@@ -177,7 +179,7 @@ _cur_changed(void *data,
 static void
 _check_set_redo(Ecrire_Doc *doc)
 {
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     elm_object_item_disabled_set(doc->redo_item,
                                  !elm_obj_code_widget_can_redo_get(doc->widget));
 }
@@ -185,7 +187,7 @@ _check_set_redo(Ecrire_Doc *doc)
 static void
 _check_set_undo(Ecrire_Doc *doc)
 {
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     elm_object_item_disabled_set(doc->undo_item,
                                  !elm_obj_code_widget_can_undo_get(doc->widget));
 
@@ -213,7 +215,7 @@ static void
 _changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
   Ecrire_Doc *doc = data;
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
       _set_save_disabled(doc, EINA_FALSE);
       elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
@@ -234,7 +236,7 @@ _new_doc(Ecrire_Doc *doc) {
   elm_code_file_new(doc->code);
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
   _init_font(doc);
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
       elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
       _set_save_disabled(doc, EINA_TRUE);
@@ -290,7 +292,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
         }
 
       _set_path(doc,file);
-      if(_ent_cfg->toolbar)
+      if(!_ent_cfg->toolbar)
         {
           _set_save_disabled(doc, EINA_TRUE);
           _set_cut_copy_disabled(doc, EINA_TRUE);
@@ -505,7 +507,7 @@ _activate_paste_cb(void *data,
 {
   if (!event)
     return EINA_FALSE;
-  if(_ent_cfg->toolbar)
+  if(!_ent_cfg->toolbar)
     {
       Ecrire_Doc *doc = data;
       elm_object_item_disabled_set(doc->paste_item,
@@ -682,7 +684,7 @@ create_window(int argc, char *argv[])
    elm_win_resize_object_add (main_doc->win, obj);
    evas_object_show (obj);
 
-   if(_ent_cfg->menu)
+   if(!_ent_cfg->menu)
      {
        menu = elm_win_main_menu_get(main_doc->win);
 
@@ -704,7 +706,7 @@ create_window(int argc, char *argv[])
        elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line, main_doc);
      }
 
-   if(_ent_cfg->toolbar)
+   if(!_ent_cfg->toolbar)
      {
        add_toolbar(main_doc);
        /* We don't have a selection when we start, make the items disabled */
