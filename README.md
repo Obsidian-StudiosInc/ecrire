@@ -9,6 +9,7 @@ editor for Enlightenment and eventually Tizen as well. Or any device
 that has EFL.
 
 ## Known Issues
+- Please see upstream elm_code open issues [phabricator link](https://phab.enlightenment.org/search/query/eLha9K5oEeGM/)
 - Crash when opening large files
 [issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
 [elm code task #T5497](https://phab.enlightenment.org/T5497)
@@ -33,7 +34,9 @@ Please do not open tasks on syntax highlighting related issues here on github.
 Please open tasks on 
 [Enlightenment's Phabricator](https://phab.enlightenment.org/) 
 for elm code. That is the best place, since those issues will have to be 
-addressed upstream in EFL itself.
+addressed upstream in EFL itself. There maybe also other issues with 
+elm_code that have been
+[filed upstream](https://phab.enlightenment.org/search/query/eLha9K5oEeGM/).
 
 Work is ongoing to get Ecrire into shape for basic daily use. Lots of 
 features will be coming after the most common are implemented, including 
