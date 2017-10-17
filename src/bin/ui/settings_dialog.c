@@ -180,7 +180,6 @@ ui_settings_dialog_open(Evas_Object *parent,
                         Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *entry = doc->widget;
   Evas_Object *ic, *obj, *table;
   int row = 0;
 
