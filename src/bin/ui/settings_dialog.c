@@ -12,7 +12,7 @@ const static int BUTTON_HEIGHT = 27;
 const static int BUTTON_WIDTH = 60;
 
 Ent_Cfg *ent_cfg;
-Evas_Object *fsize, *list, *win;
+Evas_Object *fsize, *list;
 
 static void
 disable_font_widgets(Eina_Bool state)
@@ -62,10 +62,13 @@ settings_apply_font_cb (void *data,
 }
 
 static void
-settings_delete_cb (void *data EINA_UNUSED,
+settings_delete_cb (void *data,
                     Evas_Object *obj EINA_UNUSED,
                     void *event_info EINA_UNUSED)
 {
+   Evas_Object *win;
+
+   win = (Evas_Object *)data;
    evas_object_del(win);
    win = NULL;
 }
@@ -180,11 +183,8 @@ ui_settings_dialog_open(Evas_Object *parent,
                         Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *ic, *obj, *table;
+  Evas_Object *ic, *obj, *table, *win;
   int row = 0;
-
-   if (win)
-     return win;
 
   win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
   elm_win_autodel_set(win, EINA_TRUE);
@@ -391,7 +391,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_size_hint_align_set(obj, 1, 0);
   elm_table_pack (table, obj, 0, row, 1, 1);
   evas_object_size_hint_min_set(obj, ELM_SCALE_SIZE(BUTTON_WIDTH), ELM_SCALE_SIZE(BUTTON_HEIGHT));
-  evas_object_smart_callback_add (obj, "clicked", settings_delete_cb, NULL);
+  evas_object_smart_callback_add (obj, "clicked", settings_delete_cb, win);
   evas_object_show (obj);
   
   /* Apply Button */
@@ -421,7 +421,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   evas_object_size_hint_align_set(obj, 0, 0);
   elm_table_pack (table, obj, 2, row, 1, 1);
   evas_object_size_hint_min_set(obj, ELM_SCALE_SIZE(BUTTON_WIDTH), ELM_SCALE_SIZE(BUTTON_HEIGHT));
-  evas_object_smart_callback_add (obj, "clicked", settings_delete_cb, NULL);
+  evas_object_smart_callback_add (obj, "clicked", settings_delete_cb, win);
   evas_object_show (obj);
 
   /* Box for padding */
