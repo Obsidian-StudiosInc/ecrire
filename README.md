@@ -9,7 +9,8 @@ editor for Enlightenment and eventually Tizen as well. Or any device
 that has EFL.
 
 ## Known Issues
-- Please see upstream elm_code open issues [phabricator link](https://phab.enlightenment.org/search/query/eLha9K5oEeGM/)
+- Please see upstream elm_code open issues
+[phabricator link](https://phab.enlightenment.org/search/query/HfMVBntcnXQF/)
 - Crash when opening large files
 [issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
 [elm code task #T5497](https://phab.enlightenment.org/T5497)
@@ -24,9 +25,9 @@ similar basic text editors. With the exception that ecrire should be
 usable on desktop as well as mobile devices.
 
 Ecrire has been modified to use elementary code widget instead of entry. 
-There are various issues as a result of this change, and some 
-pre-existing issues. Some pre-existing issues have been fixed with the 
-switch and others new issues have been created.
+elm_code is extremely buggy and most of the issues with ecrire are a 
+result of bugs in elm_code. Numerous issues have been filed with 
+[upstream](https://phab.enlightenment.org/search/query/HfMVBntcnXQF/).
 
 Issues relating to syntax highlighting are being tracked in the 
 [Elm Code Syntax Support chart](https://phab.enlightenment.org/w/elm_code/syntax_support/). 
@@ -34,9 +35,7 @@ Please do not open tasks on syntax highlighting related issues here on github.
 Please open tasks on 
 [Enlightenment's Phabricator](https://phab.enlightenment.org/) 
 for elm code. That is the best place, since those issues will have to be 
-addressed upstream in EFL itself. There maybe also other issues with 
-elm_code that have been
-[filed upstream](https://phab.enlightenment.org/search/query/eLha9K5oEeGM/).
+addressed upstream in EFL itself.
 
 Work is ongoing to get Ecrire into shape for basic daily use. Lots of 
 features will be coming after the most common are implemented, including 
