@@ -18,14 +18,14 @@ typedef struct
    unsigned int height;
    unsigned int width;
    unsigned int version;
+   unsigned int line_numbers;
+   unsigned int menu;
+   unsigned int toolbar;
    struct {
         const char *name; /* NULL means theme's font */
         int size; /* 0 means theme's size */
    } font;
    Elm_Wrap_Type wrap_type;
-   Eina_Bool line_numbers;
-   Eina_Bool menu;
-   Eina_Bool toolbar;
    Eina_List *recent;
 } Ent_Cfg;
 
