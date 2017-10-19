@@ -693,15 +693,19 @@ create_window(int argc, char *argv[])
        elm_menu_item_add(menu, file_menu, "document-open", _("Open"), _open_cb, main_doc);
        elm_menu_item_add(menu, file_menu, "document-save", _("Save"), _save, main_doc);
        elm_menu_item_add(menu, file_menu, "document-save-as", _("Save As"), _save_as, main_doc);
+       elm_menu_item_separator_add(menu, file_menu);
        elm_menu_item_add(menu, file_menu, "preferences-system", _("Settings"), _settings, main_doc);
+       elm_menu_item_separator_add(menu, file_menu);
        elm_menu_item_add(menu, file_menu, "application-exit", _("Exit"), _close_cb, main_doc);
 
        edit_menu = elm_menu_item_add(menu, NULL, NULL, _("Edit"), NULL, NULL);
        elm_menu_item_add(menu, edit_menu, "edit-undo", _("Undo"), _undo, main_doc);
        elm_menu_item_add(menu, edit_menu, "edit-redo", _("Redo"), _redo, main_doc);
+       elm_menu_item_separator_add(menu, edit_menu);
        elm_menu_item_add(menu, edit_menu, "edit-cut", _("Cut"), _cut, main_doc);
        elm_menu_item_add(menu, edit_menu, "edit-copy", _("Copy"), _copy, main_doc);
        elm_menu_item_add(menu, edit_menu, "edit-paste", _("Paste"), _paste, main_doc);
+       elm_menu_item_separator_add(menu, edit_menu);
        elm_menu_item_add(menu, edit_menu, "edit-find-replace", _("Search"), _find, main_doc);
        elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line, main_doc);
      }
