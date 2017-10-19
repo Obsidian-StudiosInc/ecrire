@@ -99,7 +99,6 @@ _replace_in_entry(Ecrire_Doc *doc)
 {
   Eina_Bool replaced = EINA_FALSE;
   const char *find, *replace;
-  int  len, col, row;
   int pos;
 
   find = elm_entry_entry_get(find_entry);
@@ -108,17 +107,9 @@ _replace_in_entry(Ecrire_Doc *doc)
   pos = _find_in_entry(doc, find, EINA_TRUE);
   if(pos>=0)
     {
-      Elm_Code_Line *code_line;
-
       replace = elm_entry_entry_get(replace_entry);
-      elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
-      code_line = elm_code_file_line_get(doc->code->file,row);
-      len = strlen(find);
-      elm_code_line_text_remove(code_line, pos, len);
-      len = strlen(replace);
-      elm_code_line_text_insert(code_line, pos, replace, len);
-      /* Fix me this clears all not just the current selection */
-      elm_code_widget_selection_clear(doc->widget);
+      elm_code_widget_selection_delete(doc->widget);
+      elm_code_widget_text_at_cursor_insert(doc->widget, replace);
       efl_event_callback_legacy_call(doc->widget,
                                      ELM_OBJ_CODE_WIDGET_EVENT_CHANGED_USER,
                                      NULL);
