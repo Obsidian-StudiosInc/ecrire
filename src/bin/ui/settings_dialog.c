@@ -177,22 +177,26 @@ settings_word_wrap_cb (void *data,
 }
 
 Evas_Object *
-ui_settings_dialog_open(Evas_Object *parent,
-                        Ecrire_Doc *doc,
-                        Ent_Cfg *_ent_cfg)
+_settings_dialog_display(Evas_Object *parent,
+                         Ecrire_Doc *doc,
+                         Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *ic, *obj, *table, *win;
+  Evas_Object *boxv, *obj, *table;
   int row = 0;
 
-  win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
-  elm_win_autodel_set(win, EINA_TRUE);
-  evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
+  boxv = elm_box_add(parent);
+  evas_object_size_hint_weight_set(boxv, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(boxv, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  evas_object_show(boxv);
 
-  table = elm_table_add(win);
+  table = elm_table_add(boxv);
   elm_table_padding_set(table,ELM_SCALE_SIZE(PADDING),ELM_SCALE_SIZE(PADDING));
   evas_object_size_hint_padding_set (table, ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING),
                                      ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING));
+  evas_object_size_hint_weight_set(table, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(table, 0, 0);
+  elm_box_pack_end (boxv, table);
   evas_object_show(table);
 
   /* Alpha Label */
@@ -210,7 +214,7 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_slider_value_set (obj, ent_cfg->alpha);
   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
-  elm_table_pack (table, obj, 1, row, 2, 1);
+  elm_table_pack (table, obj, 1, row, 3, 1);
   evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, doc);
   evas_object_show (obj);
   row++;
@@ -288,6 +292,30 @@ ui_settings_dialog_open(Evas_Object *parent,
   row++;
 */
 
+  return(boxv);
+}
+
+Evas_Object *
+_settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
+{
+  ent_cfg = _ent_cfg;
+  Evas_Object *boxv, *obj, *table;
+  int row = 0;
+
+  boxv = elm_box_add(parent);
+  evas_object_size_hint_weight_set(boxv, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(boxv, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_box_horizontal_set(boxv, EINA_FALSE);
+  evas_object_show(boxv);
+
+  table = elm_table_add(boxv);
+  elm_table_padding_set(table,ELM_SCALE_SIZE(PADDING),ELM_SCALE_SIZE(PADDING));
+  evas_object_size_hint_padding_set (table, ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING),
+                                     ELM_SCALE_SIZE(PADDING), ELM_SCALE_SIZE(PADDING));
+  evas_object_size_hint_align_set(table, 0, 0);
+  elm_box_pack_end (boxv, table);
+  evas_object_show(table);
+
   /* Use default font Label */
   obj = elm_label_add(table);
   elm_object_text_set(obj, _("Use default font"));
@@ -328,26 +356,14 @@ ui_settings_dialog_open(Evas_Object *parent,
   elm_table_pack (table, fsize, 1, row, 2, 1);
   evas_object_smart_callback_add(fsize, "changed", settings_apply_font_cb, doc);
   evas_object_show(fsize);
-  row++;
 
-  /* Fonts box */
-   obj = elm_box_add(table);
-   elm_box_horizontal_set(obj, EINA_TRUE);
-   evas_object_size_hint_min_set(obj, 1, ELM_SCALE_SIZE(300));
-   evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   elm_table_pack (table, obj, 0, row, 3, 1);
-
-   evas_object_show(obj);
-   row++;
-   
   /* Fonts List */
-  list = elm_list_add(table);
+  list = elm_list_add(boxv);
   if(!ent_cfg->font.name)
     disable_font_widgets(EINA_TRUE);
   evas_object_size_hint_weight_set(list, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set(list, EVAS_HINT_FILL, EVAS_HINT_FILL);
-  elm_box_pack_end (obj, list);
+  elm_box_pack_end (boxv, list);
   evas_object_show(list);
 
   /* Populate list */
@@ -378,8 +394,78 @@ ui_settings_dialog_open(Evas_Object *parent,
     }
   evas_object_smart_callback_add(list, "selected", settings_apply_font_cb, doc);
 
+  return(boxv);
+}
+
+static void
+_settings_dialog_promote_cb(void *data,
+                            Evas_Object *obj EINA_UNUSED,
+                            void *event_info EINA_UNUSED)
+{
+   elm_naviframe_item_promote(data);
+}
+
+Evas_Object *
+ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
+{
+  ent_cfg = _ent_cfg;
+  Evas_Object *boxh, *boxv, *ic, *obj, *nf, *nfi, *tb, *win;
+  unsigned int h, w;
+  
+
+  win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
+  elm_win_autodel_set(win, EINA_TRUE);
+  evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
+  evas_object_geometry_get(doc->win, NULL, NULL, &w, &h);
+
+  boxh = elm_box_add(win);
+  evas_object_size_hint_weight_set(boxh, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(boxh, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_box_horizontal_set(boxh, EINA_TRUE);
+  evas_object_show(boxh);
+
+  boxv = elm_box_add(win);
+  evas_object_size_hint_weight_set(boxv, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(boxv, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_box_horizontal_set(boxv, EINA_FALSE);
+  elm_win_resize_object_add(win, boxv);
+  evas_object_show(boxv);
+
+  tb = elm_toolbar_add(win);
+  evas_object_size_hint_weight_set(tb, 0, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(tb, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_toolbar_horizontal_set(tb, EINA_FALSE);
+  elm_toolbar_select_mode_set(tb, ELM_OBJECT_SELECT_MODE_ALWAYS);
+  elm_box_pack_end(boxh, tb);
+  evas_object_show(tb);
+
+  nf = elm_naviframe_add(win);
+  evas_object_size_hint_weight_set(nf, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_size_hint_align_set(nf, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  elm_naviframe_prev_btn_auto_pushed_set(nf, EINA_FALSE);
+  elm_box_pack_end(boxh, nf);
+  evas_object_show(nf);
+
+  obj = _settings_dialog_font(win, doc, ent_cfg); 
+  nfi = elm_naviframe_item_push(nf, _("Font Settings"), NULL, NULL, obj, NULL);
+  elm_toolbar_item_append(tb,
+                          "preferences-desktop-font",
+                          _("Font"),
+                          _settings_dialog_promote_cb,
+                          nfi);
+  
+  obj = _settings_dialog_display(win, doc, ent_cfg); 
+  nfi = elm_naviframe_item_push(nf, _("Display Settings"), NULL, NULL, obj, NULL);
+  elm_toolbar_item_prepend(tb,
+                           "preferences-desktop-display",
+                           _("Display"),
+                           _settings_dialog_promote_cb,
+                           nfi);
+
+  elm_box_pack_end(boxv, boxh);
+  
   /* Close Button */
-  obj = elm_button_add(table);
+  obj = elm_button_add(win);
   elm_object_text_set(obj,_("Close"));
   ic = elm_image_add (win);
   if (elm_icon_standard_set (ic,"dialog-close")) {
@@ -388,18 +474,12 @@ ui_settings_dialog_open(Evas_Object *parent,
   } else
     evas_object_del(ic);
   evas_object_size_hint_align_set(obj, 0.5, 0);
-  elm_table_pack (table, obj, 0, row, 3, 1);
   evas_object_size_hint_min_set(obj, ELM_SCALE_SIZE(BUTTON_WIDTH), ELM_SCALE_SIZE(BUTTON_HEIGHT));
   evas_object_smart_callback_add (obj, "clicked", settings_delete_cb, win);
+  elm_box_pack_end(boxv, obj);
   evas_object_show (obj);
 
-  /* Box for padding */
-  obj = elm_box_add (win);
-  elm_box_pack_end (obj, table);
-  evas_object_show (obj);
-
-  /* Forcing it to be the min height. */
-  elm_win_resize_object_add (win, obj);
+  evas_object_resize(win, w * 0.8, h * 0.8);
   elm_win_raise (win);
   evas_object_show (win);
 
