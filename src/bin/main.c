@@ -757,6 +757,7 @@ create_window(int argc, char *argv[])
      ALPHA (obj, _ent_cfg->alpha);
    evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
    evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   evas_object_size_hint_padding_set(obj, 0, 5, 0, 0);
    elm_box_pack_end(main_doc->box_main,obj);
    evas_object_show (obj);
 
