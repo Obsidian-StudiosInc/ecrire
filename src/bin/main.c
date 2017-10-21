@@ -243,6 +243,7 @@ _new_doc(Ecrire_Doc *doc) {
       _set_undo_redo_disabled(doc, EINA_TRUE);
     }
   _update_cur_file(doc);
+  elm_object_text_set(doc->label_mime,"");
 }
 
 static void
@@ -270,6 +271,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
               else
                 elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
             }
+          elm_object_text_set(doc->label_mime,mime);
         }
       elm_code_file_open(doc->code,file);
       _init_font(doc);
@@ -745,12 +747,27 @@ create_window(int argc, char *argv[])
    elm_box_pack_end(main_doc->box_main, main_doc->box_editor);
    evas_object_show(main_doc->widget);
 
-   main_doc->cursor_label = obj = elm_label_add(main_doc->win);
+   obj = elm_box_add (main_doc->win);
+   elm_box_horizontal_set(obj, EINA_TRUE);
+   if(_ent_cfg->alpha)
+     ALPHA (obj, _ent_cfg->alpha);
+   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
+   evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   elm_box_pack_end(main_doc->box_main,obj);
+   evas_object_show (obj);
+
+   main_doc->cursor_label = elm_label_add(obj);
    _cur_changed(main_doc, NULL, NULL);
-   evas_object_size_hint_align_set(obj, 0, 0.5);
-   evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0.0);
-   elm_box_pack_end(main_doc->box_main, obj);
-   evas_object_show(obj);
+   evas_object_size_hint_weight_set(main_doc->cursor_label, EVAS_HINT_EXPAND, 0);
+   evas_object_size_hint_align_set(main_doc->cursor_label, 0, EVAS_HINT_FILL);
+   elm_box_pack_start(obj, main_doc->cursor_label);
+   evas_object_show(main_doc->cursor_label);
+
+   main_doc->label_mime = elm_label_add(obj);
+   evas_object_size_hint_weight_set(main_doc->label_mime, EVAS_HINT_EXPAND, 0);
+   evas_object_size_hint_align_set(main_doc->label_mime, 1, EVAS_HINT_FILL);
+   elm_box_pack_end(obj, main_doc->label_mime);
+   evas_object_show(main_doc->label_mime);
 
    evas_object_smart_callback_add(main_doc->widget, "cursor,changed",
          _cur_changed, main_doc);
