@@ -22,6 +22,7 @@ struct _Ecrire_Doc {
      Evas_Object *box_editor;
      Evas_Object *box_main;
      Evas_Object *cursor_label;
+     Evas_Object *label_mime;
      Evas_Object *toolbar;
      /* Main Menu Items */
      Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
