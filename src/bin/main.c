@@ -325,7 +325,7 @@ _fs_open_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
 void
 save_do(const char *file, Ecrire_Doc *doc)
 {
-  const char *filename = NULL;
+  const char *filename = NULL, *mime = NULL;
 
   if(doc->code->file->file)
     filename = eina_file_filename_get(doc->code->file->file);
@@ -356,6 +356,10 @@ save_do(const char *file, Ecrire_Doc *doc)
       _set_save_disabled(doc, EINA_TRUE);
       _update_cur_file(doc);
     }
+
+  mime = efreet_mime_type_get(file);
+  if(mime)
+    elm_object_text_set(doc->label_mime,mime);
 }
 
 static void
