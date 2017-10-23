@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-14 23:36-0400\n"
+"POT-Creation-Date: 2017-10-21 10:38-0400\n"
 "PO-Revision-Date: 2014-01-02 15:10+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -18,85 +18,85 @@ msgstr ""
 "X-Launchpad-Export-Date: 2014-01-03 05:48+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
-#: src/bin/main.c:134
+#: src/bin/main.c:148
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:137
+#: src/bin/main.c:151
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sSentitola %d - %s"
 
-#: src/bin/main.c:155
+#: src/bin/main.c:169
 #, fuzzy, c-format
 msgid " Line %d, Column %d"
 msgstr "Lin %d, Kol %d"
 
-#: src/bin/main.c:619
-msgid "File"
-msgstr ""
-
-#: src/bin/main.c:620 src/bin/main.c:688
+#: src/bin/main.c:635 src/bin/main.c:698
 msgid "New"
 msgstr "Nova"
 
-#: src/bin/main.c:621 src/bin/main.c:689
+#: src/bin/main.c:636 src/bin/main.c:699
 msgid "Open"
 msgstr "Malfermi"
 
-#: src/bin/main.c:622 src/bin/main.c:693 src/bin/ui/alerts.c:65
+#: src/bin/main.c:638 src/bin/ui/settings_dialog.c:469
+#: src/bin/ui/search_dialog.c:327 src/bin/ui/search_dialog.c:333
+msgid "Close"
+msgstr ""
+
+#: src/bin/main.c:640 src/bin/main.c:700 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Konservi"
 
-#: src/bin/main.c:623 src/bin/main.c:695
+#: src/bin/main.c:642 src/bin/main.c:701
 msgid "Save As"
 msgstr "Konservi kiel"
 
-#: src/bin/main.c:624 src/bin/main.c:716 src/bin/ui/settings_dialog.c:186
-msgid "Settings"
-msgstr "Agordoj"
-
-#: src/bin/main.c:625
-msgid "Exit"
-msgstr ""
-
-#: src/bin/main.c:627
-msgid "Edit"
-msgstr ""
-
-#: src/bin/main.c:628 src/bin/main.c:699
+#: src/bin/main.c:646 src/bin/main.c:708
 msgid "Undo"
 msgstr "Malfari"
 
-#: src/bin/main.c:629 src/bin/main.c:701
+#: src/bin/main.c:648 src/bin/main.c:709
 msgid "Redo"
 msgstr "Refari"
 
-#: src/bin/main.c:630 src/bin/main.c:704
+#: src/bin/main.c:651 src/bin/main.c:711
 msgid "Cut"
 msgstr "Eltondi"
 
-#: src/bin/main.c:631 src/bin/main.c:706
+#: src/bin/main.c:653 src/bin/main.c:712
 msgid "Copy"
 msgstr "Kopii"
 
-#: src/bin/main.c:632 src/bin/main.c:708
+#: src/bin/main.c:655 src/bin/main.c:713
 msgid "Paste"
 msgstr "Alglui"
 
-#: src/bin/main.c:633 src/bin/main.c:711
+#: src/bin/main.c:658 src/bin/main.c:715
 #, fuzzy
 msgid "Search"
 msgstr "Serĉi:"
 
-#: src/bin/main.c:634 src/bin/main.c:713 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:659 src/bin/main.c:716 src/bin/ui/goto_dialog.c:54
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:691 src/bin/ui/settings_dialog.c:411
-#: src/bin/ui/search_dialog.c:337 src/bin/ui/search_dialog.c:343
-msgid "Close"
+#: src/bin/main.c:662 src/bin/main.c:703 src/bin/ui/settings_dialog.c:416
+msgid "Settings"
+msgstr "Agordoj"
+
+#: src/bin/main.c:697
+msgid "File"
+msgstr ""
+
+#: src/bin/main.c:705
+msgid "Exit"
+msgstr ""
+
+#: src/bin/main.c:707
+msgid "Edit"
 msgstr ""
 
 #: src/bin/ui/alerts.c:61
@@ -119,47 +119,58 @@ msgstr "Nuligi"
 msgid "Recent files"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:186
-msgid "ecrire"
-msgstr ""
-
-#: src/bin/ui/settings_dialog.c:198
+#: src/bin/ui/settings_dialog.c:204
 msgid "Alpha"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:218
+#: src/bin/ui/settings_dialog.c:224
 msgid "Line Numbers"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:235
+#: src/bin/ui/settings_dialog.c:241
 msgid "Show Menu"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:252
+#: src/bin/ui/settings_dialog.c:258
 msgid "Show Toolbar"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:291
+#: src/bin/ui/settings_dialog.c:321
 #, fuzzy
 msgid "Use default font"
 msgstr "Uzi aprioran tiparon:"
 
-#: src/bin/ui/settings_dialog.c:309
+#: src/bin/ui/settings_dialog.c:339
 #, fuzzy
 msgid "Font size"
 msgstr "Grando de tiparo:"
 
-#: src/bin/ui/settings_dialog.c:319
+#: src/bin/ui/settings_dialog.c:349
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f erojn"
 
-#: src/bin/ui/settings_dialog.c:381
-msgid "OK"
+#: src/bin/ui/settings_dialog.c:416
+msgid "ecrire"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:396
-msgid "Apply"
+#: src/bin/ui/settings_dialog.c:450
+#, fuzzy
+msgid "Font Settings"
+msgstr "Agordoj"
+
+#: src/bin/ui/settings_dialog.c:453
+#, fuzzy
+msgid "Font"
+msgstr "Grando de tiparo:"
+
+#: src/bin/ui/settings_dialog.c:458
+#, fuzzy
+msgid "Display Settings"
+msgstr "Agordoj"
+
+#: src/bin/ui/settings_dialog.c:461
+msgid "Display"
 msgstr ""
 
 #: src/bin/ui/goto_dialog.c:68
@@ -171,43 +182,43 @@ msgstr "Iru al linio:"
 msgid "Go"
 msgstr "Iri"
 
-#: src/bin/ui/search_dialog.c:188
+#: src/bin/ui/search_dialog.c:178
 #, fuzzy
 msgid "Search for"
 msgstr "Serĉi:"
 
-#: src/bin/ui/search_dialog.c:214 src/bin/ui/search_dialog.c:220
+#: src/bin/ui/search_dialog.c:204 src/bin/ui/search_dialog.c:210
 #, fuzzy
 msgid "Find All"
 msgstr "Trovi"
 
-#: src/bin/ui/search_dialog.c:235
+#: src/bin/ui/search_dialog.c:225
 msgid "Find Previous"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:241
+#: src/bin/ui/search_dialog.c:231
 msgid "Previous"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:256
+#: src/bin/ui/search_dialog.c:246
 #, fuzzy
 msgid "Find Next"
 msgstr "Trovi"
 
-#: src/bin/ui/search_dialog.c:262
+#: src/bin/ui/search_dialog.c:252
 msgid "Next"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:271 src/bin/ui/search_dialog.c:293
+#: src/bin/ui/search_dialog.c:261 src/bin/ui/search_dialog.c:283
 #, fuzzy
 msgid "Replace with"
 msgstr "Anstataŭigi per:"
 
-#: src/bin/ui/search_dialog.c:299
+#: src/bin/ui/search_dialog.c:289
 msgid "Replace"
 msgstr "Anstataŭigi"
 
-#: src/bin/ui/search_dialog.c:314 src/bin/ui/search_dialog.c:320
+#: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
 #, fuzzy
 msgid "Replace All"
 msgstr "Anstataŭigi"
