@@ -12,6 +12,39 @@ const static int BUTTON_WIDTH = 70;
 const static int BUTTON_ICON_SIZE = 12;
 
 static Evas_Object *find_entry, *replace_entry, *search_box;
+static Evas_Object *case_button;
+
+EAPI int
+elm_code_text_strncasepos(const char *content,
+                          unsigned int length,
+                          const char *search,
+                          int offset,
+                          Eina_Bool match_case)
+{
+  unsigned int searchlen, c;
+  char *ptr;
+
+  searchlen = strlen(search);
+  ptr = (char *) content;
+
+  if (searchlen > length)
+    return ELM_CODE_TEXT_NOT_FOUND;
+
+  ptr += offset;
+  for (c = offset; c <= length - searchlen; c++)
+    {
+      if(match_case)
+        {
+          if (!strncmp(ptr, search, searchlen))
+            return c;
+        }
+      else if (!strncasecmp(ptr, search, searchlen))
+        return c;
+      ptr++;
+    }
+
+   return ELM_CODE_TEXT_NOT_FOUND;
+}
 
 static void
 _search_box_del(void *data EINA_UNUSED,
@@ -20,6 +53,14 @@ _search_box_del(void *data EINA_UNUSED,
 {
   evas_object_del(search_box);
   search_box = NULL;
+}
+
+static void
+_search_case_cb(void *data EINA_UNUSED,
+                Evas_Object *obj,
+                void *event_info EINA_UNUSED)
+{
+  elm_object_disabled_set(obj,!elm_object_disabled_get(obj));
 }
 
 static void
@@ -45,7 +86,8 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
 {
   Eina_Bool reset = EINA_TRUE;
   Elm_Code_Line *code_line;
-  int i, found, col, row, lines;
+  const char *line;
+  int i, found, col, row, lines, len;
 
   if (!text || !*text)
     return EINA_FALSE;
@@ -56,7 +98,9 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
   while(i>=0 && i<=lines)
     {
       code_line = elm_code_file_line_get(doc->code->file,i);
-      found = elm_code_line_text_strpos(code_line,text,col);
+      line = elm_code_line_text_get(code_line, &len);
+      found = elm_code_text_strncasepos(line,len,text,col,
+                                        elm_object_disabled_get(case_button));
       if(found>=0)
         {
           _search_select_text(doc->widget, code_line, text, found, i, col);
@@ -254,6 +298,27 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
   elm_table_pack (table, obj, 4, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _search_next_cb, doc);
   evas_object_show(obj);
+
+  case_button = elm_button_add(table);
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "format-text-bold"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(case_button, "icon", icon);
+      elm_object_tooltip_text_set(case_button, _("Match case"));
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(case_button, _("Match Case"));
+    }
+  elm_table_pack (table, case_button, 5, row, 1, 1);
+  evas_object_smart_callback_add(case_button, "clicked", _search_case_cb, doc);
+  evas_object_show(case_button);
   row++;
 
   /* Replace with Label */
