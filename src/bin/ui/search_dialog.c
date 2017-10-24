@@ -386,8 +386,6 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
       evas_object_size_hint_min_set(icon,
                                     ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
                                     ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
-      evas_object_size_hint_weight_set(icon, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-      evas_object_size_hint_align_set(icon, EVAS_HINT_FILL, 0.5);
       elm_object_part_content_set(obj, "icon", icon);
       elm_object_tooltip_text_set(obj, _("Close"));
       evas_object_show (icon);
