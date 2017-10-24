@@ -7,15 +7,31 @@
 #endif
 
 #include <Elementary.h>
+#include <Ecore_Getopt.h>
 
 #include "ecrire.h"
 #include "cfg.h"
 #include "ui/ui.h"
 
+static const Ecore_Getopt options =
+{
+   "ecrire",
+   "%prog [OPTION]... [FILE]",
+   VERSION,
+   "(C) 2017 Obsidian-Studios, Inc. see AUTHORS.",
+   "GPL-3.0, see COPYING",
+   "Open source text editor using EFL",
+   EINA_TRUE,
+   {
+      ECORE_GETOPT_HELP ('h', "help"),
+      ECORE_GETOPT_VERSION('V', "version"),
+      ECORE_GETOPT_COPYRIGHT('R', "copyright"),
+      ECORE_GETOPT_LICENSE('L', "license"),
+      ECORE_GETOPT_SENTINEL
+   }
+};
 static Eina_Unicode plain_utf8 = EINA_TRUE;
 static Ecrire_Doc *main_doc;
-
-static void print_usage(const char *bin);
 
 Eina_Bool ctrl_pressed = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
@@ -827,12 +843,22 @@ create_window(int argc, char *argv[])
    elm_object_focus_set(main_doc->widget, EINA_TRUE);
 }
 
-int
-main(int argc, char *argv[])
+EAPI_MAIN int
+elm_main(int argc, char **argv)
 {
-   int c;
+   int args;
+   unsigned char quit_option = 0;
+   Ecore_Getopt_Value values[] =
+     {
+        ECORE_GETOPT_VALUE_BOOL(quit_option),
+        ECORE_GETOPT_VALUE_BOOL(quit_option),
+        ECORE_GETOPT_VALUE_BOOL(quit_option),
+        ECORE_GETOPT_VALUE_BOOL(quit_option)
+     };
 
-   opterr = 0;
+   args = ecore_getopt_parse(&options, values, argc, argv);
+   if (quit_option)
+     return EXIT_SUCCESS;
 
    if (!eina_init())
      {
@@ -845,28 +871,6 @@ main(int argc, char *argv[])
      {
         EINA_LOG_ERR("Unable to create a log domain.");
         exit(-1);
-     }
-
-   while ((c = getopt (argc, argv, "")) != -1)
-     {
-        switch (c)
-          {
-           case '?':
-              print_usage(argv[0]);
-              if (isprint (optopt))
-                {
-                   ERR("Unknown option or requires an argument `-%c'.",
-                         optopt);
-                }
-              else
-                {
-                   ERR("Unknown option character `\\x%x'.", optopt);
-                }
-              return 1;
-              break;
-           default:
-              abort();
-          }
      }
 
    setlocale(LC_ALL, "");
@@ -890,10 +894,4 @@ main(int argc, char *argv[])
 
    return 0;
 }
-
-static void
-print_usage(const char *bin)
-{
-   fprintf(stderr,
-         "Usage: %s [filename]\n", bin);
-}
+ELM_MAIN()
