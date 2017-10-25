@@ -57,10 +57,13 @@ elm_code_text_strnsearchpos(const char *content,
       if(whole_word)
         {
           char *whole_search;
+          Eina_Bool matched;
 
           whole_search = malloc(searchlen+10 * sizeof(char));
           snprintf(whole_search,searchlen+10,"^(%s)(\\W)",search);
-          if (match(ptr, whole_search, match_case))
+          matched = match(ptr, whole_search, match_case);
+          free(whole_search);
+          if (matched)
             return c;
         }
       else if(match_case)
