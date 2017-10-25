@@ -56,9 +56,9 @@ _search_box_del(void *data EINA_UNUSED,
 }
 
 static void
-_search_case_cb(void *data EINA_UNUSED,
-                Evas_Object *obj,
-                void *event_info EINA_UNUSED)
+_elm_obj_toggle_cb(void *data EINA_UNUSED,
+                   Evas_Object *obj,
+                   void *event_info EINA_UNUSED)
 {
   elm_object_disabled_set(obj,!elm_object_disabled_get(obj));
 }
@@ -317,7 +317,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
       elm_object_text_set(case_button, _("Match Case"));
     }
   elm_table_pack (table, case_button, 5, row, 1, 1);
-  evas_object_smart_callback_add(case_button, "clicked", _search_case_cb, doc);
+  evas_object_smart_callback_add(case_button, "clicked", _elm_obj_toggle_cb, doc);
   evas_object_show(case_button);
   row++;
 
@@ -395,7 +395,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
       evas_object_del(icon);
       elm_object_text_set(obj, _("Close"));
     }
-  elm_table_pack (table, obj, 4, row, 1, 1);
+  elm_table_pack (table, obj, 5, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _search_box_del, doc);
   evas_object_show(obj);
 
