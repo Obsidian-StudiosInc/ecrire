@@ -8,8 +8,6 @@
 #include "../ecrire.h"
 
 const static int PADDING = 2;
-const static int BUTTON_HEIGHT = 29;
-const static int BUTTON_WIDTH = 70;
 const static int BUTTON_ICON_SIZE = 12;
 
 static Evas_Object *find_entry, *replace_entry, *search_box;
