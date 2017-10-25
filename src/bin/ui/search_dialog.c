@@ -1,6 +1,7 @@
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif
+#include <regex.h>
 
 #include <Elementary.h>
 
@@ -12,14 +13,34 @@ const static int BUTTON_WIDTH = 70;
 const static int BUTTON_ICON_SIZE = 12;
 
 static Evas_Object *find_entry, *replace_entry, *search_box;
-static Evas_Object *case_button;
+static Evas_Object *case_button, *whole_button;
+
+Eina_Bool
+match(const char *string, char *pattern, Eina_Bool match_case)
+{
+    int    flags, status;
+    regex_t    re;
+
+    flags = REG_EXTENDED|REG_NOSUB;
+    if(match_case)
+        flags = flags | REG_ICASE;
+    if (regcomp(&re, pattern, flags) != 0)
+      return(EINA_FALSE);      /* Report error. */
+
+    status = regexec(&re, string, (size_t) 0, NULL, 0);
+    regfree(&re);
+    if (status != 0)
+      return(EINA_FALSE);      /* Report error. */
+    return(EINA_TRUE);
+}
 
 EAPI int
-elm_code_text_strncasepos(const char *content,
-                          unsigned int length,
-                          const char *search,
-                          int offset,
-                          Eina_Bool match_case)
+elm_code_text_strnsearchpos(const char *content,
+                            unsigned int length,
+                            const char *search,
+                            int offset,
+                            Eina_Bool match_case,
+                            Eina_Bool whole_word)
 {
   unsigned int searchlen, c;
   char *ptr;
@@ -33,7 +54,16 @@ elm_code_text_strncasepos(const char *content,
   ptr += offset;
   for (c = offset; c <= length - searchlen; c++)
     {
-      if(match_case)
+      if(whole_word)
+        {
+          char *whole_search;
+
+          whole_search = malloc(searchlen+10 * sizeof(char));
+          snprintf(whole_search,searchlen+10,"^(%s)(\\W)",search);
+          if (match(ptr, whole_search, match_case))
+            return c;
+        }
+      else if(match_case)
         {
           if (!strncmp(ptr, search, searchlen))
             return c;
@@ -99,8 +129,9 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
     {
       code_line = elm_code_file_line_get(doc->code->file,i);
       line = elm_code_line_text_get(code_line, &len);
-      found = elm_code_text_strncasepos(line,len,text,col,
-                                        elm_object_disabled_get(case_button));
+      found = elm_code_text_strnsearchpos(line,len,text,col,
+                                        elm_object_disabled_get(case_button),
+                                        elm_object_disabled_get(whole_button));
       if(found>=0)
         {
           _search_select_text(doc->widget, code_line, text, found, i, col);
@@ -319,6 +350,27 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
   elm_table_pack (table, case_button, 5, row, 1, 1);
   evas_object_smart_callback_add(case_button, "clicked", _elm_obj_toggle_cb, doc);
   evas_object_show(case_button);
+
+  whole_button = elm_button_add(table);
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "zoom-out"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(whole_button, "icon", icon);
+      elm_object_tooltip_text_set(whole_button, _("Whole word"));
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(whole_button, _("Whole word"));
+    }
+  elm_table_pack (table, whole_button, 6, row, 1, 1);
+  evas_object_smart_callback_add(whole_button, "clicked", _elm_obj_toggle_cb, doc);
+  evas_object_show(whole_button);
   row++;
 
   /* Replace with Label */
@@ -395,7 +447,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
       evas_object_del(icon);
       elm_object_text_set(obj, _("Close"));
     }
-  elm_table_pack (table, obj, 5, row, 1, 1);
+  elm_table_pack (table, obj, 6, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _search_box_del, doc);
   evas_object_show(obj);
 
