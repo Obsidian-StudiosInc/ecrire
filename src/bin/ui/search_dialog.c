@@ -7,28 +7,39 @@
 
 #include "../ecrire.h"
 
+#define PATTERN_LEN 9
+#define PATTERN_REGEX "^%s"
+#define PATTERN_WHOLE_WORD "^(%s)(\\W)"
+
 const static int PADDING = 2;
 const static int BUTTON_ICON_SIZE = 12;
 
 static Evas_Object *find_entry, *replace_entry, *search_box;
-static Evas_Object *case_button, *whole_button;
+static Evas_Object *case_button, *regex_button, *whole_button;
+static regmatch_t *_regmatch;
 
 Eina_Bool
 match(const char *string, char *pattern, Eina_Bool match_case)
 {
-    int    flags, status;
-    regex_t    re;
+    int flags, status;
+    regex_t re;
 
-    flags = REG_EXTENDED|REG_NOSUB;
+    flags = REG_EXTENDED;
     if(match_case)
         flags = flags | REG_ICASE;
     if (regcomp(&re, pattern, flags) != 0)
-      return(EINA_FALSE);      /* Report error. */
+      return(EINA_FALSE);
 
-    status = regexec(&re, string, (size_t) 0, NULL, 0);
+    if(elm_object_disabled_get(regex_button))
+      {
+        _regmatch = malloc(3 * sizeof(regmatch_t));
+        status = regexec(&re, string, (size_t) 3, _regmatch, 0);
+      }
+    else
+      status = regexec(&re, string, (size_t) 0, NULL, 0);
     regfree(&re);
     if (status != 0)
-      return(EINA_FALSE);      /* Report error. */
+      return(EINA_FALSE);
     return(EINA_TRUE);
 }
 
@@ -38,7 +49,8 @@ elm_code_text_strnsearchpos(const char *content,
                             const char *search,
                             int offset,
                             Eina_Bool match_case,
-                            Eina_Bool whole_word)
+                            Eina_Bool whole_word,
+                            Eina_Bool regex)
 {
   unsigned int searchlen, c;
   char *ptr;
@@ -52,13 +64,18 @@ elm_code_text_strnsearchpos(const char *content,
   ptr += offset;
   for (c = offset; c <= length - searchlen; c++)
     {
-      if(whole_word)
+      if(regex || whole_word)
         {
           char *whole_search;
+          int regex_len;
           Eina_Bool matched;
 
-          whole_search = malloc(searchlen+10 * sizeof(char));
-          snprintf(whole_search,searchlen+10,"^(%s)(\\W)",search);
+          regex_len = searchlen + PATTERN_LEN;
+          whole_search = malloc(regex_len + PATTERN_LEN * sizeof(char));
+          if(whole_word)
+            snprintf(whole_search, regex_len, PATTERN_WHOLE_WORD, search);
+          else
+            snprintf(whole_search, regex_len, PATTERN_REGEX, search);
           matched = match(ptr, whole_search, match_case);
           free(whole_search);
           if (matched)
@@ -97,12 +114,11 @@ _elm_obj_toggle_cb(void *data EINA_UNUSED,
 static void
 _search_select_text(Elm_Code_Widget *entry,
                     Elm_Code_Line *code_line,
-                    const char *text,
                     const int found,
                     const int row,
-                    int col)
+                    int col,
+                    const int len)
 {
-  int len = strlen(text);
   col = elm_code_widget_line_text_column_width_to_position(entry,
                                                            code_line,
                                                            found);
@@ -132,10 +148,18 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
       line = elm_code_line_text_get(code_line, &len);
       found = elm_code_text_strnsearchpos(line,len,text,col,
                                         elm_object_disabled_get(case_button),
-                                        elm_object_disabled_get(whole_button));
+                                        elm_object_disabled_get(whole_button),
+                                        elm_object_disabled_get(regex_button));
       if(found>=0)
         {
-          _search_select_text(doc->widget, code_line, text, found, i, col);
+          if(_regmatch)
+            {
+              len = _regmatch[1].rm_eo;
+              free(_regmatch);
+            }
+          else
+            len = strlen(text);
+          _search_select_text(doc->widget, code_line, found, i, col, len);
           break;
         }
       else if(forward)
@@ -372,6 +396,27 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
   elm_table_pack (table, whole_button, 6, row, 1, 1);
   evas_object_smart_callback_add(whole_button, "clicked", _elm_obj_toggle_cb, doc);
   evas_object_show(whole_button);
+
+  regex_button = elm_button_add(table);
+  icon = elm_icon_add (table);
+  evas_object_size_hint_aspect_set (icon, EVAS_ASPECT_CONTROL_BOTH, 1, 1);
+  if (elm_icon_standard_set (icon, "system-run"))
+    {
+      evas_object_size_hint_min_set(icon,
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE),
+                                    ELM_SCALE_SIZE(BUTTON_ICON_SIZE));
+      elm_object_part_content_set(regex_button, "icon", icon);
+      elm_object_tooltip_text_set(regex_button, _("Regular Expression"));
+      evas_object_show (icon);
+    }
+  else
+    {
+      evas_object_del(icon);
+      elm_object_text_set(regex_button, _("RegEx"));
+    }
+  elm_table_pack (table, regex_button, 7, row, 1, 1);
+  evas_object_smart_callback_add(regex_button, "clicked", _elm_obj_toggle_cb, doc);
+  evas_object_show(regex_button);
   row++;
 
   /* Replace with Label */
@@ -448,7 +493,7 @@ ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
       evas_object_del(icon);
       elm_object_text_set(obj, _("Close"));
     }
-  elm_table_pack (table, obj, 6, row, 1, 1);
+  elm_table_pack (table, obj, 7, row, 1, 1);
   evas_object_smart_callback_add(obj, "clicked", _search_box_del, doc);
   evas_object_show(obj);
 
