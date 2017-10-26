@@ -25,6 +25,15 @@ struct _Ecrire_Doc {
      Evas_Object *label_mime;
      Evas_Object *toolbar;
      /* Main Menu Items */
+     Elm_Object_Item *mm_close;
+     Elm_Object_Item *mm_copy;
+     Elm_Object_Item *mm_cut;
+     Elm_Object_Item *mm_paste;
+     Elm_Object_Item *mm_redo;
+     Elm_Object_Item *mm_save;
+     Elm_Object_Item *mm_save_as;
+     Elm_Object_Item *mm_undo;
+     /* Toolbar Items */
      Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
                      *save_as_item, *paste_item, *undo_item, *redo_item;
      int unsaved;
