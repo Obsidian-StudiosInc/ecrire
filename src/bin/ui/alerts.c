@@ -56,7 +56,7 @@ ui_alert_need_saving(Evas_Object *parent, void (*done)(void *data), void *data)
    done_cb = done;
    done_data = data;
 
-   elm_object_part_text_set(popup, "title,text", "Unsaved Changes");
+   elm_object_part_text_set(popup, "title,text", _("Unsaved Changes"));
    elm_object_text_set(popup,
          _("<align=center>Would you like to save changes to document?<br>"
          "Any unsaved changes will be lost."));
