@@ -18,6 +18,7 @@ typedef struct
    unsigned int height;
    unsigned int width;
    unsigned int version;
+   unsigned int insert_spaces;
    unsigned int line_numbers;
    unsigned int menu;
    unsigned int toolbar;
