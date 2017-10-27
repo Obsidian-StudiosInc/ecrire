@@ -35,6 +35,7 @@ deploy:
     repo: Obsidian-StudiosInc/ecrire
     branch: master
     tags: true
+  skip_cleanup: true
 
 addons:
   coverity_scan:
