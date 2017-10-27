@@ -21,6 +21,8 @@ struct _Ecrire_Doc {
      Evas_Object *bg;
      Evas_Object *box_editor;
      Evas_Object *box_main;
+     Evas_Object *entry_column;
+     Evas_Object *entry_line;
      Evas_Object *cursor_label;
      Evas_Object *label_mime;
      Evas_Object *toolbar;
