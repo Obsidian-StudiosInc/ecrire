@@ -193,14 +193,16 @@ _cur_changed(void *data,
              Evas_Object *obj EINA_UNUSED,
              void *event_info EINA_UNUSED)
 {
-   char buf[50];
+   char buf[sizeof(long)];
    int line;
    int col;
 
    Ecrire_Doc *doc = data;
    elm_obj_code_widget_cursor_position_get(doc->widget,&line,&col);
-   snprintf(buf, sizeof(buf), _(" Line %d, Column %d"), line, col);
-   elm_object_text_set(doc->cursor_label, buf);
+   snprintf(buf, sizeof(buf),"%d", line);
+   elm_object_text_set(doc->entry_line, buf);
+   snprintf(buf, sizeof(buf),"%d", col);
+   elm_object_text_set(doc->entry_column, buf);
    if(elm_obj_code_widget_can_undo_get(doc->widget))
      {
        if(!_ent_cfg->menu &&
@@ -418,13 +420,60 @@ _open_do(void *data)
 }
 
 static void
-_goto_line(void *data,
-           Evas_Object *obj EINA_UNUSED,
-           void *event_info EINA_UNUSED)
+_goto_column_cb(void *data,
+                Evas_Object *obj EINA_UNUSED,
+                void *event_info EINA_UNUSED)
+{
+  Ecrire_Doc *doc;
+  Elm_Code_Line *line;
+  int col, cols, cur_col, row;
+
+  doc = data;
+  elm_obj_code_widget_cursor_position_get(doc->widget,&row,&cur_col);
+  col = atoi(elm_entry_entry_get(doc->entry_column));
+  line = elm_code_file_line_get(doc->code->file,row);
+  cols = elm_obj_code_widget_line_text_column_width_get(doc->widget, line);
+  if (col<0 || col>cols)
+      col = cur_col;
+  elm_obj_code_widget_cursor_position_set(doc->widget,row,col);
+  elm_object_focus_set(doc->widget, EINA_TRUE);
+}
+
+static void
+_goto_line_cb(void *data,
+              Evas_Object *obj EINA_UNUSED,
+              void *event_info EINA_UNUSED)
+{
+  Ecrire_Doc *doc;
+  int line, lines;
+
+  doc = data;
+  line = atoi(elm_entry_entry_get(doc->entry_line));
+  lines = elm_code_file_lines_get(doc->code->file);
+  if (line>0 && lines > 0 && line <= lines)
+      elm_obj_code_widget_cursor_position_set(doc->widget,line,1);
+  else
+    {
+      char buf[sizeof(long)];
+      int col, row;
+
+      elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
+      snprintf(buf, sizeof(buf),"%d",row);
+      elm_entry_entry_set(doc->entry_line,buf);
+    }
+  elm_object_focus_set(doc->widget, EINA_TRUE);
+}
+
+static void
+_goto_line_focus_cb(void *data,
+                    Evas_Object *obj EINA_UNUSED,
+                    void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
-   ui_goto_dialog_open(doc->win, doc);
+   elm_object_focus_set(doc->entry_line, EINA_TRUE);
+   elm_entry_select_all(doc->entry_line);
 }
+
 
 static void
 _open_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
@@ -638,6 +687,9 @@ _key_down_cb(void *data,
            !strcmp("R", event->key) ||
            !strcmp("r", event->key))
             _find(data,NULL,NULL);
+        else if(!strcmp("G", event->key) ||
+                !strcmp("g", event->key))
+            _goto_line_focus_cb(data,NULL,NULL);
         else if(!strcmp("O", event->key) ||
                 !strcmp("o", event->key))
             _open_cb(data,NULL,NULL);
@@ -694,7 +746,7 @@ add_toolbar(Ecrire_Doc *doc)
   elm_toolbar_item_separator_set(
         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
   elm_toolbar_item_append(tbar, "edit-find-replace", _("Search"), _find, doc);
-  elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line, doc);
+  elm_toolbar_item_append(tbar, "go-jump", _("Jump to"), _goto_line_focus_cb, doc);
   elm_toolbar_item_separator_set(
         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
   elm_toolbar_item_append(tbar, "preferences-system", _("Settings"),
@@ -704,7 +756,7 @@ add_toolbar(Ecrire_Doc *doc)
 static void
 create_window(int argc, char *argv[])
 {
-   Evas_Object  *edit_menu, *file_menu, *menu, *obj;
+   Evas_Object  *box, *edit_menu, *file_menu, *menu, *obj, *table;
    Evas_Coord w = 600, h = 600;
 
    main_doc = calloc(1, sizeof(*main_doc));
@@ -758,7 +810,7 @@ create_window(int argc, char *argv[])
          elm_menu_item_add(menu, edit_menu, "edit-paste", _("Paste"), _paste, main_doc);
        elm_menu_item_separator_add(menu, edit_menu);
        elm_menu_item_add(menu, edit_menu, "edit-find-replace", _("Search"), _find, main_doc);
-       elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line, main_doc);
+       elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line_focus_cb, main_doc);
 
        elm_object_item_disabled_set(main_doc->mm_paste, EINA_TRUE);
      }
@@ -798,27 +850,72 @@ create_window(int argc, char *argv[])
    elm_box_pack_end(main_doc->box_main, main_doc->box_editor);
    evas_object_show(main_doc->widget);
 
-   obj = elm_box_add (main_doc->win);
-   elm_box_horizontal_set(obj, EINA_TRUE);
+   box = elm_box_add (main_doc->win);
+   elm_box_horizontal_set(box, EINA_TRUE);
    if(_ent_cfg->alpha)
-     ALPHA (obj, _ent_cfg->alpha);
-   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, 0);
+     ALPHA (box, _ent_cfg->alpha);
+   evas_object_size_hint_weight_set (box, EVAS_HINT_EXPAND, 0);
+   evas_object_size_hint_align_set(box, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   evas_object_size_hint_padding_set(box, 5, 5, 0, 0);
+   elm_box_pack_end(main_doc->box_main,box);
+   evas_object_show (box);
+
+
+   table = elm_table_add(box);
+   elm_table_homogeneous_set(table, EINA_TRUE);
+   elm_table_padding_set(table, 2, 0);
+   evas_object_size_hint_align_set(table, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   elm_box_pack_start(box, table);
+   evas_object_show(table);
+
+   obj = elm_label_add(table);
+   elm_object_text_set(obj, _("Line"));
+   evas_object_size_hint_align_set(obj, 0, EVAS_HINT_FILL);
+   elm_table_pack (table, obj, 0, 0, 1, 1);
+   evas_object_show(obj);
+
+   main_doc->entry_line = obj = elm_entry_add(table);
+   elm_entry_scrollable_set(obj, EINA_TRUE);
+   elm_entry_single_line_set(obj, EINA_TRUE);
    evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
-   evas_object_size_hint_padding_set(obj, 0, 5, 0, 0);
-   elm_box_pack_end(main_doc->box_main,obj);
-   evas_object_show (obj);
+   elm_table_pack (table, obj, 1, 0, 2, 1);
+   evas_object_show(obj);
+   evas_object_smart_callback_add(main_doc->entry_line,
+                                  "activated",
+                                  _goto_line_cb,
+                                  main_doc);
+   evas_object_smart_callback_add(main_doc->entry_line,
+                                  "clicked,triple",
+                                  _goto_line_cb,
+                                  main_doc);
 
-   main_doc->cursor_label = elm_label_add(obj);
+   obj = elm_label_add(table);
+   elm_object_text_set(obj, _("Column"));
+   evas_object_size_hint_align_set(obj, 0, EVAS_HINT_FILL);
+   elm_table_pack (table, obj, 3, 0, 2, 1);
+   evas_object_show(obj);
+
+   main_doc->entry_column = obj = elm_entry_add(table);
+   elm_entry_scrollable_set(obj, EINA_TRUE);
+   elm_entry_single_line_set(obj, EINA_TRUE);
+   evas_object_size_hint_align_set(obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
+   elm_table_pack (table, obj, 5, 0, 2, 1);
+   evas_object_show(obj);
+   evas_object_smart_callback_add(main_doc->entry_column,
+                                  "activated",
+                                  _goto_column_cb,
+                                  main_doc);
+   evas_object_smart_callback_add(main_doc->entry_column,
+                                  "clicked,triple",
+                                  _goto_column_cb,
+                                  main_doc);
+
    _cur_changed(main_doc, NULL, NULL);
-   evas_object_size_hint_weight_set(main_doc->cursor_label, EVAS_HINT_EXPAND, 0);
-   evas_object_size_hint_align_set(main_doc->cursor_label, 0, EVAS_HINT_FILL);
-   elm_box_pack_start(obj, main_doc->cursor_label);
-   evas_object_show(main_doc->cursor_label);
-
-   main_doc->label_mime = elm_label_add(obj);
+   
+   main_doc->label_mime = elm_label_add(box);
    evas_object_size_hint_weight_set(main_doc->label_mime, EVAS_HINT_EXPAND, 0);
    evas_object_size_hint_align_set(main_doc->label_mime, 1, EVAS_HINT_FILL);
-   elm_box_pack_end(obj, main_doc->label_mime);
+   elm_box_pack_end(box, main_doc->label_mime);
    evas_object_show(main_doc->label_mime);
 
    evas_object_smart_callback_add(main_doc->widget, "cursor,changed",
