@@ -15,7 +15,7 @@ that has EFL.
 [issue #4](https://github.com/Obsidian-StudiosInc/ecrire/issues/4)
 [elm code task #T5497](https://phab.enlightenment.org/T5497)
 - External 3rd button copy/paste does not function [elm code task #T5520](https://phab.enlightenment.org/T5520)
-- Line/Word wrap not possible till available in elm_code [elm code task #5908](https://phab.enlightenment.org/T5908)
+- Line/Word wrap not possible till available in elm_code [elm code task #T5908](https://phab.enlightenment.org/T5908) [#T6135](https://phab.enlightenment.org/T6135)
 
 ## About
 Ecrire is a basic text editor written in EFL for the Enlightenment 
