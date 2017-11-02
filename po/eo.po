@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-02 15:13-0400\n"
+"POT-Creation-Date: 2017-11-02 15:15-0400\n"
 "PO-Revision-Date: 2014-01-02 15:10+0000\n"
 "Last-Translator: Eliovir <Unknown>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -39,7 +39,7 @@ msgstr "Malfermi"
 #: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
-msgstr ""
+msgstr "Fermi"
 
 #: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
 msgid "Save"
@@ -72,11 +72,11 @@ msgstr "Alglui"
 #: src/bin/main.c:748 src/bin/main.c:812
 #, fuzzy
 msgid "Search"
-msgstr "Serĉi:"
+msgstr "Serĉi"
 
 #: src/bin/main.c:749 src/bin/main.c:813
 msgid "Jump to"
-msgstr ""
+msgstr "Saltu al"
 
 #: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
@@ -84,15 +84,15 @@ msgstr "Agordoj"
 
 #: src/bin/main.c:787
 msgid "File"
-msgstr ""
+msgstr "Dosiero"
 
 #: src/bin/main.c:797
 msgid "Exit"
-msgstr ""
+msgstr "Eliro"
 
 #: src/bin/main.c:799
 msgid "Edit"
-msgstr ""
+msgstr "Redakti"
 
 #: src/bin/main.c:873
 #, fuzzy
@@ -101,11 +101,11 @@ msgstr "Iru al linio"
 
 #: src/bin/main.c:894
 msgid "Column"
-msgstr ""
+msgstr "Kolumno"
 
 #: src/bin/ui/alerts.c:59
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Neŝatitaj ŝanĝoj"
 
 #: src/bin/ui/alerts.c:61
 msgid ""
@@ -125,32 +125,32 @@ msgstr "Nuligi"
 
 #: src/bin/ui/file_related.c:53
 msgid "Recent files"
-msgstr ""
+msgstr "Lastaj dosieroj"
 
 #: src/bin/ui/settings_dialog.c:217
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: src/bin/ui/settings_dialog.c:237
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "Tab enmetas spacojn"
 
 #: src/bin/ui/settings_dialog.c:254
 msgid "Line Numbers"
-msgstr ""
+msgstr "Liniaj nombroj"
 
 #: src/bin/ui/settings_dialog.c:271
 msgid "Show Menu"
-msgstr ""
+msgstr "Montri menuon"
 
 #: src/bin/ui/settings_dialog.c:288
 msgid "Show Toolbar"
-msgstr ""
+msgstr "Montru ilobreton"
 
 #: src/bin/ui/settings_dialog.c:351
 #, fuzzy
 msgid "Use default font"
-msgstr "Uzi aprioran tiparon:"
+msgstr "Uzi aprioran tiparon"
 
 #: src/bin/ui/settings_dialog.c:369
 #, fuzzy
@@ -174,59 +174,59 @@ msgstr "Agordoj"
 #: src/bin/ui/settings_dialog.c:483
 #, fuzzy
 msgid "Display Settings"
-msgstr "Agordoj"
+msgstr "Montri agordojn"
 
 #: src/bin/ui/settings_dialog.c:487
 msgid "Display"
-msgstr ""
+msgstr "Montriĝo"
 
 #: src/bin/ui/settings_dialog.c:492
 #, fuzzy
 msgid "Font"
-msgstr "Grando de tiparo:"
+msgstr "Tiparo"
 
 #: src/bin/ui/search_dialog.c:278
 #, fuzzy
 msgid "Search for"
-msgstr "Serĉi:"
+msgstr "Serĉi"
 
 #: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
 #, fuzzy
 msgid "Find All"
-msgstr "Trovi"
+msgstr "Trovu ĉion"
 
 #: src/bin/ui/search_dialog.c:325
 msgid "Find Previous"
-msgstr ""
+msgstr "Trovi antaŭan"
 
 #: src/bin/ui/search_dialog.c:331
 msgid "Previous"
-msgstr ""
+msgstr "Antaŭa"
 
 #: src/bin/ui/search_dialog.c:346
 #, fuzzy
 msgid "Find Next"
-msgstr "Trovi"
+msgstr "Trovu poste"
 
 #: src/bin/ui/search_dialog.c:352
 msgid "Next"
-msgstr ""
+msgstr "Tuj poste"
 
 #: src/bin/ui/search_dialog.c:367
 msgid "Match case"
-msgstr ""
+msgstr "Turniro-Kazo"
 
 #: src/bin/ui/search_dialog.c:373
 msgid "Match Case"
-msgstr ""
+msgstr "Turniro-Kazo"
 
 #: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
 msgid "Whole word"
-msgstr ""
+msgstr "Plena vorto"
 
 #: src/bin/ui/search_dialog.c:409
 msgid "Regular Expression"
-msgstr ""
+msgstr "Regula Esprimo"
 
 #: src/bin/ui/search_dialog.c:415
 msgid "RegEx"
@@ -235,7 +235,7 @@ msgstr ""
 #: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
 #, fuzzy
 msgid "Replace with"
-msgstr "Anstataŭigi per:"
+msgstr "Anstataŭigi per"
 
 #: src/bin/ui/search_dialog.c:452
 msgid "Replace"
@@ -244,31 +244,4 @@ msgstr "Anstataŭigi"
 #: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
 #, fuzzy
 msgid "Replace All"
-msgstr "Anstataŭigi"
-
-#, fuzzy
-#~ msgid "Jump to line"
-#~ msgstr "Iru al linio:"
-
-#~ msgid "Go"
-#~ msgstr "Iri"
-
-#, fuzzy
-#~ msgid " Line %d, Column %d"
-#~ msgstr "Lin %d, Kol %d"
-
-#, fuzzy
-#~ msgid "settings"
-#~ msgstr "Agordoj"
-
-#~ msgid "Find & Replace"
-#~ msgstr "Trovi kaj anstataŭigi"
-
-#~ msgid "Select Font"
-#~ msgstr "Elektu tiparon"
-
-#~ msgid "Set"
-#~ msgstr "Agordi"
-
-#~ msgid "Go to"
-#~ msgstr "Iri al"
+msgstr "Anstataŭigi ĉion"
