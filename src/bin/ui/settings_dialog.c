@@ -439,7 +439,7 @@ Evas_Object *
 ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *boxh, *boxv, *ic, *obj, *nf, *nfi, *tb, *win;
+  Evas_Object *boxh, *boxv, *ic, *obj, *nf, *navi_disp, *navi_font, *tb, *win;
   unsigned int h, w;
   
 
@@ -475,22 +475,23 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   elm_naviframe_prev_btn_auto_pushed_set(nf, EINA_FALSE);
   elm_box_pack_end(boxh, nf);
   evas_object_show(nf);
-
-  obj = _settings_dialog_font(win, doc, ent_cfg); 
-  nfi = elm_naviframe_item_push(nf, _("Font Settings"), NULL, NULL, obj, NULL);
-  elm_toolbar_item_append(tb,
-                          "preferences-desktop-font",
-                          _("Font"),
-                          _settings_dialog_promote_cb,
-                          nfi);
   
+  obj = _settings_dialog_font(win, doc, ent_cfg); 
+  navi_font = elm_naviframe_item_push(nf, _("Font Settings"), NULL, NULL, obj, NULL);
+
   obj = _settings_dialog_display(win, doc, ent_cfg); 
-  nfi = elm_naviframe_item_push(nf, _("Display Settings"), NULL, NULL, obj, NULL);
+  navi_disp = elm_naviframe_item_push(nf, _("Display Settings"), NULL, NULL, obj, NULL);
+
   elm_toolbar_item_prepend(tb,
                            "preferences-desktop-display",
                            _("Display"),
                            _settings_dialog_promote_cb,
-                           nfi);
+                           navi_disp);
+  elm_toolbar_item_append(tb,
+                          "preferences-desktop-font",
+                          _("Font"),
+                          _settings_dialog_promote_cb,
+                          navi_font);
 
   elm_box_pack_end(boxv, boxh);
   
