@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-02 15:13-0400\n"
+"POT-Creation-Date: 2017-11-02 15:15-0400\n"
 "PO-Revision-Date: 2014-05-26 22:31+0000\n"
 "Last-Translator: joancoll <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -39,7 +39,7 @@ msgstr "Obre"
 #: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
-msgstr ""
+msgstr "Tanca"
 
 #: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
 msgid "Save"
@@ -72,11 +72,11 @@ msgstr "Enganxa"
 #: src/bin/main.c:748 src/bin/main.c:812
 #, fuzzy
 msgid "Search"
-msgstr "Cerca per:"
+msgstr "Cerca per"
 
 #: src/bin/main.c:749 src/bin/main.c:813
 msgid "Jump to"
-msgstr ""
+msgstr "Saltar a"
 
 #: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
@@ -84,15 +84,15 @@ msgstr "Paràmetres"
 
 #: src/bin/main.c:787
 msgid "File"
-msgstr ""
+msgstr "Dossier"
 
 #: src/bin/main.c:797
 msgid "Exit"
-msgstr ""
+msgstr "Sortir"
 
 #: src/bin/main.c:799
 msgid "Edit"
-msgstr ""
+msgstr "Edita"
 
 #: src/bin/main.c:873
 #, fuzzy
@@ -101,11 +101,11 @@ msgstr "Vés a la línia"
 
 #: src/bin/main.c:894
 msgid "Column"
-msgstr ""
+msgstr "Columna"
 
 #: src/bin/ui/alerts.c:59
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Canvis no emmagatzemats"
 
 #: src/bin/ui/alerts.c:61
 msgid ""
@@ -125,27 +125,27 @@ msgstr "Cancel·la"
 
 #: src/bin/ui/file_related.c:53
 msgid "Recent files"
-msgstr ""
+msgstr "Arxius recents"
 
 #: src/bin/ui/settings_dialog.c:217
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: src/bin/ui/settings_dialog.c:237
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "La pestanya insereix espais"
 
 #: src/bin/ui/settings_dialog.c:254
 msgid "Line Numbers"
-msgstr ""
+msgstr "Números de línia"
 
 #: src/bin/ui/settings_dialog.c:271
 msgid "Show Menu"
-msgstr ""
+msgstr "Mostra el menú"
 
 #: src/bin/ui/settings_dialog.c:288
 msgid "Show Toolbar"
-msgstr ""
+msgstr "Mostra la barra d'eines"
 
 #: src/bin/ui/settings_dialog.c:351
 #, fuzzy
@@ -155,7 +155,7 @@ msgstr "Utilitza la font predeterminada"
 #: src/bin/ui/settings_dialog.c:369
 #, fuzzy
 msgid "Font size"
-msgstr "Mida de la font:"
+msgstr "Mida de la font"
 
 #: src/bin/ui/settings_dialog.c:379
 #, c-format
@@ -178,17 +178,17 @@ msgstr "Paràmetres"
 
 #: src/bin/ui/settings_dialog.c:487
 msgid "Display"
-msgstr ""
+msgstr "Mostra"
 
 #: src/bin/ui/settings_dialog.c:492
 #, fuzzy
 msgid "Font"
-msgstr "Mida de la font:"
+msgstr "Mida de la font"
 
 #: src/bin/ui/search_dialog.c:278
 #, fuzzy
 msgid "Search for"
-msgstr "Cerca per:"
+msgstr "Cerca per"
 
 #: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
 #, fuzzy
@@ -197,36 +197,36 @@ msgstr "Cerca"
 
 #: src/bin/ui/search_dialog.c:325
 msgid "Find Previous"
-msgstr ""
+msgstr "Cerca anterior"
 
 #: src/bin/ui/search_dialog.c:331
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: src/bin/ui/search_dialog.c:346
 #, fuzzy
 msgid "Find Next"
-msgstr "Cerca"
+msgstr "Cerca següent"
 
 #: src/bin/ui/search_dialog.c:352
 msgid "Next"
-msgstr ""
+msgstr "Cerca"
 
 #: src/bin/ui/search_dialog.c:367
 msgid "Match case"
-msgstr ""
+msgstr "Coincideix amb el cas"
 
 #: src/bin/ui/search_dialog.c:373
 msgid "Match Case"
-msgstr ""
+msgstr "Coincideix amb el cas"
 
 #: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
 msgid "Whole word"
-msgstr ""
+msgstr "Paraula sencera"
 
 #: src/bin/ui/search_dialog.c:409
 msgid "Regular Expression"
-msgstr ""
+msgstr "Expressió regular"
 
 #: src/bin/ui/search_dialog.c:415
 msgid "RegEx"
@@ -235,7 +235,7 @@ msgstr ""
 #: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
 #, fuzzy
 msgid "Replace with"
-msgstr "Substitueix per:"
+msgstr "Substitueix per"
 
 #: src/bin/ui/search_dialog.c:452
 msgid "Replace"
@@ -245,30 +245,3 @@ msgstr "Reemplaça"
 #, fuzzy
 msgid "Replace All"
 msgstr "Reemplaça"
-
-#, fuzzy
-#~ msgid "Jump to line"
-#~ msgstr "Vés a la línia:"
-
-#~ msgid "Go"
-#~ msgstr "Fes"
-
-#, fuzzy
-#~ msgid " Line %d, Column %d"
-#~ msgstr "Ln %d, Col %d"
-
-#, fuzzy
-#~ msgid "settings"
-#~ msgstr "Paràmetres"
-
-#~ msgid "Find & Replace"
-#~ msgstr "Cerca i substitueix"
-
-#~ msgid "Select Font"
-#~ msgstr "Seleccioni el tipus de lletra"
-
-#~ msgid "Set"
-#~ msgstr "Estableix"
-
-#~ msgid "Go to"
-#~ msgstr "Vés a"
