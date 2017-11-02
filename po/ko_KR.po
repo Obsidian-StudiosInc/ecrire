@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire 1.7.0\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-10-21 10:38-0400\n"
+"POT-Creation-Date: 2017-11-02 15:13-0400\n"
 "PO-Revision-Date: 2012-08-30 22:59+0900\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: Enlightenment-Intl <enlightenment-intl@lists.sourceforge."
@@ -18,85 +18,92 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/bin/main.c:148
+#: src/bin/main.c:181
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:151
+#: src/bin/main.c:184
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%s제목없음 %d - %s"
 
-#: src/bin/main.c:169
-#, fuzzy, c-format
-msgid " Line %d, Column %d"
-msgstr "줄: %d, 문자: %d"
-
-#: src/bin/main.c:635 src/bin/main.c:698
+#: src/bin/main.c:725 src/bin/main.c:788
 msgid "New"
 msgstr "새로 만들기"
 
-#: src/bin/main.c:636 src/bin/main.c:699
+#: src/bin/main.c:726 src/bin/main.c:789
 msgid "Open"
 msgstr "열기"
 
-#: src/bin/main.c:638 src/bin/ui/settings_dialog.c:469
-#: src/bin/ui/search_dialog.c:327 src/bin/ui/search_dialog.c:333
+#: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
+#: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:640 src/bin/main.c:700 src/bin/ui/alerts.c:65
+#: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "저장"
 
-#: src/bin/main.c:642 src/bin/main.c:701
+#: src/bin/main.c:732 src/bin/main.c:793
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
-#: src/bin/main.c:646 src/bin/main.c:708
+#: src/bin/main.c:736 src/bin/main.c:801
 msgid "Undo"
 msgstr "입력 취소"
 
-#: src/bin/main.c:648 src/bin/main.c:709
+#: src/bin/main.c:738 src/bin/main.c:803
 msgid "Redo"
 msgstr "다시 실행"
 
-#: src/bin/main.c:651 src/bin/main.c:711
+#: src/bin/main.c:741 src/bin/main.c:806
 msgid "Cut"
 msgstr "잘라내기"
 
-#: src/bin/main.c:653 src/bin/main.c:712
+#: src/bin/main.c:743 src/bin/main.c:808
 msgid "Copy"
 msgstr "복사"
 
-#: src/bin/main.c:655 src/bin/main.c:713
+#: src/bin/main.c:745 src/bin/main.c:810
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: src/bin/main.c:658 src/bin/main.c:715
+#: src/bin/main.c:748 src/bin/main.c:812
 #, fuzzy
 msgid "Search"
 msgstr "찾을 문자열:"
 
-#: src/bin/main.c:659 src/bin/main.c:716 src/bin/ui/goto_dialog.c:54
+#: src/bin/main.c:749 src/bin/main.c:813
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:662 src/bin/main.c:703 src/bin/ui/settings_dialog.c:416
+#: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
 msgstr "설정"
 
-#: src/bin/main.c:697
+#: src/bin/main.c:787
 msgid "File"
 msgstr ""
 
-#: src/bin/main.c:705
+#: src/bin/main.c:797
 msgid "Exit"
 msgstr ""
 
-#: src/bin/main.c:707
+#: src/bin/main.c:799
 msgid "Edit"
+msgstr ""
+
+#: src/bin/main.c:873
+msgid "Line"
+msgstr ""
+
+#: src/bin/main.c:894
+msgid "Column"
+msgstr ""
+
+#: src/bin/ui/alerts.c:59
+msgid "Unsaved Changes"
 msgstr ""
 
 #: src/bin/ui/alerts.c:61
@@ -119,108 +126,128 @@ msgstr "취소"
 msgid "Recent files"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:204
+#: src/bin/ui/settings_dialog.c:217
 msgid "Alpha"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:224
+#: src/bin/ui/settings_dialog.c:237
+msgid "Tab inserts spaces"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:254
 msgid "Line Numbers"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:241
+#: src/bin/ui/settings_dialog.c:271
 msgid "Show Menu"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:258
+#: src/bin/ui/settings_dialog.c:288
 msgid "Show Toolbar"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:321
+#: src/bin/ui/settings_dialog.c:351
 #, fuzzy
 msgid "Use default font"
 msgstr "기본 글꼴 사용: "
 
-#: src/bin/ui/settings_dialog.c:339
+#: src/bin/ui/settings_dialog.c:369
 #, fuzzy
 msgid "Font size"
 msgstr "글꼴 크기:"
 
-#: src/bin/ui/settings_dialog.c:349
+#: src/bin/ui/settings_dialog.c:379
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/settings_dialog.c:416
+#: src/bin/ui/settings_dialog.c:446
 msgid "ecrire"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:450
+#: src/bin/ui/settings_dialog.c:480
 #, fuzzy
 msgid "Font Settings"
 msgstr "설정"
 
-#: src/bin/ui/settings_dialog.c:453
-#, fuzzy
-msgid "Font"
-msgstr "글꼴 크기:"
-
-#: src/bin/ui/settings_dialog.c:458
+#: src/bin/ui/settings_dialog.c:483
 #, fuzzy
 msgid "Display Settings"
 msgstr "설정"
 
-#: src/bin/ui/settings_dialog.c:461
+#: src/bin/ui/settings_dialog.c:487
 msgid "Display"
 msgstr ""
 
-#: src/bin/ui/goto_dialog.c:68
-msgid "Jump to line"
-msgstr ""
+#: src/bin/ui/settings_dialog.c:492
+#, fuzzy
+msgid "Font"
+msgstr "글꼴 크기:"
 
-#: src/bin/ui/goto_dialog.c:83
-msgid "Go"
-msgstr ""
-
-#: src/bin/ui/search_dialog.c:178
+#: src/bin/ui/search_dialog.c:278
 #, fuzzy
 msgid "Search for"
 msgstr "찾을 문자열:"
 
-#: src/bin/ui/search_dialog.c:204 src/bin/ui/search_dialog.c:210
+#: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
 #, fuzzy
 msgid "Find All"
 msgstr "찾기"
 
-#: src/bin/ui/search_dialog.c:225
+#: src/bin/ui/search_dialog.c:325
 msgid "Find Previous"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:231
+#: src/bin/ui/search_dialog.c:331
 msgid "Previous"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:246
+#: src/bin/ui/search_dialog.c:346
 #, fuzzy
 msgid "Find Next"
 msgstr "찾기"
 
-#: src/bin/ui/search_dialog.c:252
+#: src/bin/ui/search_dialog.c:352
 msgid "Next"
 msgstr ""
 
-#: src/bin/ui/search_dialog.c:261 src/bin/ui/search_dialog.c:283
+#: src/bin/ui/search_dialog.c:367
+msgid "Match case"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:373
+msgid "Match Case"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
+msgid "Whole word"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:409
+msgid "Regular Expression"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:415
+msgid "RegEx"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
 #, fuzzy
 msgid "Replace with"
 msgstr "바꿀 문자열:"
 
-#: src/bin/ui/search_dialog.c:289
+#: src/bin/ui/search_dialog.c:452
 msgid "Replace"
 msgstr "바꾸기"
 
-#: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
+#: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
 #, fuzzy
 msgid "Replace All"
 msgstr "바꾸기"
+
+#, fuzzy
+#~ msgid " Line %d, Column %d"
+#~ msgstr "줄: %d, 문자: %d"
 
 #, fuzzy
 #~ msgid "settings"
