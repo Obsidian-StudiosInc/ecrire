@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Hungarian translation for Ecrire.
 # Copyright (C) YEAR Enlightenment development team
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-02 15:13-0400\n"
+"POT-Creation-Date: 2017-11-03 23:26-0400\n"
 "PO-Revision-Date: 2014-01-09 18:20+0100\n"
 "Last-Translator: rezso <rezso@rezso.net>\n"
 "Language-Team: hu <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr "Megnyitás"
 #: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 #: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
 msgid "Save"
@@ -71,11 +71,11 @@ msgstr "Beillesztés"
 #: src/bin/main.c:748 src/bin/main.c:812
 #, fuzzy
 msgid "Search"
-msgstr "Keresés erre: "
+msgstr "Keresés erre"
 
 #: src/bin/main.c:749 src/bin/main.c:813
 msgid "Jump to"
-msgstr ""
+msgstr "Ugorj"
 
 #: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
@@ -83,28 +83,28 @@ msgstr "Beállítások"
 
 #: src/bin/main.c:787
 msgid "File"
-msgstr ""
+msgstr "Fájl"
 
 #: src/bin/main.c:797
 msgid "Exit"
-msgstr ""
+msgstr "Kijárat"
 
 #: src/bin/main.c:799
 msgid "Edit"
-msgstr ""
+msgstr "Szerkesztése"
 
 #: src/bin/main.c:873
 #, fuzzy
 msgid "Line"
-msgstr "Ugrás adott sorra"
+msgstr "Vonal"
 
 #: src/bin/main.c:894
 msgid "Column"
-msgstr ""
+msgstr "Oszlop"
 
 #: src/bin/ui/alerts.c:59
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Mentetlen Változások"
 
 #: src/bin/ui/alerts.c:61
 msgid ""
@@ -124,7 +124,7 @@ msgstr "Mégsem"
 
 #: src/bin/ui/file_related.c:53
 msgid "Recent files"
-msgstr ""
+msgstr "Legutóbbi Fájlok"
 
 #: src/bin/ui/settings_dialog.c:217
 msgid "Alpha"
@@ -132,29 +132,29 @@ msgstr ""
 
 #: src/bin/ui/settings_dialog.c:237
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "A lap beilleszti a tereket"
 
 #: src/bin/ui/settings_dialog.c:254
 msgid "Line Numbers"
-msgstr ""
+msgstr "Vonalszámok"
 
 #: src/bin/ui/settings_dialog.c:271
 msgid "Show Menu"
-msgstr ""
+msgstr "Menü Megjelenítése"
 
 #: src/bin/ui/settings_dialog.c:288
 msgid "Show Toolbar"
-msgstr ""
+msgstr "Az Eszköztár Megjelenítése"
 
 #: src/bin/ui/settings_dialog.c:351
 #, fuzzy
 msgid "Use default font"
-msgstr "Alapértelmezett betűkészlet használata:"
+msgstr "Alapértelmezett betűkészlet használata"
 
 #: src/bin/ui/settings_dialog.c:369
 #, fuzzy
 msgid "Font size"
-msgstr "Betűméret:"
+msgstr "Betűméret"
 
 #: src/bin/ui/settings_dialog.c:379
 #, c-format
@@ -168,64 +168,64 @@ msgstr ""
 #: src/bin/ui/settings_dialog.c:480
 #, fuzzy
 msgid "Font Settings"
-msgstr "Beállítások"
+msgstr "Betűtípus-beállítások"
 
 #: src/bin/ui/settings_dialog.c:483
 #, fuzzy
 msgid "Display Settings"
-msgstr "Beállítások"
+msgstr "Megjelenítési Beállítások"
 
 #: src/bin/ui/settings_dialog.c:487
 msgid "Display"
-msgstr ""
+msgstr "Kijelző"
 
 #: src/bin/ui/settings_dialog.c:492
 #, fuzzy
 msgid "Font"
-msgstr "Betűméret:"
+msgstr "Betűtípus"
 
 #: src/bin/ui/search_dialog.c:278
 #, fuzzy
 msgid "Search for"
-msgstr "Keresés erre: "
+msgstr "Keresés erre"
 
 #: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
 #, fuzzy
 msgid "Find All"
-msgstr "Keresés"
+msgstr "Mindent Megtalál"
 
 #: src/bin/ui/search_dialog.c:325
 msgid "Find Previous"
-msgstr ""
+msgstr "Keresse meg az Előzőt"
 
 #: src/bin/ui/search_dialog.c:331
 msgid "Previous"
-msgstr ""
+msgstr "Előző"
 
 #: src/bin/ui/search_dialog.c:346
 #, fuzzy
 msgid "Find Next"
-msgstr "Keresés"
+msgstr "Keresés meg a Következőt"
 
 #: src/bin/ui/search_dialog.c:352
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #: src/bin/ui/search_dialog.c:367
 msgid "Match case"
-msgstr ""
+msgstr "Mérkőzés Esetén"
 
 #: src/bin/ui/search_dialog.c:373
 msgid "Match Case"
-msgstr ""
+msgstr "Mérkőzés Esetén"
 
 #: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
 msgid "Whole word"
-msgstr ""
+msgstr "Egész Világ"
 
 #: src/bin/ui/search_dialog.c:409
 msgid "Regular Expression"
-msgstr ""
+msgstr "Reguláris Kifejezés"
 
 #: src/bin/ui/search_dialog.c:415
 msgid "RegEx"
@@ -234,7 +234,7 @@ msgstr ""
 #: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
 #, fuzzy
 msgid "Replace with"
-msgstr "Csere erre:"
+msgstr "Csere erre"
 
 #: src/bin/ui/search_dialog.c:452
 msgid "Replace"
@@ -243,31 +243,4 @@ msgstr "Csere"
 #: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
 #, fuzzy
 msgid "Replace All"
-msgstr "Csere"
-
-#, fuzzy
-#~ msgid "Jump to line"
-#~ msgstr "Ugrás e sorra:"
-
-#~ msgid "Go"
-#~ msgstr "Ugrás"
-
-#, fuzzy
-#~ msgid " Line %d, Column %d"
-#~ msgstr "%d. sor, %d. oszlop"
-
-#, fuzzy
-#~ msgid "settings"
-#~ msgstr "Beállítások"
-
-#~ msgid "Find & Replace"
-#~ msgstr "Keresés és csere"
-
-#~ msgid "Select Font"
-#~ msgstr "Válasszon egy betűtípust"
-
-#~ msgid "Set"
-#~ msgstr "Beállítás"
-
-#~ msgid "Go to"
-#~ msgstr "Ugrás"
+msgstr "Cserélje ki Mindet"
