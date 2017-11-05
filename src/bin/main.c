@@ -68,11 +68,13 @@ _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
     {
       elm_object_item_disabled_set(doc->mm_cut, disabled);
       elm_object_item_disabled_set(doc->mm_copy, disabled);
+      elm_object_item_disabled_set(doc->mm_select_all, disabled);
     }
   if(!_ent_cfg->toolbar)
     {
       elm_object_item_disabled_set(doc->cut_item, disabled);
       elm_object_item_disabled_set(doc->copy_item, disabled);
+      elm_object_item_disabled_set(doc->select_all_item, disabled);
     }
 }
 
@@ -553,6 +555,13 @@ _find(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 static void
+_select_all_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
+{
+   Ecrire_Doc *doc = data;
+   elm_code_widget_selection_select_all(doc->widget);
+}
+
+static void
 _settings(void *data,
           Evas_Object *obj EINA_UNUSED,
           void *event_info EINA_UNUSED)
@@ -743,6 +752,8 @@ add_toolbar(Ecrire_Doc *doc)
      elm_toolbar_item_append(tbar, "edit-copy", _("Copy"), _copy, doc);
   doc->paste_item =
      elm_toolbar_item_append(tbar, "edit-paste", _("Paste"), _paste, doc);
+  doc->select_all_item =
+     elm_toolbar_item_append(tbar, "edit-select-all", _("Select All"), _select_all_cb, doc);
   elm_toolbar_item_separator_set(
         elm_toolbar_item_append(tbar, "", "", NULL, NULL), EINA_TRUE);
   elm_toolbar_item_append(tbar, "edit-find-replace", _("Search"), _find, doc);
@@ -808,6 +819,8 @@ create_window(int argc, char *argv[])
          elm_menu_item_add(menu, edit_menu, "edit-copy", _("Copy"), _copy, main_doc);
        main_doc->mm_paste =
          elm_menu_item_add(menu, edit_menu, "edit-paste", _("Paste"), _paste, main_doc);
+       main_doc->mm_select_all =
+         elm_menu_item_add(menu, edit_menu, "edit-select-all", _("Select All"), _select_all_cb, main_doc);
        elm_menu_item_separator_add(menu, edit_menu);
        elm_menu_item_add(menu, edit_menu, "edit-find-replace", _("Search"), _find, main_doc);
        elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line_focus_cb, main_doc);
