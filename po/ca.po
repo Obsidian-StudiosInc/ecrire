@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-02 15:15-0400\n"
+"POT-Creation-Date: 2017-11-05 18:51-0500\n"
 "PO-Revision-Date: 2014-05-26 22:31+0000\n"
 "Last-Translator: joancoll <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -18,88 +18,93 @@ msgstr ""
 "X-Launchpad-Export-Date: 2014-05-27 05:40+0000\n"
 "X-Generator: Launchpad (build 17017)\n"
 
-#: src/bin/main.c:181
+#: src/bin/main.c:183
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:184
+#: src/bin/main.c:186
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sSense títol %d - %s"
 
-#: src/bin/main.c:725 src/bin/main.c:788
+#: src/bin/main.c:734 src/bin/main.c:799
 msgid "New"
 msgstr "Nou"
 
-#: src/bin/main.c:726 src/bin/main.c:789
+#: src/bin/main.c:735 src/bin/main.c:800
 msgid "Open"
 msgstr "Obre"
 
-#: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
+#: src/bin/main.c:737 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr "Tanca"
 
-#: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
+#: src/bin/main.c:739 src/bin/main.c:802 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Desa"
 
-#: src/bin/main.c:732 src/bin/main.c:793
+#: src/bin/main.c:741 src/bin/main.c:804
 msgid "Save As"
 msgstr "Anomena i desa"
 
-#: src/bin/main.c:736 src/bin/main.c:801
+#: src/bin/main.c:745 src/bin/main.c:812
 msgid "Undo"
 msgstr "Desfés"
 
-#: src/bin/main.c:738 src/bin/main.c:803
+#: src/bin/main.c:747 src/bin/main.c:814
 msgid "Redo"
 msgstr "Refés"
 
-#: src/bin/main.c:741 src/bin/main.c:806
+#: src/bin/main.c:750 src/bin/main.c:817
 msgid "Cut"
 msgstr "Retalla"
 
-#: src/bin/main.c:743 src/bin/main.c:808
+#: src/bin/main.c:752 src/bin/main.c:819
 msgid "Copy"
 msgstr "Copia"
 
-#: src/bin/main.c:745 src/bin/main.c:810
+#: src/bin/main.c:754 src/bin/main.c:821
 msgid "Paste"
 msgstr "Enganxa"
 
-#: src/bin/main.c:748 src/bin/main.c:812
+#: src/bin/main.c:756 src/bin/main.c:823
+#, fuzzy
+msgid "Select All"
+msgstr "Seleccionar Tot"
+
+#: src/bin/main.c:759 src/bin/main.c:825
 #, fuzzy
 msgid "Search"
 msgstr "Cerca per"
 
-#: src/bin/main.c:749 src/bin/main.c:813
+#: src/bin/main.c:760 src/bin/main.c:826
 msgid "Jump to"
 msgstr "Saltar a"
 
-#: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
+#: src/bin/main.c:763 src/bin/main.c:806 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
 msgstr "Paràmetres"
 
-#: src/bin/main.c:787
+#: src/bin/main.c:798
 msgid "File"
 msgstr "Dossier"
 
-#: src/bin/main.c:797
+#: src/bin/main.c:808
 msgid "Exit"
 msgstr "Sortir"
 
-#: src/bin/main.c:799
+#: src/bin/main.c:810
 msgid "Edit"
 msgstr "Edita"
 
-#: src/bin/main.c:873
+#: src/bin/main.c:886
 #, fuzzy
 msgid "Line"
 msgstr "Vés a la línia"
 
-#: src/bin/main.c:894
+#: src/bin/main.c:907
 msgid "Column"
 msgstr "Columna"
 
@@ -244,4 +249,4 @@ msgstr "Reemplaça"
 #: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
 #, fuzzy
 msgid "Replace All"
-msgstr "Reemplaça"
+msgstr "Reemplaça Tots"
