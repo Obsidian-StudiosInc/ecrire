@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-02 15:13-0400\n"
+"POT-Creation-Date: 2017-11-05 18:51-0500\n"
 "PO-Revision-Date: 2016-09-21 16:51+0200\n"
 "Last-Translator: Renato Rener <renato.rener@gmail.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -18,86 +18,91 @@ msgstr ""
 "X-Launchpad-Export-Date: 2016-09-16 20:28+0000\n"
 "X-Generator: Poedit 1.8.9\n"
 
-#: src/bin/main.c:181
+#: src/bin/main.c:183
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:184
+#: src/bin/main.c:186
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sNeimenovano %d - %s"
 
-#: src/bin/main.c:725 src/bin/main.c:788
+#: src/bin/main.c:734 src/bin/main.c:799
 msgid "New"
 msgstr "Nov"
 
-#: src/bin/main.c:726 src/bin/main.c:789
+#: src/bin/main.c:735 src/bin/main.c:800
 msgid "Open"
 msgstr "Odpri"
 
-#: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
+#: src/bin/main.c:737 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
+#: src/bin/main.c:739 src/bin/main.c:802 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Shrani"
 
-#: src/bin/main.c:732 src/bin/main.c:793
+#: src/bin/main.c:741 src/bin/main.c:804
 msgid "Save As"
 msgstr "Shrani kot"
 
-#: src/bin/main.c:736 src/bin/main.c:801
+#: src/bin/main.c:745 src/bin/main.c:812
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: src/bin/main.c:738 src/bin/main.c:803
+#: src/bin/main.c:747 src/bin/main.c:814
 msgid "Redo"
 msgstr "Ponovno uveljavi"
 
-#: src/bin/main.c:741 src/bin/main.c:806
+#: src/bin/main.c:750 src/bin/main.c:817
 msgid "Cut"
 msgstr "Izreži"
 
-#: src/bin/main.c:743 src/bin/main.c:808
+#: src/bin/main.c:752 src/bin/main.c:819
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: src/bin/main.c:745 src/bin/main.c:810
+#: src/bin/main.c:754 src/bin/main.c:821
 msgid "Paste"
 msgstr "Prilepi"
 
-#: src/bin/main.c:748 src/bin/main.c:812
+#: src/bin/main.c:756 src/bin/main.c:823
+#, fuzzy
+msgid "Select All"
+msgstr "Izberi pisavo"
+
+#: src/bin/main.c:759 src/bin/main.c:825
 msgid "Search"
 msgstr "Iskanje"
 
-#: src/bin/main.c:749 src/bin/main.c:813
+#: src/bin/main.c:760 src/bin/main.c:826
 msgid "Jump to"
 msgstr "Skoči na"
 
-#: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
+#: src/bin/main.c:763 src/bin/main.c:806 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: src/bin/main.c:787
+#: src/bin/main.c:798
 msgid "File"
 msgstr ""
 
-#: src/bin/main.c:797
+#: src/bin/main.c:808
 msgid "Exit"
 msgstr ""
 
-#: src/bin/main.c:799
+#: src/bin/main.c:810
 msgid "Edit"
 msgstr ""
 
-#: src/bin/main.c:873
+#: src/bin/main.c:886
 msgid "Line"
 msgstr ""
 
-#: src/bin/main.c:894
+#: src/bin/main.c:907
 msgid "Column"
 msgstr ""
 
@@ -258,9 +263,6 @@ msgstr "Zamenjaj"
 #, fuzzy
 #~ msgid "settings"
 #~ msgstr "Nastavitve"
-
-#~ msgid "Select Font"
-#~ msgstr "Izberi pisavo"
 
 #~ msgid "Set"
 #~ msgstr "Nastavi"

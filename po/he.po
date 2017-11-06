@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: entitled 0.1.0\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-02 15:13-0400\n"
+"POT-Creation-Date: 2017-11-05 18:51-0500\n"
 "PO-Revision-Date: 2011-08-09 11:45+0.00\n"
 "Last-Translator: Tom Hacohen <tom@stosb.com>\n"
 "Language-Team: General\n"
@@ -17,87 +17,92 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/bin/main.c:181
+#: src/bin/main.c:183
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:184
+#: src/bin/main.c:186
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sללא שם %d - %s"
 
-#: src/bin/main.c:725 src/bin/main.c:788
+#: src/bin/main.c:734 src/bin/main.c:799
 msgid "New"
 msgstr "חדש"
 
-#: src/bin/main.c:726 src/bin/main.c:789
+#: src/bin/main.c:735 src/bin/main.c:800
 msgid "Open"
 msgstr "פתח"
 
-#: src/bin/main.c:728 src/bin/ui/settings_dialog.c:500
+#: src/bin/main.c:737 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:730 src/bin/main.c:791 src/bin/ui/alerts.c:65
+#: src/bin/main.c:739 src/bin/main.c:802 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "שמור"
 
-#: src/bin/main.c:732 src/bin/main.c:793
+#: src/bin/main.c:741 src/bin/main.c:804
 msgid "Save As"
 msgstr "שמור בשם"
 
-#: src/bin/main.c:736 src/bin/main.c:801
+#: src/bin/main.c:745 src/bin/main.c:812
 msgid "Undo"
 msgstr "בטל"
 
-#: src/bin/main.c:738 src/bin/main.c:803
+#: src/bin/main.c:747 src/bin/main.c:814
 msgid "Redo"
 msgstr "בצע שוב"
 
-#: src/bin/main.c:741 src/bin/main.c:806
+#: src/bin/main.c:750 src/bin/main.c:817
 msgid "Cut"
 msgstr "גזור"
 
-#: src/bin/main.c:743 src/bin/main.c:808
+#: src/bin/main.c:752 src/bin/main.c:819
 msgid "Copy"
 msgstr "העתק"
 
-#: src/bin/main.c:745 src/bin/main.c:810
+#: src/bin/main.c:754 src/bin/main.c:821
 msgid "Paste"
 msgstr "הדבק"
 
-#: src/bin/main.c:748 src/bin/main.c:812
+#: src/bin/main.c:756 src/bin/main.c:823
+#, fuzzy
+msgid "Select All"
+msgstr "בחר גופן"
+
+#: src/bin/main.c:759 src/bin/main.c:825
 #, fuzzy
 msgid "Search"
 msgstr "חפש:"
 
-#: src/bin/main.c:749 src/bin/main.c:813
+#: src/bin/main.c:760 src/bin/main.c:826
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:752 src/bin/main.c:795 src/bin/ui/settings_dialog.c:446
+#: src/bin/main.c:763 src/bin/main.c:806 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
 msgstr "הגדרות"
 
-#: src/bin/main.c:787
+#: src/bin/main.c:798
 msgid "File"
 msgstr ""
 
-#: src/bin/main.c:797
+#: src/bin/main.c:808
 msgid "Exit"
 msgstr ""
 
-#: src/bin/main.c:799
+#: src/bin/main.c:810
 msgid "Edit"
 msgstr ""
 
-#: src/bin/main.c:873
+#: src/bin/main.c:886
 msgid "Line"
 msgstr ""
 
-#: src/bin/main.c:894
+#: src/bin/main.c:907
 msgid "Column"
 msgstr ""
 
@@ -253,9 +258,6 @@ msgstr "החלף"
 
 #~ msgid "Find & Replace"
 #~ msgstr "חפש והחלף"
-
-#~ msgid "Select Font"
-#~ msgstr "בחר גופן"
 
 #~ msgid "Set"
 #~ msgstr "בחר"
