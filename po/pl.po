@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-09 21:19-0500\n"
+"POT-Creation-Date: 2017-11-09 22:31-0500\n"
 "PO-Revision-Date: 2013-11-22 22:59+0100\n"
 "Last-Translator: Konrad Makowski\n"
 "Language-Team: polish <poczta@konradmakowski.pl>\n"
@@ -41,7 +41,7 @@ msgstr "Otwórz"
 #: src/bin/main.c:732 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
-msgstr ""
+msgstr "Blisko"
 
 #: src/bin/main.c:734 src/bin/main.c:798 src/bin/ui/alerts.c:65
 msgid "Save"
@@ -72,18 +72,16 @@ msgid "Paste"
 msgstr "Wklej"
 
 #: src/bin/main.c:751 src/bin/main.c:819
-#, fuzzy
 msgid "Select All"
-msgstr "Wybierz Font"
+msgstr "Zaznacz Wszystko"
 
 #: src/bin/main.c:754 src/bin/main.c:821
-#, fuzzy
 msgid "Search"
-msgstr "Szukaj:"
+msgstr "Szukaj"
 
 #: src/bin/main.c:755 src/bin/main.c:822
 msgid "Jump to"
-msgstr ""
+msgstr "Skocz do"
 
 #: src/bin/main.c:758 src/bin/main.c:802 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
@@ -91,28 +89,27 @@ msgstr "Ustawienia"
 
 #: src/bin/main.c:794
 msgid "File"
-msgstr ""
+msgstr "Plik"
 
 #: src/bin/main.c:804
 msgid "Exit"
-msgstr ""
+msgstr "Wyjście"
 
 #: src/bin/main.c:806
 msgid "Edit"
-msgstr ""
+msgstr "Edytować"
 
 #: src/bin/main.c:882
-#, fuzzy
 msgid "Line"
-msgstr "Idź do linii"
+msgstr "Linia"
 
 #: src/bin/main.c:903
 msgid "Column"
-msgstr ""
+msgstr "Kolumna"
 
 #: src/bin/ui/alerts.c:59
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Niezapisane Zmiany"
 
 #: src/bin/ui/alerts.c:61
 msgid ""
@@ -132,37 +129,35 @@ msgstr "Anuluj"
 
 #: src/bin/ui/file_related.c:57
 msgid "Recent files"
-msgstr ""
+msgstr "Ostatnie pliki"
 
 #: src/bin/ui/settings_dialog.c:217
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: src/bin/ui/settings_dialog.c:237
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "Tab wstawia spacje"
 
 #: src/bin/ui/settings_dialog.c:254
 msgid "Line Numbers"
-msgstr ""
+msgstr "Numery Linii"
 
 #: src/bin/ui/settings_dialog.c:271
 msgid "Show Menu"
-msgstr ""
+msgstr "Pokaż Menu"
 
 #: src/bin/ui/settings_dialog.c:288
 msgid "Show Toolbar"
-msgstr ""
+msgstr "Pokaż pasek narzędzi"
 
 #: src/bin/ui/settings_dialog.c:351
-#, fuzzy
 msgid "Use default font"
-msgstr "Użyj Domyślnego Fontu:"
+msgstr "Użyj Domyślnego Fontu"
 
 #: src/bin/ui/settings_dialog.c:369
-#, fuzzy
 msgid "Font size"
-msgstr "Wielkość Fontu:"
+msgstr "Wielkość Fontu"
 
 #: src/bin/ui/settings_dialog.c:379
 #, c-format
@@ -174,95 +169,73 @@ msgid "ecrire"
 msgstr ""
 
 #: src/bin/ui/settings_dialog.c:480
-#, fuzzy
 msgid "Font Settings"
-msgstr "Ustawienia"
+msgstr "Ustawienia Czcionek"
 
 #: src/bin/ui/settings_dialog.c:483
-#, fuzzy
 msgid "Display Settings"
-msgstr "Ustawienia"
+msgstr "Ustawienia Wyświetlania"
 
 #: src/bin/ui/settings_dialog.c:487
 msgid "Display"
-msgstr ""
+msgstr "Pokaz"
 
 #: src/bin/ui/settings_dialog.c:492
-#, fuzzy
 msgid "Font"
-msgstr "Wielkość Fontu:"
+msgstr "Fontu"
 
 #: src/bin/ui/search_dialog.c:278
-#, fuzzy
 msgid "Search for"
-msgstr "Szukaj:"
+msgstr "Szukaj"
 
 #: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
-#, fuzzy
 msgid "Find All"
-msgstr "Znajdź"
+msgstr "Znajdź wszystko"
 
 #: src/bin/ui/search_dialog.c:325
 msgid "Find Previous"
-msgstr ""
+msgstr "Znajdź Poprzednie"
 
 #: src/bin/ui/search_dialog.c:331
 msgid "Previous"
-msgstr ""
+msgstr "Poprzedni"
 
 #: src/bin/ui/search_dialog.c:346
-#, fuzzy
 msgid "Find Next"
-msgstr "Znajdź"
+msgstr "Znajdź Następny"
 
 #: src/bin/ui/search_dialog.c:352
 msgid "Next"
-msgstr ""
+msgstr "Następny"
 
 #: src/bin/ui/search_dialog.c:367
 msgid "Match case"
-msgstr ""
+msgstr "Sprawa meczu"
 
 #: src/bin/ui/search_dialog.c:373
 msgid "Match Case"
-msgstr ""
+msgstr "Sprawa Meczu"
 
 #: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
 msgid "Whole word"
-msgstr ""
+msgstr "Cały świat"
 
 #: src/bin/ui/search_dialog.c:409
 msgid "Regular Expression"
-msgstr ""
+msgstr "Wyrażenie Regularne"
 
 #: src/bin/ui/search_dialog.c:415
 msgid "RegEx"
 msgstr ""
 
 #: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
-#, fuzzy
 msgid "Replace with"
-msgstr "Zamień przez:"
+msgstr "Zamienić"
 
 #: src/bin/ui/search_dialog.c:452
 msgid "Replace"
-msgstr "Zamień"
+msgstr "Zastąpić"
 
 #: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
-#, fuzzy
 msgid "Replace All"
-msgstr "Zamień"
-
-#, fuzzy
-#~ msgid " Line %d, Column %d"
-#~ msgstr "Wiersz %d, Kolumna %d"
-
-#, fuzzy
-#~ msgid "settings"
-#~ msgstr "Ustawienia"
-
-#~ msgid "Find & Replace"
-#~ msgstr "Znajdź i zamień"
-
-#~ msgid "Set"
-#~ msgstr "Ustaw"
+msgstr "Zamień Wszystko"
