@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-05 18:51-0500\n"
+"POT-Creation-Date: 2017-11-09 21:19-0500\n"
 "PO-Revision-Date: 2015-01-31 13:59+0100\n"
 "Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: српски <xfce4@xfce4.org>\n"
@@ -18,93 +18,93 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/bin/main.c:183
+#: src/bin/main.c:182
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:186
+#: src/bin/main.c:185
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sНеименовано %d - %s"
 
-#: src/bin/main.c:734 src/bin/main.c:799
+#: src/bin/main.c:729 src/bin/main.c:795
 msgid "New"
 msgstr "Нови"
 
-#: src/bin/main.c:735 src/bin/main.c:800
+#: src/bin/main.c:730 src/bin/main.c:796
 msgid "Open"
 msgstr "Отвори"
 
-#: src/bin/main.c:737 src/bin/ui/settings_dialog.c:500
+#: src/bin/main.c:732 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr ""
 
-#: src/bin/main.c:739 src/bin/main.c:802 src/bin/ui/alerts.c:65
+#: src/bin/main.c:734 src/bin/main.c:798 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Сачувај"
 
-#: src/bin/main.c:741 src/bin/main.c:804
+#: src/bin/main.c:736 src/bin/main.c:800
 msgid "Save As"
 msgstr "Сачувај као"
 
-#: src/bin/main.c:745 src/bin/main.c:812
+#: src/bin/main.c:740 src/bin/main.c:808
 msgid "Undo"
 msgstr "Опозови"
 
-#: src/bin/main.c:747 src/bin/main.c:814
+#: src/bin/main.c:742 src/bin/main.c:810
 msgid "Redo"
 msgstr "Понови"
 
-#: src/bin/main.c:750 src/bin/main.c:817
+#: src/bin/main.c:745 src/bin/main.c:813
 msgid "Cut"
 msgstr "Исеци"
 
-#: src/bin/main.c:752 src/bin/main.c:819
+#: src/bin/main.c:747 src/bin/main.c:815
 msgid "Copy"
 msgstr "Умножи"
 
-#: src/bin/main.c:754 src/bin/main.c:821
+#: src/bin/main.c:749 src/bin/main.c:817
 msgid "Paste"
 msgstr "Налепи"
 
-#: src/bin/main.c:756 src/bin/main.c:823
+#: src/bin/main.c:751 src/bin/main.c:819
 #, fuzzy
 msgid "Select All"
 msgstr "Одаберите словни лик"
 
-#: src/bin/main.c:759 src/bin/main.c:825
+#: src/bin/main.c:754 src/bin/main.c:821
 #, fuzzy
 msgid "Search"
 msgstr "Тражи:"
 
-#: src/bin/main.c:760 src/bin/main.c:826
+#: src/bin/main.c:755 src/bin/main.c:822
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:763 src/bin/main.c:806 src/bin/ui/settings_dialog.c:446
+#: src/bin/main.c:758 src/bin/main.c:802 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
 msgstr "Поставке"
 
-#: src/bin/main.c:798
+#: src/bin/main.c:794
 msgid "File"
 msgstr ""
 
-#: src/bin/main.c:808
+#: src/bin/main.c:804
 msgid "Exit"
 msgstr ""
 
-#: src/bin/main.c:810
+#: src/bin/main.c:806
 msgid "Edit"
 msgstr ""
 
-#: src/bin/main.c:886
+#: src/bin/main.c:882
 #, fuzzy
 msgid "Line"
 msgstr "Иди на линију"
 
-#: src/bin/main.c:907
+#: src/bin/main.c:903
 msgid "Column"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr "Одбаци"
 msgid "Cancel"
 msgstr "Откажи"
 
-#: src/bin/ui/file_related.c:53
+#: src/bin/ui/file_related.c:57
 msgid "Recent files"
 msgstr ""
 
