@@ -1,0 +1,236 @@
+# Danish translation for ecrire
+# Copyright (C) 2017 Obsidian-Studios, Inc.
+# This file is distributed under the same license as the ecrire package.
+# William L. Thomson Jr. <wlt@o-sinc.com>, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ecrire \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-09 21:19-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: William L. Thomson Jr. <wlt@o-sinc.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/bin/main.c:182
+#, c-format
+msgid "%s%s - %s"
+msgstr ""
+
+#: src/bin/main.c:185
+#, c-format
+msgid "%sUntitled %d - %s"
+msgstr "Unavngivet"
+
+#: src/bin/main.c:729 src/bin/main.c:795
+msgid "New"
+msgstr "Ny"
+
+#: src/bin/main.c:730 src/bin/main.c:796
+msgid "Open"
+msgstr "Åben"
+
+#: src/bin/main.c:732 src/bin/ui/settings_dialog.c:500
+#: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
+msgid "Close"
+msgstr "Tæt"
+
+#: src/bin/main.c:734 src/bin/main.c:798 src/bin/ui/alerts.c:65
+msgid "Save"
+msgstr "Gemme"
+
+#: src/bin/main.c:736 src/bin/main.c:800
+msgid "Save As"
+msgstr "Gem som"
+
+#: src/bin/main.c:740 src/bin/main.c:808
+msgid "Undo"
+msgstr "Fortryd"
+
+#: src/bin/main.c:742 src/bin/main.c:810
+msgid "Redo"
+msgstr "Omgør"
+
+#: src/bin/main.c:745 src/bin/main.c:813
+msgid "Cut"
+msgstr "Skære"
+
+#: src/bin/main.c:747 src/bin/main.c:815
+msgid "Copy"
+msgstr "Kopi"
+
+#: src/bin/main.c:749 src/bin/main.c:817
+msgid "Paste"
+msgstr "Indsæt"
+
+#: src/bin/main.c:751 src/bin/main.c:819
+msgid "Select All"
+msgstr "Vælg Alle"
+
+#: src/bin/main.c:754 src/bin/main.c:821
+msgid "Search"
+msgstr "Søg"
+
+#: src/bin/main.c:755 src/bin/main.c:822
+msgid "Jump to"
+msgstr "Hop til"
+
+#: src/bin/main.c:758 src/bin/main.c:802 src/bin/ui/settings_dialog.c:446
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: src/bin/main.c:794
+msgid "File"
+msgstr "Fil"
+
+#: src/bin/main.c:804
+msgid "Exit"
+msgstr "Afslut"
+
+#: src/bin/main.c:806
+msgid "Edit"
+msgstr "Redigere"
+
+#: src/bin/main.c:882
+msgid "Line"
+msgstr "Linje"
+
+#: src/bin/main.c:903
+msgid "Column"
+msgstr "Kolonne"
+
+#: src/bin/ui/alerts.c:59
+msgid "Unsaved Changes"
+msgstr "Ubesvarede Ændringer"
+
+#: src/bin/ui/alerts.c:61
+msgid ""
+"<align=center>Would you like to save changes to document?<br>Any unsaved "
+"changes will be lost."
+msgstr "<align=center>Vil du gerne gemme ændringer i dokumentet?<br>Eventuelle "
+"ubesparede ændringer vil gå tabt."
+#: src/bin/ui/alerts.c:70
+msgid "Discard"
+msgstr "Kassér"
+
+#: src/bin/ui/alerts.c:75
+msgid "Cancel"
+msgstr "Afbestille"
+
+#: src/bin/ui/file_related.c:57
+msgid "Recent files"
+msgstr "Seneste filer"
+
+#: src/bin/ui/settings_dialog.c:217
+msgid "Alpha"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:237
+msgid "Tab inserts spaces"
+msgstr "Fanen indsætter mellemrum"
+
+#: src/bin/ui/settings_dialog.c:254
+msgid "Line Numbers"
+msgstr "Linjenumre"
+
+#: src/bin/ui/settings_dialog.c:271
+msgid "Show Menu"
+msgstr "Vis Menu"
+
+#: src/bin/ui/settings_dialog.c:288
+msgid "Show Toolbar"
+msgstr "Vis Værktøjslinje"
+
+#: src/bin/ui/settings_dialog.c:351
+msgid "Use default font"
+msgstr "Brug standard skrifttype"
+
+#: src/bin/ui/settings_dialog.c:369
+msgid "Font size"
+msgstr "Skriftstørrelse"
+
+#: src/bin/ui/settings_dialog.c:379
+#, c-format
+msgid "%.0f pts"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:446
+msgid "ecrire"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:480
+msgid "Font Settings"
+msgstr "Fontindstillinger"
+
+#: src/bin/ui/settings_dialog.c:483
+msgid "Display Settings"
+msgstr "Skærmindstillinger"
+
+#: src/bin/ui/settings_dialog.c:487
+msgid "Display"
+msgstr "Skærm"
+
+#: src/bin/ui/settings_dialog.c:492
+msgid "Font"
+msgstr "Skrifttype"
+
+#: src/bin/ui/search_dialog.c:278
+msgid "Search for"
+msgstr "Søge efter"
+
+#: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
+msgid "Find All"
+msgstr "Find Alle"
+
+#: src/bin/ui/search_dialog.c:325
+msgid "Find Previous"
+msgstr "Find Forrige"
+
+#: src/bin/ui/search_dialog.c:331
+msgid "Previous"
+msgstr "Tidligere"
+
+#: src/bin/ui/search_dialog.c:346
+msgid "Find Next"
+msgstr "Find Næste"
+
+#: src/bin/ui/search_dialog.c:352
+msgid "Next"
+msgstr "Næste"
+
+#: src/bin/ui/search_dialog.c:367
+msgid "Match case"
+msgstr "Match tilfælde"
+
+#: src/bin/ui/search_dialog.c:373
+msgid "Match Case"
+msgstr "Match Tilfælde"
+
+#: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
+msgid "Whole word"
+msgstr "Hele ord"
+
+#: src/bin/ui/search_dialog.c:409
+msgid "Regular Expression"
+msgstr "Almindelig udtryk"
+
+#: src/bin/ui/search_dialog.c:415
+msgid "RegEx"
+msgstr ""
+
+#: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
+msgid "Replace with"
+msgstr "Erstat med"
+
+#: src/bin/ui/search_dialog.c:452
+msgid "Replace"
+msgstr "Erstatte"
+
+#: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
+msgid "Replace All"
+msgstr "Udskift Alle"
