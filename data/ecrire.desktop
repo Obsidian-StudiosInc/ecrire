@@ -2,6 +2,7 @@
 Type=Application
 Name=Ecrire
 Name[ca]=Ecrire
+Name[da]=Ecrire
 Name[de]=Ecrire
 Name[el]=Ecrire
 Name[fi]=Ecrire
@@ -14,6 +15,7 @@ Name[tr]=Ecrire
 Comment=Simple text editor
 Comment[ca]=Editor de text simple
 Comment[de]=Einfache Textbearbeitung
+Comment[da]=Enkel tekstredigering
 Comment[eo]=Simpla tekst-redaktilo
 Comment[es]=Un simple editor de texto
 Comment[fi]=Yksinkertainen tekstieditori
