@@ -354,12 +354,11 @@ _open_file(Ecrire_Doc *doc, const char *file)
 }
 
 static void
-_fs_open_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
-      void *event_info)
+_fs_open_done(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
-   const char *selected = event_info;
-   if (selected)
-      _open_file(main_doc, selected);
+  const char *selected = event_info;
+  if (selected)
+    _open_file((Ecrire_Doc *)data, selected);
 }
 
 void
@@ -403,15 +402,12 @@ save_do(const char *file, Ecrire_Doc *doc)
 }
 
 static void
-_fs_save_done(void *data EINA_UNUSED, Evas_Object *obj EINA_UNUSED,
-      void *event_info)
+_fs_save_done(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
-   const char *selected = event_info;
+  const char *selected = event_info;
 
-   if (selected)
-     {
-        save_do(selected, main_doc);
-     }
+  if (selected)
+    save_do(selected, (Ecrire_Doc *)data);
 }
 
 static void
