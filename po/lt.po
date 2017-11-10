@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-09 21:19-0500\n"
+"POT-Creation-Date: 2017-11-09 22:31-0500\n"
 "PO-Revision-Date: 2014-05-10 22:53+0000\n"
 "Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
@@ -26,11 +26,11 @@ msgstr ""
 #: src/bin/main.c:185
 #, c-format
 msgid "%sUntitled %d - %s"
-msgstr ""
+msgstr "%sBe Pavadinimo %d - %s"
 
 #: src/bin/main.c:729 src/bin/main.c:795
 msgid "New"
-msgstr ""
+msgstr "Naujas"
 
 #: src/bin/main.c:730 src/bin/main.c:796
 msgid "Open"
@@ -39,7 +39,7 @@ msgstr "Atverti"
 #: src/bin/main.c:732 src/bin/ui/settings_dialog.c:500
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
-msgstr ""
+msgstr "Uždaryti"
 
 #: src/bin/main.c:734 src/bin/main.c:798 src/bin/ui/alerts.c:65
 msgid "Save"
@@ -51,11 +51,11 @@ msgstr "Įrašyti kaip"
 
 #: src/bin/main.c:740 src/bin/main.c:808
 msgid "Undo"
-msgstr "Atšaukti"
+msgstr "Anuliuoti"
 
 #: src/bin/main.c:742 src/bin/main.c:810
 msgid "Redo"
-msgstr ""
+msgstr "Pakartoti"
 
 #: src/bin/main.c:745 src/bin/main.c:813
 msgid "Cut"
@@ -70,18 +70,16 @@ msgid "Paste"
 msgstr "Įdėti"
 
 #: src/bin/main.c:751 src/bin/main.c:819
-#, fuzzy
 msgid "Select All"
-msgstr "Pasirinkti šriftą"
+msgstr "Pasirinkti Viską"
 
 #: src/bin/main.c:754 src/bin/main.c:821
-#, fuzzy
 msgid "Search"
-msgstr "Ieškoti:"
+msgstr "Ieškoti"
 
 #: src/bin/main.c:755 src/bin/main.c:822
 msgid "Jump to"
-msgstr ""
+msgstr "Peršokti į"
 
 #: src/bin/main.c:758 src/bin/main.c:802 src/bin/ui/settings_dialog.c:446
 msgid "Settings"
@@ -89,75 +87,75 @@ msgstr "Nustatymai"
 
 #: src/bin/main.c:794
 msgid "File"
-msgstr ""
+msgstr "Failas"
 
 #: src/bin/main.c:804
 msgid "Exit"
-msgstr ""
+msgstr "Išeiti"
 
 #: src/bin/main.c:806
 msgid "Edit"
-msgstr ""
+msgstr "Redaguoti"
 
 #: src/bin/main.c:882
 msgid "Line"
-msgstr ""
+msgstr "Linija"
 
 #: src/bin/main.c:903
 msgid "Column"
-msgstr ""
+msgstr "Stulpelis"
 
 #: src/bin/ui/alerts.c:59
 msgid "Unsaved Changes"
-msgstr ""
+msgstr "Neapsaugoti Pakeitimai"
 
 #: src/bin/ui/alerts.c:61
 msgid ""
 "<align=center>Would you like to save changes to document?<br>Any unsaved "
 "changes will be lost."
 msgstr ""
+"<align=center>Ar norite išsaugoti dokumento pakeitimus?<br>Visi nesaugomi "
+"pakeitimai bus prarasti"
 
 #: src/bin/ui/alerts.c:70
 msgid "Discard"
-msgstr ""
+msgstr "Atmesti"
 
 #: src/bin/ui/alerts.c:75
 msgid "Cancel"
-msgstr "Atsisakyti"
+msgstr "Atšaukti"
 
 #: src/bin/ui/file_related.c:57
 msgid "Recent files"
-msgstr ""
+msgstr "Naujausi Failai"
 
 #: src/bin/ui/settings_dialog.c:217
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: src/bin/ui/settings_dialog.c:237
 msgid "Tab inserts spaces"
-msgstr ""
+msgstr "Skirtukas įterpia tarpus"
 
 #: src/bin/ui/settings_dialog.c:254
 msgid "Line Numbers"
-msgstr ""
+msgstr "Eilučių Numeriai"
 
 #: src/bin/ui/settings_dialog.c:271
 msgid "Show Menu"
-msgstr ""
+msgstr "Rodyti Meniu"
 
 #: src/bin/ui/settings_dialog.c:288
 msgid "Show Toolbar"
-msgstr ""
+msgstr "Rodyti Įrankių juosta"
 
 #: src/bin/ui/settings_dialog.c:351
-#, fuzzy
 msgid "Use default font"
-msgstr "Naudoti numatytąjį šriftą:"
+msgstr "Naudoti numatytąjį šriftą"
 
 #: src/bin/ui/settings_dialog.c:369
-#, fuzzy
 msgid "Font size"
-msgstr "Šrifto dydis:"
+msgstr "Šrifto dydis"
 
 #: src/bin/ui/settings_dialog.c:379
 #, c-format
@@ -169,94 +167,73 @@ msgid "ecrire"
 msgstr ""
 
 #: src/bin/ui/settings_dialog.c:480
-#, fuzzy
 msgid "Font Settings"
-msgstr "Nustatymai"
+msgstr "Šrifto Nustatymai"
 
 #: src/bin/ui/settings_dialog.c:483
-#, fuzzy
 msgid "Display Settings"
-msgstr "Nustatymai"
+msgstr "Ekrano Nustatymai"
 
 #: src/bin/ui/settings_dialog.c:487
 msgid "Display"
-msgstr ""
+msgstr "Ekranas"
 
 #: src/bin/ui/settings_dialog.c:492
-#, fuzzy
 msgid "Font"
-msgstr "Šrifto dydis:"
+msgstr "Šriftas"
 
 #: src/bin/ui/search_dialog.c:278
-#, fuzzy
 msgid "Search for"
-msgstr "Ieškoti:"
+msgstr "Ieškoti"
 
 #: src/bin/ui/search_dialog.c:304 src/bin/ui/search_dialog.c:310
-#, fuzzy
 msgid "Find All"
-msgstr "Rasti"
+msgstr "Rasti Viską"
 
 #: src/bin/ui/search_dialog.c:325
 msgid "Find Previous"
-msgstr ""
+msgstr "Rasti Ankstesni"
 
 #: src/bin/ui/search_dialog.c:331
 msgid "Previous"
-msgstr ""
+msgstr "Ankstesnis"
 
 #: src/bin/ui/search_dialog.c:346
-#, fuzzy
 msgid "Find Next"
-msgstr "Rasti"
+msgstr "Rasti Kitas"
 
 #: src/bin/ui/search_dialog.c:352
 msgid "Next"
-msgstr ""
+msgstr "Kitas"
 
 #: src/bin/ui/search_dialog.c:367
 msgid "Match case"
-msgstr ""
+msgstr "Rungtynių byla"
 
 #: src/bin/ui/search_dialog.c:373
 msgid "Match Case"
-msgstr ""
+msgstr "Rungtynių Byla"
 
 #: src/bin/ui/search_dialog.c:388 src/bin/ui/search_dialog.c:394
 msgid "Whole word"
-msgstr ""
+msgstr "Sveikas žodis"
 
 #: src/bin/ui/search_dialog.c:409
 msgid "Regular Expression"
-msgstr ""
+msgstr "Įprasta Išraiška"
 
 #: src/bin/ui/search_dialog.c:415
 msgid "RegEx"
 msgstr ""
 
 #: src/bin/ui/search_dialog.c:424 src/bin/ui/search_dialog.c:446
-#, fuzzy
 msgid "Replace with"
-msgstr "Pakeisti į:"
+msgstr "Pakeisti į"
 
 #: src/bin/ui/search_dialog.c:452
 msgid "Replace"
-msgstr "Pakeisti"
+msgstr "Pakeiskite"
 
 #: src/bin/ui/search_dialog.c:467 src/bin/ui/search_dialog.c:473
-#, fuzzy
 msgid "Replace All"
-msgstr "Pakeisti"
-
-#, fuzzy
-#~ msgid "settings"
-#~ msgstr "Nustatymai"
-
-#~ msgid "Find & Replace"
-#~ msgstr "Rasti ir Pakeisti"
-
-#~ msgid "Set"
-#~ msgstr "Nustatyti"
-
-#~ msgid "Go to"
-#~ msgstr "Eiti į"
+msgstr "Pakeisti Viską"
