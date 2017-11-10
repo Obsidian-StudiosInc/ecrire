@@ -6,14 +6,16 @@
 #include "../cfg.h"
 #include "../ecrire.h"
 
+Ecrire_Doc *file_doc;
 Evas_Object *inwin;
 
 static void
 _cleaning_cb(void *data, Evas_Object *obj, void *event_info)
 {
    void (*func) (void *, Evas_Object *, void *) = data;
-   func(NULL, obj, event_info);
+   func(file_doc, obj, event_info);
    evas_object_del(inwin);  /* delete the test window */
+   file_doc = NULL;
 }
 
 static void
@@ -32,6 +34,8 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    const char *file;
    Eina_List *itr;
    Evas_Object *fs, *icon, *sel, *box;
+
+   file_doc = doc;
    inwin = elm_win_inwin_add(doc->win);
    evas_object_show(inwin);
 
