@@ -15,6 +15,7 @@ Eina_Bool ecrire_cfg_load(void);
 typedef struct
 {
    unsigned int alpha;
+   unsigned int anim_open;
    unsigned int height;
    unsigned int width;
    unsigned int version;
