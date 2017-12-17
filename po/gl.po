@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-11-09 21:19-0500\n"
+"POT-Creation-Date: 2017-12-16 22:11-0500\n"
 "PO-Revision-Date: 2014-05-24 08:43+0000\n"
 "Last-Translator: Aníbal Garrido <Unknown>\n"
 "Language-Team: http://trasno.net/ <proxecto@trasno.net>\n"
@@ -27,83 +27,83 @@ msgstr "%s%s - %s"
 msgid "%sUntitled %d - %s"
 msgstr "%sSen título %d - %s"
 
-#: src/bin/main.c:729 src/bin/main.c:795
+#: src/bin/main.c:732 src/bin/main.c:798
 msgid "New"
 msgstr "Novo"
 
-#: src/bin/main.c:730 src/bin/main.c:796
+#: src/bin/main.c:733 src/bin/main.c:799
 msgid "Open"
 msgstr "Abrir"
 
-#: src/bin/main.c:732 src/bin/ui/settings_dialog.c:500
+#: src/bin/main.c:735 src/bin/ui/settings_dialog.c:529
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr "Pechar"
 
-#: src/bin/main.c:734 src/bin/main.c:798 src/bin/ui/alerts.c:65
+#: src/bin/main.c:737 src/bin/main.c:801 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Gardar"
 
-#: src/bin/main.c:736 src/bin/main.c:800
+#: src/bin/main.c:739 src/bin/main.c:803
 msgid "Save As"
 msgstr "Gardar Como"
 
-#: src/bin/main.c:740 src/bin/main.c:808
+#: src/bin/main.c:743 src/bin/main.c:811
 msgid "Undo"
 msgstr "Desfacer"
 
-#: src/bin/main.c:742 src/bin/main.c:810
+#: src/bin/main.c:745 src/bin/main.c:813
 msgid "Redo"
 msgstr "Refacer"
 
-#: src/bin/main.c:745 src/bin/main.c:813
+#: src/bin/main.c:748 src/bin/main.c:816
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/bin/main.c:747 src/bin/main.c:815
+#: src/bin/main.c:750 src/bin/main.c:818
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/bin/main.c:749 src/bin/main.c:817
+#: src/bin/main.c:752 src/bin/main.c:820
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/bin/main.c:751 src/bin/main.c:819
+#: src/bin/main.c:754 src/bin/main.c:822
 #, fuzzy
 msgid "Select All"
 msgstr "Seleccionar Todo"
 
-#: src/bin/main.c:754 src/bin/main.c:821
+#: src/bin/main.c:757 src/bin/main.c:824
 #, fuzzy
 msgid "Search"
 msgstr "Buscar"
 
-#: src/bin/main.c:755 src/bin/main.c:822
+#: src/bin/main.c:758 src/bin/main.c:825
 msgid "Jump to"
 msgstr "Ir a"
 
-#: src/bin/main.c:758 src/bin/main.c:802 src/bin/ui/settings_dialog.c:446
+#: src/bin/main.c:761 src/bin/main.c:805 src/bin/ui/settings_dialog.c:475
 msgid "Settings"
 msgstr "Preferencias"
 
-#: src/bin/main.c:794
+#: src/bin/main.c:797
 msgid "File"
 msgstr "Ficha"
 
-#: src/bin/main.c:804
+#: src/bin/main.c:807
 msgid "Exit"
 msgstr "Saída"
 
-#: src/bin/main.c:806
+#: src/bin/main.c:809
 msgid "Edit"
 msgstr "Editar"
 
-#: src/bin/main.c:882
+#: src/bin/main.c:885
 #, fuzzy
 msgid "Line"
 msgstr "Liña"
 
-#: src/bin/main.c:903
+#: src/bin/main.c:906
 msgid "Column"
 msgstr "Columna"
 
@@ -131,60 +131,64 @@ msgstr "Cancelar"
 msgid "Recent files"
 msgstr "Arquivos recentes"
 
-#: src/bin/ui/settings_dialog.c:217
+#: src/bin/ui/settings_dialog.c:229
 msgid "Alpha"
 msgstr "Alfa"
 
-#: src/bin/ui/settings_dialog.c:237
+#: src/bin/ui/settings_dialog.c:249
+msgid "Animate Open"
+msgstr "Animar Aberto"
+
+#: src/bin/ui/settings_dialog.c:266
 msgid "Tab inserts spaces"
 msgstr "A pestana insire espazos"
 
-#: src/bin/ui/settings_dialog.c:254
+#: src/bin/ui/settings_dialog.c:283
 msgid "Line Numbers"
 msgstr "Números de liña"
 
-#: src/bin/ui/settings_dialog.c:271
+#: src/bin/ui/settings_dialog.c:300
 msgid "Show Menu"
 msgstr "Mostrar menú"
 
-#: src/bin/ui/settings_dialog.c:288
+#: src/bin/ui/settings_dialog.c:317
 msgid "Show Toolbar"
 msgstr "Mostrar a barra de ferramentas"
 
-#: src/bin/ui/settings_dialog.c:351
+#: src/bin/ui/settings_dialog.c:380
 #, fuzzy
 msgid "Use default font"
 msgstr "Empregue a fonte por defecto"
 
-#: src/bin/ui/settings_dialog.c:369
+#: src/bin/ui/settings_dialog.c:398
 #, fuzzy
 msgid "Font size"
 msgstr "Tamaño de letra"
 
-#: src/bin/ui/settings_dialog.c:379
+#: src/bin/ui/settings_dialog.c:408
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/settings_dialog.c:446
+#: src/bin/ui/settings_dialog.c:475
 msgid "ecrire"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:480
+#: src/bin/ui/settings_dialog.c:509
 #, fuzzy
 msgid "Font Settings"
 msgstr "Preferencias de Fonte"
 
-#: src/bin/ui/settings_dialog.c:483
+#: src/bin/ui/settings_dialog.c:512
 #, fuzzy
 msgid "Display Settings"
 msgstr "Preferencias de Visualización"
 
-#: src/bin/ui/settings_dialog.c:487
+#: src/bin/ui/settings_dialog.c:516
 msgid "Display"
 msgstr "Amosar"
 
-#: src/bin/ui/settings_dialog.c:492
+#: src/bin/ui/settings_dialog.c:521
 #, fuzzy
 msgid "Font"
 msgstr "Fonte"
