@@ -341,12 +341,15 @@ _open_file(Ecrire_Doc *doc, const char *file)
       if(!_ent_cfg->toolbar)
         elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
 
-      Elm_Transit *transit = elm_transit_add();
-      elm_transit_object_add(transit, doc->box_editor);
-      evas_object_geometry_get(doc->win, NULL, NULL, NULL, &h);
-      elm_transit_effect_translation_add(transit, 0, h, 0, 0);
-      elm_transit_duration_set(transit, 0.75);
-      elm_transit_go(transit);
+      if(!_ent_cfg->anim_open)
+        {
+          Elm_Transit *transit = elm_transit_add();
+          elm_transit_object_add(transit, doc->box_editor);
+          evas_object_geometry_get(doc->win, NULL, NULL, NULL, &h);
+          elm_transit_effect_translation_add(transit, 0, h, 0, 0);
+          elm_transit_duration_set(transit, 0.75);
+          elm_transit_go(transit);
+        }
     }
 
   _update_cur_file(doc);
