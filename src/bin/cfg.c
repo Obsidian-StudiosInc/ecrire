@@ -23,6 +23,7 @@ _ent_cfg_descriptor_init(void)
       (_ent_cfg_descriptor, Ent_Cfg, # member, member, eet_type)
 
    CFG_ADD_BASIC(alpha, EET_T_UINT);
+   CFG_ADD_BASIC(anim_open, EET_T_UINT);
    CFG_ADD_BASIC(version, EET_T_UINT);
    CFG_ADD_BASIC(font.name, EET_T_STRING);
    CFG_ADD_BASIC(font.size, EET_T_INT);
