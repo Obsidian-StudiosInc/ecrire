@@ -41,6 +41,18 @@ settings_alpha_cb (void *data,
 }
 
 static void
+_settings_animate_open_cb (void *data,
+                           Evas_Object *obj,
+                           void *event_info EINA_UNUSED)
+{
+  Eina_Bool state;
+
+  state = elm_check_state_get(obj);
+  ent_cfg->anim_open = !state;
+  ecrire_cfg_save();
+}
+
+static void
 settings_apply_font_cb (void *data,
                         Evas_Object *obj EINA_UNUSED,
                         void *event_info EINA_UNUSED)
@@ -230,6 +242,23 @@ _settings_dialog_display(Evas_Object *parent,
   elm_table_pack (table, obj, 1, row, 3, 1);
   evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, doc);
   evas_object_show (obj);
+  row++;
+
+  /* Animate Open Label */
+  obj = elm_label_add(table);
+  elm_object_text_set(obj, _("Animate Open"));
+  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set(obj, 1, 0);
+  elm_table_pack(table, obj, 0, row, 1, 1);
+  evas_object_show(obj);
+
+  /* Animate Open Check box */
+  obj = elm_check_add(table);
+  elm_check_state_set(obj, !_ent_cfg->anim_open);
+  evas_object_size_hint_align_set(obj, 0, 1);
+  elm_table_pack(table, obj, 1, row, 1, 1);
+  evas_object_smart_callback_add(obj, "changed", _settings_animate_open_cb, doc->widget);
+  evas_object_show(obj);
   row++;
 
   /* Insert Spaces Label */
