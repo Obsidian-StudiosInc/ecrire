@@ -846,10 +846,8 @@ create_window(int argc, char *argv[])
    evas_object_show(obj);
 
    doc->code = elm_code_create();
-   doc->widget = efl_add(elm_code_widget_class_get(),
-                              doc->win,
-                              elm_obj_code_widget_code_set(efl_added,
-                                                           doc->code));
+   doc->widget = elm_code_widget_add(doc->win, doc->code);
+
    _init_font(doc);
    elm_code_file_line_append(doc->code->file, "", 0, NULL);
    elm_obj_code_widget_editable_set(doc->widget, EINA_TRUE);
