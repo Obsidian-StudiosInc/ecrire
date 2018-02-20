@@ -30,6 +30,7 @@ _ent_cfg_descriptor_init(void)
    CFG_ADD_BASIC(wrap_type, EET_T_INT);
    CFG_ADD_BASIC(insert_spaces, EET_T_UINT);
    CFG_ADD_BASIC(line_numbers, EET_T_UINT);
+   CFG_ADD_BASIC(line_width_marker, EET_T_UINT);
    CFG_ADD_BASIC(menu, EET_T_UINT);
    CFG_ADD_BASIC(toolbar, EET_T_UINT);
    CFG_ADD_BASIC(height, EET_T_UINT);
