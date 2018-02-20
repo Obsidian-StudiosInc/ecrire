@@ -4,6 +4,7 @@
 #include <Elementary.h>
 
 #define _ENTITLED_CFG_VERSION 1
+#define ECRIRE_LINE_WIDTH 80
 #define ECRIRE_RECENT_COUNT 15
 
 void ecrire_cfg_init(const char *file);
