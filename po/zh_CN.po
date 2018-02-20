@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire \n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-12-16 22:25-0500\n"
+"POT-Creation-Date: 2018-02-19 22:51-0500\n"
 "PO-Revision-Date: 2012-12-22 03:32+0800\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
@@ -35,7 +35,7 @@ msgstr "新建"
 msgid "Open"
 msgstr "打开"
 
-#: src/bin/main.c:735 src/bin/ui/settings_dialog.c:529
+#: src/bin/main.c:735 src/bin/ui/settings_dialog.c:567
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr ""
@@ -82,7 +82,7 @@ msgstr "搜索："
 msgid "Jump to"
 msgstr ""
 
-#: src/bin/main.c:761 src/bin/main.c:805 src/bin/ui/settings_dialog.c:475
+#: src/bin/main.c:761 src/bin/main.c:805 src/bin/ui/settings_dialog.c:513
 msgid "Settings"
 msgstr "设置"
 
@@ -128,64 +128,68 @@ msgstr "取消"
 msgid "Recent files"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:229
+#: src/bin/ui/settings_dialog.c:249
 msgid "Alpha"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:249
+#: src/bin/ui/settings_dialog.c:269
 msgid "Animate Open"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:266
+#: src/bin/ui/settings_dialog.c:286
 msgid "Tab inserts spaces"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:283
+#: src/bin/ui/settings_dialog.c:303
 msgid "Line Numbers"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:300
+#: src/bin/ui/settings_dialog.c:320
+msgid "Line Width Marker"
+msgstr ""
+
+#: src/bin/ui/settings_dialog.c:338
 msgid "Show Menu"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:317
+#: src/bin/ui/settings_dialog.c:355
 msgid "Show Toolbar"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:380
+#: src/bin/ui/settings_dialog.c:418
 #, fuzzy
 msgid "Use default font"
 msgstr "使用默认字体："
 
-#: src/bin/ui/settings_dialog.c:398
+#: src/bin/ui/settings_dialog.c:436
 #, fuzzy
 msgid "Font size"
 msgstr "字体大小："
 
-#: src/bin/ui/settings_dialog.c:408
+#: src/bin/ui/settings_dialog.c:446
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pts"
 
-#: src/bin/ui/settings_dialog.c:475
+#: src/bin/ui/settings_dialog.c:513
 msgid "ecrire"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:509
+#: src/bin/ui/settings_dialog.c:547
 #, fuzzy
 msgid "Font Settings"
 msgstr "设置"
 
-#: src/bin/ui/settings_dialog.c:512
+#: src/bin/ui/settings_dialog.c:550
 #, fuzzy
 msgid "Display Settings"
 msgstr "设置"
 
-#: src/bin/ui/settings_dialog.c:516
+#: src/bin/ui/settings_dialog.c:554
 msgid "Display"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:521
+#: src/bin/ui/settings_dialog.c:559
 #, fuzzy
 msgid "Font"
 msgstr "字体大小："
