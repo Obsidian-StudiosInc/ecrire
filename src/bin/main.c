@@ -854,6 +854,8 @@ create_window(int argc, char *argv[])
    elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
    elm_obj_code_widget_show_whitespace_set(doc->widget, EINA_TRUE);
    elm_obj_code_widget_line_numbers_set(doc->widget, !_ent_cfg->line_numbers);
+   if(_ent_cfg->line_width_marker>0)
+     elm_code_widget_line_width_marker_set(doc->widget, _ent_cfg->line_width_marker);
    elm_obj_code_widget_tab_inserts_spaces_set(doc->widget, !_ent_cfg->insert_spaces);
    evas_object_size_hint_align_set(doc->widget, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(doc->widget, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
