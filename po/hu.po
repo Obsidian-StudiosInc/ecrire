@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ecrire\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2017-12-16 22:11-0500\n"
+"POT-Creation-Date: 2018-02-19 22:21-0500\n"
 "PO-Revision-Date: 2014-01-09 18:20+0100\n"
 "Last-Translator: rezso <rezso@rezso.net>\n"
 "Language-Team: hu <LL@li.org>\n"
@@ -17,93 +17,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: src/bin/main.c:182
+#: src/bin/main.c:190
 #, c-format
 msgid "%s%s - %s"
 msgstr "%s%s - %s"
 
-#: src/bin/main.c:185
+#: src/bin/main.c:193
 #, c-format
 msgid "%sUntitled %d - %s"
 msgstr "%sNévtelen %d - %s"
 
-#: src/bin/main.c:732 src/bin/main.c:798
+#: src/bin/main.c:740 src/bin/main.c:806
 msgid "New"
 msgstr "Új"
 
-#: src/bin/main.c:733 src/bin/main.c:799
+#: src/bin/main.c:741 src/bin/main.c:807
 msgid "Open"
 msgstr "Megnyitás"
 
-#: src/bin/main.c:735 src/bin/ui/settings_dialog.c:529
+#: src/bin/main.c:743 src/bin/ui/settings_dialog.c:567
 #: src/bin/ui/search_dialog.c:488 src/bin/ui/search_dialog.c:494
 msgid "Close"
 msgstr "Bezárás"
 
-#: src/bin/main.c:737 src/bin/main.c:801 src/bin/ui/alerts.c:65
+#: src/bin/main.c:745 src/bin/main.c:809 src/bin/ui/alerts.c:65
 msgid "Save"
 msgstr "Mentés"
 
-#: src/bin/main.c:739 src/bin/main.c:803
+#: src/bin/main.c:747 src/bin/main.c:811
 msgid "Save As"
 msgstr "Mentés másként"
 
-#: src/bin/main.c:743 src/bin/main.c:811
+#: src/bin/main.c:751 src/bin/main.c:819
 msgid "Undo"
 msgstr "Mégse"
 
-#: src/bin/main.c:745 src/bin/main.c:813
+#: src/bin/main.c:753 src/bin/main.c:821
 msgid "Redo"
 msgstr "Újra"
 
-#: src/bin/main.c:748 src/bin/main.c:816
+#: src/bin/main.c:756 src/bin/main.c:824
 msgid "Cut"
 msgstr "Kivágás"
 
-#: src/bin/main.c:750 src/bin/main.c:818
+#: src/bin/main.c:758 src/bin/main.c:826
 msgid "Copy"
 msgstr "Másolás"
 
-#: src/bin/main.c:752 src/bin/main.c:820
+#: src/bin/main.c:760 src/bin/main.c:828
 msgid "Paste"
 msgstr "Beillesztés"
 
-#: src/bin/main.c:754 src/bin/main.c:822
+#: src/bin/main.c:762 src/bin/main.c:830
 #, fuzzy
 msgid "Select All"
 msgstr "Mindet Kiválaszt"
 
-#: src/bin/main.c:757 src/bin/main.c:824
+#: src/bin/main.c:765 src/bin/main.c:832
 #, fuzzy
 msgid "Search"
 msgstr "Keresés erre"
 
-#: src/bin/main.c:758 src/bin/main.c:825
+#: src/bin/main.c:766 src/bin/main.c:833
 msgid "Jump to"
 msgstr "Ugorj"
 
-#: src/bin/main.c:761 src/bin/main.c:805 src/bin/ui/settings_dialog.c:475
+#: src/bin/main.c:769 src/bin/main.c:813 src/bin/ui/settings_dialog.c:513
 msgid "Settings"
 msgstr "Beállítások"
 
-#: src/bin/main.c:797
+#: src/bin/main.c:805
 msgid "File"
 msgstr "Fájl"
 
-#: src/bin/main.c:807
+#: src/bin/main.c:815
 msgid "Exit"
 msgstr "Kijárat"
 
-#: src/bin/main.c:809
+#: src/bin/main.c:817
 msgid "Edit"
 msgstr "Szerkesztése"
 
-#: src/bin/main.c:885
+#: src/bin/main.c:893
 #, fuzzy
 msgid "Line"
 msgstr "Vonal"
 
-#: src/bin/main.c:906
+#: src/bin/main.c:914
 msgid "Column"
 msgstr "Oszlop"
 
@@ -131,64 +131,68 @@ msgstr "Mégsem"
 msgid "Recent files"
 msgstr "Legutóbbi Fájlok"
 
-#: src/bin/ui/settings_dialog.c:229
+#: src/bin/ui/settings_dialog.c:249
 msgid "Alpha"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:249
+#: src/bin/ui/settings_dialog.c:269
 msgid "Animate Open"
 msgstr "Nyílt Animáció"
 
-#: src/bin/ui/settings_dialog.c:266
+#: src/bin/ui/settings_dialog.c:286
 msgid "Tab inserts spaces"
 msgstr "A lap beilleszti a tereket"
 
-#: src/bin/ui/settings_dialog.c:283
+#: src/bin/ui/settings_dialog.c:303
 msgid "Line Numbers"
 msgstr "Vonalszámok"
 
-#: src/bin/ui/settings_dialog.c:300
+#: src/bin/ui/settings_dialog.c:320
+msgid "Line Width Marker"
+msgstr "Vonalvastagságjelző"
+
+#: src/bin/ui/settings_dialog.c:338
 msgid "Show Menu"
 msgstr "Menü Megjelenítése"
 
-#: src/bin/ui/settings_dialog.c:317
+#: src/bin/ui/settings_dialog.c:355
 msgid "Show Toolbar"
 msgstr "Az Eszköztár Megjelenítése"
 
-#: src/bin/ui/settings_dialog.c:380
+#: src/bin/ui/settings_dialog.c:418
 #, fuzzy
 msgid "Use default font"
 msgstr "Alapértelmezett betűkészlet használata"
 
-#: src/bin/ui/settings_dialog.c:398
+#: src/bin/ui/settings_dialog.c:436
 #, fuzzy
 msgid "Font size"
 msgstr "Betűméret"
 
-#: src/bin/ui/settings_dialog.c:408
+#: src/bin/ui/settings_dialog.c:446
 #, c-format
 msgid "%.0f pts"
 msgstr "%.0f pont"
 
-#: src/bin/ui/settings_dialog.c:475
+#: src/bin/ui/settings_dialog.c:513
 msgid "ecrire"
 msgstr ""
 
-#: src/bin/ui/settings_dialog.c:509
+#: src/bin/ui/settings_dialog.c:547
 #, fuzzy
 msgid "Font Settings"
 msgstr "Betűtípus-beállítások"
 
-#: src/bin/ui/settings_dialog.c:512
+#: src/bin/ui/settings_dialog.c:550
 #, fuzzy
 msgid "Display Settings"
 msgstr "Megjelenítési Beállítások"
 
-#: src/bin/ui/settings_dialog.c:516
+#: src/bin/ui/settings_dialog.c:554
 msgid "Display"
 msgstr "Kijelző"
 
-#: src/bin/ui/settings_dialog.c:521
+#: src/bin/ui/settings_dialog.c:559
 #, fuzzy
 msgid "Font"
 msgstr "Betűtípus"
