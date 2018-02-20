@@ -12,7 +12,8 @@ const static int BUTTON_HEIGHT = 27;
 const static int BUTTON_WIDTH = 60;
 
 Ent_Cfg *ent_cfg;
-Evas_Object *fsize, *list;
+Evas_Object *fsize;
+Evas_Object *list;
 
 static void
 disable_font_widgets(Eina_Bool state)
@@ -96,6 +97,21 @@ settings_default_font_cb(void *data,
     }
   else
     settings_apply_font_cb(doc, (Evas_Object *)NULL, (void *)NULL);
+}
+
+static void
+settings_show_line_width_marker_cb(void *data,
+                                   Evas_Object *obj,
+                                   void *event_info EINA_UNUSED)
+{
+  Ecrire_Doc *doc = data;
+  Eina_Bool state = elm_check_state_get(obj);
+  unsigned int width = 0;
+  if(state)
+    width = ECRIRE_LINE_WIDTH;
+  elm_code_widget_line_width_marker_set(doc->widget, width);
+  ent_cfg->line_width_marker = width;
+  ecrire_cfg_save();
 }
 
 static Eina_List *
@@ -292,6 +308,24 @@ _settings_dialog_display(Evas_Object *parent,
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
   evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->widget);
+  evas_object_show(obj);
+  row++;
+
+  /* Show line width marker label */
+  obj = elm_label_add(table);
+  elm_object_text_set(obj, _("Line Width Marker"));
+  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set(obj, 1, 0);
+  elm_table_pack(table, obj, 0, row, 1, 1);
+  evas_object_show(obj);
+
+  /* Show line width marker check box */
+  obj = elm_check_add(table);
+  if(ent_cfg->line_width_marker>0)
+    elm_check_state_set(obj, EINA_TRUE);
+  evas_object_size_hint_align_set(obj, 0, 1);
+  elm_table_pack(table, obj, 1, row, 1, 1);
+  evas_object_smart_callback_add(obj, "changed", settings_show_line_width_marker_cb, doc);
   evas_object_show(obj);
   row++;
 
