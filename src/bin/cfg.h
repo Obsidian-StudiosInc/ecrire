@@ -21,6 +21,7 @@ typedef struct
    unsigned int version;
    unsigned int insert_spaces;
    unsigned int line_numbers;
+   unsigned int line_width_marker;
    unsigned int menu;
    unsigned int toolbar;
    struct {
