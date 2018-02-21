@@ -22,8 +22,7 @@ static void
 _set_file_cb(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 {
   const char *file = elm_object_item_text_get(event_info);
-  elm_fileselector_selected_set((Evas_Object *)data,file);
-
+  evas_object_smart_callback_call((Evas_Object *)data,"done",file);
 }
 
 void
