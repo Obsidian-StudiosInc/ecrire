@@ -292,6 +292,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
 {
   const char *item, *mime;
   int h;
+  Eina_List *find_list;
   Eina_List *list;
 
   if (file)
@@ -326,9 +327,16 @@ _open_file(Ecrire_Doc *doc, const char *file)
               if(list)
                   _ent_cfg->recent = list;
             }
-          if(eina_list_data_find(_ent_cfg->recent,file)==NULL)
+          find_list = eina_list_data_find_list(_ent_cfg->recent,file);
+          if(find_list==NULL)
             {
               list = eina_list_prepend(_ent_cfg->recent,strdup(file));
+              if(list)
+                _ent_cfg->recent = list;
+            }
+          else
+            {
+              list = eina_list_promote_list(_ent_cfg->recent,find_list);
               if(list)
                 _ent_cfg->recent = list;
             }
