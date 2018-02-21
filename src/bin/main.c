@@ -326,7 +326,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
               if(list)
                   _ent_cfg->recent = list;
             }
-          if(!eina_list_data_find(_ent_cfg->recent,file))
+          if(eina_list_data_find(_ent_cfg->recent,file)==NULL)
             {
               list = eina_list_prepend(_ent_cfg->recent,strdup(file));
               if(list)
