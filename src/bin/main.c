@@ -169,7 +169,9 @@ _sel_cut_copy(void *data,
 static void
 _update_cur_file(Ecrire_Doc *doc)
 {
-  const char *filename = NULL, *saving;
+  const char *filename = NULL;
+  const char *saving = NULL;
+
   saving = ((!_ent_cfg->menu &&
             !elm_object_item_disabled_get(doc->mm_save)) ||
             (!_ent_cfg->toolbar &&
@@ -290,7 +292,8 @@ _new_doc(Ecrire_Doc *doc) {
 static void
 _open_file(Ecrire_Doc *doc, const char *file)
 {
-  const char *item, *mime;
+  const char *item;
+  const char *mime;
   int h;
   Eina_List *find_list;
   Eina_List *list;
@@ -374,7 +377,8 @@ _fs_open_done(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
 void
 save_do(const char *file, Ecrire_Doc *doc)
 {
-  const char *filename = NULL, *mime = NULL;
+  const char *filename = NULL;
+  const char *mime = NULL;
 
   if(doc->code->file->file)
     filename = eina_file_filename_get(doc->code->file->file);
@@ -434,7 +438,10 @@ _goto_column_cb(void *data,
 {
   Ecrire_Doc *doc;
   Elm_Code_Line *line;
-  int col, cols, cur_col, row;
+  int col;
+  int cols;
+  int cur_col;
+  int row;
 
   doc = data;
   elm_obj_code_widget_cursor_position_get(doc->widget,&row,&cur_col);
@@ -453,7 +460,8 @@ _goto_line_cb(void *data,
               void *event_info EINA_UNUSED)
 {
   Ecrire_Doc *doc;
-  int line, lines;
+  int line;
+  int lines;
 
   doc = data;
   line = atoi(elm_entry_entry_get(doc->entry_line));
@@ -463,7 +471,8 @@ _goto_line_cb(void *data,
   else
     {
       char buf[sizeof(long)];
-      int col, row;
+      int col;
+      int row;
 
       elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
       snprintf(buf, sizeof(buf),"%d",row);
@@ -774,8 +783,14 @@ static void
 create_window(int argc, char *argv[])
 {
    Ecrire_Doc *doc;
-   Evas_Object  *box, *edit_menu, *file_menu, *menu, *obj, *table;
-   Evas_Coord w = 600, h = 600;
+   Evas_Object  *box;
+   Evas_Object  *edit_menu;
+   Evas_Object  *file_menu;
+   Evas_Object  *menu;
+   Evas_Object  *obj;
+   Evas_Object  *table;
+   Evas_Coord h = 600;
+   Evas_Coord w = 600;
 
    doc = calloc(1, sizeof(*doc));
    doc->unsaved = 1;
