@@ -43,7 +43,7 @@ settings_alpha_cb (void *data,
 }
 
 static void
-_settings_animate_open_cb (void *data,
+_settings_animate_open_cb (void *data EINA_UNUSED,
                            Evas_Object *obj,
                            void *event_info EINA_UNUSED)
 {
