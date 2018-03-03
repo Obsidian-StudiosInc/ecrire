@@ -37,8 +37,15 @@ struct _Ecrire_Doc {
      Elm_Object_Item *mm_select_all;
      Elm_Object_Item *mm_undo;
      /* Toolbar Items */
-     Elm_Object_Item *close_item, *copy_item, *cut_item, *save_item,
-                     *save_as_item, *select_all_item, *paste_item, *undo_item, *redo_item;
+     Elm_Object_Item *close_item;
+     Elm_Object_Item *copy_item;
+     Elm_Object_Item *cut_item;
+     Elm_Object_Item *save_item;
+     Elm_Object_Item *save_as_item;
+     Elm_Object_Item *select_all_item;
+     Elm_Object_Item *paste_item;
+     Elm_Object_Item *undo_item;
+     Elm_Object_Item *redo_item;
      int unsaved;
      char *path;
 };
