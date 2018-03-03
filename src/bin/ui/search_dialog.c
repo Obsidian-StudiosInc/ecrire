@@ -14,14 +14,19 @@
 const static int PADDING = 2;
 const static int BUTTON_ICON_SIZE = 12;
 
-static Evas_Object *find_entry, *replace_entry, *search_box;
-static Evas_Object *case_button, *regex_button, *whole_button;
+static Evas_Object *find_entry;
+static Evas_Object *replace_entry;
+static Evas_Object *search_box;
+static Evas_Object *case_button;
+static Evas_Object *regex_button;
+static Evas_Object *whole_button;
 static regmatch_t *_regmatch;
 
 Eina_Bool
 match(const char *string, char *pattern, Eina_Bool match_case)
 {
-    int flags, status;
+    int flags;
+    int status;
     regex_t re;
 
     flags = REG_EXTENDED;
@@ -52,7 +57,8 @@ elm_code_text_strnsearchpos(const char *content,
                             Eina_Bool whole_word,
                             Eina_Bool regex)
 {
-  unsigned int searchlen, c;
+  unsigned int c;
+  unsigned int searchlen;
   char *ptr;
 
   searchlen = strlen(search);
@@ -134,7 +140,12 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
   Eina_Bool reset = EINA_TRUE;
   Elm_Code_Line *code_line;
   const char *line;
-  int i, found, col, row, lines, len;
+  int i;
+  int found;
+  int col;
+  int row;
+  int lines;
+  int len;
 
   if (!text || !*text)
     return EINA_FALSE;
@@ -198,7 +209,8 @@ static Eina_Bool
 _replace_in_entry(Ecrire_Doc *doc)
 {
   Eina_Bool replaced = EINA_FALSE;
-  const char *find, *replace;
+  const char *find;
+  const char *replace;
   int pos;
 
   find = elm_entry_entry_get(find_entry);
@@ -257,7 +269,9 @@ _replace_clicked(void *data,
 Evas_Object *
 ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc)
 {
-  Evas_Object *icon, *obj, *table;
+  Evas_Object *icon;
+  Evas_Object *obj;
+  Evas_Object *table;
   int row = 0;
 
   if (search_box)
