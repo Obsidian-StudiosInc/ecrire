@@ -18,7 +18,8 @@ Evas_Object *list;
 static void
 disable_font_widgets(Eina_Bool state)
 {
-  const Eina_List *items, *itr;
+  const Eina_List *items;
+  const Eina_List *itr;
   void *item;
 
   elm_object_disabled_set(fsize, state);
@@ -118,8 +119,10 @@ static Eina_List *
 settings_font_list_get(const Evas *e)
 {
    Eina_List *flist = evas_font_available_list(e);
-   Eina_List *itr, *nitr;
-   const char *font, *prev_font = NULL;
+   Eina_List *itr;
+   Eina_List *nitr;
+   const char *font;
+   const char *prev_font = NULL;
    flist = eina_list_sort(flist, eina_list_count(flist),
          (Eina_Compare_Cb) strcasecmp);
    EINA_LIST_FOREACH_SAFE(flist, itr, nitr, font)
@@ -151,7 +154,7 @@ _settings_insert_spaces_cb (void *data,
                             void *event_info EINA_UNUSED)
 {
   Eina_Bool state;
-  
+
   state = elm_check_state_get(obj);
   elm_obj_code_widget_tab_inserts_spaces_set((Elm_Code_Widget *)data, state);
   ent_cfg->insert_spaces = !state;
@@ -164,7 +167,7 @@ settings_line_numbers_cb (void *data,
                           void *event_info EINA_UNUSED)
 {
   Eina_Bool state;
-  
+
   state = elm_check_state_get (obj);
   elm_obj_code_widget_line_numbers_set ((Elm_Code_Widget *)data, state);
   ent_cfg->line_numbers = !state;
@@ -189,7 +192,7 @@ static void
 settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 {
   Eina_Bool state;
-  
+
   state = elm_check_state_get (obj);
   if(state)
     add_toolbar((Ecrire_Doc *)data);
@@ -223,7 +226,9 @@ _settings_dialog_display(Evas_Object *parent,
                          Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *boxv, *obj, *table;
+  Evas_Object *boxv;
+  Evas_Object *obj;
+  Evas_Object *table;
   int row = 0;
 
   boxv = elm_box_add(parent);
@@ -247,7 +252,7 @@ _settings_dialog_display(Evas_Object *parent,
   evas_object_size_hint_align_set (obj, 1, 0);
   elm_table_pack (table, obj, 0, row, 1, 1);
   evas_object_show (obj);
-  
+
   /* Alpha Slider */
   obj = elm_slider_add (table);
   elm_slider_horizontal_set (obj, EINA_TRUE);
@@ -392,7 +397,9 @@ Evas_Object *
 _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *boxv, *obj, *table;
+  Evas_Object *boxv;
+  Evas_Object *obj;
+  Evas_Object *table;
   int row = 0;
 
   boxv = elm_box_add(parent);
@@ -502,9 +509,18 @@ Evas_Object *
 ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
-  Evas_Object *boxh, *boxv, *ic, *obj, *nf, *navi_disp, *navi_font, *tb, *win;
-  unsigned int h, w;
-  
+  Evas_Object *boxh;
+  Evas_Object *boxv;
+  Evas_Object *ic;
+  Evas_Object *obj;
+  Evas_Object *nf;
+  Evas_Object *navi_disp;
+  Evas_Object *navi_font;
+  Evas_Object *tb;
+  Evas_Object *win;
+  unsigned int h;
+  unsigned int w;
+
 
   win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
   elm_win_autodel_set(win, EINA_TRUE);
@@ -538,11 +554,11 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   elm_naviframe_prev_btn_auto_pushed_set(nf, EINA_FALSE);
   elm_box_pack_end(boxh, nf);
   evas_object_show(nf);
-  
-  obj = _settings_dialog_font(win, doc, ent_cfg); 
+
+  obj = _settings_dialog_font(win, doc, ent_cfg);
   navi_font = elm_naviframe_item_push(nf, _("Font Settings"), NULL, NULL, obj, NULL);
 
-  obj = _settings_dialog_display(win, doc, ent_cfg); 
+  obj = _settings_dialog_display(win, doc, ent_cfg);
   navi_disp = elm_naviframe_item_push(nf, _("Display Settings"), NULL, NULL, obj, NULL);
 
   elm_toolbar_item_prepend(tb,
@@ -557,7 +573,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
                           navi_font);
 
   elm_box_pack_end(boxv, boxh);
-  
+
   /* Close Button */
   obj = elm_button_add(win);
   elm_object_text_set(obj,_("Close"));
