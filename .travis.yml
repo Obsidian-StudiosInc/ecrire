@@ -3,46 +3,68 @@ compiler: gcc
 sudo: required
 dist: trusty
 env:
-  global:
-    - secure: Av0RnthKHIYGQ3CUxxn81OqVAmtLVDQPmfD8ucLgps7T5XULavrX6c6OFbybLw5M1NfJyROTNYLUM11MtPWcGNbxV2ki0RaCpgMOrkz4UKw+usO7p+W3UlKZE4l0R5sbIe37hiVYyx6dhKlbC0QA0AO8KHBCFB1r19YfmbiB0K7fJoLRt3bsAyQB1cyJFJBrhPsr0pxtQu3HlX7xf+avbWEsbpY9UNmUxi+VopDAHw9Wk6WSBRvHtRhy6g4paNyz7QrygEuz6jea01K8Io4uB4DOmWbngl+mucM7nRb7Uxw5iY4Pygzz6qVfV+zRPyegy8NvLUPKTQq7FTlamAq7CdEgkFMN1nI3ZUW9X0lXOay7C3Nma0/Giso0/enmm4fM+2IjqHZ5lI2bFDLgGeES8dO/bGMGTdiV31am+W81WE+ZYw0qYT8JfnICSEkhcZsvyopvVufThUNySP0gfcWnhWsQ+SXfSa79GxSgTuwHjQN/u/ZvQJPE54mxIUt/tNRNHnP9iiGNRI0f+ZqqDeHytAT9u8Hlz9LL4tW7FhUt6+eL9kI356ZIqAG00VQ/RGtlIqapeaXpOjVw5jX6QlwyNReK7W0qqaoBgvwVddtmAkuO2FWX8FBB+mSiTHWWdloerv4xRY9HFqc32DirZOhX4RMUIS1AjkyD7ZBnlSkn0o0=
   matrix:
     - MY_PV=0.3.1
-
-before_install:
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 install:
   - sudo add-apt-repository -y ppa:niko2040/e19
   - sudo apt-get -qq update
   - sudo apt-get install -y cmake gettext libc6-dbg libefl libefl-dbg libefl-dev rpm
 
+jobs:
+  include:
+    - stage: Test build
+    - stage: SonarQube Scan
+      env:
+        - SONAR="build-wrapper-linux-x86-64 --out-dir bw-output"
+      cache:
+        directories:
+          - $HOME/.sonar/cache
+      addons:
+        sonarcloud:
+          organization: obsidian-studiosinc-github
+          token:
+            secure: qo5NaaGZXoOtAz++5JSEGzhfVMiwgG3y4UKHRQr3j17XXsu+qazEqaM4epz635AXMHOxjm5bZBXr4KyCLcBIezMky/+/RRRJVAUH/wCyfhlRb350B2ixxUKBozF448bq9MW2hOWWYDyRDRb9lgUpuKfPlgc1qjc03cvyzu4OyvQ79vQBFdLY3wLIgEDbN/S9xyvM0PcYIxFkuDYS8z9A3sHNR6q4D6pGMpTvZfCcHLNj+XnV4nh4rTvyrG9BSobza6iB24Xl+U4DDyRDWAIJ5nTpkxnZZX9Bg68POQreiKgqxyeaO6YkN/5/1vW83AfXKR1P3s7QJN/yx3PlXJ8hlKndagBjns73BWJXmvnMaNTpUnjazN7o/4tkBmGOjufTv3yx9gCcmNI/eDy8936lEVjL9KexFSTIWW7CBh8bfGkX0GzgC5qMdH+xbbUW7178RbxdNWig1T69usLLA3N9oAHqcY5UWRd/9zR6hPML8k5OpWzZsrCm1tBLD/NqVdZ/7V1tfoCVEt7cIlo4DGyrMEMRZiHz0SZ16YSjw2a7SeXh9rfSR//wD4JXsvLy8q8H7eXvTnZ/UsJXFQ74clNaCvM/WMj1RtBSr4091NrgsL0I3sM3w5Hn2baJnYEmatlcfydwaKk1jVeFeRph1uQ4FOoaD+QzSFnA4v3femqlsy8=
+    - stage: Deploy
+      if: tag =~ ^v.*
+      deploy:
+        provider: releases
+        api_key:
+          secure: sb8ol1akBX3T1R6kjN2qnlv4W0ZSq0SgrcYAQj3KS/c0WC8szqQFNdze8Ace0RnHrgbRWgUU1yEivsxQX97YhTfkWHLCsecfALfP7IPB3ghrS1Nr+e4epwqotJbW2YSdwkX2Cgf0SwxcrzO8Py2IfVhWU+dNwOONNW+S+7ad9u29TH4r3++Rtmy/8wATQahatcnu7Jefd31p+e17ZLZRSqZS9lY0xhX10hBKrZaHG3QlyEZewPq3M0RKEvSQe58m8obgTFWjpsw5btLiMFJkLZx19SbgNKe09bQSli7M5aJhj1wT+flYRAPsWIzzvBbeEL2oC6k3H1BfOU2wY8ZM9ZBlYfctba6rmCw0eG9yAFq5bcIP3wOJvCx9DYW6pcc1kOny4VYChE3C+rcbaKSCZ/AAQ81AUMgsnGIkPc8tvwRvTUA3EUAQSyRXgOkKbWh7aAlk1AklSqcgFiTYa3+WWMlW1qTTDjFMwSuJd8M+Fu5cR5FGH3yLUxOe10iyWH5E7qj3S4Xbbn+ZYVSoWAEHIb7PVwcDJHWKAyRF1b1vT8pGr17TMQGKDWZmL4mWHTB5f4SsKOqCwUayL0f0+rRUy965cxRiPPHtQhOyF2GL/tMK3ODqGgQFENxY9V6mRgQrNhpfKXaErV+n39JacWPg7poy7pESFx2IptesisM854s=
+        file:
+          - dist/ecrire-${MY_PV}.x86_64.deb
+          - dist/ecrire-${MY_PV}.x86_64.rpm
+        on:
+          repo: Obsidian-StudiosInc/ecrire
+          branch: master
+          tags: true
+        skip_cleanup: true
+      script:
+        - cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_DOC=ON ./
+        - make package
+    - stage: Coverity Scan
+      env:
+        - secure: Av0RnthKHIYGQ3CUxxn81OqVAmtLVDQPmfD8ucLgps7T5XULavrX6c6OFbybLw5M1NfJyROTNYLUM11MtPWcGNbxV2ki0RaCpgMOrkz4UKw+usO7p+W3UlKZE4l0R5sbIe37hiVYyx6dhKlbC0QA0AO8KHBCFB1r19YfmbiB0K7fJoLRt3bsAyQB1cyJFJBrhPsr0pxtQu3HlX7xf+avbWEsbpY9UNmUxi+VopDAHw9Wk6WSBRvHtRhy6g4paNyz7QrygEuz6jea01K8Io4uB4DOmWbngl+mucM7nRb7Uxw5iY4Pygzz6qVfV+zRPyegy8NvLUPKTQq7FTlamAq7CdEgkFMN1nI3ZUW9X0lXOay7C3Nma0/Giso0/enmm4fM+2IjqHZ5lI2bFDLgGeES8dO/bGMGTdiV31am+W81WE+ZYw0qYT8JfnICSEkhcZsvyopvVufThUNySP0gfcWnhWsQ+SXfSa79GxSgTuwHjQN/u/ZvQJPE54mxIUt/tNRNHnP9iiGNRI0f+ZqqDeHytAT9u8Hlz9LL4tW7FhUt6+eL9kI356ZIqAG00VQ/RGtlIqapeaXpOjVw5jX6QlwyNReK7W0qqaoBgvwVddtmAkuO2FWX8FBB+mSiTHWWdloerv4xRY9HFqc32DirZOhX4RMUIS1AjkyD7ZBnlSkn0o0=
+      before_install:
+        - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+      addons:
+        coverity_scan:
+          project:
+            name: Obsidian-StudiosInc/ecrire
+            description: Build submitted via Travis CI
+          notification_email: wlt@o-sinc.com
+          build_command_prepend: cmake -D CMAKE_BUILD_TYPE=Debug ./ ; make clean
+          build_command: make -j 4
+          branch_pattern: master
+      script:
+        - true // avoid coverity double build
+
 script:
   - cmake -D CMAKE_BUILD_TYPE=Debug ./
-  - make package
+  - ${SONAR} make package
   - sudo dpkg -i --force-all --force-confask dist/ecrire-${MY_PV}.x86_64.deb
+  - if [ "${SONAR}" ]; then find . -name '*.gcno' -exec sh -c 'gcov -b {} -o $(dirname {})' \;; fi
+  - if [ "${SONAR}" ]; then sonar-scanner; fi
 
 notifications:
   email: false
-
-deploy:
-  provider: releases
-  api_key:
-    secure: sb8ol1akBX3T1R6kjN2qnlv4W0ZSq0SgrcYAQj3KS/c0WC8szqQFNdze8Ace0RnHrgbRWgUU1yEivsxQX97YhTfkWHLCsecfALfP7IPB3ghrS1Nr+e4epwqotJbW2YSdwkX2Cgf0SwxcrzO8Py2IfVhWU+dNwOONNW+S+7ad9u29TH4r3++Rtmy/8wATQahatcnu7Jefd31p+e17ZLZRSqZS9lY0xhX10hBKrZaHG3QlyEZewPq3M0RKEvSQe58m8obgTFWjpsw5btLiMFJkLZx19SbgNKe09bQSli7M5aJhj1wT+flYRAPsWIzzvBbeEL2oC6k3H1BfOU2wY8ZM9ZBlYfctba6rmCw0eG9yAFq5bcIP3wOJvCx9DYW6pcc1kOny4VYChE3C+rcbaKSCZ/AAQ81AUMgsnGIkPc8tvwRvTUA3EUAQSyRXgOkKbWh7aAlk1AklSqcgFiTYa3+WWMlW1qTTDjFMwSuJd8M+Fu5cR5FGH3yLUxOe10iyWH5E7qj3S4Xbbn+ZYVSoWAEHIb7PVwcDJHWKAyRF1b1vT8pGr17TMQGKDWZmL4mWHTB5f4SsKOqCwUayL0f0+rRUy965cxRiPPHtQhOyF2GL/tMK3ODqGgQFENxY9V6mRgQrNhpfKXaErV+n39JacWPg7poy7pESFx2IptesisM854s=
-  file:
-    - dist/ecrire-${MY_PV}.x86_64.deb
-    - dist/ecrire-${MY_PV}.x86_64.rpm
-  on:
-    repo: Obsidian-StudiosInc/ecrire
-    branch: master
-    tags: true
-  skip_cleanup: true
-
-addons:
-  coverity_scan:
-    project:
-      name: Obsidian-StudiosInc/ecrire
-      description: Build submitted via Travis CI
-    notification_email: wlt@o-sinc.com
-    build_command_prepend: cmake -D CMAKE_BUILD_TYPE=Debug ./ ; make clean
-    build_command: make -j 4
-    branch_pattern: master
