@@ -50,7 +50,8 @@ _cancel(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 void
 ui_alert_need_saving(Evas_Object *parent, void (*done)(void *data), void *data)
 {
-   Evas_Object *obj, *popup;
+   Evas_Object *obj;
+   Evas_Object *popup;
    popup = elm_popup_add(elm_object_top_widget_get(parent));
 
    done_cb = done;
