@@ -32,7 +32,10 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
 {
    const char *file;
    Eina_List *itr;
-   Evas_Object *fs, *icon, *sel, *box;
+   Evas_Object *fs;
+   Evas_Object *icon;
+   Evas_Object *sel;
+   Evas_Object *box;
 
    file_doc = doc;
    inwin = elm_win_inwin_add(doc->win);
