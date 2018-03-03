@@ -257,7 +257,7 @@ _redo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 static void
-_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info)
+_changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
   Ecrire_Doc *doc = data;
   _set_save_disabled(doc, EINA_FALSE);
