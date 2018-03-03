@@ -696,9 +696,7 @@ _win_move_cb(void *data EINA_UNUSED, Evas_Object *obj, void *ev EINA_UNUSED)
 }
 
 static Eina_Bool
-_key_down_cb(void *data,
-             Evas_Object *obj,
-             void *ev)
+_key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
 {
     Ecore_Event_Key *event = ev;
     if(ctrl_pressed)
