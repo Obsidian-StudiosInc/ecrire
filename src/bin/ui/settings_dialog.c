@@ -470,7 +470,8 @@ _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
     {
        Elm_Object_Item *cur_font = NULL;
        const char *font;
-       Eina_List *flist, *itr;
+       Eina_List *flist;
+       Eina_List *itr;
         flist = settings_font_list_get(evas_object_evas_get(list));
        EINA_LIST_FOREACH(flist, itr, font)
          {
