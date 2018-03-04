@@ -197,8 +197,8 @@ _cur_changed(void *data,
              void *event_info EINA_UNUSED)
 {
    char buf[sizeof(long)];
-   int line;
-   int col;
+   unsigned int line;
+   unsigned int col;
 
    Ecrire_Doc *doc = data;
    elm_obj_code_widget_cursor_position_get(doc->widget,&line,&col);
@@ -438,10 +438,10 @@ _goto_column_cb(void *data,
 {
   Ecrire_Doc *doc;
   Elm_Code_Line *line;
-  int col;
+  unsigned int col;
   int cols;
-  int cur_col;
-  int row;
+  unsigned int cur_col;
+  unsigned int row;
 
   doc = data;
   elm_obj_code_widget_cursor_position_get(doc->widget,&row,&cur_col);
@@ -471,8 +471,8 @@ _goto_line_cb(void *data,
   else
     {
       char buf[sizeof(long)];
-      int col;
-      int row;
+      unsigned int col;
+      unsigned int row;
 
       elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
       snprintf(buf, sizeof(buf),"%d",row);
@@ -622,7 +622,7 @@ _activate_paste_cb(void *data,
 {
   if (!event)
     return EINA_FALSE;
-   
+
   Ecrire_Doc *doc = data;
   if(!_ent_cfg->toolbar)
     elm_object_item_disabled_set(doc->mm_paste,
@@ -734,7 +734,7 @@ void
 add_toolbar(Ecrire_Doc *doc)
 {
   Evas_Object  *tbar;
-   
+
   doc->toolbar = tbar = elm_toolbar_add(doc->win);
   elm_toolbar_homogeneous_set(tbar, 0);
   elm_toolbar_shrink_mode_set(tbar, ELM_TOOLBAR_SHRINK_SCROLL);
