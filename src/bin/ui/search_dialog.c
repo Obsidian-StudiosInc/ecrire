@@ -141,7 +141,7 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
   Elm_Code_Line *code_line;
   const char *line;
   int i;
-  int found;
+  int found = -1;
   unsigned int col;
   unsigned int row;
   unsigned int lines;
