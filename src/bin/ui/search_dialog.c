@@ -142,10 +142,10 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
   const char *line;
   int i;
   int found;
-  int col;
-  int row;
-  int lines;
-  int len;
+  unsigned int col;
+  unsigned int row;
+  unsigned int lines;
+  unsigned int len;
 
   if (!text || !*text)
     return EINA_FALSE;
