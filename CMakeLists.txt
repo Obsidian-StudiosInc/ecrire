@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project(ecrire)
+project(ecrire C)
 set(VMAJ 0)
 set(VMIN 3)
 set(VMIC 1)
