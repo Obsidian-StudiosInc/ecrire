@@ -4,10 +4,13 @@
 #include "cfg.h"
 #include "ecrire.h"
 
+#define _CONFIG_ENTRY "config"
+#define CFG_ADD_BASIC(member, eet_type)\
+   EET_DATA_DESCRIPTOR_ADD_BASIC\
+      (_ent_cfg_descriptor, Ent_Cfg, # member, member, eet_type)
+
 Ent_Cfg *_ent_cfg;
 static Eet_Data_Descriptor * _ent_cfg_descriptor;
-#define _CONFIG_ENTRY "config"
-
 static char *config_file = NULL;
 
 static void
@@ -17,10 +20,6 @@ _ent_cfg_descriptor_init(void)
 
    EET_EINA_STREAM_DATA_DESCRIPTOR_CLASS_SET(&eddc, Ent_Cfg);
    _ent_cfg_descriptor = eet_data_descriptor_stream_new(&eddc);
-
-#define CFG_ADD_BASIC(member, eet_type)\
-   EET_DATA_DESCRIPTOR_ADD_BASIC\
-      (_ent_cfg_descriptor, Ent_Cfg, # member, member, eet_type)
 
    CFG_ADD_BASIC(alpha, EET_T_UINT);
    CFG_ADD_BASIC(anim_open, EET_T_UINT);
@@ -35,8 +34,6 @@ _ent_cfg_descriptor_init(void)
    CFG_ADD_BASIC(toolbar, EET_T_UINT);
    CFG_ADD_BASIC(height, EET_T_UINT);
    CFG_ADD_BASIC(width, EET_T_UINT);
-
-#undef CFG_ADD_BASIC
 
    EET_DATA_DESCRIPTOR_ADD_LIST_STRING(
        _ent_cfg_descriptor, Ent_Cfg, "recent", recent );
