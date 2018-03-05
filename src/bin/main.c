@@ -448,7 +448,7 @@ _goto_column_cb(void *data,
   col = atoi(elm_entry_entry_get(doc->entry_column));
   line = elm_code_file_line_get(doc->code->file,row);
   cols = elm_obj_code_widget_line_text_column_width_get(doc->widget, line);
-  if (col<0 || col>cols)
+  if (col>cols)
       col = cur_col;
   elm_obj_code_widget_cursor_position_set(doc->widget,row,col);
   elm_object_focus_set(doc->widget, EINA_TRUE);
