@@ -510,6 +510,8 @@ Evas_Object *
 ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
+  Evas_Coord h;
+  Evas_Coord w;
   Evas_Object *boxh;
   Evas_Object *boxv;
   Evas_Object *ic;
@@ -519,9 +521,6 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   Evas_Object *navi_font;
   Evas_Object *tb;
   Evas_Object *win;
-  unsigned int h;
-  unsigned int w;
-
 
   win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
   elm_win_autodel_set(win, EINA_TRUE);
