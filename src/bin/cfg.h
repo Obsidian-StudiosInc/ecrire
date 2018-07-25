@@ -17,8 +17,6 @@ typedef struct
 {
    unsigned int alpha;
    unsigned int anim_open;
-   unsigned int height;
-   unsigned int width;
    unsigned int version;
    unsigned int insert_spaces;
    unsigned int line_numbers;
@@ -31,6 +29,8 @@ typedef struct
    } font;
    Elm_Wrap_Type wrap_type;
    Eina_List *recent;
+   Evas_Coord height;
+   Evas_Coord width;
 } Ent_Cfg;
 
 extern Ent_Cfg *_ent_cfg;
