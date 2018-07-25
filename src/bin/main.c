@@ -30,7 +30,6 @@ static const Ecore_Getopt options =
       ECORE_GETOPT_SENTINEL
    }
 };
-static Eina_Unicode plain_utf8 = EINA_TRUE;
 
 Eina_Bool ctrl_pressed = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
