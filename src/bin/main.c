@@ -1019,6 +1019,13 @@ elm_main(int argc, char **argv)
      };
 
    args = ecore_getopt_parse(&options, values, argc, argv);
+   
+   if (args < 0)
+     {
+        fprintf(stderr, "ERROR: Could not parse options.");
+        return -1;
+     }
+
    if (quit_option)
      return EXIT_SUCCESS;
 
