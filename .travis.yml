@@ -63,7 +63,7 @@ script:
   - cmake -D CMAKE_BUILD_TYPE=Debug ./
   - ${SONAR} make package
   - sudo dpkg -i --force-all --force-confask dist/ecrire-${MY_PV}.x86_64.deb
-  - if [ "${SONAR}" ]; then src/bin/ecrire; sleep 5 && killall -q ecrire; fi
+  - if [ "${SONAR}" ]; then sudo src/bin/ecrire; sleep 5 && sudo killall -q ecrire; fi
   - if [ "${SONAR}" ]; then find . -name '*.gcno' -exec sh -c 'gcov -b {} -o $(dirname {})' \;; fi
   - if [ "${SONAR}" ]; then sonar-scanner; fi
 
