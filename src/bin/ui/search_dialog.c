@@ -210,7 +210,6 @@ _replace_in_entry(Ecrire_Doc *doc)
 {
   Eina_Bool replaced = EINA_FALSE;
   const char *find;
-  const char *replace;
   int pos;
 
   find = elm_entry_entry_get(find_entry);
@@ -219,6 +218,8 @@ _replace_in_entry(Ecrire_Doc *doc)
   pos = _find_in_entry(doc, find, EINA_TRUE);
   if(pos>=0)
     {
+      const char *replace;
+
       replace = elm_entry_entry_get(replace_entry);
       elm_code_widget_selection_delete(doc->widget);
       elm_code_widget_text_at_cursor_insert(doc->widget, replace);
