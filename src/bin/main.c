@@ -201,9 +201,9 @@ _cur_changed(void *data,
 
    Ecrire_Doc *doc = data;
    elm_obj_code_widget_cursor_position_get(doc->widget,&line,&col);
-   snprintf(buf, sizeof(buf),"%d", line);
+   snprintf(buf, sizeof(buf),"%u", line);
    elm_object_text_set(doc->entry_line, buf);
-   snprintf(buf, sizeof(buf),"%d", col);
+   snprintf(buf, sizeof(buf),"%u", col);
    elm_object_text_set(doc->entry_column, buf);
    if(elm_obj_code_widget_can_undo_get(doc->widget))
      {
@@ -474,7 +474,7 @@ _goto_line_cb(void *data,
       unsigned int row;
 
       elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
-      snprintf(buf, sizeof(buf),"%d",row);
+      snprintf(buf, sizeof(buf),"%u",row);
       elm_entry_entry_set(doc->entry_line,buf);
     }
   elm_object_focus_set(doc->widget, EINA_TRUE);
