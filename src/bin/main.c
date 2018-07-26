@@ -170,24 +170,23 @@ _update_cur_file(Ecrire_Doc *doc)
 {
   const char *filename = NULL;
   const char *saving = NULL;
+  char buf[1024];
 
   saving = ((!_ent_cfg->menu &&
             !elm_object_item_disabled_get(doc->mm_save)) ||
             (!_ent_cfg->toolbar &&
             !elm_object_item_disabled_get(doc->save_item))) ? "*" : "";
-    {
-      char buf[1024];
-      if(doc->code->file->file)
-        filename = eina_file_filename_get(doc->code->file->file);
-      if (filename)
-         snprintf(buf, sizeof(buf), _("%s%s - %s"), saving,
-                  filename, PACKAGE_NAME);
-      else
-         snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
-                  doc->unsaved, PACKAGE_NAME);
 
-      elm_win_title_set(doc->win, buf);
-    }
+  if(doc->code->file->file)
+    filename = eina_file_filename_get(doc->code->file->file);
+  if (filename)
+     snprintf(buf, sizeof(buf), _("%s%s - %s"), saving,
+              filename, PACKAGE_NAME);
+  else
+     snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
+              doc->unsaved, PACKAGE_NAME);
+
+  elm_win_title_set(doc->win, buf);
 }
 
 static void
