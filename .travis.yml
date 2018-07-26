@@ -10,6 +10,7 @@ install:
   - sudo add-apt-repository -y ppa:niko2040/e19
   - sudo apt-get -qq update
   - sudo apt-get install -y cmake gettext libc6-dbg libefl libefl-dbg libefl-dev rpm
+  - if [ "${SONAR}" ]; then sudo apt-get install -y xvfb; fi
 
 jobs:
   include:
@@ -63,7 +64,7 @@ script:
   - cmake -D CMAKE_BUILD_TYPE=Debug ./
   - ${SONAR} make package
   - sudo dpkg -i --force-all --force-confask dist/ecrire-${MY_PV}.x86_64.deb
-  - if [ "${SONAR}" ]; then sudo src/bin/ecrire & ; sleep 5 && sudo killall -q ecrire; fi
+  - if [ "${SONAR}" ]; then sudo xvfb-run src/bin/ecrire & ; sleep 5 && sudo killall -q ecrire; fi
   - if [ "${SONAR}" ]; then find . -name '*.gcno' -exec sh -c 'gcov -b {} -o $(dirname {})' \;; fi
   - if [ "${SONAR}" ]; then sonar-scanner; fi
 
