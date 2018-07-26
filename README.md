@@ -3,6 +3,7 @@
 [![Build Status](https://img.shields.io/travis/Obsidian-StudiosInc/ecrire/master.svg?colorA=9977bb&style=plastic)](https://travis-ci.org/Obsidian-StudiosInc/ecrire)
 [![Build Status](https://img.shields.io/shippable/58fa9a131fb3ec0700df16e5/master.svg?colorA=9977bb&style=plastic)](https://app.shippable.com/projects/58fa9a131fb3ec0700df16e5/)
 [![Code Quality](https://img.shields.io/coverity/scan/12512.svg?colorA=9977bb&style=plastic)](https://scan.coverity.com/projects/obsidian-studiosinc-ecrire)
+[![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=ecrire&metric=alert_status)](https://sonarcloud.io/dashboard?id=ecrire)
 
 This is a fork and current development version Ecrire, a EFL based text 
 editor for Enlightenment and eventually Tizen as well. Or any device 
