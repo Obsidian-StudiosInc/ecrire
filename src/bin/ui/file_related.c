@@ -31,7 +31,7 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
                               Eina_Bool save)
 {
    const char *file;
-   Eina_List *itr;
+   Eina_List *itr = NULL;
    Evas_Object *fs;
    Evas_Object *icon;
    Evas_Object *sel;
