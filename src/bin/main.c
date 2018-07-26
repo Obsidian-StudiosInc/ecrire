@@ -291,14 +291,10 @@ _new_doc(Ecrire_Doc *doc) {
 static void
 _open_file(Ecrire_Doc *doc, const char *file)
 {
-  const char *item;
-  const char *mime;
-  int h;
-  Eina_List *find_list;
-  Eina_List *list;
-
   if (file)
     {
+      const char *mime;
+
       mime = efreet_mime_type_get(file);
       if(mime)
         {
@@ -322,8 +318,13 @@ _open_file(Ecrire_Doc *doc, const char *file)
 
       if(strlen(file)>2)
         {
+          Eina_List *find_list;
+          Eina_List *list;
+
           if(eina_list_count(_ent_cfg->recent) >= ECRIRE_RECENT_COUNT)
             {
+              const char *item;
+
               item = eina_list_last_data_get(_ent_cfg->recent);
               list = eina_list_remove(_ent_cfg->recent, item);
               if(list)
@@ -353,6 +354,8 @@ _open_file(Ecrire_Doc *doc, const char *file)
 
       if(!_ent_cfg->anim_open)
         {
+          int h;
+
           Elm_Transit *transit = elm_transit_add();
           elm_transit_object_add(transit, doc->box_editor);
           evas_object_geometry_get(doc->win, NULL, NULL, NULL, &h);
@@ -781,9 +784,6 @@ create_window(int argc, char *argv[])
 {
    Ecrire_Doc *doc;
    Evas_Object  *box;
-   Evas_Object  *edit_menu;
-   Evas_Object  *file_menu;
-   Evas_Object  *menu;
    Evas_Object  *obj;
    Evas_Object  *table;
    Evas_Coord h = 600;
@@ -805,6 +805,10 @@ create_window(int argc, char *argv[])
 
    if(!_ent_cfg->menu)
      {
+       Evas_Object  *edit_menu;
+       Evas_Object  *file_menu;
+       Evas_Object  *menu;
+
        menu = elm_win_main_menu_get(doc->win);
 
        file_menu = elm_menu_item_add(menu, NULL, NULL, _("File"), NULL, NULL);
