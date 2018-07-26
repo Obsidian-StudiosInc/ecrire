@@ -396,9 +396,13 @@ Evas_Object *
 _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
+  Elm_Object_Item *cur_font = NULL;
+  Eina_List *flist;
+  Eina_List *itr;
   Evas_Object *boxv;
   Evas_Object *obj;
   Evas_Object *table;
+  const char *font;
   int row = 0;
 
   boxv = elm_box_add(parent);
@@ -466,31 +470,25 @@ _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   evas_object_show(list);
 
   /* Populate list */
+  flist = settings_font_list_get(evas_object_evas_get(list));
+  EINA_LIST_FOREACH(flist, itr, font)
     {
-       Elm_Object_Item *cur_font = NULL;
-       const char *font;
-       Eina_List *flist;
-       Eina_List *itr;
-        flist = settings_font_list_get(evas_object_evas_get(list));
-       EINA_LIST_FOREACH(flist, itr, font)
+       Elm_Object_Item *tmp;
+       tmp = elm_list_item_append(list, font, NULL, NULL, NULL, NULL);
+       if (ent_cfg->font.name)
          {
-            Elm_Object_Item *tmp;
-            tmp = elm_list_item_append(list, font, NULL, NULL, NULL, NULL);
-            if (ent_cfg->font.name)
-              {
-                if(!strcmp(ent_cfg->font.name, font))
-                  cur_font = tmp;
-              }
-            else
-              elm_object_item_disabled_set(tmp, EINA_TRUE);
+           if(!strcmp(ent_cfg->font.name, font))
+             cur_font = tmp;
          }
-        EINA_LIST_FREE(flist, font)
-          eina_stringshare_del(font);
-        if (cur_font)
-         {
-            elm_list_item_bring_in(cur_font);
-            elm_list_item_selected_set(cur_font, EINA_TRUE);
-         }
+       else
+         elm_object_item_disabled_set(tmp, EINA_TRUE);
+    }
+  EINA_LIST_FREE(flist, font)
+  eina_stringshare_del(font);
+  if (cur_font)
+    {
+       elm_list_item_bring_in(cur_font);
+       elm_list_item_selected_set(cur_font, EINA_TRUE);
     }
   evas_object_smart_callback_add(list, "selected", settings_apply_font_cb, doc);
 
