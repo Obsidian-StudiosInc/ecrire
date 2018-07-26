@@ -36,7 +36,6 @@ settings_alpha_cb (void *data,
   Ecrire_Doc *doc = data;
 
   ent_cfg->alpha = elm_slider_value_get (obj);
-  ALPHA (doc->bg, ent_cfg->alpha);
   ALPHA (doc->box_main, ent_cfg->alpha);
   ALPHA (doc->box_editor, ent_cfg->alpha);
   ecrire_cfg_save();

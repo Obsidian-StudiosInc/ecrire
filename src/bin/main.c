@@ -796,13 +796,6 @@ create_window(int argc, char *argv[])
    elm_win_alpha_set (doc->win, EINA_TRUE);
    elm_win_autodel_set(doc->win, EINA_FALSE);
 
-   doc->bg = elm_bg_add (doc->win);
-   if(_ent_cfg->alpha)
-     ALPHA (doc->bg, _ent_cfg->alpha);
-   elm_win_resize_object_add (doc->win, doc->bg);
-   evas_object_size_hint_weight_set (doc->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   evas_object_show (doc->bg);
-
    doc->box_main = obj = elm_box_add (doc->win);
    if(_ent_cfg->alpha)
      ALPHA (doc->box_main, _ent_cfg->alpha);
