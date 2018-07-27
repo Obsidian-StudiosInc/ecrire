@@ -882,11 +882,6 @@ create_window(int argc, char *argv[])
 
    box = elm_box_add (_win);
    elm_box_horizontal_set(box, EINA_TRUE);
-   if(_ent_cfg->alpha)
-     {
-        ecrire_alpha_set(_ent_cfg->alpha);
-        ALPHA (box, _ent_cfg->alpha);
-     }
    evas_object_size_hint_weight_set (box, EVAS_HINT_EXPAND, 0);
    evas_object_size_hint_align_set(box, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_padding_set(box, 5, 5, 0, 0);
@@ -986,6 +981,9 @@ create_window(int argc, char *argv[])
                                   "move",
                                   (Evas_Smart_Cb)_win_move_cb,
                                   _win);
+
+   if(_ent_cfg->alpha)
+     ecrire_alpha_set(_ent_cfg->alpha);
 
    if(_ent_cfg->height && _ent_cfg->width)
      evas_object_resize(_win, _ent_cfg->width, _ent_cfg->height);
