@@ -38,7 +38,7 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    Evas_Object *box;
 
    file_doc = doc;
-   inwin = elm_win_inwin_add(doc->win);
+   inwin = elm_win_inwin_add(ecrire_win_get());
    evas_object_show(inwin);
 
    box = elm_box_add(inwin);

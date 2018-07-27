@@ -29,15 +29,12 @@ disable_font_widgets(Eina_Bool state)
 }
 
 static void
-settings_alpha_cb (void *data,
+settings_alpha_cb (void *data EINA_UNUSED,
                    Evas_Object *obj,
                    void *event_info EINA_UNUSED)
 {
-  Ecrire_Doc *doc = data;
-
   ent_cfg->alpha = elm_slider_value_get (obj);
-  ALPHA (doc->box_main, ent_cfg->alpha);
-  ALPHA (doc->box_editor, ent_cfg->alpha);
+  ecrire_alpha_set(ent_cfg->alpha);
   ecrire_cfg_save();
 }
 
@@ -196,7 +193,7 @@ settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
   if(state)
     add_toolbar((Ecrire_Doc *)data);
   else
-    evas_object_del(((Ecrire_Doc *)data)->toolbar);
+    ecrire_toolbar_del();
   ent_cfg->toolbar = !state;
   ecrire_cfg_save();
 }
@@ -346,7 +343,7 @@ _settings_dialog_display(Evas_Object *parent,
   elm_check_state_set(obj, !_ent_cfg->menu);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_menu_cb, doc->win);
+  evas_object_smart_callback_add(obj, "changed", settings_menu_cb, ecrire_win_get());
   evas_object_show(obj);
   row++;
 
@@ -522,7 +519,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
   elm_win_autodel_set(win, EINA_TRUE);
   evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
-  evas_object_geometry_get(doc->win, NULL, NULL, &w, &h);
+  evas_object_geometry_get(ecrire_win_get(), NULL, NULL, &w, &h);
 
   boxh = elm_box_add(win);
   evas_object_size_hint_weight_set(boxh, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);

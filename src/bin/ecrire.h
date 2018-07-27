@@ -17,15 +17,10 @@ extern int _ecrire_log_dom;
 struct _Ecrire_Doc {
      Elm_Code *code;
      Elm_Code_Widget *widget;
-     Evas_Object *win;
-     Evas_Object *bg;
-     Evas_Object *box_editor;
-     Evas_Object *box_main;
      Evas_Object *entry_column;
      Evas_Object *entry_line;
      Evas_Object *cursor_label;
      Evas_Object *label_mime;
-     Evas_Object *toolbar;
      /* Main Menu Items */
      Elm_Object_Item *mm_close;
      Elm_Object_Item *mm_copy;
@@ -52,7 +47,11 @@ struct _Ecrire_Doc {
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
 
+Evas_Object * ecrire_win_get();
 void add_toolbar(Ecrire_Doc *doc);
+void ecrire_alpha_set(int alpha);
+void ecrire_pack_end(Evas_Object *search);
+void ecrire_toolbar_del();
 void editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size);
 void editor_save(Ecrire_Doc *doc, void *callback_func);
 void save_do(const char *file, Ecrire_Doc *doc);

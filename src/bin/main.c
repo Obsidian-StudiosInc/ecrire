@@ -31,6 +31,10 @@ static const Ecore_Getopt options =
    }
 };
 
+static Evas_Object *_box_editor;
+static Evas_Object *_box_main;
+static Evas_Object *_toolbar;
+static Evas_Object *_win;
 Eina_Bool ctrl_pressed = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
@@ -186,7 +190,7 @@ _update_cur_file(Ecrire_Doc *doc)
      snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
               doc->unsaved, PACKAGE_NAME);
 
-  elm_win_title_set(doc->win, buf);
+  elm_win_title_set(_win, buf);
 }
 
 static void
@@ -356,8 +360,8 @@ _open_file(Ecrire_Doc *doc, const char *file)
           int h;
 
           Elm_Transit *transit = elm_transit_add();
-          elm_transit_object_add(transit, doc->box_editor);
-          evas_object_geometry_get(doc->win, NULL, NULL, NULL, &h);
+          elm_transit_object_add(transit, _box_editor);
+          evas_object_geometry_get(_win, NULL, NULL, NULL, &h);
           elm_transit_effect_translation_add(transit, 0, h, 0, 0);
           elm_transit_duration_set(transit, 0.75);
           elm_transit_go(transit);
@@ -567,7 +571,7 @@ static void
 _find(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
-   ui_find_dialog_open(doc->win, doc);
+   ui_find_dialog_open(_win, doc);
 }
 
 static void
@@ -583,20 +587,21 @@ _settings(void *data,
           void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
-   ui_settings_dialog_open(elm_object_top_widget_get(doc->win), doc, _ent_cfg);
+   ui_settings_dialog_open(elm_object_top_widget_get(_win), doc, _ent_cfg);
 }
 
 static void
 _win_del_do(void *data)
 {
-   Ecrire_Doc *doc = data;
+  Ecrire_Doc *doc = data;
   ecrire_cfg_save();
-   _close_doc(doc);
-   evas_object_del(doc->win);
+  _close_doc(data);
+  if(_win)
+    evas_object_del(_win);
   if(doc->path)
     free(doc->path);
-   free(doc);
-   elm_exit();
+  free(doc);
+  elm_exit();
 }
 
 static void
@@ -642,7 +647,7 @@ _get_clipboard_cb(void *data,
 {
   Ecrire_Doc *doc = data;
 
-  elm_cnp_selection_get(doc->win,
+  elm_cnp_selection_get(_win,
                         ELM_SEL_TYPE_CLIPBOARD,
                         ELM_SEL_FORMAT_TARGETS,
                         _activate_paste_cb,
@@ -736,13 +741,13 @@ add_toolbar(Ecrire_Doc *doc)
 {
   Evas_Object  *tbar;
 
-  doc->toolbar = tbar = elm_toolbar_add(doc->win);
+  _toolbar = tbar = elm_toolbar_add(_win);
   elm_toolbar_homogeneous_set(tbar, 0);
   elm_toolbar_shrink_mode_set(tbar, ELM_TOOLBAR_SHRINK_SCROLL);
   elm_toolbar_select_mode_set(tbar, ELM_OBJECT_SELECT_MODE_NONE);
   elm_toolbar_align_set(tbar, 0);
   evas_object_size_hint_align_set(tbar, EVAS_HINT_FILL, 0);
-  elm_box_pack_start(doc->box_main, tbar);
+  elm_box_pack_start(_box_main, tbar);
   evas_object_show(tbar);
 
   elm_toolbar_item_append(tbar, "document-new", _("New"), _new, doc);
@@ -791,15 +796,13 @@ create_window(int argc, char *argv[])
    doc = calloc(1, sizeof(*doc));
    doc->unsaved = 1;
 
-   doc->win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
-   elm_win_alpha_set (doc->win, EINA_TRUE);
-   elm_win_autodel_set(doc->win, EINA_FALSE);
+   _win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
+   elm_win_alpha_set (_win, EINA_TRUE);
+   elm_win_autodel_set(_win, EINA_FALSE);
 
-   doc->box_main = obj = elm_box_add (doc->win);
-   if(_ent_cfg->alpha)
-     ALPHA (doc->box_main, _ent_cfg->alpha);
+   _box_main = obj = elm_box_add (_win);
    evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   elm_win_resize_object_add (doc->win, obj);
+   elm_win_resize_object_add (_win, obj);
    evas_object_show (obj);
 
    if(!_ent_cfg->menu)
@@ -808,7 +811,7 @@ create_window(int argc, char *argv[])
        Evas_Object  *file_menu;
        Evas_Object  *menu;
 
-       menu = elm_win_main_menu_get(doc->win);
+       menu = elm_win_main_menu_get(_win);
 
        file_menu = elm_menu_item_add(menu, NULL, NULL, _("File"), NULL, NULL);
        elm_menu_item_add(menu, file_menu, "document-new", _("New"), _new, doc);
@@ -854,15 +857,13 @@ create_window(int argc, char *argv[])
    _set_save_disabled(doc, EINA_TRUE);
    _set_undo_redo_disabled(doc, EINA_TRUE);
 
-   doc->box_editor = obj = elm_box_add (doc->win);
-   if(_ent_cfg->alpha)
-     ALPHA (obj, _ent_cfg->alpha);
+   _box_editor = obj = elm_box_add (_win);
    evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    evas_object_show(obj);
 
    doc->code = elm_code_create();
-   doc->widget = elm_code_widget_add(doc->win, doc->code);
+   doc->widget = elm_code_widget_add(_win, doc->code);
 
    _init_font(doc);
    elm_code_file_line_append(doc->code->file, "", 0, NULL);
@@ -875,18 +876,21 @@ create_window(int argc, char *argv[])
    elm_obj_code_widget_tab_inserts_spaces_set(doc->widget, !_ent_cfg->insert_spaces);
    evas_object_size_hint_align_set(doc->widget, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(doc->widget, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-   elm_box_pack_end(doc->box_editor, doc->widget);
-   elm_box_pack_end(doc->box_main, doc->box_editor);
+   elm_box_pack_end(_box_editor, doc->widget);
+   elm_box_pack_end(_box_main, _box_editor);
    evas_object_show(doc->widget);
 
-   box = elm_box_add (doc->win);
+   box = elm_box_add (_win);
    elm_box_horizontal_set(box, EINA_TRUE);
    if(_ent_cfg->alpha)
-     ALPHA (box, _ent_cfg->alpha);
+     {
+        ecrire_alpha_set(_ent_cfg->alpha);
+        ALPHA (box, _ent_cfg->alpha);
+     }
    evas_object_size_hint_weight_set (box, EVAS_HINT_EXPAND, 0);
    evas_object_size_hint_align_set(box, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_padding_set(box, 5, 5, 0, 0);
-   elm_box_pack_end(doc->box_main,box);
+   elm_box_pack_end(_box_main,box);
    evas_object_show (box);
 
 
@@ -970,24 +974,24 @@ create_window(int argc, char *argv[])
    ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
                            (Ecore_Event_Handler_Cb)_key_down_cb,
                            doc);
-   evas_object_smart_callback_add(doc->win,
+   evas_object_smart_callback_add(_win,
                                   "delete,request",
                                   my_win_del,
                                   doc);
-   evas_object_smart_callback_add(doc->win,
+   evas_object_smart_callback_add(_win,
                                   "focused",
                                   (Evas_Smart_Cb)_get_clipboard_cb,
                                   doc);
-   evas_object_smart_callback_add(doc->win,
+   evas_object_smart_callback_add(_win,
                                   "move",
                                   (Evas_Smart_Cb)_win_move_cb,
-                                  doc->win);
+                                  _win);
 
    if(_ent_cfg->height && _ent_cfg->width)
-     evas_object_resize(doc->win, _ent_cfg->width, _ent_cfg->height);
+     evas_object_resize(_win, _ent_cfg->width, _ent_cfg->height);
    else
-     evas_object_resize(doc->win, w, h);
-   evas_object_show(doc->win);
+     evas_object_resize(_win, w, h);
+   evas_object_show(_win);
 
    if (optind < argc)
      {
@@ -998,6 +1002,31 @@ create_window(int argc, char *argv[])
      _update_cur_file(doc);
 
    elm_object_focus_set(doc->widget, EINA_TRUE);
+}
+
+void
+ecrire_alpha_set(int alpha)
+{
+  ALPHA (_box_main, alpha);
+  ALPHA (_box_editor, alpha);
+}
+
+void
+ecrire_pack_end(Evas_Object *table)
+{
+  elm_box_pack_end(_box_editor, table);
+}
+
+void
+ecrire_toolbar_del()
+{
+  evas_object_del(_toolbar);
+}
+
+Evas_Object *
+ecrire_win_get()
+{
+  return(_win);
 }
 
 EAPI_MAIN int
