@@ -612,15 +612,6 @@ _close_cb(void *data,
   _alert_if_need_saving(_win_del_do, (Ecrire_Doc *)data);
 }
 
-static void
-my_win_del(void *data,
-           Evas_Object *obj EINA_UNUSED,
-           void *event_info EINA_UNUSED)
-{
-   Ecrire_Doc *doc = data;
-   _alert_if_need_saving(_win_del_do, doc);
-}
-
 static Eina_Bool
 _activate_paste_cb(void *data,
                    Evas_Object *obj EINA_UNUSED,
@@ -971,7 +962,7 @@ create_window(int argc, char *argv[])
                            doc);
    evas_object_smart_callback_add(_win,
                                   "delete,request",
-                                  my_win_del,
+                                  _close_cb,
                                   doc);
    evas_object_smart_callback_add(_win,
                                   "focused",
