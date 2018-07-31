@@ -324,6 +324,14 @@ _open_file(Ecrire_Doc *doc, const char *file)
           Eina_List *find_list = NULL;
           Eina_List *list = NULL;
 
+          find_list = eina_list_data_find_list(_ent_cfg->recent,
+                                               eina_stringshare_add(file));
+          if(find_list)
+            list = eina_list_promote_list(_ent_cfg->recent,find_list);
+          else
+            list = eina_list_prepend(_ent_cfg->recent,strdup(file));
+          if(list)
+            _ent_cfg->recent = list;
           if(eina_list_count(_ent_cfg->recent) >= ECRIRE_RECENT_COUNT)
             {
               const char *item;
@@ -333,14 +341,6 @@ _open_file(Ecrire_Doc *doc, const char *file)
               if(list)
                   _ent_cfg->recent = list;
             }
-          find_list = eina_list_data_find_list(_ent_cfg->recent,
-                                               eina_stringshare_add(file));
-          if(find_list)
-            list = eina_list_promote_list(_ent_cfg->recent,find_list);
-          else
-            list = eina_list_prepend(_ent_cfg->recent,strdup(file));
-          if(list)
-            _ent_cfg->recent = list;
         }
 
       _set_path(doc,file);
