@@ -323,6 +323,16 @@ _open_file(Ecrire_Doc *doc, const char *file)
         {
           Eina_List *find_list = NULL;
           Eina_List *list = NULL;
+          Eina_List *l;
+          Eina_List *l_next;
+          char *data;
+          struct stat buffer;
+
+          EINA_LIST_FOREACH_SAFE(_ent_cfg->recent, l, l_next, data)
+            {
+              if(stat (data, &buffer) == -1)
+                _ent_cfg->recent = eina_list_remove_list(_ent_cfg->recent, l);
+            }
 
           find_list = eina_list_data_find_list(_ent_cfg->recent,
                                                eina_stringshare_add(file));
