@@ -41,6 +41,46 @@ int _ecrire_log_dom = -1;
 char *drop_file = NULL;
 
 static void
+_add_to_recent_files(const char *file)
+{
+  if(strlen(file)>2)
+    {
+      Eina_List *find_list = NULL;
+      Eina_List *list = NULL;
+      Eina_List *l;
+      Eina_List *l_next;
+      char absolute[PATH_MAX];
+      char *data;
+      struct stat buffer;
+
+      realpath(file,absolute);
+      EINA_LIST_FOREACH_SAFE(_ent_cfg->recent, l, l_next, data)
+        {
+          if(stat (data, &buffer) == -1)
+            _ent_cfg->recent = eina_list_remove_list(_ent_cfg->recent, l);
+        }
+
+      find_list = eina_list_data_find_list(_ent_cfg->recent,
+                                           eina_stringshare_add(absolute));
+      if(find_list)
+        list = eina_list_promote_list(_ent_cfg->recent,find_list);
+      else
+        list = eina_list_prepend(_ent_cfg->recent,strdup(absolute));
+      if(list)
+        _ent_cfg->recent = list;
+      if(eina_list_count(_ent_cfg->recent) >= ECRIRE_RECENT_COUNT)
+        {
+          const char *item;
+
+          item = eina_list_last_data_get(_ent_cfg->recent);
+          list = eina_list_remove(_ent_cfg->recent, item);
+          if(list)
+              _ent_cfg->recent = list;
+        }
+    }
+}
+
+static void
 _set_path(Ecrire_Doc *doc, const char *file)
 {
   char *f = NULL;
@@ -318,43 +358,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
         }
       elm_code_file_open(doc->code,file);
       _init_font(doc);
-
-      if(strlen(file)>2)
-        {
-          Eina_List *find_list = NULL;
-          Eina_List *list = NULL;
-          Eina_List *l;
-          Eina_List *l_next;
-          char absolute[PATH_MAX];
-          char *data;
-          struct stat buffer;
-
-          realpath(file,absolute);
-          EINA_LIST_FOREACH_SAFE(_ent_cfg->recent, l, l_next, data)
-            {
-              if(stat (data, &buffer) == -1)
-                _ent_cfg->recent = eina_list_remove_list(_ent_cfg->recent, l);
-            }
-
-          find_list = eina_list_data_find_list(_ent_cfg->recent,
-                                               eina_stringshare_add(absolute));
-          if(find_list)
-            list = eina_list_promote_list(_ent_cfg->recent,find_list);
-          else
-            list = eina_list_prepend(_ent_cfg->recent,strdup(absolute));
-          if(list)
-            _ent_cfg->recent = list;
-          if(eina_list_count(_ent_cfg->recent) >= ECRIRE_RECENT_COUNT)
-            {
-              const char *item;
-
-              item = eina_list_last_data_get(_ent_cfg->recent);
-              list = eina_list_remove(_ent_cfg->recent, item);
-              if(list)
-                  _ent_cfg->recent = list;
-            }
-        }
-
+      _add_to_recent_files(file);
       _set_path(doc,file);
       _set_save_disabled(doc, EINA_TRUE);
       _set_cut_copy_disabled(doc, EINA_TRUE);
@@ -417,6 +421,7 @@ save_do(const char *file, Ecrire_Doc *doc)
   /* File open, save */
   if(doc->code->file->file)
     {
+      _add_to_recent_files(eina_file_filename_get(doc->code->file->file));
       elm_code_file_save (doc->code->file);
       _set_save_disabled(doc, EINA_TRUE);
       _update_cur_file(doc);
