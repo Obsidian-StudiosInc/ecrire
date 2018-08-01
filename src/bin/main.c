@@ -325,9 +325,11 @@ _open_file(Ecrire_Doc *doc, const char *file)
           Eina_List *list = NULL;
           Eina_List *l;
           Eina_List *l_next;
+          char absolute[PATH_MAX];
           char *data;
           struct stat buffer;
 
+          realpath(file,absolute);
           EINA_LIST_FOREACH_SAFE(_ent_cfg->recent, l, l_next, data)
             {
               if(stat (data, &buffer) == -1)
@@ -335,11 +337,11 @@ _open_file(Ecrire_Doc *doc, const char *file)
             }
 
           find_list = eina_list_data_find_list(_ent_cfg->recent,
-                                               eina_stringshare_add(file));
+                                               eina_stringshare_add(absolute));
           if(find_list)
             list = eina_list_promote_list(_ent_cfg->recent,find_list);
           else
-            list = eina_list_prepend(_ent_cfg->recent,strdup(file));
+            list = eina_list_prepend(_ent_cfg->recent,strdup(absolute));
           if(list)
             _ent_cfg->recent = list;
           if(eina_list_count(_ent_cfg->recent) >= ECRIRE_RECENT_COUNT)
