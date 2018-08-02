@@ -15,6 +15,7 @@ install:
 jobs:
   include:
     - stage: Test build
+    - env: OPTS="ENABLE_NLS=true"
     - stage: SonarQube Scan
       env:
         - SONAR="build-wrapper-linux-x86-64 --out-dir bw-output"
@@ -28,6 +29,7 @@ jobs:
             secure: qo5NaaGZXoOtAz++5JSEGzhfVMiwgG3y4UKHRQr3j17XXsu+qazEqaM4epz635AXMHOxjm5bZBXr4KyCLcBIezMky/+/RRRJVAUH/wCyfhlRb350B2ixxUKBozF448bq9MW2hOWWYDyRDRb9lgUpuKfPlgc1qjc03cvyzu4OyvQ79vQBFdLY3wLIgEDbN/S9xyvM0PcYIxFkuDYS8z9A3sHNR6q4D6pGMpTvZfCcHLNj+XnV4nh4rTvyrG9BSobza6iB24Xl+U4DDyRDWAIJ5nTpkxnZZX9Bg68POQreiKgqxyeaO6YkN/5/1vW83AfXKR1P3s7QJN/yx3PlXJ8hlKndagBjns73BWJXmvnMaNTpUnjazN7o/4tkBmGOjufTv3yx9gCcmNI/eDy8936lEVjL9KexFSTIWW7CBh8bfGkX0GzgC5qMdH+xbbUW7178RbxdNWig1T69usLLA3N9oAHqcY5UWRd/9zR6hPML8k5OpWzZsrCm1tBLD/NqVdZ/7V1tfoCVEt7cIlo4DGyrMEMRZiHz0SZ16YSjw2a7SeXh9rfSR//wD4JXsvLy8q8H7eXvTnZ/UsJXFQ74clNaCvM/WMj1RtBSr4091NrgsL0I3sM3w5Hn2baJnYEmatlcfydwaKk1jVeFeRph1uQ4FOoaD+QzSFnA4v3femqlsy8=
     - stage: Deploy
       if: tag =~ ^v.*
+      env: OPTS="ENABLE_NLS=true"
       deploy:
         provider: releases
         api_key:
@@ -61,7 +63,7 @@ jobs:
         - true // avoid coverity double build
 
 script:
-  - cmake -D CMAKE_BUILD_TYPE=Debug ./
+  - cmake -D CMAKE_BUILD_TYPE=Debug ${OPTS} ./
   - ${SONAR} make package
   - sudo dpkg -i --force-all --force-confask dist/ecrire-${MY_PV}.x86_64.deb
   - if [ "${SONAR}" ]; then sudo utils/travis.sh ; fi
