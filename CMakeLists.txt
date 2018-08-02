@@ -30,10 +30,6 @@ find_package(Efreet ${EFL_VERSION} REQUIRED)
 find_package(Efreet COMPONENTS mime)
 find_package(Elementary ${EFL_VERSION} REQUIRED)
 
-IF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-    find_package(Intl REQUIRED)
-ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-
 INCLUDE(CheckIncludeFiles)
 CHECK_INCLUDE_FILES(unistd.h HAVE_UNISTD_H)
 
@@ -50,13 +46,17 @@ ADD_DEFINITIONS(
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 ADD_DEFINITIONS(-DEFL_BETA_API_SUPPORT)
 
-find_package(Gettext)
-if (GETTEXT_FOUND)
+if(ENABLE_NLS)
+   if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+      find_package(Intl REQUIRED)
+   else()
+      find_package(Gettext REQUIRED)
+   endif()
    set(GettextTranslate_ALL true)
    set(GettextTranslate_GMO_BINARY true)
    include(GettextTranslate)
-   set(ENABLE_NLS 1)
-endif (GETTEXT_FOUND)
+   add_subdirectory(po)
+endif(ENABLE_NLS)
 
 configure_file (
    "${PROJECT_SOURCE_DIR}/cmakeconfig.h.in"
@@ -65,7 +65,6 @@ configure_file (
 
 add_subdirectory(src/bin)
 add_subdirectory(data)
-add_subdirectory(po)
 
 # Package Sources
 set(CPACK_SOURCE_GENERATOR "TGZ;TBZ2")
