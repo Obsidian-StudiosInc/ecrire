@@ -1068,8 +1068,10 @@ elm_main(int argc, char **argv)
      }
 
    setlocale(LC_ALL, "");
+#ifdef ENABLE_NLS
    bindtextdomain(PACKAGE, LOCALE_DIR);
    textdomain(PACKAGE);
+#endif
 
    elm_init(argc, argv);
 
