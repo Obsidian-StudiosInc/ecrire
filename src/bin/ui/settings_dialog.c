@@ -516,9 +516,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   Evas_Object *tb;
   Evas_Object *win;
 
-  win = elm_win_util_dialog_add (parent, _("ecrire"),  _("Settings"));
-  elm_win_autodel_set(win, EINA_TRUE);
-  evas_object_smart_callback_add(win, "delete,request", settings_delete_cb, NULL);
+  win = elm_win_inwin_add (parent);
   evas_object_geometry_get(ecrire_win_get(), NULL, NULL, &w, &h);
 
   boxh = elm_box_add(win);
@@ -531,7 +529,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   evas_object_size_hint_weight_set(boxv, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set(boxv, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_box_horizontal_set(boxv, EINA_FALSE);
-  elm_win_resize_object_add(win, boxv);
+  elm_win_inwin_content_set(win, boxv);
   evas_object_show(boxv);
 
   tb = elm_toolbar_add(win);
@@ -584,8 +582,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   evas_object_show (obj);
 
   evas_object_resize(win, w * 0.8, h * 0.8);
-  elm_win_raise (win);
-  evas_object_show (win);
+  elm_win_inwin_activate (win);
 
   return win;
 }
