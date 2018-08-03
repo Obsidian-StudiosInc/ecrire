@@ -284,6 +284,12 @@ _check_set_undo(Ecrire_Doc *doc)
 }
 
 static void
+_signal_cb(int sig EINA_UNUSED)
+{
+  evas_object_smart_callback_call(_win, "delete,request", NULL);
+}
+
+static void
 _undo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    /* In undo we care about the current item */
@@ -1083,6 +1089,13 @@ elm_main(int argc, char **argv)
    ecrire_cfg_load();
 
    create_window(argc, argv);
+
+   signal(SIGQUIT, _signal_cb);
+   signal(SIGTERM, _signal_cb);
+   signal(SIGINT, _signal_cb);
+   signal(SIGHUP, _signal_cb);
+   signal(SIGPIPE, _signal_cb);
+   signal(SIGALRM, _signal_cb);
 
    elm_run();
 
