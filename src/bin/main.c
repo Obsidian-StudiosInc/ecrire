@@ -33,6 +33,7 @@ static const Ecore_Getopt options =
 
 static Evas_Object *_box_editor;
 static Evas_Object *_box_main;
+static Evas_Object *_menu;
 static Evas_Object *_toolbar;
 static Evas_Object *_win;
 Eina_Bool ctrl_pressed = EINA_FALSE;
@@ -607,6 +608,10 @@ _win_del_do(void *data)
 {
   Ecrire_Doc *doc = data;
   ecrire_cfg_save();
+  if(_menu)
+    evas_object_del(_menu);
+  if(_toolbar)
+    evas_object_del(_toolbar);
   _close_doc(data);
   if(_win)
     evas_object_del(_win);
@@ -812,39 +817,38 @@ create_window(int argc, char *argv[])
      {
        Evas_Object  *edit_menu;
        Evas_Object  *file_menu;
-       Evas_Object  *menu;
 
-       menu = elm_win_main_menu_get(_win);
+       _menu = elm_win_main_menu_get(_win);
 
-       file_menu = elm_menu_item_add(menu, NULL, NULL, _("File"), NULL, NULL);
-       elm_menu_item_add(menu, file_menu, "document-new", _("New"), _new, doc);
-       elm_menu_item_add(menu, file_menu, "document-open", _("Open"), _open_cb, doc);
+       file_menu = elm_menu_item_add(_menu, NULL, NULL, _("File"), NULL, NULL);
+       elm_menu_item_add(_menu, file_menu, "document-new", _("New"), _new, doc);
+       elm_menu_item_add(_menu, file_menu, "document-open", _("Open"), _open_cb, doc);
        doc->mm_save =
-         elm_menu_item_add(menu, file_menu, "document-save", _("Save"), _save, doc);
+         elm_menu_item_add(_menu, file_menu, "document-save", _("Save"), _save, doc);
        doc->mm_save_as =
-         elm_menu_item_add(menu, file_menu, "document-save-as", _("Save As"), _save_as, doc);
-       elm_menu_item_separator_add(menu, file_menu);
-       elm_menu_item_add(menu, file_menu, "preferences-system", _("Settings"), _settings, doc);
-       elm_menu_item_separator_add(menu, file_menu);
-       elm_menu_item_add(menu, file_menu, "application-exit", _("Exit"), _close_cb, doc);
+         elm_menu_item_add(_menu, file_menu, "document-save-as", _("Save As"), _save_as, doc);
+       elm_menu_item_separator_add(_menu, file_menu);
+       elm_menu_item_add(_menu, file_menu, "preferences-system", _("Settings"), _settings, doc);
+       elm_menu_item_separator_add(_menu, file_menu);
+       elm_menu_item_add(_menu, file_menu, "application-exit", _("Exit"), _close_cb, doc);
 
-       edit_menu = elm_menu_item_add(menu, NULL, NULL, _("Edit"), NULL, NULL);
+       edit_menu = elm_menu_item_add(_menu, NULL, NULL, _("Edit"), NULL, NULL);
        doc->mm_undo =
-         elm_menu_item_add(menu, edit_menu, "edit-undo", _("Undo"), _undo, doc);
+         elm_menu_item_add(_menu, edit_menu, "edit-undo", _("Undo"), _undo, doc);
        doc->mm_redo =
-         elm_menu_item_add(menu, edit_menu, "edit-redo", _("Redo"), _redo, doc);
-       elm_menu_item_separator_add(menu, edit_menu);
+         elm_menu_item_add(_menu, edit_menu, "edit-redo", _("Redo"), _redo, doc);
+       elm_menu_item_separator_add(_menu, edit_menu);
        doc->mm_cut =
-         elm_menu_item_add(menu, edit_menu, "edit-cut", _("Cut"), _cut, doc);
+         elm_menu_item_add(_menu, edit_menu, "edit-cut", _("Cut"), _cut, doc);
        doc->mm_copy =
-         elm_menu_item_add(menu, edit_menu, "edit-copy", _("Copy"), _copy, doc);
+         elm_menu_item_add(_menu, edit_menu, "edit-copy", _("Copy"), _copy, doc);
        doc->mm_paste =
-         elm_menu_item_add(menu, edit_menu, "edit-paste", _("Paste"), _paste, doc);
+         elm_menu_item_add(_menu, edit_menu, "edit-paste", _("Paste"), _paste, doc);
        doc->mm_select_all =
-         elm_menu_item_add(menu, edit_menu, "edit-select-all", _("Select All"), _select_all_cb, doc);
-       elm_menu_item_separator_add(menu, edit_menu);
-       elm_menu_item_add(menu, edit_menu, "edit-find-replace", _("Search"), _find, doc);
-       elm_menu_item_add(menu, edit_menu, "go-jump", _("Jump to"), _goto_line_focus_cb, doc);
+         elm_menu_item_add(_menu, edit_menu, "edit-select-all", _("Select All"), _select_all_cb, doc);
+       elm_menu_item_separator_add(_menu, edit_menu);
+       elm_menu_item_add(_menu, edit_menu, "edit-find-replace", _("Search"), _find, doc);
+       elm_menu_item_add(_menu, edit_menu, "go-jump", _("Jump to"), _goto_line_focus_cb, doc);
 
        elm_object_item_disabled_set(doc->mm_paste, EINA_TRUE);
      }
