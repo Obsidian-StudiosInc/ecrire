@@ -31,6 +31,7 @@ static const Ecore_Getopt options =
    }
 };
 
+static Evas_Object *_bg;
 static Evas_Object *_box_editor;
 static Evas_Object *_box_main;
 static Evas_Object *_menu;
@@ -813,6 +814,11 @@ create_window(int argc, char *argv[])
    _win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
    elm_win_alpha_set (_win, EINA_TRUE);
    elm_win_autodel_set(_win, EINA_FALSE);
+
+   _bg = elm_bg_add (_win);
+   elm_win_resize_object_add (_win, _bg);
+   evas_object_size_hint_weight_set (_bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+   evas_object_show (_bg);
 
    _box_main = obj = elm_box_add (_win);
    evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
