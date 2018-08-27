@@ -95,7 +95,7 @@ _set_path(Ecrire_Doc *doc, const char *file)
   fp = f = (char *)malloc(len);
   if(f)
     {
-      strncpy(f,file,len); 
+      strncpy(f,file,len);
       path = dirname(f);
       len = strlen(path)+1;
       doc->path = (char *)malloc(len);
@@ -819,6 +819,7 @@ create_window(int argc, char *argv[])
    elm_win_resize_object_add (_win, _bg);
    evas_object_size_hint_weight_set (_bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    evas_object_show (_bg);
+   evas_object_data_set(_win, "background", _bg);
 
    _box_main = obj = elm_box_add (_win);
    evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
@@ -1024,6 +1025,13 @@ create_window(int argc, char *argv[])
 void
 ecrire_alpha_set(int alpha)
 {
+  int r;
+  int g;
+  int b;
+  int a;
+
+  efl_gfx_color_get(efl_part(_win, "background"), &r, &g, &b, &a);
+  efl_gfx_color_set(_bg, r*1.5, g*1.5, b*1.5, alpha);
   ALPHA (_box_main, alpha);
   ALPHA (_box_editor, alpha);
 }
