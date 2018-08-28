@@ -172,15 +172,11 @@ _init_font(Ecrire_Doc *doc)
 static void
 _alert_if_need_saving(void (*done)(void *data), Ecrire_Doc *doc)
 {
-   if (!_ent_cfg->toolbar &&
-       !elm_object_item_disabled_get(doc->save_item))
-     {
-        ui_alert_need_saving(doc->widget, done, doc);
-     }
+   if ((!_ent_cfg->menu && !elm_object_item_disabled_get(doc->mm_save)) ||
+       (!_ent_cfg->toolbar && !elm_object_item_disabled_get(doc->save_item)))
+     ui_alert_need_saving(doc->widget, done, doc);
    else
-     {
-        done(doc);
-     }
+     done(doc);
 }
 
 static void
