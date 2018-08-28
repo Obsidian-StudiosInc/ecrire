@@ -619,7 +619,8 @@ _win_del_do(void *data)
     evas_object_del(_menu);
   if(_toolbar)
     evas_object_del(_toolbar);
-  _close_doc(data);
+  evas_object_del(doc->widget);
+  elm_code_free(doc->code);
   if(_win)
     evas_object_del(_win);
   if(doc->path)
