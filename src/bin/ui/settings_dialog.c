@@ -581,7 +581,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   elm_box_pack_end(boxv, obj);
   evas_object_show (obj);
 
-  evas_object_resize(win, w * 0.8, h * 0.8);
+  evas_object_resize(win, w, h);
   elm_win_inwin_activate (win);
 
   return win;
