@@ -287,8 +287,7 @@ _init_font(Ecrire_Doc *doc)
 static void
 _alert_if_need_saving(void (*done)(void *data), Ecrire_Doc *doc)
 {
-   if ((!_ent_cfg->menu && !elm_object_item_disabled_get(doc->mm_save)) ||
-       (!_ent_cfg->toolbar && !elm_object_item_disabled_get(doc->save_item)))
+   if (doc->changed)
      ui_alert_need_saving(doc->widget, done, doc);
    else
      done(doc);
@@ -329,10 +328,7 @@ _update_cur_file(Ecrire_Doc *doc)
   const char *saving = NULL;
   char buf[1024];
 
-  saving = ((!_ent_cfg->menu &&
-            !elm_object_item_disabled_get(doc->mm_save)) ||
-            (!_ent_cfg->toolbar &&
-            !elm_object_item_disabled_get(doc->save_item))) ? "*" : "";
+  saving = (doc->changed>0) ? "*" : "";
 
   if(doc->code->file->file)
     filename = eina_file_filename_get(doc->code->file->file);
