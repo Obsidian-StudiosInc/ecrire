@@ -13,6 +13,110 @@
 #include "cfg.h"
 #include "ui/ui.h"
 
+static Eina_Bool _activate_paste_cb(void *data,
+                                    Evas_Object *obj EINA_UNUSED,
+                                    Elm_Selection_Data *event);
+static Eina_Bool _drop_cb(void *data,
+                          Evas_Object *obj EINA_UNUSED,
+                          Elm_Selection_Data *event);
+static Eina_Bool _get_clipboard_cb(void *data,
+                                   Evas_Object *obj EINA_UNUSED,
+                                   void *ev EINA_UNUSED);
+static Eina_Bool _key_down_cb(void *data,
+                              EINA_UNUSED Evas_Object *obj,
+                              void *ev);
+static Eina_Bool _win_move_cb(void *data EINA_UNUSED,
+                              Evas_Object *obj,
+                              void *ev EINA_UNUSED);
+
+static void _add_to_recent_files(const char *file);
+static void _alert_if_need_saving(void (*done)(void *data), Ecrire_Doc *doc);
+static void _changed(void *data,
+                     Evas_Object *obj EINA_UNUSED,
+                     void *event_info EINA_UNUSED);
+static void _check_set_redo(Ecrire_Doc *doc);
+static void _check_set_undo(Ecrire_Doc *doc);
+static void _close_cb(void *data,
+                      Evas_Object *obj EINA_UNUSED,
+                      void *event_info EINA_UNUSED);
+static void _close_doc (void *data);
+static void _copy(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *event_info EINA_UNUSED);
+static void _cur_changed(void *data,
+                         Evas_Object *obj EINA_UNUSED,
+                         void *event_info EINA_UNUSED);
+static void _cut(void *data,
+                 Evas_Object *obj EINA_UNUSED,
+                 void *event_info EINA_UNUSED);
+static void _drop_do(void *data);
+static void _find(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *event_info EINA_UNUSED);
+static void _fs_open_done(void *data,
+                          Evas_Object *obj EINA_UNUSED,
+                          void *event_info);
+static void _fs_save_done(void *data,
+                          Evas_Object *obj EINA_UNUSED,
+                          void *event_info);
+static void _goto_column_cb(void *data,
+                            Evas_Object *obj EINA_UNUSED,
+                            void *event_info EINA_UNUSED);
+static void _goto_line_cb(void *data,
+                          Evas_Object *obj EINA_UNUSED,
+                          void *event_info EINA_UNUSED);
+static void _goto_line_focus_cb(void *data,
+                                Evas_Object *obj EINA_UNUSED,
+                                void *event_info EINA_UNUSED);
+static void _init_font(Ecrire_Doc *doc);
+static void _new(void *data,
+                 Evas_Object *obj EINA_UNUSED,
+                 void *event_info EINA_UNUSED);
+static void _new_do(void *data);
+static void _new_doc(Ecrire_Doc *doc);
+static void _open_cb(void *data,
+                     Evas_Object *obj EINA_UNUSED,
+                     void *event_info EINA_UNUSED);
+static void _open_do(void *data);
+static void _open_file(Ecrire_Doc *doc, const char *file);
+static void _paste(void *data,
+                   Evas_Object *obj EINA_UNUSED,
+                   void *event_info EINA_UNUSED);
+static void _redo(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *event_info EINA_UNUSED);
+static void _save(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *event_info EINA_UNUSED);
+static void _save_as(void *data,
+                     Evas_Object *obj EINA_UNUSED,
+                     void *event_info EINA_UNUSED);
+static void _sel_clear(void *data,
+                       Evas_Object *obj EINA_UNUSED,
+                       void *event_info EINA_UNUSED);
+static void _sel_cut_copy(void *data,
+                          Evas_Object *obj EINA_UNUSED,
+                          void *event_info EINA_UNUSED);
+static void _sel_start(void *data,
+                       Evas_Object *obj EINA_UNUSED,
+                       void *event_info EINA_UNUSED);
+static void _select_all_cb(void *data,
+                           Evas_Object *obj EINA_UNUSED,
+                           void *event_info EINA_UNUSED);
+static void _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled);
+static void _set_path(Ecrire_Doc *doc, const char *file);
+static void _set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled);
+static void _set_undo_redo_disabled(Ecrire_Doc *doc, Eina_Bool disabled);
+static void _settings(void *data,
+                      Evas_Object *obj EINA_UNUSED,
+                      void *event_info EINA_UNUSED);
+static void _signal_cb(int sig EINA_UNUSED);
+static void _undo(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *event_info EINA_UNUSED);
+static void _update_cur_file(Ecrire_Doc *doc);
+static void _win_del_do(void *data);
+
 static const Ecore_Getopt options =
 {
    "ecrire",
