@@ -25,6 +25,9 @@ static Eina_Bool _get_clipboard_cb(void *data,
 static Eina_Bool _key_down_cb(void *data,
                               EINA_UNUSED Evas_Object *obj,
                               void *ev);
+static Eina_Bool _key_up_cb(void *data,
+                            EINA_UNUSED Evas_Object *obj,
+                            void *ev);
 static Eina_Bool _win_move_cb(void *data EINA_UNUSED,
                               Evas_Object *obj,
                               void *ev EINA_UNUSED);
@@ -834,7 +837,6 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
     Ecore_Event_Key *event = ev;
     if(ctrl_pressed)
       {
-        ctrl_pressed = EINA_FALSE;
         if(!strcmp("F", event->key) ||
            !strcmp("f", event->key) ||
            !strcmp("H", event->key) ||
@@ -872,6 +874,16 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
       {
         ctrl_pressed = EINA_TRUE;
       }
+  return EINA_TRUE;
+}
+
+static Eina_Bool
+_key_up_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
+{
+  Ecore_Event_Key *event = ev;
+    if (!strcmp("Control_L", event->key) ||
+        !strcmp("Control_R", event->key))
+      ctrl_pressed = EINA_FALSE;
   return EINA_TRUE;
 }
 
@@ -1112,6 +1124,9 @@ create_window(int argc, char *argv[])
                        doc);
    ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
                            (Ecore_Event_Handler_Cb)_key_down_cb,
+                           doc);
+   ecore_event_handler_add(ECORE_EVENT_KEY_UP,
+                           (Ecore_Event_Handler_Cb)_key_up_cb,
                            doc);
    evas_object_smart_callback_add(_win,
                                   "delete,request",
