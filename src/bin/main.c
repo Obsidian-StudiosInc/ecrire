@@ -104,6 +104,7 @@ static void _select_all_cb(void *data,
                            Evas_Object *obj EINA_UNUSED,
                            void *event_info EINA_UNUSED);
 static void _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled);
+static void _set_doc_changed(Ecrire_Doc *doc, Eina_Bool changed);
 static void _set_path(Ecrire_Doc *doc, const char *file);
 static void _set_save_disabled(Ecrire_Doc *doc, Eina_Bool disabled);
 static void _set_undo_redo_disabled(Ecrire_Doc *doc, Eina_Bool disabled);
@@ -224,6 +225,16 @@ _set_cut_copy_disabled(Ecrire_Doc *doc, Eina_Bool disabled)
       elm_object_item_disabled_set(doc->copy_item, disabled);
       elm_object_item_disabled_set(doc->select_all_item, disabled);
     }
+}
+
+static void
+_set_doc_changed(Ecrire_Doc *doc, Eina_Bool changed)
+{
+  doc->changed = changed;
+  _set_save_disabled(doc, !changed);
+  if(!_ent_cfg->toolbar)
+    elm_object_item_disabled_set(doc->close_item, !changed);
+  _update_cur_file(doc);
 }
 
 static void
@@ -375,13 +386,17 @@ _check_set_redo(Ecrire_Doc *doc)
 static void
 _check_set_undo(Ecrire_Doc *doc)
 {
-  if(!_ent_cfg->menu)
-    elm_object_item_disabled_set(doc->undo_item,
-                                 !elm_obj_code_widget_can_undo_get(doc->widget));
-  if(!_ent_cfg->toolbar)
-    elm_object_item_disabled_set(doc->undo_item,
-                                 !elm_obj_code_widget_can_undo_get(doc->widget));
+  Eina_Bool can_undo;
 
+  can_undo = elm_obj_code_widget_can_undo_get(doc->widget);
+  if(!_ent_cfg->menu)
+    elm_object_item_disabled_set(doc->undo_item, !can_undo);
+  if(!_ent_cfg->toolbar)
+    elm_object_item_disabled_set(doc->undo_item, !can_undo);
+  if(!can_undo && doc->changed)
+    _set_doc_changed(doc, EINA_FALSE);
+  else if(can_undo && !doc->changed)
+    _set_doc_changed(doc, EINA_TRUE);
 }
 
 static void
@@ -412,11 +427,9 @@ static void
 _changed(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
   Ecrire_Doc *doc = data;
-  _set_save_disabled(doc, EINA_FALSE);
-  if(!_ent_cfg->toolbar)
-    elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
+
   _check_set_redo(doc);
-  _update_cur_file(doc);
+  _check_set_undo(doc);
 }
 
 static void
@@ -427,7 +440,9 @@ _close_doc (void *data)
 }
 
 static void
-_new_doc(Ecrire_Doc *doc) {
+_new_doc(Ecrire_Doc *doc)
+{
+  doc->changed = EINA_FALSE;
   elm_code_file_new(doc->code);
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
   _init_font(doc);
