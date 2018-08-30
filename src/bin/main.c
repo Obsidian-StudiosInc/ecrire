@@ -837,9 +837,21 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
         else if(!strcmp("O", event->key) ||
                 !strcmp("o", event->key))
             _open_cb(data,NULL,NULL);
+        else if(!strcmp("Y", event->key) ||
+                !strcmp("y", event->key))
+            _check_set_redo((Ecrire_Doc *)data);
         else if(!strcmp("S", event->key) ||
                 !strcmp("s", event->key))
             _save(data,NULL,NULL);
+        else if(!strcmp("Z", event->key) ||
+                !strcmp("z", event->key))
+          {
+            Ecrire_Doc *doc;
+
+            doc = (Ecrire_Doc *)data;
+            _check_set_redo(doc);
+            _check_set_undo(doc);
+          }
         else if(!strcmp("W", event->key) ||
                 !strcmp("w", event->key))
             _close_cb(data,NULL,NULL);
