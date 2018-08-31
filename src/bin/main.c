@@ -72,6 +72,10 @@ static void _goto_line_focus_cb(void *data,
                                 Evas_Object *obj EINA_UNUSED,
                                 void *event_info EINA_UNUSED);
 static void _init_font(Ecrire_Doc *doc);
+static void _mouse_down_cb(void *data,
+                           EINA_UNUSED Evas *evas,
+                           EINA_UNUSED Evas_Object *obj,
+                           void *event);
 static void _new(void *data,
                  Evas_Object *obj EINA_UNUSED,
                  void *event_info EINA_UNUSED);
@@ -887,6 +891,23 @@ _key_up_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
   return EINA_TRUE;
 }
 
+static void
+_mouse_down_cb(void *data,
+               EINA_UNUSED Evas *evas,
+               EINA_UNUSED Evas_Object *obj,
+               void *event)
+{
+  Evas_Event_Mouse_Down *e = (Evas_Event_Mouse_Down *)event;
+  switch (e->button)
+    {
+      case 2:
+        elm_code_widget_selection_paste(((Ecrire_Doc *)data)->widget);
+        break;
+      default:
+        break;
+    }
+}
+
 void
 add_toolbar(Ecrire_Doc *doc)
 {
@@ -1128,6 +1149,10 @@ create_window(int argc, char *argv[])
    ecore_event_handler_add(ECORE_EVENT_KEY_UP,
                            (Ecore_Event_Handler_Cb)_key_up_cb,
                            doc);
+   evas_object_event_callback_add(_box_editor,
+                                  EVAS_CALLBACK_MOUSE_DOWN,
+                                  _mouse_down_cb,
+                                  doc);
    evas_object_smart_callback_add(_win,
                                   "delete,request",
                                   _close_cb,
