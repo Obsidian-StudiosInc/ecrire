@@ -9,6 +9,9 @@
    EET_DATA_DESCRIPTOR_ADD_BASIC\
       (_ent_cfg_descriptor, Ent_Cfg, # member, member, eet_type)
 
+static Ent_Cfg * _ecrire_cfg_new(void);
+static void _ent_cfg_descriptor_init(void);
+
 Ent_Cfg *_ent_cfg;
 static Eet_Data_Descriptor * _ent_cfg_descriptor;
 static char *config_file = NULL;
