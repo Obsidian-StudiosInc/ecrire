@@ -11,16 +11,16 @@ static void _set_file_cb(void *data,
                          Evas_Object *obj EINA_UNUSED,
                          void *event_info);
 
-Ecrire_Doc *file_doc;
-Evas_Object *inwin;
+static Ecrire_Doc *_file_doc;
+static Evas_Object *_inwin;
 
 static void
 _cleaning_cb(void *data, Evas_Object *obj, void *event_info)
 {
    void (*func) (void *, Evas_Object *, void *) = data;
-   func(file_doc, obj, event_info);
-   evas_object_del(inwin);  /* delete the test window */
-   file_doc = NULL;
+   func(_file_doc, obj, event_info);
+   evas_object_del(_inwin);  /* delete the test window */
+   _file_doc = NULL;
 }
 
 static void
@@ -42,16 +42,16 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    Evas_Object *sel;
    Evas_Object *box;
 
-   file_doc = doc;
-   inwin = elm_win_inwin_add(ecrire_win_get());
+   _file_doc = doc;
+   _inwin = elm_win_inwin_add(ecrire_win_get());
 
-   box = elm_box_add(inwin);
-   elm_win_inwin_content_set(inwin, box);
+   box = elm_box_add(_inwin);
+   elm_win_inwin_content_set(_inwin, box);
    evas_object_show(box);
 
-   sel = elm_hoversel_add(inwin);
+   sel = elm_hoversel_add(_inwin);
    elm_hoversel_auto_update_set(sel,EINA_TRUE);
-   icon = elm_icon_add (inwin);
+   icon = elm_icon_add (_inwin);
    if (elm_icon_standard_set (icon, "document-open-recent") ||
        elm_icon_standard_set (icon, "document-multiple"))
      {
@@ -71,7 +71,7 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    elm_box_pack_start(box,sel);
    evas_object_show(sel);
 
-   fs = elm_fileselector_add(inwin);
+   fs = elm_fileselector_add(_inwin);
    elm_fileselector_is_save_set(fs, save);
    elm_fileselector_expandable_set(fs, EINA_FALSE);
    if(doc->path)
@@ -86,6 +86,6 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    evas_object_smart_callback_add(sel, "selected", _set_file_cb, fs);
    evas_object_smart_callback_add(fs, "done", _cleaning_cb, func);
 
-   evas_object_resize(inwin, _ent_cfg->width , _ent_cfg->height);
-   evas_object_show(inwin);
+   evas_object_resize(_inwin, _ent_cfg->width , _ent_cfg->height);
+   evas_object_show(_inwin);
 }
