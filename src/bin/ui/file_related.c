@@ -6,6 +6,11 @@
 #include "../cfg.h"
 #include "../ecrire.h"
 
+static void _cleaning_cb(void *data, Evas_Object *obj, void *event_info);
+static void _set_file_cb(void *data,
+                         Evas_Object *obj EINA_UNUSED,
+                         void *event_info);
+
 Ecrire_Doc *file_doc;
 Evas_Object *inwin;
 
