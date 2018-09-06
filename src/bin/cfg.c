@@ -39,19 +39,13 @@ _ent_cfg_descriptor_init(void)
        _ent_cfg_descriptor, Ent_Cfg, "recent", recent );
 }
 
-static void
-_ent_cfg_descriptor_shutdown(void)
-{
-   eet_data_descriptor_free(_ent_cfg_descriptor);
-}
-
 void
 ecrire_cfg_shutdown(void)
 {
    if (config_file)
       free(config_file);
 
-   _ent_cfg_descriptor_shutdown();
+   eet_data_descriptor_free(_ent_cfg_descriptor);
 
    eet_shutdown();
    efreet_shutdown();
