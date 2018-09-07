@@ -11,6 +11,42 @@
 #define PATTERN_REGEX "^%s"
 #define PATTERN_WHOLE_WORD "^(%s)(\\W)"
 
+Eina_Bool match(const char *string, char *pattern, Eina_Bool match_case);
+static Eina_Bool _replace_in_entry(Ecrire_Doc *doc);
+EAPI int elm_code_text_strnsearchpos(const char *content,
+                                     unsigned int length,
+                                     const char *search,
+                                     int offset,
+                                     Eina_Bool match_case,
+                                     Eina_Bool whole_word,
+                                     Eina_Bool regex);
+static int _find_in_entry(Ecrire_Doc *doc,
+                          const char *text, Eina_Bool forward);
+static void _elm_obj_toggle_cb(void *data EINA_UNUSED,
+                               Evas_Object *obj,
+                               void *event_info EINA_UNUSED);
+static void _replace_all_clicked(void *data,
+                                 Evas_Object *obj EINA_UNUSED,
+                                 void *event_info EINA_UNUSED);
+static void _replace_clicked(void *data,
+                             Evas_Object *obj EINA_UNUSED,
+                             void *event_info EINA_UNUSED);
+static void _search_box_del(void *data EINA_UNUSED,
+                            Evas_Object *obj EINA_UNUSED,
+                            void *event_info EINA_UNUSED);
+static void _search_next_cb(void *data,
+                            Evas_Object *obj EINA_UNUSED,
+                            void *event_info EINA_UNUSED);
+static void _search_prev_cb(void *data,
+                            Evas_Object *obj EINA_UNUSED,
+                            void *event_info EINA_UNUSED);
+static void _search_select_text(Elm_Code_Widget *entry,
+                                Elm_Code_Line *code_line,
+                                const int found,
+                                const int row,
+                                int col,
+                                const int len);
+
 const static int PADDING = 2;
 const static int BUTTON_ICON_SIZE = 12;
 
