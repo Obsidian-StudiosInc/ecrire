@@ -7,6 +7,51 @@
 #include "../ecrire.h"
 #include "../cfg.h"
 
+static Eina_List * settings_font_list_get(const Evas *e);
+Evas_Object * _settings_dialog_display(Evas_Object *parent,
+                                       Ecrire_Doc *doc,
+                                       Ent_Cfg *_ent_cfg);
+Evas_Object * _settings_dialog_font(Evas_Object *parent,
+                                    Ecrire_Doc *doc,
+                                    Ent_Cfg *_ent_cfg);
+static void disable_font_widgets(Eina_Bool state);
+static void settings_alpha_cb (void *data EINA_UNUSED,
+                               Evas_Object *obj,
+                               void *event_info EINA_UNUSED);
+static void _settings_animate_open_cb (void *data EINA_UNUSED,
+                                       Evas_Object *obj,
+                                       void *event_info EINA_UNUSED);
+static void settings_apply_font_cb (void *data,
+                                    Evas_Object *obj EINA_UNUSED,
+                                    void *event_info EINA_UNUSED);
+static void _settings_dialog_promote_cb(void *data,
+                                        Evas_Object *obj EINA_UNUSED,
+                                        void *event_info EINA_UNUSED);
+static void settings_default_font_cb(void *data,
+                                     Evas_Object *obj,
+                                     void *event_info EINA_UNUSED);
+static void settings_delete_cb (void *data,
+                                Evas_Object *obj EINA_UNUSED,
+                                void *event_info EINA_UNUSED);
+static void _settings_insert_spaces_cb (void *data,
+                                        Evas_Object *obj,
+                                        void *event_info EINA_UNUSED);
+static void settings_line_numbers_cb (void *data,
+                                      Evas_Object *obj,
+                                      void *event_info EINA_UNUSED);
+static void settings_menu_cb (void *data,
+                              Evas_Object *obj,
+                              void *event_info EINA_UNUSED);
+static void settings_show_line_width_marker_cb(void *data,
+                                               Evas_Object *obj,
+                                               void *event_info EINA_UNUSED);
+static void settings_toolbar_cb (void *data,
+                                 Evas_Object *obj,
+                                 void *event_info EINA_UNUSED);
+static void settings_word_wrap_cb (void *data,
+                                   Evas_Object *obj,
+                                   void *event_info EINA_UNUSED);
+
 const static int PADDING = 5;
 const static int BUTTON_HEIGHT = 27;
 const static int BUTTON_WIDTH = 60;
