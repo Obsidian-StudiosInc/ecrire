@@ -7,48 +7,48 @@
 #include "../ecrire.h"
 #include "../cfg.h"
 
-static Eina_List * settings_font_list_get(const Evas *e);
+static Eina_List * _settings_font_list_get(const Evas *e);
 static Evas_Object * _settings_dialog_display(Evas_Object *parent,
                                               Ecrire_Doc *doc,
                                               Ent_Cfg *_ent_cfg);
 static Evas_Object * _settings_dialog_font(Evas_Object *parent,
                                            Ecrire_Doc *doc,
                                            Ent_Cfg *_ent_cfg);
-static void disable_font_widgets(Eina_Bool state);
-static void settings_alpha_cb (void *data EINA_UNUSED,
+static void _disable_font_widgets(Eina_Bool state);
+static void _settings_alpha_cb(void *data EINA_UNUSED,
                                Evas_Object *obj,
                                void *event_info EINA_UNUSED);
 static void _settings_animate_open_cb (void *data EINA_UNUSED,
                                        Evas_Object *obj,
                                        void *event_info EINA_UNUSED);
-static void settings_apply_font_cb (void *data,
+static void _settings_apply_font_cb(void *data,
                                     Evas_Object *obj EINA_UNUSED,
                                     void *event_info EINA_UNUSED);
 static void _settings_dialog_promote_cb(void *data,
                                         Evas_Object *obj EINA_UNUSED,
                                         void *event_info EINA_UNUSED);
-static void settings_default_font_cb(void *data,
-                                     Evas_Object *obj,
-                                     void *event_info EINA_UNUSED);
-static void settings_delete_cb (void *data,
+static void _settings_default_font_cb(void *data,
+                                      Evas_Object *obj,
+                                      void *event_info EINA_UNUSED);
+static void _settings_delete_cb(void *data,
                                 Evas_Object *obj EINA_UNUSED,
                                 void *event_info EINA_UNUSED);
 static void _settings_insert_spaces_cb (void *data,
                                         Evas_Object *obj,
                                         void *event_info EINA_UNUSED);
-static void settings_line_numbers_cb (void *data,
+static void _settings_line_numbers_cb(void *data,
                                       Evas_Object *obj,
                                       void *event_info EINA_UNUSED);
-static void settings_menu_cb (void *data,
+static void _settings_menu_cb(void *data,
                               Evas_Object *obj,
                               void *event_info EINA_UNUSED);
-static void settings_show_line_width_marker_cb(void *data,
-                                               Evas_Object *obj,
-                                               void *event_info EINA_UNUSED);
-static void settings_toolbar_cb (void *data,
+static void _settings_show_line_width_marker_cb(void *data,
+                                                Evas_Object *obj,
+                                                void *event_info EINA_UNUSED);
+static void _settings_toolbar_cb(void *data,
                                  Evas_Object *obj,
                                  void *event_info EINA_UNUSED);
-static void settings_word_wrap_cb (void *data,
+static void _settings_word_wrap_cb(void *data,
                                    Evas_Object *obj,
                                    void *event_info EINA_UNUSED);
 
@@ -61,7 +61,7 @@ Evas_Object *fsize;
 Evas_Object *list;
 
 static void
-disable_font_widgets(Eina_Bool state)
+_disable_font_widgets(Eina_Bool state)
 {
   const Eina_List *items;
   const Eina_List *itr;
@@ -74,7 +74,7 @@ disable_font_widgets(Eina_Bool state)
 }
 
 static void
-settings_alpha_cb (void *data EINA_UNUSED,
+_settings_alpha_cb (void *data EINA_UNUSED,
                    Evas_Object *obj,
                    void *event_info EINA_UNUSED)
 {
@@ -96,7 +96,7 @@ _settings_animate_open_cb (void *data EINA_UNUSED,
 }
 
 static void
-settings_apply_font_cb (void *data,
+_settings_apply_font_cb (void *data,
                         Evas_Object *obj EINA_UNUSED,
                         void *event_info EINA_UNUSED)
 {
@@ -111,7 +111,7 @@ settings_apply_font_cb (void *data,
 }
 
 static void
-settings_delete_cb (void *data,
+_settings_delete_cb (void *data,
                     Evas_Object *obj EINA_UNUSED,
                     void *event_info EINA_UNUSED)
 {
@@ -123,13 +123,13 @@ settings_delete_cb (void *data,
 }
 
 static void
-settings_default_font_cb(void *data,
+_settings_default_font_cb(void *data,
                          Evas_Object *obj,
                          void *event_info EINA_UNUSED)
 {
   Ecrire_Doc *doc = data;
   Eina_Bool state = elm_check_state_get(obj);
-  disable_font_widgets(state);
+  _disable_font_widgets(state);
   if(state)
     {
       elm_obj_code_widget_font_set(doc->widget, NULL, 10);
@@ -138,11 +138,11 @@ settings_default_font_cb(void *data,
       ecrire_cfg_save();
     }
   else
-    settings_apply_font_cb(doc, (Evas_Object *)NULL, (void *)NULL);
+    _settings_apply_font_cb(doc, (Evas_Object *)NULL, (void *)NULL);
 }
 
 static void
-settings_show_line_width_marker_cb(void *data,
+_settings_show_line_width_marker_cb(void *data,
                                    Evas_Object *obj,
                                    void *event_info EINA_UNUSED)
 {
@@ -157,7 +157,7 @@ settings_show_line_width_marker_cb(void *data,
 }
 
 static Eina_List *
-settings_font_list_get(const Evas *e)
+_settings_font_list_get(const Evas *e)
 {
    Eina_List *flist = evas_font_available_list(e);
    Eina_List *itr;
@@ -203,7 +203,7 @@ _settings_insert_spaces_cb (void *data,
 }
 
 static void
-settings_line_numbers_cb (void *data,
+_settings_line_numbers_cb (void *data,
                           Evas_Object *obj,
                           void *event_info EINA_UNUSED)
 {
@@ -216,7 +216,7 @@ settings_line_numbers_cb (void *data,
 }
 
 static void
-settings_menu_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
+_settings_menu_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 {
   Eina_Bool state;
   Evas_Object *win;
@@ -230,7 +230,7 @@ settings_menu_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 }
 
 static void
-settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
+_settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 {
   Eina_Bool state;
 
@@ -244,7 +244,7 @@ settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED)
 }
 
 static void
-settings_word_wrap_cb (void *data,
+_settings_word_wrap_cb (void *data,
                        Evas_Object *obj,
                        void *event_info EINA_UNUSED)
 {
@@ -302,7 +302,7 @@ _settings_dialog_display(Evas_Object *parent,
   evas_object_size_hint_weight_set (obj, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set (obj, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_table_pack (table, obj, 1, row, 3, 1);
-  evas_object_smart_callback_add (obj, "changed", settings_alpha_cb, doc);
+  evas_object_smart_callback_add (obj, "changed", _settings_alpha_cb, doc);
   evas_object_show (obj);
   row++;
 
@@ -353,7 +353,7 @@ _settings_dialog_display(Evas_Object *parent,
   elm_check_state_set(obj, !_ent_cfg->line_numbers);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_line_numbers_cb, doc->widget);
+  evas_object_smart_callback_add(obj, "changed", _settings_line_numbers_cb, doc->widget);
   evas_object_show(obj);
   row++;
 
@@ -371,7 +371,7 @@ _settings_dialog_display(Evas_Object *parent,
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_show_line_width_marker_cb, doc);
+  evas_object_smart_callback_add(obj, "changed", _settings_show_line_width_marker_cb, doc);
   evas_object_show(obj);
   row++;
 
@@ -388,7 +388,7 @@ _settings_dialog_display(Evas_Object *parent,
   elm_check_state_set(obj, !_ent_cfg->menu);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_menu_cb, ecrire_win_get());
+  evas_object_smart_callback_add(obj, "changed", _settings_menu_cb, ecrire_win_get());
   evas_object_show(obj);
   row++;
 
@@ -405,7 +405,7 @@ _settings_dialog_display(Evas_Object *parent,
   elm_check_state_set(obj, !_ent_cfg->toolbar);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_toolbar_cb, doc);
+  evas_object_smart_callback_add(obj, "changed", _settings_toolbar_cb, doc);
   evas_object_show(obj);
   row++;
 
@@ -426,7 +426,7 @@ _settings_dialog_display(Evas_Object *parent,
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_word_wrap_cb, doc->widget);
+  evas_object_smart_callback_add(obj, "changed", _settings_word_wrap_cb, doc->widget);
   evas_object_show(obj);
   row++;
 */
@@ -475,7 +475,7 @@ _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
     elm_check_state_set(obj, EINA_TRUE);
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
-  evas_object_smart_callback_add(obj, "changed", settings_default_font_cb, doc);
+  evas_object_smart_callback_add(obj, "changed", _settings_default_font_cb, doc);
   evas_object_show(obj);
   row++;
 
@@ -490,7 +490,7 @@ _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   /* Font Size Spinner */
   fsize = elm_spinner_add(table);
   if(!ent_cfg->font.name)
-    disable_font_widgets(EINA_TRUE);
+    _disable_font_widgets(EINA_TRUE);
   elm_spinner_label_format_set(fsize, _("%.0f pts"));
   elm_spinner_step_set(fsize, 1);
   elm_spinner_wrap_set(fsize, EINA_FALSE);
@@ -499,20 +499,20 @@ _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   elm_spinner_value_set(fsize, ent_cfg->font.size);
   evas_object_size_hint_align_set(fsize, 0.0, 0.5);
   elm_table_pack (table, fsize, 1, row, 2, 1);
-  evas_object_smart_callback_add(fsize, "changed", settings_apply_font_cb, doc);
+  evas_object_smart_callback_add(fsize, "changed", _settings_apply_font_cb, doc);
   evas_object_show(fsize);
 
   /* Fonts List */
   list = elm_list_add(boxv);
   if(!ent_cfg->font.name)
-    disable_font_widgets(EINA_TRUE);
+    _disable_font_widgets(EINA_TRUE);
   evas_object_size_hint_weight_set(list, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
   evas_object_size_hint_align_set(list, EVAS_HINT_FILL, EVAS_HINT_FILL);
   elm_box_pack_end (boxv, list);
   evas_object_show(list);
 
   /* Populate list */
-  flist = settings_font_list_get(evas_object_evas_get(list));
+  flist = _settings_font_list_get(evas_object_evas_get(list));
   EINA_LIST_FOREACH(flist, itr, font)
     {
        Elm_Object_Item *tmp;
@@ -532,7 +532,7 @@ _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
        elm_list_item_bring_in(cur_font);
        elm_list_item_selected_set(cur_font, EINA_TRUE);
     }
-  evas_object_smart_callback_add(list, "selected", settings_apply_font_cb, doc);
+  evas_object_smart_callback_add(list, "selected", _settings_apply_font_cb, doc);
 
   return(boxv);
 }
@@ -622,7 +622,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
     evas_object_del(ic);
   evas_object_size_hint_align_set(obj, 0.5, 0);
   evas_object_size_hint_min_set(obj, ELM_SCALE_SIZE(BUTTON_WIDTH), ELM_SCALE_SIZE(BUTTON_HEIGHT));
-  evas_object_smart_callback_add (obj, "clicked", settings_delete_cb, win);
+  evas_object_smart_callback_add (obj, "clicked", _settings_delete_cb, win);
   elm_box_pack_end(boxv, obj);
   evas_object_show (obj);
 
