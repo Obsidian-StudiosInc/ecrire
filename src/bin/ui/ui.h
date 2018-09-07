@@ -7,11 +7,6 @@ void ui_file_open_save_dialog_open(Ecrire_Doc *doc,
                                    Evas_Smart_Cb func,
                                    Eina_Bool save);
 Evas_Object *ui_find_dialog_open(Evas_Object *parent, Ecrire_Doc *doc);
-Evas_Object *ui_goto_dialog_open(Evas_Object *parent, Ecrire_Doc *doc);
-Evas_Object *ui_font_dialog_open(Evas_Object *parent,
-                                 Ecrire_Doc *doc,
-                                 const char *pfont,
-                                 int size);
 Evas_Object *ui_settings_dialog_open(Evas_Object *parent,
                                      Ecrire_Doc *doc,
                                      Ent_Cfg *ent_cfg);
