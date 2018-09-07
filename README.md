@@ -11,6 +11,8 @@ This is a fork and current development version Ecrire, a EFL based text
 editor for Enlightenment and eventually Tizen as well. Or any device 
 that has EFL.
 
+![A screenshot of Ecrire](https://user-images.githubusercontent.com/12835340/45193472-2686d880-b21c-11e8-9dde-7ed2e2296103.jpg)
+
 ## Known Issues
 - Please see upstream elm_code open issues
 [phabricator link](https://phab.enlightenment.org/search/query/HfMVBntcnXQF/)
