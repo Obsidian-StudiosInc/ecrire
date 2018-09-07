@@ -6,6 +6,19 @@
 
 #include "../ecrire.h"
 
+static void _cancel(void *data,
+                    Evas_Object *obj EINA_UNUSED,
+                    void *event_info EINA_UNUSED);
+static void _discard(void *data,
+                     Evas_Object *obj EINA_UNUSED,
+                     void *event_info EINA_UNUSED);
+static void _fs_save_done(void *data EINA_UNUSED,
+                          Evas_Object *obj EINA_UNUSED,
+                          void *event_info);
+static void _save(void *data,
+                  Evas_Object *obj EINA_UNUSED,
+                  void *event_info EINA_UNUSED);
+
 static void *done_data;
 static void (*done_cb)(void *data);
 
