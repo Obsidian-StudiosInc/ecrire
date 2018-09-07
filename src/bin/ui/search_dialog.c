@@ -11,15 +11,15 @@
 #define PATTERN_REGEX "^%s"
 #define PATTERN_WHOLE_WORD "^(%s)(\\W)"
 
-Eina_Bool match(const char *string, char *pattern, Eina_Bool match_case);
+static Eina_Bool _match(const char *string, char *pattern, Eina_Bool match_case);
 static Eina_Bool _replace_in_entry(Ecrire_Doc *doc);
-EAPI int elm_code_text_strnsearchpos(const char *content,
-                                     unsigned int length,
-                                     const char *search,
-                                     int offset,
-                                     Eina_Bool match_case,
-                                     Eina_Bool whole_word,
-                                     Eina_Bool regex);
+static EAPI int _elm_code_text_strnsearchpos(const char *content,
+                                             unsigned int length,
+                                             const char *search,
+                                             int offset,
+                                             Eina_Bool match_case,
+                                             Eina_Bool whole_word,
+                                             Eina_Bool regex);
 static int _find_in_entry(Ecrire_Doc *doc,
                           const char *text, Eina_Bool forward);
 static void _elm_obj_toggle_cb(void *data EINA_UNUSED,
@@ -58,8 +58,8 @@ static Evas_Object *regex_button;
 static Evas_Object *whole_button;
 static regmatch_t *_regmatch;
 
-Eina_Bool
-match(const char *string, char *pattern, Eina_Bool match_case)
+static Eina_Bool
+_match(const char *string, char *pattern, Eina_Bool match_case)
 {
     int flags;
     int status;
@@ -85,7 +85,7 @@ match(const char *string, char *pattern, Eina_Bool match_case)
 }
 
 EAPI int
-elm_code_text_strnsearchpos(const char *content,
+_elm_code_text_strnsearchpos(const char *content,
                             unsigned int length,
                             const char *search,
                             int offset,
@@ -118,7 +118,7 @@ elm_code_text_strnsearchpos(const char *content,
             snprintf(whole_search, regex_len, PATTERN_WHOLE_WORD, search);
           else
             snprintf(whole_search, regex_len, PATTERN_REGEX, search);
-          matched = match(ptr, whole_search, match_case);
+          matched = _match(ptr, whole_search, match_case);
           free(whole_search);
           if (matched)
             return c;
@@ -193,10 +193,10 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
     {
       code_line = elm_code_file_line_get(doc->code->file,i);
       line = elm_code_line_text_get(code_line, &len);
-      found = elm_code_text_strnsearchpos(line,len,text,col,
-                                        elm_object_disabled_get(case_button),
-                                        elm_object_disabled_get(whole_button),
-                                        elm_object_disabled_get(regex_button));
+      found = _elm_code_text_strnsearchpos(line,len,text,col,
+                                           elm_object_disabled_get(case_button),
+                                           elm_object_disabled_get(whole_button),
+                                           elm_object_disabled_get(regex_button));
       if(found>=0)
         {
           if(_regmatch)
