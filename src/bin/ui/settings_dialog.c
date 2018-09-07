@@ -8,12 +8,12 @@
 #include "../cfg.h"
 
 static Eina_List * settings_font_list_get(const Evas *e);
-Evas_Object * _settings_dialog_display(Evas_Object *parent,
-                                       Ecrire_Doc *doc,
-                                       Ent_Cfg *_ent_cfg);
-Evas_Object * _settings_dialog_font(Evas_Object *parent,
-                                    Ecrire_Doc *doc,
-                                    Ent_Cfg *_ent_cfg);
+static Evas_Object * _settings_dialog_display(Evas_Object *parent,
+                                              Ecrire_Doc *doc,
+                                              Ent_Cfg *_ent_cfg);
+static Evas_Object * _settings_dialog_font(Evas_Object *parent,
+                                           Ecrire_Doc *doc,
+                                           Ent_Cfg *_ent_cfg);
 static void disable_font_widgets(Eina_Bool state);
 static void settings_alpha_cb (void *data EINA_UNUSED,
                                Evas_Object *obj,
@@ -261,7 +261,7 @@ settings_word_wrap_cb (void *data,
   ecrire_cfg_save();
 }
 
-Evas_Object *
+static Evas_Object *
 _settings_dialog_display(Evas_Object *parent,
                          Ecrire_Doc *doc,
                          Ent_Cfg *_ent_cfg)
@@ -434,7 +434,7 @@ _settings_dialog_display(Evas_Object *parent,
   return(boxv);
 }
 
-Evas_Object *
+static Evas_Object *
 _settings_dialog_font(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
 {
   ent_cfg = _ent_cfg;
