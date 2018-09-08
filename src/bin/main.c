@@ -152,6 +152,7 @@ static Evas_Object *_win;
 Eina_Bool ctrl_pressed = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
+static int _untitled = 1;
 char *drop_file = NULL;
 
 static void
@@ -344,7 +345,7 @@ _update_cur_file(Ecrire_Doc *doc)
               filename, PACKAGE_NAME);
   else
      snprintf(buf, sizeof(buf), _("%sUntitled %d - %s"), saving,
-              doc->unsaved, PACKAGE_NAME);
+              _untitled, PACKAGE_NAME);
 
   elm_win_title_set(_win, buf);
 }
@@ -453,6 +454,7 @@ _new_doc(Ecrire_Doc *doc)
     elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
   _set_save_disabled(doc, EINA_TRUE);
   _set_undo_redo_disabled(doc, EINA_TRUE);
+  _untitled++;
   _update_cur_file(doc);
   elm_object_text_set(doc->label_mime,"");
 }
@@ -966,7 +968,6 @@ create_window(int argc, char *argv[])
    Evas_Coord w = 600;
 
    doc = calloc(1, sizeof(*doc));
-   doc->unsaved = 1;
 
    _win = elm_win_add(NULL, "editor", ELM_WIN_BASIC);
    elm_win_alpha_set (_win, EINA_TRUE);
