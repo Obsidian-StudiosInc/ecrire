@@ -42,7 +42,6 @@ struct _Ecrire_Doc {
      Elm_Object_Item *undo_item;
      Elm_Object_Item *redo_item;
      Eina_Bool changed;
-     int unsaved;
      char *path;
 };
 
