@@ -552,6 +552,7 @@ save_do(const char *file, Ecrire_Doc *doc)
       _add_to_recent_files(eina_file_filename_get(doc->code->file->file));
       elm_code_file_save (doc->code->file);
       _set_save_disabled(doc, EINA_TRUE);
+      doc->changed = EINA_FALSE;
       _update_cur_file(doc);
     }
 
