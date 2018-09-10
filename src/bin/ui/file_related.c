@@ -37,6 +37,8 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
 {
    const char *file;
    Eina_List *itr = NULL;
+   Evas_Coord h;
+   Evas_Coord w;
    Evas_Object *fs;
    Evas_Object *icon;
    Evas_Object *sel;
@@ -88,7 +90,8 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    evas_object_smart_callback_add(sel, "selected", _set_file_cb, fs);
    evas_object_smart_callback_add(fs, "done", _cleaning_cb, func);
 
-   evas_object_resize(_inwin, _ent_cfg->width , _ent_cfg->height);
+   evas_object_geometry_get(win, NULL, NULL, &w, &h);
+   evas_object_resize(_inwin, w, h);
    evas_object_show(_inwin);
    evas_object_smart_callback_add(win,
                                   "move",
