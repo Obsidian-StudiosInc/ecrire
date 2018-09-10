@@ -1213,13 +1213,13 @@ ecrire_pack_end(Evas_Object *table)
 }
 
 void
-ecrire_toolbar_del()
+ecrire_toolbar_del(void)
 {
   evas_object_del(_toolbar);
 }
 
 Evas_Object *
-ecrire_win_get()
+ecrire_win_get(void)
 {
   return(_win);
 }

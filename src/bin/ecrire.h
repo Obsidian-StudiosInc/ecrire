@@ -47,11 +47,11 @@ struct _Ecrire_Doc {
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
 
-Evas_Object * ecrire_win_get();
+Evas_Object * ecrire_win_get(void);
 void add_toolbar(Ecrire_Doc *doc);
 void ecrire_alpha_set(int alpha);
 void ecrire_pack_end(Evas_Object *search);
-void ecrire_toolbar_del();
+void ecrire_toolbar_del(void);
 void editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size);
 void editor_save(Ecrire_Doc *doc, void *callback_func);
 void save_do(const char *file, Ecrire_Doc *doc);
