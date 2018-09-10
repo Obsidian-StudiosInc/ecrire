@@ -77,6 +77,8 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
 
    fs = elm_fileselector_add(_inwin);
    elm_fileselector_is_save_set(fs, save);
+   if(save)
+     elm_layout_text_set(fs,"ok",_("Save"));
    elm_fileselector_expandable_set(fs, EINA_FALSE);
    if(doc->path)
      elm_fileselector_path_set(fs, doc->path);
