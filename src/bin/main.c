@@ -1206,6 +1206,21 @@ ecrire_alpha_set(int alpha)
   ALPHA (_box_editor, alpha);
 }
 
+Eina_Bool ecrire_inwin_move_cb(void *data,
+                               Evas_Object *obj,
+                               void *ev EINA_UNUSED)
+{
+  Evas_Coord h;
+  Evas_Coord w;
+  Evas_Object *inwin;
+
+  inwin = data;
+  evas_object_geometry_get(obj, NULL, NULL, &w, &h);
+  evas_object_resize(inwin, w, h);
+
+  return EINA_TRUE;
+}
+
 void
 ecrire_pack_end(Evas_Object *table)
 {

@@ -47,6 +47,10 @@ struct _Ecrire_Doc {
 
 typedef struct _Ecrire_Doc Ecrire_Doc;
 
+// Needed due to side effects from efl_part requiring re-sizing for centering
+Eina_Bool ecrire_inwin_move_cb(void *data,
+                               Evas_Object *obj,
+                               void *ev EINA_UNUSED);
 Evas_Object * ecrire_win_get(void);
 void add_toolbar(Ecrire_Doc *doc);
 void ecrire_alpha_set(int alpha);
