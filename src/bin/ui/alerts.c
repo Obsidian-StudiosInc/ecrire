@@ -36,13 +36,7 @@ _fs_save_done(void *data EINA_UNUSED,
               Evas_Object *obj EINA_UNUSED,
               void *event_info)
 {
-   const char *selected = event_info;
-
-   if (selected)
-     {
-        save_do(selected, done_data);
-        done_cb(data);
-     }
+   done_cb(data);
 }
 
 static void
