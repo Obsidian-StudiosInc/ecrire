@@ -574,7 +574,7 @@ static void
 _open_do(void *data)
 {
    Ecrire_Doc *doc = data;
-   ui_file_open_save_dialog_open(doc, _fs_open_done, EINA_TRUE);
+   ui_file_open_save_dialog_open(doc, _fs_open_done, EINA_FALSE);
 }
 
 static void
