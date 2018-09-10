@@ -653,7 +653,11 @@ editor_save(Ecrire_Doc *doc, void *callback_func)
   if(doc->code->file->file)
     filename = eina_file_filename_get(doc->code->file->file);
   if (filename)
-    save_do(filename, doc);
+    {
+      save_do(filename, doc);
+      void (*func) (void *, Evas_Object *, void *) = callback_func;
+      func(doc,NULL,(char *)filename);
+    }
   else
     ui_file_open_save_dialog_open(doc, callback_func, EINA_TRUE);
 }
