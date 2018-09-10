@@ -95,8 +95,8 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    evas_object_geometry_get(win, NULL, NULL, &w, &h);
    evas_object_resize(_inwin, w, h);
    evas_object_show(_inwin);
-   evas_object_smart_callback_add(win,
-                                  "move",
-                                  (Evas_Smart_Cb)ecrire_inwin_move_cb,
+   evas_object_event_callback_add(win,
+                                  EVAS_CALLBACK_RESIZE,
+                                  (Evas_Object_Event_Cb)ecrire_inwin_move_cb,
                                   _inwin);
 }
