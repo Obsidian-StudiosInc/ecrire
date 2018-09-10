@@ -629,5 +629,9 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   evas_object_resize(win, w, h);
   elm_win_inwin_activate (win);
 
+  evas_object_smart_callback_add(parent,
+                                 "move",
+                                 (Evas_Smart_Cb)ecrire_inwin_move_cb,
+                                 win);
   return win;
 }
