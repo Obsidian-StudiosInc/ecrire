@@ -41,9 +41,11 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    Evas_Object *icon;
    Evas_Object *sel;
    Evas_Object *box;
+   Evas_Object *win;
 
    _file_doc = doc;
-   _inwin = elm_win_inwin_add(ecrire_win_get());
+   win = ecrire_win_get();
+   _inwin = elm_win_inwin_add(win);
 
    box = elm_box_add(_inwin);
    elm_win_inwin_content_set(_inwin, box);
@@ -88,4 +90,8 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
 
    evas_object_resize(_inwin, _ent_cfg->width , _ent_cfg->height);
    evas_object_show(_inwin);
+   evas_object_smart_callback_add(win,
+                                  "move",
+                                  (Evas_Smart_Cb)ecrire_inwin_move_cb,
+                                  _inwin);
 }
