@@ -29,7 +29,7 @@ static Eina_Bool _key_up_cb(void *data,
                             EINA_UNUSED Evas_Object *obj,
                             void *ev);
 static Eina_Bool _win_move_cb(void *data EINA_UNUSED,
-                              Evas_Object *obj,
+                              Evas_Object *obj EINA_UNUSED,
                               void *ev EINA_UNUSED);
 
 static void _add_to_recent_files(const char *file);
@@ -832,9 +832,11 @@ _drop_cb(void *data, Evas_Object *obj EINA_UNUSED, Elm_Selection_Data *event)
 }
 
 static Eina_Bool
-_win_move_cb(void *data EINA_UNUSED, Evas_Object *obj, void *ev EINA_UNUSED)
+_win_move_cb(void *data EINA_UNUSED,
+             Evas_Object *obj EINA_UNUSED,
+             void *ev EINA_UNUSED)
 {
-  evas_object_geometry_get(obj,
+  evas_object_geometry_get(_win,
                            NULL,
                            NULL,
                            &(_ent_cfg->width),
@@ -1167,9 +1169,9 @@ create_window(int argc, char *argv[])
                                   "focused",
                                   (Evas_Smart_Cb)_get_clipboard_cb,
                                   doc);
-   evas_object_smart_callback_add(_win,
-                                  "move",
-                                  (Evas_Smart_Cb)_win_move_cb,
+   evas_object_event_callback_add(_win,
+                                  EVAS_CALLBACK_RESIZE,
+                                  (Evas_Object_Event_Cb)_win_move_cb,
                                   _win);
 
    if(_ent_cfg->alpha)
