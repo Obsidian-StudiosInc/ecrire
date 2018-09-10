@@ -562,7 +562,7 @@ ui_settings_dialog_open(Evas_Object *parent, Ecrire_Doc *doc, Ent_Cfg *_ent_cfg)
   Evas_Object *win;
 
   win = elm_win_inwin_add (parent);
-  evas_object_geometry_get(ecrire_win_get(), NULL, NULL, &w, &h);
+  evas_object_geometry_get(parent, NULL, NULL, &w, &h);
 
   boxh = elm_box_add(win);
   evas_object_size_hint_weight_set(boxh, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
