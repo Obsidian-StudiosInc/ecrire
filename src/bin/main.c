@@ -1141,6 +1141,7 @@ create_window(int argc, char *argv[])
    evas_object_smart_callback_add(doc->widget, "selection,cleared", _sel_clear, doc);
    evas_object_smart_callback_add(doc->widget, "selection,copy", _sel_cut_copy, doc);
    evas_object_smart_callback_add(doc->widget, "selection,cut", _sel_cut_copy, doc);
+   evas_object_smart_callback_add(doc->widget, "selection,paste", _changed, doc);
 
    elm_drop_target_add(doc->widget,
                        ELM_SEL_FORMAT_IMAGE,
