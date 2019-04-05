@@ -132,7 +132,11 @@ _settings_default_font_cb(void *data,
   _disable_font_widgets(state);
   if(state)
     {
+#ifdef EFL_VERSION_1_22
+      elm_code_widget_font_set(doc->widget, NULL, 10);
+#else
       elm_obj_code_widget_font_set(doc->widget, NULL, 10);
+#endif
       ent_cfg->font.name = NULL;
       ent_cfg->font.size = 10;
       ecrire_cfg_save();
@@ -197,7 +201,11 @@ _settings_insert_spaces_cb (void *data,
   Eina_Bool state;
 
   state = elm_check_state_get(obj);
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_tab_inserts_spaces_set((Elm_Code_Widget *)data, state);
+#else
   elm_obj_code_widget_tab_inserts_spaces_set((Elm_Code_Widget *)data, state);
+#endif
   ent_cfg->insert_spaces = !state;
   ecrire_cfg_save();
 }
@@ -210,7 +218,11 @@ _settings_line_numbers_cb (void *data,
   Eina_Bool state;
 
   state = elm_check_state_get (obj);
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_line_numbers_set ((Elm_Code_Widget *)data, state);
+#else
   elm_obj_code_widget_line_numbers_set ((Elm_Code_Widget *)data, state);
+#endif
   ent_cfg->line_numbers = !state;
   ecrire_cfg_save();
 }
