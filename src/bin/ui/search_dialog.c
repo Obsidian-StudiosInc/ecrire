@@ -165,7 +165,11 @@ _search_select_text(Elm_Code_Widget *entry,
                                                            code_line,
                                                            found);
   elm_code_widget_selection_start(entry,row,col);
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_cursor_position_set(entry,row,col);
+#else
   elm_obj_code_widget_cursor_position_set(entry,row,col);
+#endif
   col += len-1;
   elm_code_widget_selection_end(entry,row,col);
 }
@@ -187,7 +191,11 @@ _find_in_entry(Ecrire_Doc *doc, const char *text, Eina_Bool forward)
     return EINA_FALSE;
 
   lines = elm_code_file_lines_get(doc->code->file);
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_cursor_position_get(doc->widget,&row,&col);
+#else
   elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
+#endif
   i=row;
   while(i>=0 && i<=lines)
     {
@@ -259,9 +267,15 @@ _replace_in_entry(Ecrire_Doc *doc)
       replace = elm_entry_entry_get(replace_entry);
       elm_code_widget_selection_delete(doc->widget);
       elm_code_widget_text_at_cursor_insert(doc->widget, replace);
+#ifdef EFL_VERSION_1_22
+      efl_event_callback_legacy_call(doc->widget,
+                                     EFL_UI_CODE_WIDGET_EVENT_CHANGED_USER,
+                                     NULL);
+#else
       efl_event_callback_legacy_call(doc->widget,
                                      ELM_OBJ_CODE_WIDGET_EVENT_CHANGED_USER,
                                      NULL);
+#endif
       replaced = EINA_TRUE;
     }
   return(replaced);
