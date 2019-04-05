@@ -280,10 +280,17 @@ editor_font_set(Ecrire_Doc *doc, const char *name, unsigned int size)
 {
   if(size==0)
     size = 10;
+#ifdef EFL_VERSION_1_22
+  if(name)
+    elm_code_widget_font_set(doc->widget, name, size);
+  else
+    elm_code_widget_font_set(doc->widget, NULL, size);
+#else
   if(name)
     elm_obj_code_widget_font_set(doc->widget, name, size);
   else
     elm_obj_code_widget_font_set(doc->widget, NULL, size);
+#endif
 }
 
 static void
@@ -360,12 +367,20 @@ _cur_changed(void *data,
    unsigned int col;
 
    Ecrire_Doc *doc = data;
+#ifdef EFL_VERSION_1_22
+   elm_code_widget_cursor_position_get(doc->widget,&line,&col);
+#else
    elm_obj_code_widget_cursor_position_get(doc->widget,&line,&col);
+#endif
    snprintf(buf, sizeof(buf),"%u", line);
    elm_object_text_set(doc->entry_line, buf);
    snprintf(buf, sizeof(buf),"%u", col);
    elm_object_text_set(doc->entry_column, buf);
+#ifdef EFL_VERSION_1_22
+   if(elm_code_widget_can_undo_get(doc->widget))
+#else
    if(elm_obj_code_widget_can_undo_get(doc->widget))
+#endif
      {
        if(!_ent_cfg->menu &&
           elm_object_item_disabled_get(doc->mm_undo))
@@ -379,12 +394,21 @@ _cur_changed(void *data,
 static void
 _check_set_redo(Ecrire_Doc *doc)
 {
+#ifdef EFL_VERSION_1_22
+  if(!_ent_cfg->menu)
+    elm_object_item_disabled_set(doc->mm_redo,
+                                 !elm_code_widget_can_redo_get(doc->widget));
+  if(!_ent_cfg->toolbar)
+    elm_object_item_disabled_set(doc->redo_item,
+                                 !elm_code_widget_can_redo_get(doc->widget));
+#else
   if(!_ent_cfg->menu)
     elm_object_item_disabled_set(doc->mm_redo,
                                  !elm_obj_code_widget_can_redo_get(doc->widget));
   if(!_ent_cfg->toolbar)
     elm_object_item_disabled_set(doc->redo_item,
                                  !elm_obj_code_widget_can_redo_get(doc->widget));
+#endif
 }
 
 static void
@@ -392,7 +416,11 @@ _check_set_undo(Ecrire_Doc *doc)
 {
   Eina_Bool can_undo;
 
-  can_undo = elm_obj_code_widget_can_undo_get(doc->widget);
+#ifdef EFL_VERSION_1_22
+  can_undo = elm_code_widget_can_undo_get(doc->widget);
+#else
+  can_undo = elm_code_widget_can_undo_get(doc->widget);
+#endif
   if(!_ent_cfg->menu)
     elm_object_item_disabled_set(doc->undo_item, !can_undo);
   if(!_ent_cfg->toolbar)
@@ -414,7 +442,11 @@ _undo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    /* In undo we care about the current item */
    Ecrire_Doc *doc = data;
+#ifdef EFL_VERSION_1_22
+   elm_code_widget_undo(doc->widget);
+#else
    elm_obj_code_widget_undo(doc->widget);
+#endif
    _check_set_redo(doc);
    _check_set_undo(doc);
 }
@@ -423,7 +455,11 @@ static void
 _redo(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 {
    Ecrire_Doc *doc = data;
+#ifdef EFL_VERSION_1_22
+   elm_code_widget_redo(doc->widget);
+#else
    elm_obj_code_widget_redo(doc->widget);
+#endif
    _check_set_redo(doc);
    _check_set_undo(doc);
 }
@@ -478,10 +514,17 @@ _open_file(Ecrire_Doc *doc, const char *file)
             {
               doc->code->parsers = eina_list_remove(doc->code->parsers,
                                                     ELM_CODE_PARSER_STANDARD_DIFF);
+#ifdef EFL_VERSION_1_22
+              if(strstr(mime, "text/"))
+                elm_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
+              else
+                elm_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
+#else
               if(strstr(mime, "text/"))
                 elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
               else
                 elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_FALSE);
+#endif
             }
           elm_object_text_set(doc->label_mime,mime);
         }
@@ -527,6 +570,7 @@ save_do(const char *file, Ecrire_Doc *doc)
 
   if(doc->code->file->file)
     filename = eina_file_filename_get(doc->code->file->file);
+
 
   /* New file name, another file opened, close first */
   if(file && filename && strcmp(file, filename))
@@ -591,13 +635,25 @@ _goto_column_cb(void *data,
   unsigned int row;
 
   doc = data;
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_cursor_position_get(doc->widget,&row,&cur_col);
+#else
   elm_obj_code_widget_cursor_position_get(doc->widget,&row,&cur_col);
+#endif
   col = atoi(elm_entry_entry_get(doc->entry_column));
   line = elm_code_file_line_get(doc->code->file,row);
+#ifdef EFL_VERSION_1_22
+  cols = elm_code_widget_line_text_column_width_get(doc->widget, line);
+#else
   cols = elm_obj_code_widget_line_text_column_width_get(doc->widget, line);
+#endif
   if (col>cols)
       col = cur_col;
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_cursor_position_set(doc->widget,row,col);
+#else
   elm_obj_code_widget_cursor_position_set(doc->widget,row,col);
+#endif
   elm_object_focus_set(doc->widget, EINA_TRUE);
 }
 
@@ -614,14 +670,22 @@ _goto_line_cb(void *data,
   line = atoi(elm_entry_entry_get(doc->entry_line));
   lines = elm_code_file_lines_get(doc->code->file);
   if (line>0 && lines > 0 && line <= lines)
+#ifdef EFL_VERSION_1_22
+      elm_code_widget_cursor_position_set(doc->widget,line,1);
+#else
       elm_obj_code_widget_cursor_position_set(doc->widget,line,1);
+#endif
   else
     {
       char buf[sizeof(long)];
       unsigned int col;
       unsigned int row;
 
+#ifdef EFL_VERSION_1_22
+      elm_code_widget_cursor_position_get(doc->widget,&row,&col);
+#else
       elm_obj_code_widget_cursor_position_get(doc->widget,&row,&col);
+#endif
       snprintf(buf, sizeof(buf),"%u",row);
       elm_entry_entry_set(doc->entry_line,buf);
     }
@@ -1053,6 +1117,15 @@ create_window(int argc, char *argv[])
 
    _init_font(doc);
    elm_code_file_line_append(doc->code->file, "", 0, NULL);
+#ifdef EFL_VERSION_1_22
+   elm_code_widget_editable_set(doc->widget, EINA_TRUE);
+   elm_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
+   elm_code_widget_show_whitespace_set(doc->widget, EINA_TRUE);
+   elm_code_widget_line_numbers_set(doc->widget, !_ent_cfg->line_numbers);
+   if(_ent_cfg->line_width_marker>0)
+     elm_code_widget_line_width_marker_set(doc->widget, _ent_cfg->line_width_marker);
+   elm_code_widget_tab_inserts_spaces_set(doc->widget, !_ent_cfg->insert_spaces);
+#else
    elm_obj_code_widget_editable_set(doc->widget, EINA_TRUE);
    elm_obj_code_widget_syntax_enabled_set(doc->widget, EINA_TRUE);
    elm_obj_code_widget_show_whitespace_set(doc->widget, EINA_TRUE);
@@ -1060,6 +1133,7 @@ create_window(int argc, char *argv[])
    if(_ent_cfg->line_width_marker>0)
      elm_code_widget_line_width_marker_set(doc->widget, _ent_cfg->line_width_marker);
    elm_obj_code_widget_tab_inserts_spaces_set(doc->widget, !_ent_cfg->insert_spaces);
+#endif
    evas_object_size_hint_align_set(doc->widget, EVAS_HINT_FILL, EVAS_HINT_FILL);
    evas_object_size_hint_weight_set(doc->widget, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
    elm_box_pack_end(_box_editor, doc->widget);
