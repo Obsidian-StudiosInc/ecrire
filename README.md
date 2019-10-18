@@ -46,7 +46,7 @@ either dist or package targets. Dist target will package sources in
 addition to binaries. Package will only generate deb and rpm's.
 
 ## Autotools
-The default build of cmake uses autotools
+By default, cmake uses autotools to build
 
 ```
 cmake .
