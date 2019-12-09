@@ -240,8 +240,6 @@ _set_doc_changed(Ecrire_Doc *doc, Eina_Bool changed)
 {
   doc->changed = changed;
   _set_save_disabled(doc, !changed);
-  if(!_ent_cfg->toolbar)
-    elm_object_item_disabled_set(doc->close_item, !changed);
   _update_cur_file(doc);
 }
 
@@ -487,8 +485,6 @@ _new_doc(Ecrire_Doc *doc)
   elm_code_file_new(doc->code);
   elm_code_file_line_append(doc->code->file, "", 0, NULL);
   _init_font(doc);
-  if(!_ent_cfg->toolbar)
-    elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
   _set_save_disabled(doc, EINA_TRUE);
   _set_undo_redo_disabled(doc, EINA_TRUE);
   _untitled++;
@@ -535,8 +531,6 @@ _open_file(Ecrire_Doc *doc, const char *file)
       _set_save_disabled(doc, EINA_TRUE);
       _set_cut_copy_disabled(doc, EINA_TRUE);
       _set_undo_redo_disabled(doc, EINA_TRUE);
-      if(!_ent_cfg->toolbar)
-        elm_object_item_disabled_set(doc->close_item, EINA_FALSE);
 
       if(!_ent_cfg->anim_open)
         {
@@ -1101,7 +1095,6 @@ create_window(int argc, char *argv[])
      {
        add_toolbar(doc);
        /* We don't have a selection when we start, make the items disabled */
-       elm_object_item_disabled_set(doc->close_item, EINA_TRUE);
        elm_object_item_disabled_set(doc->paste_item, EINA_TRUE);
      }
    _set_cut_copy_disabled(doc, EINA_TRUE);
