@@ -1062,6 +1062,7 @@ create_window(int argc, char *argv[])
        Evas_Object  *file_menu;
 
        _menu = elm_win_main_menu_get(_win);
+       evas_object_show(_menu);
 
        file_menu = elm_menu_item_add(_menu, NULL, NULL, _("File"), NULL, NULL);
        elm_menu_item_add(_menu, file_menu, "document-new", _("New"), _new, doc);
