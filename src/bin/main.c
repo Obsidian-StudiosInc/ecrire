@@ -130,7 +130,7 @@ static const Ecore_Getopt options =
    "ecrire",
    "%prog [OPTION]... [FILE]",
    VERSION,
-   "(C) 2017 Obsidian-Studios, Inc. see AUTHORS.",
+   "(C) 2019 Obsidian-Studios, Inc. see AUTHORS.",
    "GPL-3.0, see COPYING",
    "Open source text editor using EFL",
    EINA_TRUE,
@@ -765,10 +765,15 @@ _copy(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 static void
-_paste(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
+_paste(void *data, Evas_Object *obj, void *event_info)
 {
    Ecrire_Doc *doc = data;
    elm_code_widget_selection_paste(doc->widget);
+/*
+   _set_save_disabled(doc, EINA_FALSE);
+*/
+   evas_object_smart_callback_call(obj, "changed,user", event_info);
+   
 }
 
 static void
