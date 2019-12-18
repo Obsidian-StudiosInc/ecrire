@@ -150,6 +150,7 @@ static Evas_Object *_menu;
 static Evas_Object *_toolbar;
 static Evas_Object *_win;
 Eina_Bool ctrl_pressed = EINA_FALSE;
+Eina_Bool delay_anim = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
 static int _untitled = 1;
@@ -499,6 +500,7 @@ _open_file(Ecrire_Doc *doc, const char *file)
     {
       const char *mime;
 
+      evas_object_hide(doc->widget);
       mime = efreet_mime_type_get(file);
       if(mime)
         {
@@ -537,12 +539,20 @@ _open_file(Ecrire_Doc *doc, const char *file)
           int h;
 
           Elm_Transit *transit = elm_transit_add();
-          elm_transit_object_add(transit, _box_editor);
+          elm_transit_objects_final_state_keep_set(transit, EINA_TRUE);
+          elm_transit_object_add(transit, doc->widget);
           evas_object_geometry_get(_win, NULL, NULL, NULL, &h);
           elm_transit_effect_translation_add(transit, 0, h, 0, 0);
           elm_transit_duration_set(transit, 0.75);
-          elm_transit_go(transit);
+          if(delay_anim)
+            {
+              delay_anim = EINA_FALSE;
+              elm_transit_go_in(transit, 0.25);
+            }
+          else
+            elm_transit_go(transit);
         }
+      evas_object_show(doc->widget);
     }
 
   _update_cur_file(doc);
@@ -1260,6 +1270,7 @@ create_window(int argc, char *argv[])
 
    if (optind < argc)
      {
+       delay_anim = EINA_TRUE;
        _open_file(doc, argv[optind]);
        DBG("Opening filename: '%s'", argv[optind]);
      }
