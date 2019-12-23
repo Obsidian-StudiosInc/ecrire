@@ -175,19 +175,25 @@ _settings_font_list_get(const Evas *e)
         Elm_Font_Properties *efp;
 
         efp = elm_font_properties_get(font);
-        /* Remove dups */
-        if (prev_font && !strcmp(efp->name, prev_font))
-          {
-             flist = eina_list_remove_list(flist, itr);
-          }
-        else
-          {
-             eina_stringshare_replace(&font, efp->name);
-             prev_font = font;
-             eina_list_data_set(itr, font);
-          }
 
-        elm_font_properties_free(efp);
+        if(efp)
+          {
+            /* Remove dups */
+            if (prev_font &&
+                efp->name &&
+                !strcmp(efp->name, prev_font))
+              {
+                 flist = eina_list_remove_list(flist, itr);
+              }
+            else if (efp->name)
+              {
+                 eina_stringshare_replace(&font, efp->name);
+                 prev_font = font;
+                 eina_list_data_set(itr, font);
+              }
+
+            elm_font_properties_free(efp);
+          }
      }
 
    return flist;
