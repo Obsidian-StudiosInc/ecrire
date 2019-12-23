@@ -150,6 +150,7 @@ static Evas_Object *_menu;
 static Evas_Object *_toolbar;
 static Evas_Object *_win;
 Eina_Bool ctrl_pressed = EINA_FALSE;
+Eina_Bool shft_pressed = EINA_FALSE;
 Eina_Bool delay_anim = EINA_FALSE;
 /* specific log domain to help debug only ecrire */
 int _ecrire_log_dom = -1;
@@ -934,6 +935,8 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
         else if(!strcmp("G", event->key) ||
                 !strcmp("g", event->key))
             _goto_line_focus_cb(data,NULL,NULL);
+        else if(!strcmp("Insert", event->key))
+            elm_code_widget_selection_copy(((Ecrire_Doc *)data)->widget);
         else if(!strcmp("O", event->key) ||
                 !strcmp("o", event->key))
             _open_cb(data,NULL,NULL);
@@ -956,11 +959,15 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
                 !strcmp("w", event->key))
             _close_cb(data,NULL,NULL);
       }
+    else if(shft_pressed &&
+            !strcmp("Insert", event->key))
+        elm_code_widget_selection_paste(((Ecrire_Doc *)data)->widget);
     else if (!strcmp("Control_L", event->key) ||
              !strcmp("Control_R", event->key))
-      {
         ctrl_pressed = EINA_TRUE;
-      }
+    else if (!strcmp("Shift_L", event->key) ||
+             !strcmp("Shift_R", event->key))
+        shft_pressed = EINA_TRUE;
   return EINA_TRUE;
 }
 
@@ -971,6 +978,9 @@ _key_up_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
     if (!strcmp("Control_L", event->key) ||
         !strcmp("Control_R", event->key))
       ctrl_pressed = EINA_FALSE;
+    else if (!strcmp("Shift_L", event->key) ||
+             !strcmp("Shift_R", event->key))
+      shft_pressed = EINA_FALSE;
   return EINA_TRUE;
 }
 
