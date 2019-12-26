@@ -921,13 +921,37 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
     Ecore_Event_Key *event = ev;
     if(ctrl_pressed)
       {
-        if(!strcmp("F", event->key) ||
-           !strcmp("f", event->key) ||
-           !strcmp("H", event->key) ||
-           !strcmp("h", event->key) ||
-           !strcmp("R", event->key) ||
-           !strcmp("r", event->key))
+        if(!strcmp("End", event->key))
+          {
+            Ecrire_Doc *doc;
+            Elm_Code_Line *line;
+            unsigned int cols;
+            unsigned int lines;
+
+            doc = data;
+            lines = elm_code_file_lines_get(doc->code->file);
+            line = elm_code_file_line_get(doc->code->file, lines);
+#ifdef EFL_VERSION_1_22
+            cols = elm_code_widget_line_text_column_width_get(doc->widget, line);
+            elm_code_widget_cursor_position_set(doc->widget, lines, cols+1);
+#else
+            cols = elm_obj_code_widget_line_text_column_width_get(doc->widget, line);
+            elm_obj_code_widget_cursor_position_set(doc->widget, lines, cols+1);
+#endif
+          }
+        else if(!strcmp("F", event->key) ||
+                !strcmp("f", event->key) ||
+                !strcmp("H", event->key) ||
+                !strcmp("h", event->key) ||
+                !strcmp("R", event->key) ||
+                !strcmp("r", event->key))
             _find(data,NULL,NULL);
+        else if(!strcmp("Home", event->key))
+#ifdef EFL_VERSION_1_22
+            elm_code_widget_cursor_position_set(((Ecrire_Doc *)data)->widget,1,1);
+#else
+            elm_obj_code_widget_cursor_position_set(((Ecrire_Doc *)data)->widget,1,1);
+#endif
         else if(!strcmp("G", event->key) ||
                 !strcmp("g", event->key))
             _goto_line_focus_cb(data,NULL,NULL);
