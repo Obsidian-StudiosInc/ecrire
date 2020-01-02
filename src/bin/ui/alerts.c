@@ -32,9 +32,9 @@ _discard(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 static void
-_fs_save_done(void *data EINA_UNUSED,
+_fs_save_done(void *data,
               Evas_Object *obj EINA_UNUSED,
-              void *event_info)
+              void *event_info EINA_UNUSED)
 {
    done_cb(data);
 }
