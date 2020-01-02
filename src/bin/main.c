@@ -725,8 +725,8 @@ editor_save(Ecrire_Doc *doc, void *callback_func)
   if (filename)
     {
       save_do(filename, doc);
-      void (*func) (void *, Evas_Object *, void *) = callback_func;
-      func(doc,NULL,(char *)filename);
+      void (*func) (void *, Evas_Object *, const void *) = callback_func;
+      func(doc,NULL,filename);
     }
   else
     ui_file_open_save_dialog_open(doc, callback_func, EINA_TRUE);
@@ -776,10 +776,14 @@ _copy(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
 }
 
 static void
-_paste(void *data, Evas_Object *obj EINA_UNUSED, void *event_info EINA_UNUSED)
+_paste(void *data, Evas_Object *obj, void *event_info)
 {
    Ecrire_Doc *doc = data;
    elm_code_widget_selection_paste(doc->widget);
+/*
+   _set_save_disabled(doc, EINA_FALSE);
+*/
+   evas_object_smart_callback_call(obj, "changed,user", event_info);
    
 }
 
