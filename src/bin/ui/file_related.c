@@ -67,7 +67,7 @@ ui_file_open_save_dialog_open(Ecrire_Doc *doc,
    elm_object_text_set(sel, _("Recent files"));
    EINA_LIST_FOREACH(_ent_cfg->recent, itr, file)
      {
-        elm_hoversel_item_add(sel, (char *)file, NULL, ELM_ICON_NONE, NULL, NULL);
+        elm_hoversel_item_add(sel, file, NULL, ELM_ICON_NONE, NULL, NULL);
      }
                
    evas_object_size_hint_weight_set(sel, EVAS_HINT_EXPAND, 0);
