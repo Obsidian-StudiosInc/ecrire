@@ -996,7 +996,7 @@ _key_down_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
 }
 
 static Eina_Bool
-_key_up_cb(void *data, EINA_UNUSED Evas_Object *obj, void *ev)
+_key_up_cb(EINA_UNUSED void *data, EINA_UNUSED Evas_Object *obj, void *ev)
 {
   Ecore_Event_Key *event = ev;
     if (!strcmp("Control_L", event->key) ||
