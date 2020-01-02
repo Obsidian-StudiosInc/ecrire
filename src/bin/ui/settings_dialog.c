@@ -261,7 +261,7 @@ _settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED
   ecrire_cfg_save();
 }
 
-static void
+static void EINA_UNUSED
 _settings_word_wrap_cb (void *data,
                        Evas_Object *obj,
                        void *event_info EINA_UNUSED)
