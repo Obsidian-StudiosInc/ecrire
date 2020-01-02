@@ -48,6 +48,9 @@ static void _settings_show_line_width_marker_cb(void *data,
 static void _settings_toolbar_cb(void *data,
                                  Evas_Object *obj,
                                  void *event_info EINA_UNUSED);
+static void _settings_whitespace_cb(void *data,
+                                    Evas_Object *obj,
+                                    void *event_info EINA_UNUSED);
 static void _settings_word_wrap_cb(void *data,
                                    Evas_Object *obj,
                                    void *event_info EINA_UNUSED);
@@ -261,6 +264,23 @@ _settings_toolbar_cb (void *data, Evas_Object *obj, void *event_info EINA_UNUSED
   ecrire_cfg_save();
 }
 
+
+static void _settings_whitespace_cb(void *data,
+                                    Evas_Object *obj,
+                                    void *event_info EINA_UNUSED)
+{
+  Eina_Bool state;
+
+  state = elm_check_state_get (obj);
+#ifdef EFL_VERSION_1_22
+  elm_code_widget_show_whitespace_set ((Elm_Code_Widget *)data, state);
+#else
+  elm_obj_code_widget_show_whitespace_set ((Elm_Code_Widget *)data, state);
+#endif
+  ent_cfg->show_whitespace = !state;
+  ecrire_cfg_save();
+}
+
 static void EINA_UNUSED
 _settings_word_wrap_cb (void *data,
                        Evas_Object *obj,
@@ -390,6 +410,23 @@ _settings_dialog_display(Evas_Object *parent,
   evas_object_size_hint_align_set(obj, 0, 1);
   elm_table_pack(table, obj, 1, row, 1, 1);
   evas_object_smart_callback_add(obj, "changed", _settings_show_line_width_marker_cb, doc);
+  evas_object_show(obj);
+  row++;
+
+  /* Show Whitespace Label */
+  obj = elm_label_add(table);
+  elm_object_text_set(obj, _("Show Whitespace"));
+  evas_object_size_hint_weight_set(obj, EVAS_HINT_EXPAND, 0);
+  evas_object_size_hint_align_set(obj, 1, 0);
+  elm_table_pack(table, obj, 0, row, 1, 1);
+  evas_object_show(obj);
+
+  /* Whitespace Check box */
+  obj = elm_check_add(table);
+  elm_check_state_set(obj, !_ent_cfg->show_whitespace);
+  evas_object_size_hint_align_set(obj, 0, 1);
+  elm_table_pack(table, obj, 1, row, 1, 1);
+  evas_object_smart_callback_add(obj, "changed", _settings_whitespace_cb, doc->widget);
   evas_object_show(obj);
   row++;
 
