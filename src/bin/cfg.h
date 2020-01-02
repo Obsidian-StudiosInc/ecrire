@@ -22,6 +22,7 @@ typedef struct
    unsigned int line_numbers;
    unsigned int line_width_marker;
    unsigned int menu;
+   unsigned int show_whitespace;
    unsigned int toolbar;
    struct {
         const char *name; /* NULL means theme's font */
